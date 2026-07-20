@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة حفظ الجغرافيا الذكية - حركة رؤوس الأموال والعولمة</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght=300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Tajawal', 'sans-serif'],
+                    },
+                    colors: {
+                        north: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                        },
+                        south: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                            800: '#9f1239',
+                        },
+                        capital: {
+                            50: '#fdf4ff',
+                            100: '#f3e8ff',
+                            500: '#a855f7',
+                            600: '#9333ea',
+                            700: '#7e22ce',
+                        },
+                        global: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f8fafc;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        /* Card Flip style for Active Recall - Fixed and Optimised for mobile/Safari */
+        .flip-card {
+            perspective: 1000px;
+            -webkit-perspective: 1000px;
+        }
+        .flip-card-inner {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+        }
+        /* CRITICAL FIX: Target the flip-card-inner directly with the flipped class */
+        .flip-card-inner.flipped {
+            transform: rotateY(180deg);
+            -webkit-transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+            -webkit-transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body class="text-slate-800 min-h-screen flex flex-col antialiased selection:bg-indigo-500 selection:text-white">
+
+    <!-- Header / Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="p-2.5 bg-gradient-to-tr from-indigo-600 to-violet-500 rounded-xl text-white shadow-md shadow-indigo-100">
+                    <i class="fa-solid fa-graduation-cap text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-black text-slate-900 tracking-tight">مُرافق البكالوريا الذكي 2026</h1>
+                    <p class="text-xs font-semibold text-slate-500">منهجية الـ 6 مطات الذهبية لتأمين العلامة الكاملة دون حشو</p>
+                </div>
+            </div>
+            
+            <!-- Quick stats bar -->
+            <div class="flex items-center gap-2 flex-wrap text-xs font-bold">
+                <span class="px-3 py-1.5 bg-slate-100 text-slate-600 rounded-full border border-slate-200/50">
+                    <i class="fa-solid fa-book-open text-indigo-500 ml-1"></i> الجغرافيا: حركة الأموال والأسواق
+                </span>
+                <span id="recall-score" class="px-3 py-1.5 bg-indigo-50 text-indigo-700 rounded-full border border-indigo-100">
+                    <i class="fa-solid fa-fire text-amber-500 ml-1"></i> الكروت المحفوظة: <span id="score-counter">0</span>/6
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col gap-6">
+        
+        <!-- Dashboard Navigation Tabs -->
+        <div class="bg-white p-2 rounded-2xl shadow-sm border border-slate-100 flex flex-wrap gap-1">
+            <button onclick="switchTab('concepts')" id="tab-concepts" class="tab-btn px-4 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 transition-all bg-indigo-600 text-white shadow-sm">
+                <i class="fa-solid fa-lightbulb"></i> المفاهيم والمؤشرات
+            </button>
+            <button onclick="switchTab('capital')" id="tab-capital" class="tab-btn px-4 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 transition-all text-slate-600 hover:bg-slate-50">
+                <i class="fa-solid fa-money-bill-transfer"></i> حركة رؤوس الأموال
+            </button>
+            <button onclick="switchTab('globalization')" id="tab-globalization" class="tab-btn px-4 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 transition-all text-slate-600 hover:bg-slate-50">
+                <i class="fa-solid fa-globe"></i> العولمة والتكنولوجيا
+            </button>
+            <button onclick="switchTab('six-points')" id="tab-six-points" class="tab-btn px-4 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 transition-all text-slate-600 hover:bg-slate-50">
+                <i class="fa-solid fa-list-check"></i> الـ 48 كرت ذهبي (Active Recall)
+            </button>
+            <button onclick="switchTab('quiz')" id="tab-quiz" class="tab-btn px-4 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 transition-all text-slate-600 hover:bg-slate-50">
+                <i class="fa-solid fa-gamepad"></i> تحدي البكالوريا (BAC Quiz)
+            </button>
+        </div>
+
+        <!-- TAB 1: CONCEPTS & INDICATORS -->
+        <section id="content-concepts" class="tab-content flex flex-col gap-6">
+            <!-- Intro Card -->
+            <div class="bg-gradient-to-r from-slate-900 to-indigo-950 rounded-2xl p-6 text-white relative overflow-hidden shadow-lg">
+                <div class="absolute right-0 top-0 opacity-10 pointer-events-none transform translate-x-12 -translate-y-8">
+                    <i class="fa-solid fa-globe text-[200px]"></i>
+                </div>
+                <div class="max-w-2xl relative z-10">
+                    <span class="bg-indigo-500/25 border border-indigo-400/30 text-indigo-300 text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full">تشخيص واقع الاقتصاد العالمي</span>
+                    <h2 class="text-2xl font-extrabold mt-3 text-white">تحديد المفاهيم الأساسية ومعايير التصنيف</h2>
+                    <p class="text-slate-300 text-sm mt-2 leading-relaxed">المصحح يبحث دائماً عن مفاهيم دقيقة واختصارات واضحة. ابدأ بفهم أساسيات الفجوة بين عالم الشمال المتقدم وعالم الجنوب المتخلف قبل الغوص في الأسواق المالية.</p>
+                </div>
+            </div>
+
+            <!-- Comparison Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- North -->
+                <div class="bg-white border-2 border-slate-100 hover:border-emerald-100 rounded-3xl p-6 shadow-sm transition-all relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-2 h-full bg-emerald-500"></div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-4 py-1.5 bg-emerald-50 text-emerald-700 rounded-xl text-xs font-extrabold border border-emerald-100 flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> عالم الشمال (التقدم)
+                        </span>
+                        <div class="p-3 bg-emerald-50 text-emerald-600 rounded-2xl">
+                            <i class="fa-solid fa-arrow-trend-up text-xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-extrabold text-slate-800 mb-2">التقدم: ظاهرة اقتصادية تعكس:</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-4">الازدهار الاقتصادي، التطور التكنولوجي، الرفاهية الاجتماعية، والاستقرار السياسي الدائم.</p>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/50"><span class="text-xs font-bold block text-slate-400">التجارة</span><span class="text-xs font-black text-emerald-700">هيمنة مطلقة (80%)</span></div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/50"><span class="text-xs font-bold block text-slate-400">الصناعة</span><span class="text-xs font-black text-emerald-700">تحويلية وتكنولوجية</span></div>
+                    </div>
+                </div>
+
+                <!-- South -->
+                <div class="bg-white border-2 border-slate-100 hover:border-rose-100 rounded-3xl p-6 shadow-sm transition-all relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-2 h-full bg-rose-500"></div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-4 py-1.5 bg-rose-50 text-rose-700 rounded-xl text-xs font-extrabold border border-rose-100 flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-rose-500"></span> عالم الجنوب (التخلف)
+                        </span>
+                        <div class="p-3 bg-rose-50 text-rose-600 rounded-2xl">
+                            <i class="fa-solid fa-arrow-trend-down text-xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-extrabold text-slate-800 mb-2">التخلف: ظاهرة اقتصادية تعكس:</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-4">الركود الاقتصادي، العجز التكنولوجي، تدهور المستوى المعيشي والصحي، وعدم الاستقرار السياسي.</p>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/50"><span class="text-xs font-bold block text-slate-400">التجارة</span><span class="text-xs font-black text-rose-700">مساهمة ضئيلة (&lt;20%)</span></div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/50"><span class="text-xs font-black text-rose-700">الصناعة</span><span class="text-xs font-black text-rose-700">استخراجية (مواد خام)</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: CAPITAL MOVEMENTS -->
+        <section id="content-capital" class="tab-content hidden flex flex-col gap-6">
+            <div class="bg-gradient-to-r from-purple-900 to-indigo-950 rounded-2xl p-6 text-white relative overflow-hidden shadow-lg">
+                <div class="absolute right-0 top-0 opacity-10 pointer-events-none transform translate-x-12 -translate-y-8">
+                    <i class="fa-solid fa-money-bill-transfer text-[200px]"></i>
+                </div>
+                <div class="max-w-2xl relative z-10">
+                    <span class="bg-purple-500/25 border border-purple-400/30 text-purple-300 text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full">العلاقات الاقتصادية الدولية</span>
+                    <h2 class="text-2xl font-extrabold mt-3 text-white">حركة رؤوس الأموال: سلاح ذو حدين</h2>
+                    <p class="text-slate-300 text-sm mt-2 leading-relaxed">تتدفق رؤوس الأموال لتمويل المشاريع لكنها في ذات الوقت تفرض قيود الديون وتفاقم من المديونية وهشاشة اقتصاد الجنوب.</p>
+                </div>
+            </div>
+
+            <!-- Two-column interactive view of Capital Movements -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Positives -->
+                <div class="bg-white border border-slate-100 rounded-3xl p-6 shadow-sm">
+                    <h3 class="text-lg font-black text-purple-700 flex items-center gap-2 mb-6">
+                        <i class="fa-solid fa-circle-plus"></i> إيجابيات حركة رؤوس الأموال (6 مطّات ذهبية)
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3 p-3 bg-purple-50/30 rounded-xl border border-purple-100/50">
+                            <span class="w-6 h-6 rounded-full bg-purple-100 text-purple-700 text-xs font-bold flex items-center justify-center">1</span>
+                            <div>
+                                <h4 class="text-sm font-black text-slate-800">تمويل الاستثمارات</h4>
+                                <p class="text-xs text-slate-600">دعم وإقامة المشاريع الاقتصادية الحيوية والمصانع الإنتاجية.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-purple-50/30 rounded-xl border border-purple-100/50">
+                            <span class="w-6 h-6 rounded-full bg-purple-100 text-purple-700 text-xs font-bold flex items-center justify-center">2</span>
+                            <div>
+                                <h4 class="text-sm font-black text-slate-800">توفير السيولة</h4>
+                                <p class="text-xs text-slate-600">تنشيط الحركة التجارية والأسواق المختلفة عبر ضخ مستمر للأموال.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-purple-50/30 rounded-xl border border-purple-100/50">
+                            <span class="w-6 h-6 rounded-full bg-purple-100 text-purple-700 text-xs font-bold flex items-center justify-center">3</span>
+                            <div>
+                                <h4 class="text-sm font-black text-slate-800">تحقيق التنمية</h4>
+                                <p class="text-xs text-slate-600">دفع عجلة النمو الاقتصادي وتطوير الهياكل وتحديث بلدان العالم.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-purple-50/30 rounded-xl border border-purple-100/50">
+                            <span class="w-6 h-6 rounded-full bg-purple-100 text-purple-700 text-xs font-bold flex items-center justify-center">4</span>
+                            <div>
+                                <h4 class="text-sm font-black text-slate-800">استحداث الوظائف</h4>
+                                <p class="text-xs text-slate-600">خلق فرص عمل جديدة للشباب والحد من انتشار البطالة.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-purple-50/30 rounded-xl border border-purple-100/50">
+                            <span class="w-6 h-6 rounded-full bg-purple-100 text-purple-700 text-xs font-bold flex items-center justify-center">5</span>
+                            <div>
+                                <h4 class="text-sm font-black text-slate-800">تقديم القروض</h4>
+                                <p class="text-xs text-slate-600">دعم ومساعدة الميزانيات المالية للدول وتجاوز العجز المؤقت.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-purple-50/30 rounded-xl border border-purple-100/50">
+                            <span class="w-6 h-6 rounded-full bg-purple-100 text-purple-700 text-xs font-bold flex items-center justify-center">6</span>
+                            <div>
+                                <h4 class="text-sm font-black text-slate-800">إنعاش الخزينة</h4>
+                                <p class="text-xs text-slate-600">زيادة إيرادات الدول المحققة من الرسوم الجمركية والضرائب المباشرة.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Negatives -->
+                <div class="bg-white border border-slate-100 rounded-3xl p-6 shadow-sm">
+                    <h3 class="text-lg font-black text-rose-700 flex items-center gap-2 mb-6">
+                        <i class="fa-solid fa-circle-minus"></i> سلبيات ومخاطر حركة رؤوس الأموال (6 مطّات ذهبية)
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3 p-3 bg-rose-50/30 rounded-xl border border-rose-100/50">
+                            <span class="w-6 h-6 rounded-full bg-rose-100 text-rose-700 text-xs font-bold flex items-center justify-center">1</span>
+                            <div>
+                                <h4 class="text-sm font-black text-slate-800">تمركز الأموال</h4>
+                                <p class="text-xs text-slate-600">احتكار وتركز الأوعية المالية الكبرى في دول النصف الشمالي المتقدم.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-rose-50/30 rounded-xl border border-rose-100/50">
+                            <span class="w-6 h-6 rounded-full bg-rose-100 text-rose-700 text-xs font-bold flex items-center justify-center">2</span>
+                            <div>
+                                <h4 class="text-sm font-black text-slate-800">تفاقم المديونية</h4>
+                                <p class="text-xs text-slate-600">غرق بلدان الجنوب في فخ الديون المتراكمة وفوائدها المركبة.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-rose-50/30 rounded-xl border border-rose-100/50">
+                            <span class="w-6 h-6 rounded-full bg-rose-100 text-rose-700 text-xs font-bold flex items-center justify-center">3</span>
+                            <div>
+                                <h4 class="text-sm font-black text-slate-800">الأزمات المالية</h4>
+                                <p class="text-xs text-slate-600">حدوث هزات اقتصادية مفاجئة تؤثر سلبًا على الاستقرار الاقتصادي للجميع.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-rose-50/30 rounded-xl border border-rose-100/50">
+                            <span class="w-6 h-6 rounded-full bg-rose-100 text-rose-700 text-xs font-bold flex items-center justify-center">4</span>
+                            <div>
+                                <h4 class="text-sm font-black text-slate-800">تبييض الأموال</h4>
+                                <p class="text-xs text-slate-600">تزايد عمليات غسيل الأموال غير المشروعة عبر قنوات البنوك والشركات الاستثمارية.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-rose-50/30 rounded-xl border border-rose-100/50">
+                            <span class="w-6 h-6 rounded-full bg-rose-100 text-rose-700 text-xs font-bold flex items-center justify-center">5</span>
+                            <div>
+                                <h4 class="text-sm font-black text-slate-800">الجرائم الاقتصادية</h4>
+                                <p class="text-xs text-slate-600">انتشار السرقات المنظمة، الاختلاسات المالية الكبرى، والتهرب الضريبي العابر للقارات.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-rose-50/30 rounded-xl border border-rose-100/50">
+                            <span class="w-6 h-6 rounded-full bg-rose-100 text-rose-700 text-xs font-bold flex items-center justify-center">6</span>
+                            <div>
+                                <h4 class="text-sm font-black text-slate-800">الفساد المالي</h4>
+                                <p class="text-xs text-slate-600">تغلغل الرشاوى وتأثير كبرى الكارتلات والشركات الاحتكارية على صناعة القرارات السيادية للدول.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: GLOBALIZATION & TECHNOLOGY -->
+        <section id="content-globalization" class="tab-content hidden flex flex-col gap-6">
+            <div class="bg-gradient-to-r from-sky-900 to-indigo-950 rounded-2xl p-6 text-white relative overflow-hidden shadow-lg">
+                <div class="absolute right-0 top-0 opacity-10 pointer-events-none transform translate-x-12 -translate-y-8">
+                    <i class="fa-solid fa-cloud-bolt text-[200px]"></i>
+                </div>
+                <div class="max-w-2xl relative z-10">
+                    <span class="bg-sky-500/25 border border-sky-400/30 text-sky-300 text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full">العصر الرقمي والمبادلات</span>
+                    <h2 class="text-2xl font-extrabold mt-3 text-white">العولمة والتكنولوجيا في المبادلات الدولية</h2>
+                    <p class="text-slate-300 text-sm mt-2 leading-relaxed">كيف أسهمت الثورة الرقمية في تسهيل تبادل السلع ولكن مع فرض الهيمنة الثقافية الغربية وتهميش سيادة الجنوب.</p>
+                </div>
+            </div>
+
+            <!-- Two-column interactive view of Globalization -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Positives -->
+                <div class="bg-white border border-slate-100 rounded-3xl p-6 shadow-sm">
+                    <h3 class="text-lg font-black text-sky-700 flex items-center gap-2 mb-6">
+                        <i class="fa-solid fa-circle-plus"></i> إيجابيات العولمة والتكنولوجيا (6 مطّات ذهبية)
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3 p-3 bg-sky-50/30 rounded-xl border border-sky-100/50">
+                            <span class="w-6 h-6 rounded-full bg-sky-100 text-sky-700 text-xs font-bold flex items-center justify-center">1</span>
+                            <div>
+                                <h4 class="text-sm font-black text-slate-800">التجارة الإلكترونية</h4>
+                                <p class="text-xs text-slate-600">زيادة سرعة وسهولة إبرام المعاملات المالية والتسوق المباشر عبر الإنترنت.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-sky-50/30 rounded-xl border border-sky-100/50">
+                            <span class="w-6 h-6 rounded-full bg-sky-100 text-sky-700 text-xs font-bold flex items-center justify-center">2</span>
+                            <div>
+                                <h4 class="text-sm font-black text-slate-800">الإشهار والترويج</h4>
+                                <p class="text-xs text-slate-600">إمكانية عرض السلع والترويج للعلامات التجارية على نطاق عالمي واسع.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-sky-50/30 rounded-xl border border-sky-100/50">
+                            <span class="w-6 h-6 rounded-full bg-sky-100 text-sky-700 text-xs font-bold flex items-center justify-center">3</span>
+                            <div>
+                                <h4 class="text-sm font-black text-slate-800">تجاوز الوسطاء</h4>
+                                <p class="text-xs text-slate-600">إلغاء وتجاوز دور السماسرة والوسطاء في عمليات البيع والشراء والربط المباشر.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-sky-50/30 rounded-xl border border-sky-100/50">
+                            <span class="w-6 h-6 rounded-full bg-sky-100 text-sky-700 text-xs font-bold flex items-center justify-center">4</span>
+                            <div>
+                                <h4 class="text-sm font-black text-slate-800">الشفافية السعرية</h4>
+                                <p class="text-xs text-slate-600">سهولة مقارنة الأسعار ومعرفة القيمة الفعلية للخدمات عبر المواقع الرقمية.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-sky-50/30 rounded-xl border border-sky-100/50">
+                            <span class="w-6 h-6 rounded-full bg-sky-100 text-sky-700 text-xs font-bold flex items-center justify-center">5</span>
+                            <div>
+                                <h4 class="text-sm font-black text-slate-800">متابعة الأسواق</h4>
+                                <p class="text-xs text-slate-600">الاطلاع الفوري والمستمر على أداء ومؤشرات البورصات العالمية لحظة بلحظة.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-sky-50/30 rounded-xl border border-sky-100/50">
+                            <span class="w-6 h-6 rounded-full bg-sky-100 text-sky-700 text-xs font-bold flex items-center justify-center">6</span>
+                            <div>
+                                <h4 class="text-sm font-black text-slate-800">تحديد الفاعلين</h4>
+                                <p class="text-xs text-slate-600">التعرف السريع والدقيق على هوية وقوة كبار المنتجين والمصدرين الدوليين.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Negatives -->
+                <div class="bg-white border border-slate-100 rounded-3xl p-6 shadow-sm">
+                    <h3 class="text-lg font-black text-rose-700 flex items-center gap-2 mb-6">
+                        <i class="fa-solid fa-circle-minus"></i> مخاطر وسلبيات العولمة (6 مطّات ذهبية)
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3 p-3 bg-rose-50/30 rounded-xl border border-rose-100/50">
+                            <span class="w-6 h-6 rounded-full bg-rose-100 text-rose-700 text-xs font-bold flex items-center justify-center">1</span>
+                            <div>
+                                <h4 class="text-sm font-black text-slate-800">المجتمع الاستهلاكي</h4>
+                                <p class="text-xs text-slate-600">تحويل شعوب دول العالم إلى مستهلك غير منتج للسلع والصادرات الغربية.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-rose-50/30 rounded-xl border border-rose-100/50">
+                            <span class="w-6 h-6 rounded-full bg-rose-100 text-rose-700 text-xs font-bold flex items-center justify-center">2</span>
+                            <div>
+                                <h4 class="text-sm font-black text-slate-800">هيمنة الشركات</h4>
+                                <p class="text-xs text-slate-600">سيطرة كبرى الشركات الأجنبية والشركات متعددة الجنسيات على اقتصاديات دول الجنوب.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-rose-50/30 rounded-xl border border-rose-100/50">
+                            <span class="w-6 h-6 rounded-full bg-rose-100 text-rose-700 text-xs font-bold flex items-center justify-center">3</span>
+                            <div>
+                                <h4 class="text-sm font-black text-slate-800">القرصنة الإلكترونية</h4>
+                                <p class="text-xs text-slate-600">تعرض المعاملات البنكية والتجارية الإلكترونية المستمر لخطر الاختراق والاحتيال الرقمي.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-rose-50/30 rounded-xl border border-rose-100/50">
+                            <span class="w-6 h-6 rounded-full bg-rose-100 text-rose-700 text-xs font-bold flex items-center justify-center">4</span>
+                            <div>
+                                <h4 class="text-sm font-black text-slate-800">طمس الهوية</h4>
+                                <p class="text-xs text-slate-600">تهميش اللغات المحلية وإضعاف الموروث الثقافي لحساب الثقافة المهيمنة.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-rose-50/30 rounded-xl border border-rose-100/50">
+                            <span class="w-6 h-6 rounded-full bg-rose-100 text-rose-700 text-xs font-bold flex items-center justify-center">5</span>
+                            <div>
+                                <h4 class="text-sm font-black text-slate-800">توجيه القرارات</h4>
+                                <p class="text-xs text-slate-600">التحكم في توجهات الرأي العام الدولي وقرارات المؤسسات الاقتصادية والسياسية للدول.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-rose-50/30 rounded-xl border border-rose-100/50">
+                            <span class="w-6 h-6 rounded-full bg-rose-100 text-rose-700 text-xs font-bold flex items-center justify-center">6</span>
+                            <div>
+                                <h4 class="text-sm font-black text-slate-800">إثارة النزاعات</h4>
+                                <p class="text-xs text-slate-600">استخدام تكنولوجيا التوجيه في تغذية الخلافات وإثارة الحروب والصراعات الداخلية بالدول.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: THE GOLDEN MEMORIZATION CARDS (ACTIVE RECALL) -->
+        <section id="content-six-points" class="tab-content hidden flex flex-col gap-6">
+            <div class="bg-gradient-to-r from-violet-900 to-indigo-950 rounded-2xl p-6 text-white relative overflow-hidden shadow-lg">
+                <div class="absolute right-0 top-0 opacity-10 pointer-events-none transform translate-x-12 -translate-y-8">
+                    <i class="fa-solid fa-layer-group text-[200px]"></i>
+                </div>
+                <div class="max-w-2xl relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 w-full font-sans">
+                    <div>
+                        <span class="bg-violet-500/25 border border-violet-400/30 text-violet-300 text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full">السرعة والدقة للحفظ السريع</span>
+                        <h2 class="text-2xl font-extrabold mt-3 text-white">الـ 48 كرت ذهبي (كاملة ومحدثة)</h2>
+                        <p class="text-slate-300 text-sm mt-2 leading-relaxed">بوابة الاسترجاع النشط الذكي. فعّل "وضع إخفاء التفاصيل" ثم اضغط على الكارت لاختبار ذاكرتك في الكلمات المفتاحية.</p>
+                    </div>
+                    <!-- Toggle active recall -->
+                    <button onclick="toggleActiveRecall()" id="recall-btn" class="flex-shrink-0 px-4 py-2 bg-white text-indigo-900 font-extrabold text-xs rounded-xl hover:bg-slate-100 transition-all flex items-center gap-1 shadow-md">
+                        <i id="recall-icon" class="fa-solid fa-eye-slash"></i> <span id="recall-text">إخفاء التفاصيل للحفظ</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Categories Filter Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                <button onclick="filterSixPoints('north-prog')" id="btn-north-prog" class="six-filter-btn px-3 py-2 bg-indigo-600 text-white font-extrabold text-xs rounded-xl shadow-sm transition-all border border-transparent">
+                    مظاهر تقدم الشمال
+                </button>
+                <button onclick="filterSixPoints('south-und')" id="btn-south-und" class="six-filter-btn px-3 py-2 bg-slate-100 text-slate-600 font-extrabold text-xs rounded-xl transition-all border border-slate-200/50">
+                    مظاهر تخلف الجنوب
+                </button>
+                <button onclick="filterSixPoints('south-barriers')" id="btn-south-barriers" class="six-filter-btn px-3 py-2 bg-slate-100 text-slate-600 font-extrabold text-xs rounded-xl transition-all border border-slate-200/50">
+                    معيقات التنمية
+                </button>
+                <button onclick="filterSixPoints('solutions')" id="btn-solutions" class="six-filter-btn px-3 py-2 bg-slate-100 text-slate-600 font-extrabold text-xs rounded-xl transition-all border border-slate-200/50">
+                    حلول التنمية
+                </button>
+                <button onclick="filterSixPoints('capital-pos')" id="btn-capital-pos" class="six-filter-btn px-3 py-2 bg-slate-100 text-slate-600 font-extrabold text-xs rounded-xl transition-all border border-slate-200/50">
+                    إيجابيات الأموال
+                </button>
+                <button onclick="filterSixPoints('capital-neg')" id="btn-capital-neg" class="six-filter-btn px-3 py-2 bg-slate-100 text-slate-600 font-extrabold text-xs rounded-xl transition-all border border-slate-200/50">
+                    سلبيات الأموال
+                </button>
+                <button onclick="filterSixPoints('global-pos')" id="btn-global-pos" class="six-filter-btn px-3 py-2 bg-slate-100 text-slate-600 font-extrabold text-xs rounded-xl transition-all border border-slate-200/50">
+                    إيجابيات العولمة
+                </button>
+                <button onclick="filterSixPoints('global-neg')" id="btn-global-neg" class="six-filter-btn px-3 py-2 bg-slate-100 text-slate-600 font-extrabold text-xs rounded-xl transition-all border border-slate-200/50">
+                    سلبيات العولمة
+                </button>
+            </div>
+
+            <!-- Visual Cards Container -->
+            <div id="six-points-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Javascript will dynamically inject the filtered cards here -->
+            </div>
+        </section>
+
+        <!-- TAB 5: BAC QUIZ GAME -->
+        <section id="content-quiz" class="tab-content hidden flex flex-col gap-6">
+            <div class="bg-gradient-to-r from-emerald-900 to-indigo-950 rounded-2xl p-6 text-white relative overflow-hidden shadow-lg">
+                <div class="absolute right-0 top-0 opacity-10 pointer-events-none transform translate-x-12 -translate-y-8">
+                    <i class="fa-solid fa-gamepad text-[200px]"></i>
+                </div>
+                <div class="max-w-2xl relative z-10">
+                    <span class="bg-emerald-500/25 border border-emerald-400/30 text-emerald-300 text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full">تحدي تثبيت الحفظ الذكي المطور</span>
+                    <h2 class="text-2xl font-extrabold mt-3 text-white">اختبر معلوماتك (مظاهر التنمية وحركة الأسواق)</h2>
+                    <p class="text-slate-300 text-sm mt-2 leading-relaxed">لعبة تفاعلية سريعة تمنحك الثقة في امتحان البكالوريا بأسئلة موسعة ومطابقة للنظام الوزاري!</p>
+                </div>
+            </div>
+
+            <!-- Quiz Play Board -->
+            <div class="bg-white border-2 border-slate-100 rounded-3xl p-6 shadow-sm max-w-3xl mx-auto w-full">
+                <!-- Start Screen -->
+                <div id="quiz-start-screen" class="text-center py-10 flex flex-col items-center">
+                    <div class="w-20 h-20 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-3xl mb-4 animate-bounce">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-slate-900">تحدي الجغرافيا الموسع 2026</h3>
+                    <p class="text-sm text-slate-500 mt-2 max-w-md mx-auto">سيتم طرح أسئلة دقيقة مخصصة لحركة رؤوس الأموال، العولمة والتكنولوجيا، ومؤشرات الفجوة العالمية. هل أنت مستعد للعلامة الكاملة؟</p>
+                    <button onclick="startQuiz()" class="mt-6 px-8 py-3 bg-gradient-to-r from-emerald-500 to-indigo-600 text-white font-extrabold rounded-2xl shadow-lg hover:shadow-emerald-100 transition-all hover:scale-105">
+                        ابدأ التحدي الآن
+                    </button>
+                </div>
+
+                <!-- Game Screen -->
+                <div id="quiz-play-screen" class="hidden">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
+                        <span class="text-xs font-extrabold text-slate-400">السؤال <span id="current-question-num">1</span> من 8</span>
+                        <span id="quiz-timer" class="px-3 py-1 bg-amber-50 text-amber-700 border border-amber-100 rounded-full text-xs font-black">
+                            <i class="fa-regular fa-clock"></i> الوقت: <span id="timer-val">30</span> ث
+                        </span>
+                    </div>
+
+                    <div class="mb-6">
+                        <h4 id="question-text" class="text-lg font-black text-slate-900 leading-relaxed">جاري تحميل السؤال...</h4>
+                    </div>
+
+                    <div class="space-y-3" id="quiz-options-container">
+                        <!-- Dynamic option buttons -->
+                    </div>
+
+                    <div id="quiz-feedback" class="hidden mt-6 p-4 rounded-2xl border flex items-start gap-3">
+                        <div id="feedback-icon" class="text-lg mt-0.5"></div>
+                        <div>
+                            <h5 id="feedback-title" class="font-extrabold text-sm">إجابة صحيحة!</h5>
+                            <p id="feedback-desc" class="text-xs text-slate-600 mt-1 leading-relaxed"></p>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end mt-6">
+                        <button id="next-quiz-btn" onclick="nextQuestion()" class="hidden px-6 py-2.5 bg-slate-900 text-white font-black rounded-xl text-sm transition-all hover:bg-indigo-600">
+                            السؤال التالي <i class="fa-solid fa-arrow-left mr-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- End Screen -->
+                <div id="quiz-end-screen" class="hidden text-center py-10 flex flex-col items-center">
+                    <div class="w-20 h-20 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center text-4xl mb-4">
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-slate-900">لقد أكملت التحدي بنجاح!</h3>
+                    <p class="text-sm text-slate-500 mt-2">مجموع النقاط التي حققتها:</p>
+                    <div class="text-5xl font-black text-indigo-600 mt-4"><span id="final-score">0</span>/8</div>
+                    
+                    <p id="quiz-evaluation-text" class="text-sm font-bold text-slate-600 mt-4 px-4 py-2 bg-slate-50 rounded-xl border border-slate-200/50 max-w-md"></p>
+
+                    <button onclick="resetQuiz()" class="mt-8 px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs rounded-xl transition-all shadow">
+                        أعد المحاولة <i class="fa-solid fa-rotate-left mr-1"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // State management
+        let activeRecallEnabled = false;
+        let scoreCount = 0;
+        const scoreTracker = {}; 
+
+        // 48 Golden Points Database (Completely updated with Capital flows and Globalization)
+        const sixPointsData = {
+            'north-prog': [
+                { id: 'np1', title: 'التحكم المالي الدولي', keywords: 'صندوق النقد / البنك العالمي', desc: 'السيطرة الكاملة والتحكم في توجيه المؤسسات المالية الدولية وصياغة السياسات النقدية والائتمانية العالمية.' },
+                { id: 'np2', title: 'السيطرة على الأسواق والبورصات', keywords: 'نيويورك / لندن / طوكيو', desc: 'تحديد أسعار السلع الاستراتيجية والأسهم والعملات عبر البورصات العالمية الكبرى المهيمن عليها في عواصم الشمال.' },
+                { id: 'np3', title: 'الهيمنة التجارية الكاسحة', keywords: '80% من المبادلات العالمية', desc: 'الاستئثار بالحصة الأكبر من التدفقات التجارية السلعية والخدماتية وحركة السلع حول العالم.' },
+                { id: 'np4', title: 'احتكار التكنولوجيا المتطورة', keywords: 'براءات الاختراع / تصنيع تحويلي', desc: 'السيطرة على حقوق الابتكار العلمي ومراكز الصناعة الثقيلة والذكية والتحويلية المتطورة.' },
+                { id: 'np5', title: 'المساهمة العالية في الإنتاج', keywords: 'أكثر من 80% من الناتج الخام', desc: 'تركيز الثروة والإنتاج والخدمات الاقتصادية مما يسمح بتوليد مداخيل قومية مهولة جداً.' },
+                { id: 'np6', title: 'تحقيق الاكتفاء واستخدام الغذاء', keywords: 'السلاح الأخضر للضغط الدولي', desc: 'القدرة الكاملة على سد الاحتياجات الغذائية وتصدير الفائض، واستغلال الغذاء وسيلة ابتزاز سياسي للدول الفقيرة.' }
+            ],
+            'south-und': [
+                { id: 'su1', title: 'عجز غذائي دائم واستيراد', keywords: 'التبعية الغذائية / استيراد القوت', desc: 'الفشل في تحقيق الاكتفاء الذاتي الزراعي والارتهان للاستيراد لتلبية الاحتياجات الأساسية اليومية للمواطنين.' },
+                { id: 'su2', title: 'مساهمة ضئيلة في التجارة', keywords: 'أقل من 20% تجارياً', desc: 'حضور هامشي جداً في الأسواق العالمية مما يفقدها القدرة على التأثير في حركة التبادل الدولي.' },
+                { id: 'su3', title: 'تبعية اقتصادية ومالية كاملة', keywords: 'شروط الشمال / فقدان الاستقلالية', desc: 'التبعية والارتهان الكامل والمستمر لاقتصادات الشمال المتقدم عبر القروض أو المساعدات أو الاستيراد.' },
+                { id: 'su4', title: 'ضعف وهشاشة الهياكل الأساسية', keywords: 'بنى تحتية مدمرة / مستشفيات وطرق', desc: 'الضعف البنيوي في شبكات النقل والاتصالات والمستشفيات والمدارس مما ينعكس سلباً على الحياة اليومية.' },
+                { id: 'su5', title: 'اقتصاد ريعي استخراجي', keywords: 'تصدير المواد الخام فقط', desc: 'الاعتماد الكلي على تصدير الموارد الطبيعية (بترول، معادن) دون تصنيعها، مما يحرمها من القيمة المضافة.' },
+                { id: 'su6', title: 'فقدان السيادة في اتخاذ القرار', keywords: 'الخضوع للإملاءات والضغوط', desc: 'غياب الحرية والاستقلالية الفعلية في اتخاذ القرار السياسي والارتهان لقوى الشمال والشركات متعددة الجنسيات.' }
+            ],
+            'south-barriers': [
+                { id: 'sb1', title: 'قساوة المناخ والكوارث', keywords: 'جفاف / تصحر / فيضانات', desc: 'الوقوع في مناطق جغرافية صعبة تعيق النشاط البشري والزراعي المستقر كالجفاف الدائم والتصحر المتمدد.' },
+                { id: 'sb2', title: 'انفجار ديموغرافي غير متناسب', keywords: 'نمو سكاني سريع / ضعف اقتصادي', desc: 'نمو سريع في التعداد السكاني يلتهم كل ثمار التنمية المتواضعة ولا يتلاءم نهائياً مع معدلات النمو الاقتصادي.' },
+                { id: 'sb3', title: 'تراكم المديونية والفوائد', keywords: 'استنزاف الميزانية / فوائد القروض', desc: 'عقبة استراتيجية كبرى حيث تذهب غالبية عوائد الدولة لسداد فوائد وأقساط القروض المتراكمة لصالح الشمال.' },
+                { id: 'sb4', title: 'ضعف الاستثمار والتصنيع المحلي', keywords: 'عجز تكنولوجي / جمود داخلي', desc: 'عدم القدرة على توفير وتأمين رؤوس أموال داخلية للاستثمار وغياب التكنولوجيا والمهندسين لإنشاء بنية صناعية.' },
+                { id: 'sb5', title: 'اضطرابات سياسية وحروب أهلية', keywords: 'انقلابات عسكرية / عدم استقرار', desc: 'بيئة غير آمنة تدفع المستثمرين للهروب وتعرقل سير خطط التنمية الاقتصادية المبرمجة.' },
+                { id: 'sb6', title: 'نزيف العقول والأدمغة', keywords: 'هجرة الكفاءات العلمية والشابة', desc: 'مغادرة أفضل العقول الوطنية نحو أوروبا وأمريكا نتيجة غياب التقدير والبيئة المحفزة للبحث والعيش الكريم.' }
+            ],
+            'solutions': [
+                { id: 'sl1', title: 'تنويع الاقتصاد الوطني', keywords: 'الخروج من التبعية للريع', desc: 'الانتقال إلى اقتصاد قائم على عدة قطاعات (زراعة، صناعة، سياحة) وعدم الاكتفاء بالاعتماد على البترول أو المواد الخام.' },
+                { id: 'sl2', title: 'تفعيل التكتلات الاقتصادية', keywords: 'الاندماج الإقليمي / القوة الجماعية', desc: 'إعادة إحياء وتنشيط الاتحادات الإقليمية لخلق أسواق مشتركة تعزز الموقف التفاوضي ضد كتلة الشمال.' },
+                { id: 'sl3', title: 'الاستغلال العقلاني للثروات', keywords: 'تصنيع محلي / منع النهب', desc: 'توجيه واستثمار الموارد الطبيعية محلياً وتصنيع المواد الخام قبل تصديرها لكسب أعلى قيمة اقتصادية مضافة.' },
+                { id: 'sl4', title: 'الاستثمار في المورد البشري', keywords: 'تعليم عصري / بحث علمي', desc: 'تحديث المناهج التعليمية ودعم الجامعات ومراكز الابتكار لخلق طاقات وطنية قادرة على قيادة التحول التكنولوجي.' },
+                { id: 'sl5', title: 'تشجيع الاستثمارات الموجهة', keywords: 'رؤوس أموال وطنية وأجنبية', desc: 'خلق مناخ ملائم وتوفير تسهيلات للمستثمرين لبناء مشاريع إنتاجية حقيقية وتوفير مناصب الشغل.' },
+                { id: 'sl6', title: 'تحقيق الاستقرار السياسي والعدالة', keywords: 'ديمقراطية / أمن داخلي', desc: 'بناء مؤسسات دولة قوية مستقرة قائمة على تكافؤ الفرص والتداول السلمي على السلطة لخلق بيئة صالحة للبناء.' }
+            ],
+            'capital-pos': [
+                { id: 'cp1', title: 'تمويل الاستثمارات', keywords: 'دعم وإقامة المشاريع والصانع', desc: 'المطورة للأنشطة الاقتصادية وتأسيس هياكل الصناعة الكبرى بالبلاد.' },
+                { id: 'cp2', title: 'توفير السيولة', keywords: 'تنشيط الحركة التجارية والأسواق', desc: 'تنشيط دورة المعاملات التجارية وتسهيل عمليات تمويل عقود التصدير والاستيراد.' },
+                { id: 'cp3', title: 'تحقيق التنمية', keywords: 'دفع عجلة النمو الاقتصادي', desc: 'رفع مستوى كفاءة البنية الأساسية والمرافق وزيادة الطاقة الاستيعابية للاقتصاد.' },
+                { id: 'cp4', title: 'استحداث الوظائف', keywords: 'خلق فرص العمل وامتصاص البطالة', desc: 'تقليص نسب الفقر وتوظيف الشباب المؤهل عبر تشييد مصانع جديدة ومشاريع ضخمة.' },
+                { id: 'cp5', title: 'تقديم القروض', keywords: 'دعم ومساعدة ميزانيات الدول', desc: 'مد الحكومات بالخطوط التمويلية اللازمة لتفادي الانكماش وتجاوز فترات الركود المالي.' },
+                { id: 'cp6', title: 'إنعاش الخزينة', keywords: 'زيادة إيرادات الضرائب والجمارك', desc: 'توسيع القاعدة الجبائية المحلية عبر زيادة المعاملات والضرائب المستحصلة من المستثمرين.' }
+            ],
+            'capital-neg': [
+                { id: 'cn1', title: 'تمركز الأموال', keywords: 'احتكار وتركز الثروة بالشمال', desc: 'سيطرة بضع عواصم ومؤسسات غربية على الغالبية الساحقة من كتل العرض النقدي العالمي.' },
+                { id: 'cn2', title: 'تفاقم المديونية', keywords: 'غرق الجنوب في أزمة الديون', desc: 'خضوع دول الجنوب لإملاءات القوى المقرضة ورهن قرارها الاقتصادي نتيجة الفوائد المتراكمة.' },
+                { id: 'cn3', title: 'الأزمات المالية', keywords: 'هزات تضرب الاستقرار العالمي', desc: 'سهولة انتقال الصدمات والفقاعات المالية السلبية عبر الأسواق والبورصات بشكل فوري.' },
+                { id: 'cn4', title: 'تبييض الأموال', keywords: 'غسل الأموال غير المشروعة بالبنوك', desc: 'صعوبة تتبع حركة الأموال القذرة الناتجة عن ممارسات غير قانونية كالسلاح أو المخدرات.' },
+                { id: 'cn5', title: 'الجرائم الاقتصادية', keywords: 'الفساد والاختلاس والسرقات المنظمة', desc: 'تزايد ممارسات التهرب الضريبي والتهريب المالي من قبل كبار مديري المحافظ والصناديق الاستثمارية.' },
+                { id: 'cn6', title: 'الفساد المالي', keywords: 'الرشوة وتأثير الكارتلات على السياسة', desc: 'شراء نفوذ وتغيير خطط وتشريعات الدول لتتوافق مع مطامع واحتكارات الشركات الأجنبية.' }
+            ],
+            'global-pos': [
+                { id: 'gp1', title: 'التجارة الإلكترونية', keywords: 'سرعة وسهولة المعاملات بالإنترنت', desc: 'البيع والشراء الفوري للسلع من أي بقعة في العالم، وتيسير قنوات السداد الرقمي الفوري.' },
+                { id: 'gp2', title: 'الإشهار والترويج', keywords: 'عرض السلع على نطاق عالمي واسع', desc: 'استغلال تقنيات الاتصال المعاصرة في تقديم السلع وبث العروض الإشهارية لأكثر من مليار متلقٍ.' },
+                { id: 'gp3', title: 'تجاوز الوسطاء', keywords: 'إلغاء دور السماسرة في التجارة', desc: 'ربط المصنع والمنتج الرئيسي مباشرة مع المشتري النهائي مما يخفض هوامش التكلفة النهائية للسلعة.' },
+                { id: 'gp4', title: 'الشفافية السعرية', keywords: 'مقارنة الأسعار بالمواقع الرقمية', desc: 'حماية المشتري من الغش السعري عبر توفير منصات معلنة لمقارنة أسعار المعروضات العالمية.' },
+                { id: 'gp5', title: 'متابعة الأسواق', keywords: 'الاطلاع الفوري على البورصات', desc: 'المعرفة الفورية بتغير أسعار السلع الغذائية الاستراتيجية والمعادن وتدفق الأسهم حول العالم.' },
+                { id: 'gp6', title: 'تحديد الفاعلين', keywords: 'التعرف السريع على كبار المصدرين', desc: 'تمكين الدول الصغرى من المفاضلة السريعة بين كبار موردي التكنولوجيا وصانعي المواد الضرورية.' }
+            ],
+            'global-neg': [
+                { id: 'gn1', title: 'المجتمع الاستهلاكي', keywords: 'تحويل الشعوب لاستهلاك المنتجات الغربية', desc: 'خلق رغبات استهلاكية زائفة ومستمرة تفوق القدرة المالية لشعوب دول العالم الثالث.' },
+                { id: 'gn2', title: 'هيمنة الشركات', keywords: 'سيطرة الاحتكارات الأجنبية على الجنوب', desc: 'تصفية وإغلاق المصانع والشركات المحلية البسيطة بسبب عدم قدرتها على مجابهة غول الاحتكار.' },
+                { id: 'gn3', title: 'القرصنة الإلكترونية', keywords: 'احتيال واختراق المعاملات البنكية', desc: 'تعرض حسابات الشركات والأفراد والأنظمة الحيوية لسرقات واختراقات سيبرانية فادحة الخسائر.' },
+                { id: 'gn4', title: 'طمس الهوية', keywords: 'تهميش وإضعاف الثقافات واللغات', desc: 'تحييد وإقصاء الخصوصيات الثقافية والدينية واللغوية وتمرير نمط الحياة الغربي الاستهلاكي الموحد.' },
+                { id: 'gn5', title: 'توجيه القرارات', keywords: 'التأثير على الرأي العام والمؤسسات', desc: 'بث الأخبار الموجهة والدعايات الذكية لزعزعة قناعات الجماهير والتأثير على السيادات الوطنية.' },
+                { id: 'gn6', title: 'إثارة النزاعات', keywords: 'تغذية الصراعات والحروب بالدول', desc: 'إشاعة الفتن السيبرانية والاجتماعية لضرب الاستقرار الداخلي بغرض فرض شروط اقتصادية ومطامع إقليمية.' }
+            ]
+        };
+
+        let currentFilter = 'north-prog';
+
+        // Initialize App
+        window.onload = function() {
+            renderSixPoints();
+        };
+
+        // Navigation Tab Switcher
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-sm');
+                btn.classList.add('text-slate-600', 'hover:bg-slate-50');
+            });
+
+            document.getElementById(`content-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('bg-indigo-600', 'text-white', 'shadow-sm');
+            document.getElementById(`tab-${tabId}`).classList.remove('text-slate-600', 'hover:bg-slate-50');
+        }
+
+        // Active Recall Details Toggle
+        function toggleActiveRecall() {
+            activeRecallEnabled = !activeRecallEnabled;
+            
+            const btn = document.getElementById('recall-btn');
+            const icon = document.getElementById('recall-icon');
+            const text = document.getElementById('recall-text');
+
+            if (activeRecallEnabled) {
+                btn.classList.remove('bg-white', 'text-indigo-900');
+                btn.classList.add('bg-rose-600', 'text-white');
+                icon.className = 'fa-solid fa-eye';
+                text.innerText = 'إظهار التفاصيل (وضع المراجعة)';
+            } else {
+                btn.classList.add('bg-white', 'text-indigo-900');
+                btn.classList.remove('bg-rose-600', 'text-white');
+                icon.className = 'fa-solid fa-eye-slash';
+                text.innerText = 'إخفاء التفاصيل للحفظ';
+            }
+
+            renderSixPoints();
+        }
+
+        // Filter cards in Tab 4
+        function filterSixPoints(category) {
+            currentFilter = category;
+            
+            document.querySelectorAll('.six-filter-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-sm');
+                btn.classList.add('bg-slate-100', 'text-slate-600');
+            });
+            document.getElementById(`btn-${category}`).classList.add('bg-indigo-600', 'text-white', 'shadow-sm');
+            document.getElementById(`btn-${category}`).classList.remove('bg-slate-100', 'text-slate-600');
+
+            renderSixPoints();
+        }
+
+        // Render dynamic cards inside DOM
+        function renderSixPoints() {
+            const grid = document.getElementById('six-points-grid');
+            grid.innerHTML = '';
+            
+            const cards = sixPointsData[currentFilter];
+
+            cards.forEach((card, index) => {
+                const cardEl = document.createElement('div');
+                cardEl.className = "flip-card h-64 cursor-pointer";
+                
+                const isTested = scoreTracker[card.id] ? true : false;
+                
+                // FIXED: flip-card-inner has "flipped" toggled, our CSS matches ".flip-card-inner.flipped"
+                cardEl.innerHTML = `
+                    <div id="flip-inner-${card.id}" onclick="flipCard('${card.id}')" class="flip-card-inner relative w-full h-full text-center transition-transform duration-500 rounded-2xl shadow-sm border border-slate-200/50 ${isTested ? 'flipped' : ''}">
+                        
+                        <!-- FRONT SIDE (Keywords/Title) -->
+                        <div class="flip-card-front absolute inset-0 w-full h-full bg-white rounded-2xl p-5 flex flex-col justify-between text-right border-t-4 ${getBorderColor()}">
+                            <div>
+                                <div class="flex items-center justify-between">
+                                    <span class="w-8 h-8 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center text-xs font-black text-indigo-600">${index + 1}</span>
+                                    <i class="fa-solid fa-bolt text-amber-500 animate-pulse text-xs"></i>
+                                </div>
+                                <h4 class="text-base font-black text-slate-800 mt-4">${card.title}</h4>
+                                <div class="mt-4 p-2.5 bg-indigo-50/50 rounded-xl border border-indigo-100/50 text-center">
+                                    <span class="text-[10px] text-indigo-500 font-extrabold block">مطة بكالوريا نموذجية</span>
+                                    <span class="text-xs font-black text-indigo-900 mt-1 block">${card.keywords}</span>
+                                </div>
+                            </div>
+                            <div class="text-center text-[10px] font-bold text-slate-400">
+                                ${activeRecallEnabled ? '<i class="fa-solid fa-rotate"></i> اضغط لتأكيد الحفظ والاسترجاع' : 'اضغط لقراءة الشرح والمصحح الموجه'}
+                            </div>
+                        </div>
+
+                        <!-- BACK SIDE (Explanation) -->
+                        <div class="flip-card-back absolute inset-0 w-full h-full ${getBackBg()} rounded-2xl p-5 flex flex-col justify-between text-right border border-slate-200">
+                            <div>
+                                <span class="px-2.5 py-0.5 bg-white/80 rounded-full text-[9px] font-bold text-slate-600">الشرح المنهجي الدقيق:</span>
+                                <p class="text-xs font-semibold text-slate-700 mt-3 leading-relaxed">${card.desc}</p>
+                            </div>
+                            <div class="flex items-center justify-between mt-4">
+                                <span class="text-[9px] font-bold text-slate-400"><i class="fa-solid fa-circle-check text-emerald-500"></i> تم التخزين بنجاح!</span>
+                                <span class="text-[9px] px-2 py-0.5 bg-indigo-100 text-indigo-800 font-black rounded-md">حفظ</span>
+                            </div>
+                        </div>
+
+                    </div>
+                `;
+                grid.appendChild(cardEl);
+            });
+        }
+
+        // Color helper functions
+        function getBorderColor() {
+            if (currentFilter.includes('pos')) return 'border-emerald-500';
+            if (currentFilter.includes('neg')) return 'border-rose-500';
+            if (currentFilter === 'north-prog') return 'border-emerald-500';
+            if (currentFilter === 'south-und') return 'border-rose-500';
+            if (currentFilter === 'south-barriers') return 'border-amber-500';
+            return 'border-indigo-500';
+        }
+
+        function getBackBg() {
+            if (currentFilter.includes('pos')) return 'bg-emerald-50/90';
+            if (currentFilter.includes('neg')) return 'bg-rose-50/90';
+            if (currentFilter === 'north-prog') return 'bg-emerald-50/90';
+            if (currentFilter === 'south-und') return 'bg-rose-50/90';
+            if (currentFilter === 'south-barriers') return 'bg-amber-50/90';
+            return 'bg-indigo-50/90';
+        }
+
+        // Handle Card Flip + Score Tracker for Memorization Mode
+        function flipCard(cardId) {
+            const cardInner = document.getElementById(`flip-inner-${cardId}`);
+            
+            if (cardInner.classList.contains('flipped')) {
+                cardInner.classList.remove('flipped');
+                if (scoreTracker[cardId]) {
+                    delete scoreTracker[cardId];
+                    updateScore(-1);
+                }
+            } else {
+                cardInner.classList.add('flipped');
+                if (!scoreTracker[cardId]) {
+                    scoreTracker[cardId] = true;
+                    updateScore(1);
+                }
+            }
+        }
+
+        function updateScore(val) {
+            scoreCount += val;
+            if (scoreCount < 0) scoreCount = 0;
+            if (scoreCount > 6) scoreCount = 6;
+            document.getElementById('score-counter').innerText = scoreCount;
+        }
+
+        // ==========================================
+        // TAB 5: BAC QUIZ GAME SYSTEM
+        // ==========================================
+        const quizQuestions = [
+            {
+                q: "ما هي النسبة التي يهيمن عليها عالم الشمال من إجمالي المبادلات التجارية العالمية؟",
+                options: [
+                    { text: "يهيمن عالم الشمال على حوالي 50% فقط.", correct: false, reason: "الشمال يهيمن بشكل أكبر بكثير ومطلق." },
+                    { text: "يهيمن عالم الشمال على أكثر من 80% من المبادلات.", correct: true, reason: "صحيح! الشمال يسيطر بنسبة مطلقة تعادل 80% وتعتبر من أهم المعايير الاقتصادية." },
+                    { text: "يهيمن عالم الشمال بنسبة ضئيلة جداً أقل من 20%.", correct: false, reason: "النسبة الضئيلة (أقل من 20%) هي مساهمة عالم الجنوب المتخلف." }
+                ]
+            },
+            {
+                q: "من الإيجابيات التنموية الهامة المترتبة على حركة رؤوس الأموال الاقتصادية:",
+                options: [
+                    { text: "تمركز الثروة في كبرى بورصات دول النصف الشمالي.", correct: false, reason: "هذا سلبي ويمثل تركز الثروة واحتكارها وليس إيجابيًا." },
+                    { text: "تمويل الاستثمارات وبناء المصانع وتوفير السيولة لتنشيط الأسواق.", correct: true, reason: "أحسنت! التدفق السليم للأموال يؤدي لفتح فرص استثمار جديدة وضخ سيولة للتجارة." },
+                    { text: "الاضطرار المتكرر للرشوة والتهرب الضريبي العابر للحدود.", correct: false, reason: "هذا فساد مالي ويمثل سلبيات وجرائم اقتصادية." }
+                ]
+            },
+            {
+                q: "تتسبب حركة رؤوس الأموال العشوائية في حدوث مخاطر جسيمة على الجنوب منها:",
+                options: [
+                    { text: "تجاوز السماسرة والوسطاء وتفعيل الشفافية السعرية للمنتجات.", correct: false, reason: "هذه من إيجابيات العولمة التكنولوجية." },
+                    { text: "انخفاض معدلات الفقر وتوفير ميزانيات البنى التحتية المتينة.", correct: false, reason: "هذا من الجوانب الإيجابية المحققة للتنمية." },
+                    { text: "تفاقم المديونية، غرق الجنوب في الديون، وتغلغل عمليات تبييض الأموال.", correct: true, reason: "رائع! الديون وتبييض الأموال من أهم المعوقات والمخاطر المترتبة على حركة الأموال." }
+                ]
+            },
+            {
+                q: "من إيجابيات تغلغل التكنولوجيا والوسائل الرقمية الحديثة في الأسواق والمبادلات:",
+                options: [
+                    { text: "طمس الهوية الثقافية واللغات المحلية للشعوب النامية.", correct: false, reason: "هذا دور سلبي وخطير للعولمة والتكنولوجيا." },
+                    { text: "سرعة وسهولة إبرام الصفقات عبر التجارة الإلكترونية ومتابعة البورصات.", correct: true, reason: "ممتاز! سرعة المتابعة اللحظية وحماية المستهلك عبر التجارة الرقمية هي إيجابيات مباشرة للتكنولوجيا." },
+                    { text: "تغذية النزاعات المحلية المسلحة والتحكم في قرارات السيادة.", correct: false, reason: "هذا يقع ضمن سلبيات استغلال التكنولوجيا وتوجيه القرارات." }
+                ]
+            },
+            {
+                q: "يلعب الجانب السلبي للعولمة المعاصرة دوراً مدمراً في دول الجنوب عبر:",
+                options: [
+                    { text: "تحويل الشعوب لمجتمع استهلاكي وتبعيتها للشركات متعددة الجنسيات.", correct: true, reason: "أصبت! تحويل الفرد لآلة استهلاكية للمنتجات الغربية وسيطرة الشركات هو أخطر آثار العولمة السلبية." },
+                    { text: "زيادة حجم الميزانيات المخصصة لدعم الابتكار والبحث الجامعي.", correct: false, reason: "هذا مظهر تقدم وإيجابي ولا يعبر عن مخاطر العولمة الاستهلاكية." },
+                    { text: "توفير بوابات مجانية لمقارنة أسعار ومواصفات السلع المستوردة.", correct: false, reason: "هذا يندرج تحت إيجابيات الشفافية السعرية للمستهلك." }
+                ]
+            },
+            {
+                q: "ما معنى أن تعتمد بلدان الجنوب المتخلفة على 'الاقتصاد الريعي' كمظهر تبعية؟",
+                options: [
+                    { text: "اعتماد الاقتصاد كلياً على تصنيع التكنولوجيا والذكاء الاصطناعي.", correct: false, reason: "هذا تقدم واحتكار تكنولوجي للشمال." },
+                    { text: "الاعتماد الكلي على تصدير الموارد الطبيعية والمواد الخام كالبترول دون تصنيعها.", correct: true, reason: "أحسنت! الاقتصاد الريعي يفقد الدولة القيمة المضافة ويجعلها رهن تذبذب الأسعار العالمية." },
+                    { text: "تحقيق التوازن المالي وتجنب القروض وفوائد صندوق النقد الدولي.", correct: false, reason: "التبعية تزيد العجز والمديونية ولا تجنب القروض." }
+                ]
+            },
+            {
+                q: "تعتبر 'هجرة الأدمغة' من المعيقات الهيكلية الهامة في الجنوب لأنها:",
+                options: [
+                    { text: "تساهم في رفع الإنتاج وزيادة عدد براءات الاختراع المحلية بالجنوب.", correct: false, reason: "هذا تقدم للشمال، أما الجنوب فيخسر كفاءاته." },
+                    { text: "تؤدي لنقص الكفاءات الهندسية والعلمية اللازمة لبناء قاعدة صناعية متطورة.", correct: true, reason: "صحيح! مغادرة العقول المبدعة تفرغ الدولة من قيادات الابتكار وتكرس التخلف التقني." },
+                    { text: "تساعد في حل معضلة الانفجار الديموغرافي بشكل مباشر.", correct: false, reason: "الهجرة لا تحل الانفجار الديموغرافي بل تحرم الدولة من أفضل طاقاتها الشابة." }
+                ]
+            },
+            {
+                q: "ما هو أفضل مسار استراتيجي للانتقال الاقتصادي في دول الجنوب من الهامش إلى مركز التأثير؟",
+                options: [
+                    { text: "تنويع الاقتصاد، الاستثمار في المورد البشري، وتنشيط التكتلات الإقليمية.", correct: true, reason: "ممتاز وجواب نهائي صحيح! هذا المسار يحول المعيقات إلى فرص حقيقية للتنمية والسيادة." },
+                    { text: "الاستمرار في الاستيراد من الشمال لتوفير السيولة والسيادة المؤقتة.", correct: false, reason: "هذا يعمق العجز والتبعية ولا يوفر سيادة." },
+                    { text: "زيادة حدة الصراعات والحروب لفرض السعر في الأسواق والبورصات.", correct: false, reason: "النزاعات تعرقل خطط التنمية وتدمر البنى التحتية تماماً." }
+                ]
+            }
+        ];
+
+        let currentQuestionIdx = 0;
+        let quizScore = 0;
+        let quizTimerInterval;
+        let timeLeft = 30;
+
+        function startQuiz() {
+            document.getElementById('quiz-start-screen').classList.add('hidden');
+            document.getElementById('quiz-play-screen').classList.remove('hidden');
+            document.getElementById('quiz-end-screen').classList.add('hidden');
+            
+            currentQuestionIdx = 0;
+            quizScore = 0;
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            clearInterval(quizTimerInterval);
+            timeLeft = 30;
+            document.getElementById('timer-val').innerText = timeLeft;
+            document.getElementById('quiz-feedback').className = "hidden mt-6 p-4 rounded-2xl border flex items-start gap-3";
+            document.getElementById('next-quiz-btn').classList.add('hidden');
+
+            const currentQ = quizQuestions[currentQuestionIdx];
+            document.getElementById('current-question-num').innerText = currentQuestionIdx + 1;
+            document.getElementById('question-text').innerText = currentQ.q;
+
+            const optionsContainer = document.getElementById('quiz-options-container');
+            optionsContainer.innerHTML = '';
+
+            currentQ.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-right p-4 rounded-2xl border-2 border-slate-100 hover:border-indigo-100 hover:bg-slate-50 transition-all text-sm font-bold text-slate-700 flex justify-between items-center group";
+                btn.innerHTML = `
+                    <span>${opt.text}</span>
+                    <i class="fa-solid fa-circle-play text-slate-300 group-hover:text-indigo-500 transition-colors"></i>
+                `;
+                btn.onclick = () => selectOption(btn, opt);
+                optionsContainer.appendChild(btn);
+            });
+
+            quizTimerInterval = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timer-val').innerText = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(quizTimerInterval);
+                    handleTimeout();
+                }
+            }, 1000);
+        }
+
+        function selectOption(selectedBtn, optionObj) {
+            clearInterval(quizTimerInterval);
+            
+            const buttons = document.getElementById('quiz-options-container').querySelectorAll('button');
+            buttons.forEach(btn => btn.disabled = true);
+
+            const feedbackEl = document.getElementById('quiz-feedback');
+            const feedbackIcon = document.getElementById('feedback-icon');
+            const feedbackTitle = document.getElementById('feedback-title');
+            const feedbackDesc = document.getElementById('feedback-desc');
+
+            feedbackEl.classList.remove('hidden');
+
+            if (optionObj.correct) {
+                quizScore++;
+                selectedBtn.classList.remove('border-slate-100', 'hover:border-indigo-100', 'hover:bg-slate-50');
+                selectedBtn.classList.add('border-emerald-500', 'bg-emerald-50/50', 'text-emerald-900');
+                selectedBtn.querySelector('i').className = "fa-solid fa-circle-check text-emerald-600";
+                
+                feedbackEl.className = "mt-6 p-4 rounded-2xl border border-emerald-100 bg-emerald-50 flex items-start gap-3 text-emerald-900";
+                feedbackIcon.innerHTML = '<i class="fa-solid fa-circle-check text-xl text-emerald-600"></i>';
+                feedbackTitle.innerText = "إجابة نموذجية ممتازة!";
+                feedbackDesc.innerText = optionObj.reason;
+            } else {
+                selectedBtn.classList.remove('border-slate-100', 'hover:border-indigo-100', 'hover:bg-slate-50');
+                selectedBtn.classList.add('border-rose-500', 'bg-rose-50/50', 'text-rose-900');
+                selectedBtn.querySelector('i').className = "fa-solid fa-circle-xmark text-rose-600";
+
+                feedbackEl.className = "mt-6 p-4 rounded-2xl border border-rose-100 bg-rose-50 flex items-start gap-3 text-rose-900";
+                feedbackIcon.innerHTML = '<i class="fa-solid fa-circle-exclaim text-xl text-rose-600"></i>';
+                feedbackTitle.innerText = "تنبيه هام للبكالوريا!";
+                feedbackDesc.innerText = optionObj.reason;
+
+                highlightCorrectAnswer();
+            }
+
+            document.getElementById('next-quiz-btn').classList.remove('hidden');
+        }
+
+        function highlightCorrectAnswer() {
+            const currentQ = quizQuestions[currentQuestionIdx];
+            const buttons = document.getElementById('quiz-options-container').querySelectorAll('button');
+            
+            currentQ.options.forEach((opt, idx) => {
+                if (opt.correct) {
+                    buttons[idx].classList.add('border-emerald-400', 'bg-emerald-50/20');
+                    buttons[idx].querySelector('i').className = "fa-solid fa-circle-check text-emerald-500";
+                }
+            });
+        }
+
+        function handleTimeout() {
+            const buttons = document.getElementById('quiz-options-container').querySelectorAll('button');
+            buttons.forEach(btn => btn.disabled = true);
+
+            const feedbackEl = document.getElementById('quiz-feedback');
+            feedbackEl.classList.remove('hidden');
+            feedbackEl.className = "mt-6 p-4 rounded-2xl border border-amber-100 bg-amber-50 flex items-start gap-3 text-amber-900";
+            document.getElementById('feedback-icon').innerHTML = '<i class="fa-solid fa-hourglass-end text-xl text-amber-600"></i>';
+            document.getElementById('feedback-title').innerText = "انتهى وقت التفكير!";
+            document.getElementById('feedback-desc').innerText = "في الامتحان الحقيقي، استرجاع المعلومة في الكلمات المفتاحية يضمن لك كتابة المقال الاقتصادي بسرعة ودون تردد.";
+
+            highlightCorrectAnswer();
+            document.getElementById('next-quiz-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQuestionIdx++;
+            if (currentQuestionIdx < quizQuestions.length) {
+                loadQuestion();
+            } else {
+                showQuizResult();
+            }
+        }
+
+        function showQuizResult() {
+            document.getElementById('quiz-play-screen').classList.add('hidden');
+            document.getElementById('quiz-end-screen').classList.remove('hidden');
+
+            document.getElementById('final-score').innerText = quizScore;
+            
+            const evalText = document.getElementById('quiz-evaluation-text');
+            if (quizScore === 8) {
+                evalText.innerHTML = "🏆 <strong>مستوى بطل البكالوريا!</strong> لقد حققت العلامة الكاملة. أنت جاهز ومستوعب تماماً لأسرار حركة الأموال والعولمة في المقال الجغرافي.";
+            } else if (quizScore >= 5) {
+                evalText.innerHTML = "👍 <strong>أداء جيد جداً ومبشر!</strong> مستواك ممتاز، راجع فقط بعض كروت المراجعة النشطة المخصصة لسلبيات الأموال لتفادي ضياع أي ربع نقطة.";
+            } else {
+                evalText.innerHTML = "⚠️ <strong>تحتاج لمزيد من الحفظ!</strong> لا تقلق، تذكر أن التكرار يثبت الذاكرة طويلة المدى. أعد تشغيل (وضع إخفاء التفاصيل) لمراجعة المفاهيم وعاود الاختبار.";
+            }
+        }
+
+        function resetQuiz() {
+            document.getElementById('quiz-end-screen').classList.add('hidden');
+            document.getElementById('quiz-start-screen').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

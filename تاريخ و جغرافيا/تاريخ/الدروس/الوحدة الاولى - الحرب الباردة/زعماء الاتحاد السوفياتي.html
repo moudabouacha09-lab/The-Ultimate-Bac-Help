@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنفوجرافيك زعماء المعسكر الشرقي - بكالوريا الجزائر</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for Arabic -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #0c0a09; /* stone-950 */
+        }
+        .soviet-gradient {
+            background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 50%, #1c1917 100%);
+        }
+        .gold-border {
+            border-image: linear-gradient(to right, #d97706, #f59e0b, #d97706) 1;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1c1917;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #7f1d1d;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #b91c1c;
+        }
+    </style>
+</head>
+<body class="text-stone-100 min-h-screen pb-12 overflow-x-hidden">
+
+    <!-- Header Section -->
+    <header class="relative soviet-gradient py-12 px-4 border-b-4 border-amber-500 shadow-2xl">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,158,11,0.08)_0%,transparent_70%)] pointer-events-none"></div>
+        <div class="max-w-6xl mx-auto text-center relative z-10">
+            <!-- Soviet Star SVG Icon -->
+            <div class="flex justify-center mb-4 animate-pulse">
+                <svg class="w-16 h-16 text-amber-500" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.787 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.132 9.21l8.2-1.192z"/>
+                </svg>
+            </div>
+            <h1 class="text-3xl md:text-5xl font-black text-amber-400 mb-3 tracking-wide">
+                زعماء ورجالات الاتحاد السوفياتي
+            </h1>
+            <p class="text-lg md:text-2xl text-stone-300 font-bold mb-6">
+                خلال الحرب الباردة: الشخصيات، المنجزات والأزمات بأسلوب البكالوريا الجزائرية
+            </p>
+            <div class="flex flex-wrap justify-center gap-3 max-w-2xl mx-auto">
+                <span class="bg-red-950/80 text-red-200 text-xs md:text-sm px-3 py-1.5 rounded-full border border-red-500/30 flex items-center gap-1.5 font-bold">
+                    🛡️ مطابق للتدرج السنوي 2026
+                </span>
+                <span class="bg-amber-950/80 text-amber-200 text-xs md:text-sm px-3 py-1.5 rounded-full border border-amber-500/30 flex items-center gap-1.5 font-bold">
+                    🎯 منهجية الـ 1.5 كاملة مضمونة
+                </span>
+                <span class="bg-stone-900 text-stone-300 text-xs md:text-sm px-3 py-1.5 rounded-full border border-stone-700 flex items-center gap-1.5 font-bold">
+                    🚀 مراجعة تفاعلية ذكية
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <div class="max-w-6xl mx-auto px-4 mt-8">
+        <div class="flex flex-wrap justify-center gap-2 border-b border-stone-800 pb-4">
+            <button onclick="switchTab('infographic')" id="tab-infographic" class="tab-btn px-5 py-2.5 rounded-lg font-bold text-sm md:text-base transition duration-300 bg-amber-500 text-stone-950 shadow-lg">
+                📋 إنفوجرافيك الشخصيات
+            </button>
+            <button onclick="switchTab('simulator')" id="tab-simulator" class="tab-btn px-5 py-2.5 rounded-lg font-bold text-sm md:text-base transition duration-300 bg-stone-900 text-stone-400 hover:text-stone-100">
+                ⚖️ محاكي تنقيط البكالوريا
+            </button>
+            <button onclick="switchTab('versus')" id="tab-versus" class="tab-btn px-5 py-2.5 rounded-lg font-bold text-sm md:text-base transition duration-300 bg-stone-900 text-stone-400 hover:text-stone-100">
+                ⚔️ وضع المواجهة (سوفياتي vs أمريكي)
+            </button>
+            <button onclick="switchTab('quiz')" id="tab-quiz" class="tab-btn px-5 py-2.5 rounded-lg font-bold text-sm md:text-base transition duration-300 bg-stone-900 text-stone-400 hover:text-stone-100">
+                🧠 اختبار الحفظ النشط
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT CONTAINERS -->
+    <main class="max-w-6xl mx-auto px-4 mt-8">
+
+        <!-- TAB 1: INFOGRAPHIC VIEW -->
+        <section id="content-infographic" class="tab-content block">
+            
+            <!-- Unified Definition Box -->
+            <div class="bg-gradient-to-r from-red-950/80 to-amber-950/80 border-2 border-amber-500/40 rounded-2xl p-6 md:p-8 mb-10 shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 bg-amber-500 text-stone-950 font-black px-4 py-1 text-xs rounded-br-xl uppercase tracking-wider">
+                    سر النجاح في البكالوريا
+                </div>
+                <h3 class="text-xl md:text-2xl font-black text-amber-400 mb-3 mt-2 flex items-center gap-2">
+                    <span>🗝️</span> القالب المشترك (مفتاح التصحيح النموذجي)
+                </h3>
+                <p class="text-stone-200 text-sm md:text-base leading-relaxed mb-4">
+                    في تصحيح البكالوريا، يحاسب المصحح على <strong class="text-amber-300">الصفة والمنصب</strong> ثم <strong class="text-amber-300">أهم منجزين أو أزمتين</strong>. احفظ هذا التعريف المشترك لتبدأ به إجابتك بثقة تامة:
+                </p>
+                <div class="bg-stone-950/70 border-l-4 border-red-600 p-4 rounded-lg font-bold text-amber-100 text-center text-base md:text-lg">
+                    "شخصية سوفياتية، قاد المعسكر الشرقي الشيوعي خلال الحرب الباردة، وأحد صناع السياسة الخارجية السوفياتية."
+                </div>
+            </div>
+
+            <!-- Timeline/Stage Sub-headers and Grid -->
+            <!-- STAGE 1 -->
+            <div class="mb-12">
+                <div class="flex items-center gap-3 mb-6 border-b border-red-900 pb-2">
+                    <span class="bg-red-600 text-stone-100 px-3 py-1 text-xs md:text-sm rounded font-black">المرحلة الأولى</span>
+                    <h2 class="text-xl md:text-2xl font-black text-red-400">التشدد والصدام المبكر (1945 - 1953)</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- JOSEPH STALIN CARD -->
+                    <div class="bg-stone-900/90 rounded-2xl border border-red-900/60 overflow-hidden shadow-lg transition duration-300 hover:border-red-500">
+                        <div class="bg-gradient-to-r from-red-950 to-stone-900 p-6 flex flex-col sm:flex-row items-center gap-6 border-b border-red-900/40">
+                            <div class="relative w-24 h-24 flex-shrink-0 bg-stone-850 rounded-full border-4 border-red-700 overflow-hidden flex items-center justify-center shadow-lg">
+                                <svg class="w-16 h-16 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                                </svg>
+                                <span class="absolute bottom-1 bg-red-600 text-stone-100 px-2 py-0.5 text-[10px] rounded-full font-bold">ستالين</span>
+                            </div>
+                            <div class="text-center sm:text-right">
+                                <h3 class="text-2xl font-black text-stone-100">جوزيف ستالين</h3>
+                                <p class="text-amber-400 font-bold text-sm mt-1">الرجل الحديدي وصانع الانتصار وبداية الحرب الباردة</p>
+                                <p class="text-xs text-stone-400 mt-2">توفي في 5 مارس 1953 (غيّر مجرى الصراع الإيديولوجي)</p>
+                            </div>
+                        </div>
+                        <div class="p-6 grid grid-cols-1 gap-6 bg-stone-900/50">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <h4 class="text-red-400 font-black mb-2 text-sm flex items-center gap-1.5">
+                                        <span>⚙️</span> المنجزات:
+                                    </h4>
+                                    <ul class="space-y-2 text-stone-300 text-xs md:text-sm">
+                                        <li>• تميز عهده بـ <strong>التشدد والتعصب الشديد</strong> وتثبيت الشيوعية.</li>
+                                        <li>• حول بلاده لقوة نووية <strong>(تفجير أول قنبلة ذرية سوفياتية 1949)</strong>.</li>
+                                        <li>• فرض نظام <strong>الستار الحديدي</strong> في أوروبا الشرقية.</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="text-amber-400 font-black mb-2 text-sm flex items-center gap-1.5">
+                                        <span>💥</span> الأزمات والسياسات:
+                                    </h4>
+                                    <ul class="space-y-2 text-stone-300 text-xs md:text-sm">
+                                        <li>• حضر مؤتمر <strong>يالطا 1945</strong> لرسم خارطة العالم.</li>
+                                        <li>• فجر <strong>أزمة برلين الأولى 1948</strong> (حصار برلين العسكري).</li>
+                                        <li>• أسس مكتب <strong>الكومينفورم</strong> ومجلس <strong>الكوميكون</strong>.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ANDREI ZHDANOV CARD -->
+                    <div class="bg-stone-900/90 rounded-2xl border border-red-900/60 overflow-hidden shadow-lg transition duration-300 hover:border-red-500">
+                        <div class="bg-gradient-to-r from-red-950 to-stone-900 p-6 flex flex-col sm:flex-row items-center gap-6 border-b border-red-900/40">
+                            <div class="relative w-24 h-24 flex-shrink-0 bg-stone-850 rounded-full border-4 border-red-700 overflow-hidden flex items-center justify-center shadow-lg">
+                                <svg class="w-16 h-16 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                                </svg>
+                                <span class="absolute bottom-1 bg-red-600 text-stone-100 px-2 py-0.5 text-[10px] rounded-full font-bold">جدانوف</span>
+                            </div>
+                            <div class="text-center sm:text-right">
+                                <h3 class="text-2xl font-black text-stone-100">أندري جدانوف</h3>
+                                <p class="text-amber-400 font-bold text-sm mt-1">المُنظّر الأيديولوجي وصاحب الأطروحة الثنائية</p>
+                                <p class="text-xs text-stone-400 mt-2">توفي عام 1948 (كان الساعد الأيمن لستالين وموجه الحزب)</p>
+                            </div>
+                        </div>
+                        <div class="p-6 grid grid-cols-1 gap-6 bg-stone-900/50">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <h4 class="text-red-400 font-black mb-2 text-sm flex items-center gap-1.5">
+                                        <span>⚙️</span> المنجزات والمنصب:
+                                    </h4>
+                                    <ul class="space-y-2 text-stone-300 text-xs md:text-sm">
+                                        <li>• قيادي ومُنظّر بارز جداً في <strong>الحزب الشيوعي السوفياتي</strong>.</li>
+                                        <li>• كُلِّف بـ <strong>مكتب الإعلام والدعاية</strong> وتوجيه الفكر الشيوعي.</li>
+                                        <li>• ساهم في صياغة ردود الفعل السوفياتية المتشددة في بداية الصراع.</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="text-amber-400 font-black mb-2 text-sm flex items-center gap-1.5">
+                                        <span>💥</span> المبادئ والسياسات:
+                                    </h4>
+                                    <ul class="space-y-2 text-stone-300 text-xs md:text-sm">
+                                        <li>• صاحب <strong>مبدأ جدانوف (سبتمبر 1947)</strong> الذي قسّم العالم لمعسكرين (شرقي ديمقراطي وغربي إمبريالي).</li>
+                                        <li>• من أبرز مؤسسي ومهندسي مكتب <strong>الكومينفورم 1947</strong> لمواجهة النفوذ الأمريكي.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STAGE 2 -->
+            <div class="mb-12">
+                <div class="flex items-center gap-3 mb-6 border-b border-amber-900 pb-2">
+                    <span class="bg-amber-600 text-stone-950 px-3 py-1 text-xs md:text-sm rounded font-black">المرحلة الثانية</span>
+                    <h2 class="text-xl md:text-2xl font-black text-amber-400">التعايش السلمي والانفراج الدولي (1953 - 1985)</h2>
+                </div>
+
+                <!-- Sub-Label: Leaders of the Troika and Successors -->
+                <div class="mb-4 text-xs md:text-sm text-stone-400 font-bold">
+                    📌 أقطاب القيادة الجماعية (الترويكا) وزعماء التهدئة الفكرية:
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- NIKITA KHRUSHCHEV CARD -->
+                    <div class="bg-stone-900/90 rounded-2xl border border-stone-800 overflow-hidden shadow-lg transition duration-300 hover:border-amber-500/50 flex flex-col justify-between">
+                        <div>
+                            <div class="bg-gradient-to-r from-amber-950/60 to-stone-900 p-6 flex items-center gap-4 border-b border-stone-800">
+                                <div class="relative w-20 h-20 flex-shrink-0 bg-stone-850 rounded-full border-3 border-amber-500 overflow-hidden flex items-center justify-center">
+                                    <svg class="w-14 h-14 text-amber-500" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                                    </svg>
+                                    <span class="absolute bottom-0.5 bg-amber-500 text-stone-950 px-1.5 py-0.5 text-[9px] rounded-full font-bold">خروتشوف</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-black text-stone-100">نيكيتا خروتشوف</h3>
+                                    <p class="text-amber-400 font-bold text-xs mt-0.5">صاحب مبادرة التعايش السلمي وغزو الفضاء</p>
+                                </div>
+                            </div>
+                            <div class="p-6 space-y-4">
+                                <div>
+                                    <h4 class="text-red-400 font-black text-sm mb-1">⚙️ المنجزات:</h4>
+                                    <ul class="space-y-1 text-stone-300 text-xs md:text-sm">
+                                        <li>• طرح مبادرة <strong>التعايش السلمي 1956</strong>.</li>
+                                        <li>• قاد السوفيات لإطلاق أول قمر صناعي <strong>سبوتنيك 1957</strong>.</li>
+                                        <li>• تأسس في عهده <strong>حلف وارسو 1955</strong> لمواجهة الناتو.</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="text-amber-400 font-black text-sm mb-1">💥 الأزمات:</h4>
+                                    <ul class="space-y-1 text-stone-300 text-xs md:text-sm">
+                                        <li>• عاصر <strong>أزمة جدار برلين الثانية 1961</strong>.</li>
+                                        <li>• أطلق <strong>أزمة الصواريخ في كوبا (الكاريبي) 1962</strong>.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LEONID BREZHNEV CARD -->
+                    <div class="bg-stone-900/90 rounded-2xl border border-stone-800 overflow-hidden shadow-lg transition duration-300 hover:border-amber-500/50 flex flex-col justify-between">
+                        <div>
+                            <div class="bg-gradient-to-r from-amber-950/60 to-stone-900 p-6 flex items-center gap-4 border-b border-stone-800">
+                                <div class="relative w-20 h-20 flex-shrink-0 bg-stone-850 rounded-full border-3 border-amber-500 overflow-hidden flex items-center justify-center">
+                                    <svg class="w-14 h-14 text-amber-500" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                                    </svg>
+                                    <span class="absolute bottom-0.5 bg-amber-500 text-stone-950 px-1.5 py-0.5 text-[9px] rounded-full font-bold">بريجنيف</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-black text-stone-100">ليونيد بريجنيف</h3>
+                                    <p class="text-amber-400 font-bold text-xs mt-0.5">مرحلة الوفاق الدولي والجمود الاقتصادي</p>
+                                </div>
+                            </div>
+                            <div class="p-6 space-y-4">
+                                <div>
+                                    <h4 class="text-red-400 font-black text-sm mb-1">⚙️ المنجزات:</h4>
+                                    <ul class="space-y-1 text-stone-300 text-xs md:text-sm">
+                                        <li>• تميزت سياسته بالمرونة ودعم سياسة الانفراج الدولي.</li>
+                                        <li>• حقق <strong>التكافؤ الاستراتيجي والعسكري</strong> مع أمريكا.</li>
+                                        <li>• أدخل البلاد في مرحلة "الركود الاقتصادي" الداخلي.</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="text-amber-400 font-black text-sm mb-1">💥 الأزمات والاتفاقيات:</h4>
+                                    <ul class="space-y-1 text-stone-300 text-xs md:text-sm">
+                                        <li>• وقع معاهدات الحد من السلاح <strong>سالت 1 (1972) وسالت 2 (1979)</strong>.</li>
+                                        <li>• أمر بـ <strong>الغزو السوفياتي لأفغانستان 1979</strong>.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- NIKOLAI BULGANIN CARD (NEW) -->
+                    <div class="bg-stone-900/90 rounded-2xl border border-stone-800 overflow-hidden shadow-lg transition duration-300 hover:border-amber-500/50 flex flex-col justify-between">
+                        <div>
+                            <div class="bg-gradient-to-r from-amber-950/60 to-stone-900 p-6 flex items-center gap-4 border-b border-stone-800">
+                                <div class="relative w-20 h-20 flex-shrink-0 bg-stone-850 rounded-full border-3 border-amber-500 overflow-hidden flex items-center justify-center">
+                                    <svg class="w-14 h-14 text-amber-500" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                                    </svg>
+                                    <span class="absolute bottom-0.5 bg-amber-500 text-stone-950 px-1.5 py-0.5 text-[9px] rounded-full font-bold">بولغانين</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-black text-stone-100">نيكولاي بولغانين</h3>
+                                    <p class="text-amber-400 font-bold text-xs mt-0.5">وزير الدفاع، حليف خروتشوف وقطب الترويكا الداعم للتعايش</p>
+                                </div>
+                            </div>
+                            <div class="p-6 space-y-4">
+                                <div>
+                                    <h4 class="text-red-400 font-black text-sm mb-1">⚙️ الصفة والمنصب:</h4>
+                                    <ul class="space-y-1 text-stone-300 text-xs md:text-sm">
+                                        <li>• رجل دولة وقائد عسكري سوفياتي بارز.</li>
+                                        <li>• شغل منصب <strong>وزير الدفاع السوفياتي</strong> ثم رئيس الوزراء (الوزراء).</li>
+                                        <li>• أحد الأركان الثلاثة للقيادة الجماعية <strong>(الترويكا)</strong> التي تسلمت الحكم بعد ستالين.</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="text-amber-400 font-black text-sm mb-1">💥 السياسات والتحالفات:</h4>
+                                    <ul class="space-y-1 text-stone-300 text-xs md:text-sm">
+                                        <li>• كان <strong>حليفاً وثيقاً لنيكيتا خروتشوف</strong> في تصفية الإرث الستاليني المتشدد.</li>
+                                        <li>• من أبرز المؤيدين والدعاة لمبادرة سياسة <strong>التعايش السلمي</strong> والانفتاح الدولي.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GEORGY MALENKOV CARD (NEW) -->
+                    <div class="bg-stone-900/90 rounded-2xl border border-stone-800 overflow-hidden shadow-lg transition duration-300 hover:border-amber-500/50 flex flex-col justify-between">
+                        <div>
+                            <div class="bg-gradient-to-r from-amber-950/60 to-stone-900 p-6 flex items-center gap-4 border-b border-stone-800">
+                                <div class="relative w-20 h-20 flex-shrink-0 bg-stone-850 rounded-full border-3 border-amber-500 overflow-hidden flex items-center justify-center">
+                                    <svg class="w-14 h-14 text-amber-500" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                                    </svg>
+                                    <span class="absolute bottom-0.5 bg-amber-500 text-stone-950 px-1.5 py-0.5 text-[9px] rounded-full font-bold">مالينكوف</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-black text-stone-100">غيورغي مالينكوف</h3>
+                                    <p class="text-amber-400 font-bold text-xs mt-0.5">رئيس الوزراء الخصم، ومعارض خروتشوف المنفي</p>
+                                </div>
+                            </div>
+                            <div class="p-6 space-y-4">
+                                <div>
+                                    <h4 class="text-red-400 font-black text-sm mb-1">⚙️ الصفة والمنصب:</h4>
+                                    <ul class="space-y-1 text-stone-300 text-xs md:text-sm">
+                                        <li>• سياسي سوفياتي ورجل دولة من الطراز الأول.</li>
+                                        <li>• تولى رئاسة مجلس الوزراء السوفياتي مباشرة بعد وفاة ستالين 1953.</li>
+                                        <li>• عضو رئيسي في جبهة القيادة الثلاثية الجماعية <strong>(الترويكا)</strong>.</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="text-amber-400 font-black text-sm mb-1">💥 الخلاف والنفي:</h4>
+                                    <ul class="space-y-1 text-stone-300 text-xs md:text-sm">
+                                        <li>• تزعم الجناح الحزبي <strong>المعارض لسياسات وتوجهات نيكيتا خروتشوف</strong>.</li>
+                                        <li>• خسر الصراع الخفي على السلطة، مما أدى لعزله من الحزب و <strong>نفيه إلى كازاخستان</strong> لإبعاده عن القرار.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- STAGE 3 -->
+            <div class="mb-12">
+                <div class="flex items-center gap-3 mb-6 border-b border-red-900 pb-2">
+                    <span class="bg-red-600 text-stone-100 px-3 py-1 text-xs md:text-sm rounded font-black">المرحلة الثالثة</span>
+                    <h2 class="text-xl md:text-2xl font-black text-red-400">تصدع وسقوط المعسكر الشرقي (1985 - 1991)</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-1 gap-6">
+                    <!-- MIKHAIL GORBACHEV CARD -->
+                    <div class="bg-stone-900/90 rounded-2xl border border-red-900/60 overflow-hidden shadow-lg transition duration-300 hover:border-red-500">
+                        <div class="bg-gradient-to-r from-red-950 to-stone-900 p-6 flex flex-col md:flex-row items-center gap-6 border-b border-red-900/40">
+                            <div class="relative w-28 h-28 flex-shrink-0 bg-stone-850 rounded-full border-4 border-red-700 overflow-hidden flex items-center justify-center shadow-lg">
+                                <svg class="w-20 h-20 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                                </svg>
+                                <span class="absolute bottom-1 bg-red-600 text-stone-100 px-2 py-0.5 text-[10px] rounded-full font-bold">غورباتشوف</span>
+                            </div>
+                            <div class="text-center md:text-right">
+                                <h3 class="text-2xl font-black text-stone-100">ميخائيل غورباتشوف</h3>
+                                <p class="text-amber-400 font-bold text-sm mt-1">آخر رؤساء الاتحاد السوفياتي وصاحب الإصلاحات الفاشلة</p>
+                                <p class="text-xs text-stone-400 mt-2">استقال في 25 ديسمبر 1991 معلناً تفكك وسقوط السوفيات رسمياً</p>
+                            </div>
+                        </div>
+                        <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6 bg-stone-900/50">
+                            <div>
+                                <h4 class="text-red-400 font-black mb-3 text-sm flex items-center gap-2">
+                                    <span>⚙️</span> إصلاحات تسببت بالانهيار:
+                                </h4>
+                                <ul class="space-y-3 text-stone-300 text-xs md:text-sm">
+                                    <li>• أطلق إصلاحاته الاقتصادية والسياسية التي عجلت بالسقوط: <strong>البيرسترويكا</strong> (إعادة الهيكلة) و <strong>الغلاسنوست</strong> (الشفافية).</li>
+                                    <li>• تخلى عن دعم الأنظمة الشيوعية الحليفة في شرق أوروبا.</li>
+                                    <li>• حاز على <strong>جائزة نوبل للسلام 1990</strong> بعد إنهائه الصراع من طرف واحد.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-amber-400 font-black mb-3 text-sm flex items-center gap-2">
+                                    <span>💥</span> نهاية الحرب الباردة:
+                                </h4>
+                                <ul class="space-y-3 text-stone-300 text-xs md:text-sm">
+                                    <li>• وقع على نهاية الحرب الباردة رسمياً مع جورج بوش الأب في <strong>قمة مالطا (1989)</strong> و <strong>قمة باريس (1990)</strong>.</li>
+                                    <li>• أعلن رسمياً <strong>حل وتفكيك الاتحاد السوفياتي</strong> واستقالته في 25 ديسمبر 1991.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- TAB 2: BAC SCORE SIMULATOR -->
+        <section id="content-simulator" class="tab-content hidden">
+            <div class="bg-stone-900 border border-amber-500/30 rounded-2xl p-6 md:p-8 max-w-4xl mx-auto shadow-xl">
+                <h3 class="text-2xl font-black text-amber-400 mb-4 flex items-center gap-2">
+                    <span>⚖️</span> محاكي علامة بكالوريا الشخصيات (1.5 / 1.5)
+                </h3>
+                <p class="text-stone-300 text-sm md:text-base leading-relaxed mb-6">
+                    قم بتركيب إجابتك النموذجية المخصصة للشخصيات السوفياتية السبعة المعتمدة في البكالوريا، واكتشف كيف يوزع المصحح الـ 1.5 نقطة بدقة متناهية!
+                </p>
+
+                <!-- Interactive Simulator Logic Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Step 1: Character Select -->
+                    <div class="bg-stone-950 p-4 rounded-xl border border-stone-800">
+                        <label class="block text-red-400 font-black mb-2 text-sm">1. اختر الشخصية السوفياتية:</label>
+                        <select id="sim-char-select" onchange="updateSimulator()" class="w-full bg-stone-900 border border-stone-700 text-stone-100 rounded-lg p-2.5 focus:border-red-500 focus:outline-none font-bold text-sm">
+                            <option value="stalin">جوزيف ستالين</option>
+                            <option value="zhdanov">أندري جدانوف</option>
+                            <option value="khrushchev">نيكيتا خروتشوف</option>
+                            <option value="bulganin">نيكولاي بولغانين</option>
+                            <option value="malenkov">غيورغي مالينكوف</option>
+                            <option value="brezhnev">ليونيد بريجنيف</option>
+                            <option value="gorbachev">ميخائيل غورباتشوف</option>
+                        </select>
+                    </div>
+
+                    <!-- Step 2: Checklist components -->
+                    <div class="bg-stone-950 p-4 rounded-xl border border-stone-800 md:col-span-2">
+                        <span class="block text-amber-400 font-black mb-2 text-sm">2. حدد العناصر التي ستكتبها في كراسة الإجابة:</span>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <label class="flex items-center gap-2 text-xs md:text-sm cursor-pointer hover:text-amber-200">
+                                <input type="checkbox" id="sim-chk-nationality" checked onchange="updateSimulator()" class="rounded bg-stone-900 border-stone-700 text-amber-500 focus:ring-amber-500">
+                                الجنسية والمنصب (سوفياتي / قيادي) <span class="text-amber-500 font-bold">(0.5ن)</span>
+                            </label>
+                            <label class="flex items-center gap-2 text-xs md:text-sm cursor-pointer hover:text-amber-200">
+                                <input type="checkbox" id="sim-chk-ach1" checked onchange="updateSimulator()" class="rounded bg-stone-900 border-stone-700 text-amber-500 focus:ring-amber-500">
+                                المنجز أو الصفة الأولى <span class="text-amber-500 font-bold">(0.5ن)</span>
+                            </label>
+                            <label class="flex items-center gap-2 text-xs md:text-sm cursor-pointer hover:text-amber-200">
+                                <input type="checkbox" id="sim-chk-ach2" checked onchange="updateSimulator()" class="rounded bg-stone-900 border-stone-700 text-amber-500 focus:ring-amber-500">
+                                المنجز أو الصفة الثانية <span class="text-amber-500 font-bold">(0.5ن)</span>
+                            </label>
+                            <label class="flex items-center gap-2 text-xs md:text-sm cursor-pointer hover:text-amber-200">
+                                <input type="checkbox" id="sim-chk-date" onchange="updateSimulator()" class="rounded bg-stone-900 border-stone-700 text-amber-500 focus:ring-amber-500">
+                                تواريخ الولادة والوفاة بالتفصيل <span class="text-red-500 font-bold">(لا ينقّط عليه!)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Scoreboard -->
+                <div class="bg-stone-950 rounded-xl p-5 border border-stone-800 flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="w-full">
+                        <span class="text-xs text-stone-400 font-bold uppercase block mb-1">صياغة إجابتك النموذجية للامتحان:</span>
+                        <p id="sim-output-text" class="text-stone-200 font-medium text-base leading-relaxed bg-stone-900 p-4 rounded-lg border border-stone-800 min-h-[100px]"></p>
+                    </div>
+                    <div class="text-center bg-stone-900 border-2 border-amber-500 rounded-2xl py-4 px-6 min-w-[150px]">
+                        <span class="text-xs text-stone-400 font-black block uppercase mb-1">العلامة المتوقعة</span>
+                        <div class="text-3xl md:text-4xl font-black text-amber-400" id="sim-score-display">1.5 / 1.5</div>
+                        <span class="text-[10px] text-green-400 font-bold block mt-1" id="sim-score-comment">إجابة مثالية كاملة!</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: VERSUS / COMPARISON MODE -->
+        <section id="content-versus" class="tab-content hidden">
+            <div class="bg-stone-900 border border-red-500/30 rounded-2xl p-6 md:p-8 shadow-xl">
+                <h3 class="text-2xl font-black text-amber-400 mb-4 flex items-center gap-2">
+                    <span>⚔️</span> وضع المواجهة والندية (القطبية الثنائية)
+                </h3>
+                <p class="text-stone-300 text-sm md:text-base mb-8">
+                    قارن القادة السوفيات السبعة (بمن فيهم رجالات الترويكا ومُنظري الفكر) ضد الرؤساء الأمريكيين الذين عاصروهم في ساحة الحرب الباردة:
+                </p>
+
+                <!-- Comparison Interactive Widget -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center relative">
+                    <!-- VS Badge in absolute center on desktop -->
+                    <div class="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-amber-500 text-stone-950 font-black h-12 w-12 rounded-full border-4 border-stone-900 justify-center items-center text-lg shadow-xl z-20">
+                        VS
+                    </div>
+
+                    <!-- Left Column: Soviet Leader -->
+                    <div class="bg-red-950/40 p-6 rounded-2xl border border-red-500/30">
+                        <div class="text-center mb-4">
+                            <span class="bg-red-600 text-stone-100 text-xs px-2.5 py-1 rounded font-bold">الاتحاد السوفياتي ☭</span>
+                        </div>
+                        <label class="block text-stone-300 font-bold mb-2 text-sm text-center">اختر القائد السوفياتي:</label>
+                        <select id="vs-soviet-select" onchange="updateVersus()" class="w-full bg-stone-900 border border-red-800 text-stone-100 rounded-lg p-2.5 font-bold mb-6">
+                            <option value="stalin">جوزيف ستالين</option>
+                            <option value="zhdanov">أندري جدانوف</option>
+                            <option value="khrushchev">نيكيتا خروتشوف</option>
+                            <option value="bulganin">نيكولاي بولغانين</option>
+                            <option value="malenkov">غيورغي مالينكوف</option>
+                            <option value="brezhnev">ليونيد بريجنيف</option>
+                            <option value="gorbachev">ميخائيل غورباتشوف</option>
+                        </select>
+                        <div id="vs-soviet-data" class="bg-stone-950 p-4 rounded-xl border border-stone-850 min-h-[220px]">
+                            <!-- Will be populated dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Right Column: US Leader (From image provided by user) -->
+                    <div class="bg-blue-950/40 p-6 rounded-2xl border border-blue-500/30">
+                        <div class="text-center mb-4">
+                            <span class="bg-blue-600 text-stone-100 text-xs px-2.5 py-1 rounded font-bold">الولايات المتحدة الأمريكية 🇺🇸</span>
+                        </div>
+                        <label class="block text-stone-300 font-bold mb-2 text-sm text-center">اختر الرئيس الأمريكي المقابل:</label>
+                        <select id="vs-us-select" onchange="updateVersus()" class="w-full bg-stone-900 border border-blue-800 text-stone-100 rounded-lg p-2.5 font-bold mb-6">
+                            <option value="truman">هاري ترومان</option>
+                            <option value="eisenhower">دوايت أيزنهاور</option>
+                            <option value="kennedy">جون كينيدي</option>
+                            <option value="carter">جيمي كارتر</option>
+                            <option value="reagan">رونالد ريغان</option>
+                            <option value="bush">جورج بوش الأب</option>
+                        </select>
+                        <div id="vs-us-data" class="bg-stone-950 p-4 rounded-xl border border-stone-850 min-h-[220px]">
+                            <!-- Will be populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analysis of the selected matchup -->
+                <div class="bg-stone-950 p-5 rounded-xl border border-stone-850 mt-8">
+                    <h4 class="text-amber-400 font-black text-sm mb-2 flex items-center gap-1.5">
+                        <span>💡</span> نقطة الالتقاء والصدام بين الخصمين:
+                    </h4>
+                    <p id="vs-clash-analysis" class="text-stone-300 text-sm leading-relaxed"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: ACTIVE RECALL QUIZ -->
+        <section id="content-quiz" class="tab-content hidden">
+            <div class="bg-stone-900 border border-amber-500/30 rounded-2xl p-6 md:p-8 max-w-3xl mx-auto shadow-xl">
+                <div class="flex items-center justify-between border-b border-stone-800 pb-4 mb-6">
+                    <h3 class="text-2xl font-black text-amber-400 flex items-center gap-2">
+                        <span>🧠</span> اختبار الذاكرة الفوري للبكالوريا
+                    </h3>
+                    <div class="bg-red-950 px-3 py-1 rounded text-red-300 text-xs md:text-sm font-bold border border-red-500/30">
+                        درجة النجاح المطلوبة: 100%
+                    </div>
+                </div>
+
+                <!-- Quiz Interactive Container -->
+                <div id="quiz-container">
+                    <div class="mb-4">
+                        <span class="text-stone-400 text-xs md:text-sm font-bold block" id="quiz-progress-text">السؤال 1 من 8</span>
+                        <div class="w-full bg-stone-950 h-2.5 rounded-full mt-1.5 overflow-hidden">
+                            <div class="bg-red-600 h-full transition-all duration-300" id="quiz-progress-bar" style="width: 12.5%;"></div>
+                        </div>
+                    </div>
+                    
+                    <h4 class="text-stone-100 text-base md:text-lg font-bold mb-6 leading-relaxed" id="quiz-question-text">
+                        من هو المُنظّر السوفياتي وصاحب المبدأ الذي قسّم العالم لمعسكرين عام 1947؟
+                    </h4>
+
+                    <div class="space-y-3" id="quiz-options-container">
+                        <!-- Options populated dynamically -->
+                    </div>
+
+                    <div class="mt-6 flex justify-end gap-3 hidden" id="quiz-actions">
+                        <button onclick="nextQuestion()" class="bg-amber-500 text-stone-950 font-black px-6 py-2.5 rounded-lg text-sm hover:bg-amber-400 transition">
+                            السؤال التالي 🎯
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quiz Results (Hidden initially) -->
+                <div id="quiz-results" class="hidden text-center py-8">
+                    <span class="text-5xl block mb-4" id="quiz-results-emoji">🎉</span>
+                    <h4 class="text-2xl font-black text-stone-100 mb-2" id="quiz-results-title">عمل رائع يا بطل البكالوريا!</h4>
+                    <p class="text-stone-300 text-sm md:text-base max-w-md mx-auto mb-6" id="quiz-results-desc">
+                        لقد تمكنت من الإجابة على الأسئلة السوفياتية وحصلت على علامة تدل على جاهزيتك التامة لامتحان التاريخ والجغرافيا.
+                    </p>
+                    <div class="inline-block bg-stone-950 rounded-2xl py-4 px-8 border border-amber-500/30 mb-8">
+                        <span class="text-xs text-stone-400 font-bold block">علامتك الإجمالية</span>
+                        <div class="text-4xl font-black text-amber-400" id="quiz-results-score">8 / 8</div>
+                    </div>
+                    <div>
+                        <button onclick="restartQuiz()" class="bg-red-700 hover:bg-red-600 text-stone-100 font-black px-6 py-2.5 rounded-lg text-sm transition">
+                            أعد الاختبار لترسيخ الحفظ النشط 🔄
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="max-w-6xl mx-auto px-4 mt-16 text-center text-stone-500 text-xs md:text-sm border-t border-stone-900 pt-6">
+        <p class="font-bold">مبادرة تفاعلية تعليمية مجانية مخصصة لطلاب بكالوريا 2026 في الجزائر 🇩🇿</p>
+        <p class="mt-1">جميع البيانات تتبع الدليل الوزاري الرسمي وقوالب التصحيح المعتمدة للشخصيات التاريخية.</p>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <script>
+        // 1. Tab Navigation logic
+        function switchTab(tabName) {
+            // Hide all sections
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('block');
+            });
+            // Show active section
+            document.getElementById('content-' + tabName).classList.remove('hidden');
+            document.getElementById('content-' + tabName).classList.add('block');
+
+            // Reset active styles on tabs
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-amber-500', 'text-stone-950', 'shadow-lg');
+                btn.classList.add('bg-stone-900', 'text-stone-400', 'hover:text-stone-100');
+            });
+            // Set active style to clicked tab
+            const activeTabBtn = document.getElementById('tab-' + tabName);
+            activeTabBtn.classList.add('bg-amber-500', 'text-stone-950', 'shadow-lg');
+            activeTabBtn.classList.remove('bg-stone-900', 'text-stone-400', 'hover:text-stone-100');
+        }
+
+        // 2. Simulator Data & Logic
+        const simulatorData = {
+            stalin: {
+                name: "جوزيف ستالين",
+                nationality: "رئيس الاتحاد السوفياتي وقائد بلاده خلال الحرب العالمية الثانية وبداية الحرب الباردة،",
+                ach1: "حول بلاده لقوة نووية بتفجير أول قنبلة ذرية سوفياتية عام 1949،",
+                ach2: "تميز بـ التشدد الشديد وفرض نظام الستار الحديدي على أوروبا الشرقية وتأسيس الكوميكون والكومينفورم."
+            },
+            zhdanov: {
+                name: "أندري جدانوف",
+                nationality: "شخصية سوفياتية، قيادي ومُنظّر بارز في الحزب الشيوعي السوفياتي ومكلف بمكتب الإعلام،",
+                ach1: "اشتهر بطرحه 'مبدأ جدانوف' سبتمبر 1947 الذي قسّم العالم لمعسكرين (ديمقراطي وإمبريالي)،",
+                ach2: "يعد المهندس والمنشئ الأساسي لمكتب الإعلام الشيوعي (الكومينفورم) لتوحيد وتنسيق الحركات الشيوعية."
+            },
+            khrushchev: {
+                name: "نيكيتا خروتشوف",
+                nationality: "رئيس الاتحاد السوفياتي وأبرز قادة الترويكا بعد وفاة ستالين،",
+                ach1: "صاحب مبادرة سياسة 'التعايش السلمي' وتأسيس حلف وارسو 1955،",
+                ach2: "عاصر أخطر الأزمات كأزمة جدار برلين الثانية 1961 وأزمة الصواريخ في كوبا (الكاريبي) 1962."
+            },
+            bulganin: {
+                name: "نيكولاي بولغانين",
+                nationality: "شخصية سوفياتية، سياسي ورجل دولة وأحد أقطاب الترويكا (القيادة الجماعية)،",
+                ach1: "تولى منصب وزير الدفاع ثم منصب رئيس الوزراء وكان حليفا وثيقا لخروتشوف،",
+                ach2: "عُرف بـ تأييده الكامل لمبادرة سياسة التعايش السلمي والانفتاح الدبلوماسي لتخفيف التوتر الدولي."
+            },
+            malenkov: {
+                name: "غيورغي مالينكوف",
+                nationality: "شخصية سوفياتية، سياسي ورجل دولة ومن كبار أقطاب الترويكا بعد وفاة ستالين،",
+                ach1: "تولى منصب رئيس مجلس الوزراء السوفياتي ودخل في خلاف شديد مع سياسات خروتشوف،",
+                ach2: "تزعم التيار المعارض داخل الحزب الشيوعي مما أدى في النهاية لعزله كلياً ونفيه لكازاخستان."
+            },
+            brezhnev: {
+                name: "ليونيد بريجنيف",
+                nationality: "رئيس الاتحاد السوفياتي، قاد بلاده في مرحلة تميزت بالانفراج والوفاق الدولي،",
+                ach1: "وقع على معاهدات الحد من الأسلحة الاستراتيجية 'سالت 1' و 'سالت 2' مع أمريكا،",
+                ach2: "أمر بالغزو السوفياتي المدمر لأفغانستان 1979 مما تسبب في أزمة اقتصادية وركود داخلي حاد."
+            },
+            gorbachev: {
+                name: "ميخائيل غورباتشوف",
+                nationality: "آخر رؤساء الاتحاد السوفياتي قبل حله وتفكيكه في ديسمبر 1991،",
+                ach1: "اشتهر بإصلاحاته الاقتصادية والسياسية الفاشلة التي عجلت بالسقوط: البيرسترويكا والغلاسنوست،",
+                ach2: "أنهى الحرب الباردة من طرف واحد ووقع عليها رسمياً في قمتي مالطا 1989 وباريس 1990 وحصل على نوبل للسلام."
+            }
+        };
+
+        function updateSimulator() {
+            const charKey = document.getElementById('sim-char-select').value;
+            const data = simulatorData[charKey];
+
+            const chkNationality = document.getElementById('sim-chk-nationality').checked;
+            const chkAch1 = document.getElementById('sim-chk-ach1').checked;
+            const chkAch2 = document.getElementById('sim-chk-ach2').checked;
+            const chkDate = document.getElementById('sim-chk-date').checked;
+
+            let textSegments = [];
+            let score = 0;
+
+            if (chkNationality) {
+                textSegments.push(data.nationality);
+                score += 0.5;
+            }
+            if (chkAch1) {
+                textSegments.push(data.ach1);
+                score += 0.5;
+            }
+            if (chkAch2) {
+                textSegments.push(data.ach2);
+                score += 0.5;
+            }
+            if (chkDate) {
+                textSegments.push(`(ولد وتوفي في كذا وكذا وتاريخ الوفاة كذا)`);
+            }
+
+            // Assemble output text
+            let finalOutput = textSegments.join(" ");
+            if (finalOutput === "") {
+                finalOutput = "يرجى تحديد عنصر واحد على الأقل لتوليد التعريف...";
+            } else {
+                finalOutput = `<strong>تعريفك المقترح في البكالوريا:</strong><br>${data.name} هو: ${finalOutput}`;
+            }
+
+            document.getElementById('sim-output-text').innerHTML = finalOutput;
+            
+            // Score commentary and color updates
+            const scoreDisplay = document.getElementById('sim-score-display');
+            const scoreComment = document.getElementById('sim-score-comment');
+
+            scoreDisplay.textContent = score.toFixed(1) + " / 1.5";
+
+            if (score === 1.5) {
+                scoreDisplay.className = "text-3xl md:text-4xl font-black text-green-400";
+                scoreComment.textContent = "إجابة مثالية كاملة! تضمن الـ 1.5ن كاملة بذكاء واختصار.";
+                scoreComment.className = "text-[10px] text-green-400 font-bold block mt-1";
+            } else if (score >= 1.0) {
+                scoreDisplay.className = "text-3xl md:text-4xl font-black text-amber-400";
+                scoreComment.textContent = "إجابة جيدة ولكنك تفرط في 0.5ن ثمينة. أضف المنصب أو منجزاً ثانياً!";
+                scoreComment.className = "text-[10px] text-amber-400 font-bold block mt-1";
+            } else {
+                scoreDisplay.className = "text-3xl md:text-4xl font-black text-red-500";
+                scoreComment.textContent = "إجابة ناقصة جداً! قد لا تحصل سوى على جزء بسيط من العلامة.";
+                scoreComment.className = "text-[10px] text-red-500 font-bold block mt-1";
+            }
+        }
+
+        // 3. Versus Mode Matchups Data
+        const versusSovietData = {
+            stalin: {
+                name: "جوزيف ستالين (1945-1953)",
+                desc: "تمتع بتعصب وتشدد أيديولوجي تام. بنى قوة نووية ونظام الستار الحديدي، ورفض أي توافق مع الرأسمالية.",
+                icon: "☭"
+            },
+            zhdanov: {
+                name: "أندري جدانوف (منظر الحزب)",
+                desc: "واجه المخططات الأمريكية فكرياً عبر مبدئه الشهير 1947 وصياغة مكتب الكومينفورم ضد مشروع مارشال.",
+                icon: "📰"
+            },
+            khrushchev: {
+                name: "نيكيتا خروتشوف (1953-1964)",
+                desc: "دعا للتعايش السلمي لكنه قاد صراعاً شرساً في الفضاء والصواريخ، وتميز بالمرونة الممزوجة بالتهديد النووي.",
+                icon: "🚀"
+            },
+            bulganin: {
+                name: "نيكولاي بولغانين (وزير الدفاع)",
+                desc: "وزير دفاع ورئيس وزراء سوفياتي في حقبة الترويكا، عزز تحالفه مع خروتشوف ودعم بشدة التعايش السلمي.",
+                icon: "🛡️"
+            },
+            malenkov: {
+                name: "غيورغي مالينكوف (رئيس الوزراء المعزول)",
+                desc: "تزعم التيار المعارض لسياسات الانفتاح التي قادها خروتشوف، لكنه هزم ونُفي كلياً لكازاخستان.",
+                icon: "❄️"
+            },
+            brezhnev: {
+                name: "ليونيد بريجنيف (1964-1982)",
+                desc: "فضل الانفراج الدولي والوفاق والتكافؤ، لكنه تورط عسكرياً في أفغانستان مما كبد بلاده خسائر اقتصادية بالغة.",
+                icon: "📜"
+            },
+            gorbachev: {
+                name: "ميخائيل غورباتشوف (1985-1991)",
+                desc: "أبرز رؤساء الانفتاح والتراجع. قاد إصلاحات هدمت الاتحاد السوفياتي من الداخل وتخلى عن الحلفاء الشرقيين.",
+                icon: "🍂"
+            }
+        };
+
+        const versusUsData = {
+            truman: {
+                name: "هاري ترومان",
+                desc: "صاحب المبدأ الشهير باسمه لملء الفراغ، ومطلق القنابل الذرية على اليابان وبداية الاحتواء وصاحب مشروع مارشال.",
+                icon: "💥"
+            },
+            eisenhower: {
+                name: "دوايت أيزنهاور",
+                desc: "قائد الحلف الأطلسي وصاحب نظرية ملء الفراغ، أنهى الحرب الكورية ورسخ حلف وارسو لمواجهته.",
+                icon: "🛡️"
+            },
+            kennedy: {
+                name: "جون كينيدي",
+                desc: "زعيم أطلق مشروع غزو الفضاء أبوللو، وعاصر أزمة الصواريخ الكوبية الشهيرة وتصدى للسوفيات بحزم.",
+                icon: "🚀"
+            },
+            carter: {
+                name: "جيمي كارتر",
+                desc: "دعم الحوار والحد من التسلح ووقع سالت 2، لكن فترته انتهت بأزمة أفغانستان وانهيار الوفاق المؤقت.",
+                icon: "🕊️"
+            },
+            reagan: {
+                name: "رونالد ريغان",
+                desc: "صاحب مشروع حرب النجوم ووصف الاتحاد السوفياتي بإمبراطورية الشر، متبنياً سياسة التصعيد العسكري.",
+                icon: "⭐"
+            },
+            bush: {
+                name: "جورج بوش الأب",
+                desc: "مهندس النظام الدولي الجديد والقطبية الأحادية، وقع نهاية الحرب الباردة وتفكك الاتحاد السوفياتي.",
+                icon: "🌍"
+            }
+        };
+
+        function updateVersus() {
+            const sovKey = document.getElementById('vs-soviet-select').value;
+            const usKey = document.getElementById('vs-us-select').value;
+
+            const sov = versusSovietData[sovKey];
+            const us = versusUsData[usKey];
+
+            // Render Soviet side
+            document.getElementById('vs-soviet-data').innerHTML = `
+                <div class="flex items-center gap-3 mb-3">
+                    <span class="text-3xl">${sov.icon}</span>
+                    <h5 class="text-lg font-black text-red-400">${sov.name}</h5>
+                </div>
+                <p class="text-stone-300 text-sm leading-relaxed">${sov.desc}</p>
+            `;
+
+            // Render US side
+            document.getElementById('vs-us-data').innerHTML = `
+                <div class="flex items-center gap-3 mb-3">
+                    <span class="text-3xl">${us.icon}</span>
+                    <h5 class="text-lg font-black text-blue-400">${us.name}</h5>
+                </div>
+                <p class="text-stone-300 text-sm leading-relaxed">${us.desc}</p>
+            `;
+
+            // Generate Matchup Clash Analysis
+            let clashText = "";
+            if (sovKey === "zhdanov" && usKey === "truman") {
+                clashText = "<strong>الصراع الفكري والاحتواء المتبادل 1947:</strong> واجه مبدأ جدانوف (الذي قسّم العالم معسكرين) مباشرة مبدأ ترومان ومشروع مارشال الاقتصادي. شكل هذا التقابل الفكري التأسيس الحقيقي للقطبية الثنائية الشرسة.";
+            } else if (sovKey === "stalin" && usKey === "truman") {
+                clashText = "<strong>مواجهة الحرب الباردة المبكرة:</strong> جسد هذا الثنائي التشدد الكلي للقطبية الثنائية. رد ستالين على مبدأ ترومان بتأسيس الكوميكون ومكتب الكومينفورم وتجربته الذرية الأولى 1949 كأول تحدٍ نووي حقيقي لأمريكا.";
+            } else if (sovKey === "khrushchev" && usKey === "kennedy") {
+                clashText = "<strong>ذروة الحرب الباردة (أزمة الصواريخ الكوبية 1962):</strong> واجه خروتشوف كينيدي وجهاً لوجه في أخطر أزمة كادت تشعل حرباً نووية مدمرة. انتهى الصراع بتسوية تاريخية وتأسيس الخط الأحمر الهاتفي.";
+            } else if (sovKey === "brezhnev" && usKey === "carter") {
+                clashText = "<strong>سالت 2 ونهاية الانفراج:</strong> سعى الثنائي إلى الحد من التسلح الاستراتيجي عبر اتفاقية سالت 2 عام 1979، لكن التوقيع انهار تماماً بعد إعطاء بريجنيف الأوامر بغزو أفغانستان مما أدخل العلاقات السوفياتية الأمريكية في مستنقع حاد.";
+            } else if (sovKey === "gorbachev" && usKey === "reagan") {
+                clashText = "<strong>إمبراطورية الشر وحرب النجوم:</strong> عاصر ريغان المتشدد البدايات الأولى لإصلاحات غورباتشوف الانفتاحية. شكل ضغط ريغان العسكري وحرب النجوم عبئاً كبيراً دفع غورباتشوف لطلب التفاوض والانسحاب.";
+            } else if (sovKey === "gorbachev" && usKey === "bush") {
+                clashText = "<strong>تصفية الحرب الباردة وإعلان الوفاة:</strong> التقى غورباتشوف مع جورج بوش الأب في قمة مالطا 1989 التاريخية، حيث أعلنا رسمياً نهاية الحرب الباردة وبداية حقبة 'النظام الدولي الجديد' بعد تفكك السوفيات 1991.";
+            } else {
+                clashText = `التقاء وتزامن فترات الصراع: قاد <strong>${sov.name}</strong> السوفيات بالتزامن مع فترات من حكم <strong>${us.name}</strong>؛ حيث واجهت التكتلات السوفياتية (الأحلاف والقوى الفكرية) الرئاسة الأمريكية ومشاريع الاحتواء وملء الفراغ الغربي عبر القارات.`;
+            }
+
+            document.getElementById('vs-clash-analysis').innerHTML = clashText;
+        }
+
+        // 4. Interactive Quiz Logic (Extended to 8 Questions)
+        const quizQuestions = [
+            {
+                q: "من هو المُنظّر السوفياتي وصاحب المبدأ الذي قسّم العالم لمعسكرين (ديمقراطي وإمبريالي) عام 1947؟",
+                options: ["ميخائيل غورباتشوف", "أندري جدانوف", "ليونيد بريجنيف", "غيورغي مالينكوف"],
+                answer: 1,
+                hint: "هو مكلف بالدعاية والإعلام في الحزب ومؤسس مكتب الكومينفورم."
+            },
+            {
+                q: "من هو قطب الترويكا السوفياتي، حليف خروتشوف المقرب، الذي شغل منصب وزير الدفاع وكان من مؤيدي التعايش السلمي؟",
+                options: ["نيكولاي بولغانين", "أندري جدانوف", "جوزيف ستالين", "ليونيد بريجنيف"],
+                answer: 0,
+                hint: "أحد أقطاب القيادة الجماعية الثلاثية (الترويكا) المعتمدين في البكالوريا."
+            },
+            {
+                q: "من هو زعيم الترويكا الذي عارض سياسات خروتشوف بقوة وانتهى به الصراع معزولاً ومنفياً إلى كازاخستان؟",
+                options: ["ليونيد بريجنيف", "جوزيف ستالين", "غيورغي مالينكوف", "أندري جدانوف"],
+                answer: 2,
+                hint: "تولى منصب رئيس الوزراء مباشرة بعد وفاة ستالين 1953."
+            },
+            {
+                q: "من هو الزعيم السوفياتي الذي عُرف بـ 'الرجل الحديدي' وتوفي في 5 مارس 1953 مسبباً تغيراً بمجرى الحرب الباردة؟",
+                options: ["ميخائيل غورباتشوف", "جوزيف ستالين", "ليونيد بريجنيف", "نيكيتا خروتشوف"],
+                answer: 1,
+                hint: "حقق الانتصار للسوفيات في الحرب العالمية الثانية وامتلك السلاح النووي أول مرة 1949."
+            },
+            {
+                q: "ما هو الاسم المطلق على الإصلاحات الاقتصادية والسياسية الفاشلة التي قام بها غورباتشوف وعجلت بانهيار السوفيات؟",
+                options: ["مكتب الكومينفورم ومجلس الكوميكون", "البيرسترويكا والغلاسنوست", "التعايش السلمي والتكتل", "مشاريع الترويكا وتثبيت الأحلاف"],
+                answer: 1,
+                hint: "أحدهما يعني 'إعادة الهيكلة والشفافية' بالروسية."
+            },
+            {
+                q: "في عهد أي رئيس سوفياتي تم غزو أفغانستان عام 1979 والتوقيع على اتفاقيتي الحد من الأسلحة 'سالت 1' و 'سالت 2'؟",
+                options: ["ليونيد بريجنيف", "جوزيف ستالين", "مالينكوف", "نيكيتا خروتشوف"],
+                answer: 0,
+                hint: "تميزت فترته بمرحلة ركود اقتصادي ووفاق استراتيجي."
+            },
+            {
+                q: "أي من هذه الأزمات وقعت في عهد الزعيم السوفياتي نيكيتا خروتشوف؟",
+                options: ["أزمة حصار برلين الأولى 1948", "أزمة الصواريخ في كوبا (أزمة الكاريبي) 1962", "أزمة تفجير القنبلة الذرية الأولى", "سقوط جدار برلين ومالطا"],
+                answer: 1,
+                hint: "وقعت في أكتوبر 1962 وكادت تؤدي لصدام نووي عابر للقارات."
+            },
+            {
+                q: "أين تم التوقيع رسمياً على إنهاء صراع الحرب الباردة بين ميخائيل غورباتشوف وجورج بوش الأب؟",
+                options: ["مؤتمر يالطا 1945", "قمة مالطا 1989 وقمة باريس 1990", "اتفاقيات سالت الأولى", "مؤتمر بوتسدام"],
+                answer: 1,
+                hint: "مالطا جزيرة متوسطية كانت شاهدة على زوال القطبية الثنائية."
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let userScore = 0;
+
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            userScore = 0;
+            document.getElementById('quiz-container').classList.remove('hidden');
+            document.getElementById('quiz-results').classList.add('hidden');
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const qData = quizQuestions[currentQuestionIndex];
+            
+            // Progress Bar & Stats
+            document.getElementById('quiz-progress-text').textContent = `السؤال ${currentQuestionIndex + 1} من ${quizQuestions.length}`;
+            const percent = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
+            document.getElementById('quiz-progress-bar').style.width = percent + '%';
+
+            // Text
+            document.getElementById('quiz-question-text').textContent = qData.q;
+
+            // Render Options
+            const optionsContainer = document.getElementById('quiz-options-container');
+            optionsContainer.innerHTML = '';
+            
+            qData.options.forEach((opt, idx) => {
+                const button = document.createElement('button');
+                button.className = "w-full text-right bg-stone-950 hover:bg-stone-850 border border-stone-800 p-4 rounded-xl text-stone-200 text-sm md:text-base font-medium transition flex items-center justify-between group";
+                button.onclick = () => selectOption(idx);
+                button.innerHTML = `
+                    <span>${opt}</span>
+                    <span class="h-6 w-6 rounded-full border border-stone-700 group-hover:border-amber-500 transition flex items-center justify-center text-[10px] text-stone-400">
+                        ${String.fromCharCode(65 + idx)}
+                    </span>
+                `;
+                optionsContainer.appendChild(button);
+            });
+
+            document.getElementById('quiz-actions').classList.add('hidden');
+        }
+
+        function selectOption(selectedIdx) {
+            const qData = quizQuestions[currentQuestionIndex];
+            const optionsContainer = document.getElementById('quiz-options-container');
+            
+            // Disable further clicks
+            Array.from(optionsContainer.children).forEach((btn, idx) => {
+                btn.removeAttribute('onclick'); // disable clicks
+                btn.classList.remove('hover:bg-stone-850');
+                
+                if (idx === qData.answer) {
+                    // Correct answer style
+                    btn.classList.add('bg-green-950/80', 'border-green-500', 'text-green-100');
+                    btn.innerHTML += `<span class="text-green-400 font-bold text-xs">✓ إجابة صحيحة</span>`;
+                } else if (idx === selectedIdx) {
+                    // Incorrect selected style
+                    btn.classList.add('bg-red-950/80', 'border-red-500', 'text-red-100');
+                    btn.innerHTML += `<span class="text-red-400 font-bold text-xs">✗ إجابة خاطئة</span>`;
+                }
+            });
+
+            if (selectedIdx === qData.answer) {
+                userScore++;
+            }
+
+            document.getElementById('quiz-actions').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizQuestions.length) {
+                showQuestion();
+            } else {
+                showQuizResults();
+            }
+        }
+
+        function showQuizResults() {
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('quiz-results').classList.remove('hidden');
+
+            const scoreDisplay = document.getElementById('quiz-results-score');
+            const resultsTitle = document.getElementById('quiz-results-title');
+            const resultsDesc = document.getElementById('quiz-results-desc');
+            const resultsEmoji = document.getElementById('quiz-results-emoji');
+
+            scoreDisplay.textContent = `${userScore} / ${quizQuestions.length}`;
+
+            if (userScore === quizQuestions.length) {
+                resultsEmoji.textContent = "🏆";
+                resultsTitle.textContent = "عبقري وممتاز!";
+                resultsDesc.textContent = "لقد أجبت بشكل صحيح على جميع الأسئلة السوفياتية. أنت الآن تمتلك سلاح العلامة الكاملة في شخصيات الاتحاد السوفياتي بالبكالوريا!";
+            } else if (userScore >= 5) {
+                resultsEmoji.textContent = "👍";
+                resultsTitle.textContent = "نتيجة جيدة جداً!";
+                resultsDesc.textContent = "لقد تمكنت من الإجابة على أغلب الأسئلة بشكل صحيح. أعد الاختبار بضع مرات لتصل إلى الحفظ التام واليقين المطلق لـ بولغانين ومالينكوف وجدانوف.";
+            } else {
+                resultsEmoji.textContent = "⚠️";
+                resultsTitle.textContent = "تحتاج إلى مراجعة بطاقات الترويكا!";
+                resultsDesc.textContent = "لا تقلق، هذا اختبار تجريبي للتعلم والخطأ هو أول درجات التفوق. تفحص بطاقات الإنفوجرافيك من التبويب الأول ثم أعد الكرة مرة أخرى.";
+            }
+        }
+
+        function restartQuiz() {
+            startQuiz();
+        }
+
+        // Initialize state on load
+        window.onload = function() {
+            updateSimulator();
+            updateVersus();
+            startQuiz();
+        };
+    </script>
+</body>
+</html>

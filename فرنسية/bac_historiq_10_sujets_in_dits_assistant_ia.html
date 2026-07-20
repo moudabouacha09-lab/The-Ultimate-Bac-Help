@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bac HistoriQ — Guide d'Expression Écrite (Sujets Inédits & Assistant IA)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Google Fonts: Inter & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .serif-title {
+            font-family: 'Playfair Display', serif;
+        }
+        [x-cloak] { display: none !important; }
+        
+        /* Custom scrollbar styling for a premium dark look */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b1329;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ef4444;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-red-500 selection:text-white" x-data="bacApp()">
+
+    <header class="border-b border-slate-800 bg-slate-950/90 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="h-10 w-10 rounded-xl bg-gradient-to-tr from-red-500 to-amber-500 flex items-center justify-center shadow-lg shadow-red-500/20">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                        Bac HistoriQ <span class="text-[10px] bg-red-500/20 text-red-400 px-2 py-0.5 rounded-full border border-red-500/30 font-medium">10 Sujets Inédits</span>
+                    </h1>
+                    <p class="text-xs text-slate-400">Pour l'expression écrite du Bac de Français (3AS)</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-3">
+                <button 
+                    @click="openAssistant('Bonjour ! Je suis ton assistant de français. Clique sur n\'importe quel bouton d\'aide ou tape un mot difficile pour que je te l\'explique simplement.')" 
+                    class="px-3.5 py-2 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 text-xs font-semibold flex items-center gap-2 transition"
+                >
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                    </span>
+                    Assistant IA Simplificateur
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="relative overflow-hidden py-10 lg:py-14 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(239,68,68,0.06),transparent_50%)]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="text-center max-w-3xl mx-auto">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-red-500/10 text-red-400 border border-red-500/20 mb-4">
+                    Objectif Bac DZ 2026 : Réussir l'Expression Écrite
+                </span>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight serif-title">
+                    Maîtrise <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-amber-300">10 thèmes originaux</span> avec des phrases simples
+                </h2>
+                <p class="mt-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                    Tu as peur du niveau trop difficile du français du Bac ? Ne t'inquiète pas. Découvre 10 sujets inédits découpés en structures faciles et utilise notre **Assistant IA** pour t'expliquer tous les mots complexes en français basique.
+                </p>
+                
+                <div class="mt-6 flex flex-wrap gap-3 justify-center">
+                    <a href="#themes" class="px-5 py-3 rounded-xl bg-gradient-to-r from-red-500 to-amber-500 text-white font-bold text-xs hover:shadow-lg hover:shadow-red-500/20 transition duration-300 flex items-center justify-center gap-2">
+                        Découvrir les 10 Sujets Inédits
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                    </a>
+                    <a href="#reformulator" class="px-5 py-3 rounded-xl bg-slate-850 text-white font-medium text-xs hover:bg-slate-800 border border-slate-700/50 transition duration-300 flex items-center justify-center gap-2">
+                        Bâtisseur de phrases
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Left Side: Interactive Guide (8/12 width) -->
+        <div class="lg:col-span-8 space-y-12">
+            
+            <section id="themes">
+                <div class="mb-6">
+                    <div class="flex items-center gap-2">
+                        <span class="h-2.5 w-2.5 rounded-full bg-red-500"></span>
+                        <h3 class="text-2xl font-extrabold text-white serif-title">Sélectionne un sujet historique inédit</h3>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-1">Clique sur l'un des 10 thèmes ci-dessous pour découvrir sa structure simplifiée et ses phrases d'apprentissage.</p>
+                </div>
+
+                <!-- Theme filter tabs -->
+                <div class="flex gap-2 mb-4 overflow-x-auto pb-2">
+                    <button @click="categoryFilter = 'all'" :class="categoryFilter === 'all' ? 'bg-red-500 text-white border-red-500' : 'bg-slate-900 border-slate-800 text-slate-400'" class="px-3 py-1.5 rounded-full text-xs font-semibold border shrink-0 transition">
+                        Tous les sujets
+                    </button>
+                    <button @click="categoryFilter = 'human'" :class="categoryFilter === 'human' ? 'bg-red-500 text-white border-red-500' : 'bg-slate-900 border-slate-800 text-slate-400'" class="px-3 py-1.5 rounded-full text-xs font-semibold border shrink-0 transition">
+                        Aspects Humains & Sociaux
+                    </button>
+                    <button @click="categoryFilter = 'strategy'" :class="categoryFilter === 'strategy' ? 'bg-red-500 text-white border-red-500' : 'bg-slate-900 border-slate-800 text-slate-400'" class="px-3 py-1.5 rounded-full text-xs font-semibold border shrink-0 transition">
+                        Stratégie & Logistique
+                    </button>
+                </div>
+
+                <!-- Interactive Grid of 10 Unprecedented Themes -->
+                <div class="grid grid-cols-2 sm:grid-cols-5 gap-2.5 mb-6">
+                    <template x-for="(theme, index) in filteredThemes" :key="theme.id">
+                        <button 
+                            @click="selectTheme(theme.id)" 
+                            class="p-3 rounded-xl text-left border transition-all duration-300 relative overflow-hidden flex flex-col justify-between min-h-[110px]"
+                            :class="activeThemeId === theme.id 
+                                ? 'bg-gradient-to-br from-slate-900 via-slate-850 to-slate-900 border-red-500 shadow-md shadow-red-500/15 text-white ring-1 ring-red-500/30' 
+                                : 'bg-slate-950 border-slate-850 text-slate-400 hover:border-slate-800 hover:bg-slate-900/40'"
+                        >
+                            <div class="absolute right-1.5 top-1 text-[9px] font-bold font-mono opacity-25" :class="activeThemeId === theme.id ? 'text-red-400 opacity-80' : 'text-slate-600'">
+                                #<span x-text="theme.id + 1"></span>
+                            </div>
+                            <div class="flex items-center gap-1.5 mb-1">
+                                <span class="p-1 rounded bg-red-500/10 text-red-400" x-html="theme.icon"></span>
+                                <span class="text-[8px] font-bold uppercase tracking-wider text-red-400" x-text="theme.categoryName"></span>
+                            </div>
+                            <h4 class="font-bold text-[11px] leading-tight line-clamp-3 text-slate-200" x-text="theme.title"></h4>
+                        </button>
+                    </template>
+                </div>
+
+                <!-- Active Theme Detailed Info Block -->
+                <div class="bg-slate-950 border border-slate-850 rounded-2xl p-5 md:p-6 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(239,68,68,0.01),transparent_40%)]"></div>
+                    
+                    <div class="flex flex-col lg:flex-row lg:items-center justify-between border-b border-slate-850 pb-4 mb-6 gap-3">
+                        <div class="flex items-start gap-3">
+                            <div class="p-2.5 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 flex items-center justify-center shrink-0">
+                                <div class="w-6 h-6" x-html="getActiveTheme().icon"></div>
+                            </div>
+                            <div>
+                                <span class="text-[10px] uppercase font-bold tracking-widest text-red-400">Fiche Méthodologique Inédite</span>
+                                <h3 class="text-xl md:text-2xl font-extrabold text-white serif-title mt-0.5" x-text="getActiveTheme().title"></h3>
+                                <p class="text-xs text-slate-400 mt-1" x-text="getActiveTheme().description"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-2 shrink-0">
+                            <span class="px-2.5 py-1 rounded bg-slate-900 text-[10px] font-semibold text-slate-300 flex items-center gap-1 border border-slate-800">
+                                <span class="w-1.5 h-1.5 rounded-full bg-red-400"></span>
+                                Visée : <span class="text-red-400" x-text="getActiveTheme().visee"></span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Introduction, 3-Sentence Development, and Conclusion Sections -->
+                    <div class="grid grid-cols-1 gap-6 relative z-10">
+                        
+                        <!-- 1. Introduction Card -->
+                        <div class="bg-slate-900/40 border border-slate-850 rounded-xl p-4 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-red-500/10 text-red-400 border border-red-500/20 uppercase tracking-wider">
+                                        1. Introduction
+                                    </span>
+                                    <button @click="simplifyText(getActiveTheme().structure.intro.example)" class="text-[10px] text-slate-400 hover:text-red-400 flex items-center gap-1 transition">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 21l8.982-8.982m-9 9l3.193-3.193M21 3l-8.982 8.982m0 0l-3.193-3.193" /></svg>
+                                        M'expliquer simplement
+                                    </button>
+                                </div>
+                                <p class="text-xs text-slate-300 leading-relaxed mb-3" x-text="getActiveTheme().structure.intro.explanation"></p>
+                                
+                                <div class="bg-slate-950/60 rounded-lg p-3 border border-slate-850 mb-3">
+                                    <h5 class="text-[9px] font-bold text-red-400 uppercase tracking-wider mb-1.5">Lexique clé (Niveau Bac) :</h5>
+                                    <div class="flex flex-wrap gap-1">
+                                        <template x-for="word in getActiveTheme().structure.intro.keywords">
+                                            <span @click="explainWord(word)" class="text-[10px] px-2 py-0.5 rounded bg-slate-900 text-slate-300 border border-slate-800 hover:border-red-500/50 hover:text-red-400 cursor-pointer transition" x-text="word"></span>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-t border-slate-850 pt-2 mt-2">
+                                <h5 class="text-[9px] font-bold text-slate-500 uppercase mb-1">Exemple de phrase d'introduction :</h5>
+                                <blockquote class="text-xs italic text-slate-200 border-l-2 border-red-500 pl-2 py-0.5" x-text="getActiveTheme().structure.intro.example"></blockquote>
+                            </div>
+                        </div>
+
+                        <!-- 2. Development Card (Organized in exactly 3 clear, distinct sentences) -->
+                        <div class="bg-slate-900/40 border border-slate-850 rounded-xl p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase tracking-wider">
+                                    2. Développement (3 arguments clairs)
+                                </span>
+                                <span class="text-[10px] text-slate-500">Un argument = Une phrase</span>
+                            </div>
+                            
+                            <p class="text-xs text-slate-300 leading-relaxed mb-4" x-text="getActiveTheme().structure.development.explanation"></p>
+                            
+                            <!-- 3 distinct structured sentences/arguments -->
+                            <div class="space-y-3 mb-4">
+                                <template x-for="(sentence, idx) in getActiveTheme().structure.development.sentences" :key="idx">
+                                    <div class="bg-slate-950/80 rounded-xl p-3 border border-slate-850 relative group">
+                                        <div class="flex justify-between items-start mb-1">
+                                            <span class="text-[10px] font-bold text-amber-400">Phrase d'appui <span x-text="idx + 1"></span> :</span>
+                                            <button @click="simplifyText(sentence)" class="text-[9px] text-slate-500 hover:text-amber-400 flex items-center gap-1 transition">
+                                                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 21l8.982-8.982m-9 9l3.193-3.193M21 3l-8.982 8.982m0 0l-3.193-3.193" /></svg>
+                                                Simplifier
+                                            </button>
+                                        </div>
+                                        <p class="text-xs text-slate-100 italic" x-text="sentence"></p>
+                                    </div>
+                                </template>
+                            </div>
+
+                            <div class="bg-slate-950/60 rounded-lg p-3 border border-slate-850">
+                                <h5 class="text-[9px] font-bold text-amber-400 uppercase tracking-wider mb-1.5">Lexique clé (Niveau Bac) :</h5>
+                                <div class="flex flex-wrap gap-1">
+                                    <template x-for="word in getActiveTheme().structure.development.keywords">
+                                        <span @click="explainWord(word)" class="text-[10px] px-2 py-0.5 rounded bg-slate-900 text-slate-300 border border-slate-800 hover:border-amber-500/50 hover:text-amber-400 cursor-pointer transition" x-text="word"></span>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 3. Conclusion Card -->
+                        <div class="bg-slate-900/40 border border-slate-850 rounded-xl p-4 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 uppercase tracking-wider">
+                                        3. Conclusion
+                                    </span>
+                                    <button @click="simplifyText(getActiveTheme().structure.conclusion.example)" class="text-[10px] text-slate-400 hover:text-blue-400 flex items-center gap-1 transition">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 21l8.982-8.982m-9 9l3.193-3.193M21 3l-8.982 8.982m0 0l-3.193-3.193" /></svg>
+                                        M'expliquer simplement
+                                    </button>
+                                </div>
+                                <p class="text-xs text-slate-300 leading-relaxed mb-3" x-text="getActiveTheme().structure.conclusion.explanation"></p>
+                                
+                                <div class="bg-slate-950/60 rounded-lg p-3 border border-slate-850 mb-3">
+                                    <h5 class="text-[9px] font-bold text-blue-400 uppercase tracking-wider mb-1.5">Lexique clé (Niveau Bac) :</h5>
+                                    <div class="flex flex-wrap gap-1">
+                                        <template x-for="word in getActiveTheme().structure.conclusion.keywords">
+                                            <span @click="explainWord(word)" class="text-[10px] px-2 py-0.5 rounded bg-slate-900 text-slate-300 border border-slate-800 hover:border-blue-500/50 hover:text-blue-400 cursor-pointer transition" x-text="word"></span>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-t border-slate-850 pt-2 mt-2">
+                                <h5 class="text-[9px] font-bold text-slate-500 uppercase mb-1">Exemple de phrase de conclusion :</h5>
+                                <blockquote class="text-xs italic text-slate-200 border-l-2 border-blue-500 pl-2 py-0.5" x-text="getActiveTheme().structure.conclusion.example"></blockquote>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section id="reformulator" class="bg-slate-950 border border-slate-850 rounded-2xl p-5 md:p-6">
+                <div class="flex items-center gap-3 mb-5">
+                    <div class="p-2 bg-red-500/10 text-red-400 rounded-xl">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.656 48.656 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7C4.765 12 4.765 12 4.765 12s0 0 0 0c.092 1.209.138 2.43.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.092-1.209.138-2.43.138-3.662z" /><path stroke-linecap="round" stroke-linejoin="round" d="M9 10.5l3 3 3-3" /></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white serif-title">Le Traducteur Académique (Bâtisseur de phrases)</h3>
+                        <p class="text-xs text-slate-400">Écris une idée très simple et nous la transformerons en phrase magique de niveau Bac !</p>
+                    </div>
+                </div>
+
+                <!-- Fast click suggestions -->
+                <div class="mb-4">
+                    <span class="block text-[10px] font-semibold uppercase text-slate-400 mb-2">Exemples d'idées simples (clique pour essayer) :</span>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
+                        <template x-for="demo in demoSentences">
+                            <button 
+                                @click="userInput = demo.original; performReformulation()" 
+                                class="text-left text-xs p-2.5 rounded-xl bg-slate-900/60 border border-slate-850 text-slate-300 hover:border-red-500/50 hover:bg-slate-900 transition flex flex-col justify-between"
+                            >
+                                <span class="font-bold text-[9px] text-red-400 mb-1" x-text="demo.theme"></span>
+                                <span x-text="demo.original"></span>
+                            </button>
+                        </template>
+                    </div>
+                    
+                    <textarea 
+                        x-model="userInput" 
+                        @input="performReformulation()"
+                        class="w-full bg-slate-900 border border-slate-850 rounded-xl p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 min-h-[80px] transition" 
+                        placeholder="Écris ton idée ici... Ex : Des musiciens ont aidé la guerre en faisant de la musique."
+                    ></textarea>
+                </div>
+
+                <!-- Formulations list -->
+                <div class="space-y-3">
+                    <span class="text-[10px] font-semibold uppercase text-slate-400">Ta phrase transformée en niveau Élite (Bac) :</span>
+
+                    <div class="space-y-2">
+                        <template x-for="(reformulation, idx) in matchedReformulations">
+                            <div class="bg-slate-900 border border-slate-850 rounded-xl p-3.5 hover:border-slate-750 transition relative group">
+                                <div class="absolute right-2 top-2">
+                                    <button 
+                                        @click="copyText(reformulation)" 
+                                        class="p-1 rounded bg-slate-950 text-slate-400 hover:text-white transition"
+                                        title="Copier"
+                                    >
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5A3.375 3.375 0 006.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0015 2.25h-1.5a2.251 2.251 0 00-1.9 1.086M12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" /></svg>
+                                    </button>
+                                </div>
+                                <div class="flex items-center gap-1.5 mb-1">
+                                    <span class="text-[8px] font-bold px-2 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20">Idéal pour le Bac</span>
+                                    <button @click="simplifyText(reformulation)" class="text-[9px] text-slate-500 hover:text-red-400 flex items-center gap-0.5">
+                                        Expliquer la structure
+                                    </button>
+                                </div>
+                                <p class="text-xs text-slate-200 font-medium pr-6" x-text="reformulation"></p>
+                            </div>
+                        </template>
+
+                        <div x-show="matchedReformulations.length === 0" class="text-center py-6 bg-slate-900/40 border border-dashed border-slate-850 rounded-xl text-slate-500 text-xs">
+                            Tape ton idée ou utilise un exemple ci-dessus. Notre système la transformera automatiquement.
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Right Side: AI Assistant Panel & Banish List (4/12 width) -->
+        <div class="lg:col-span-4 space-y-6">
+            
+            <!-- AI Assistant Card (Sticky) -->
+            <div class="bg-slate-900 border-2 border-red-500/30 rounded-2xl p-4 md:p-5 sticky top-24 shadow-xl">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-3">
+                    <div class="flex items-center gap-2">
+                        <div class="h-8 w-8 rounded-lg bg-red-500/20 text-red-400 flex items-center justify-center">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 21l8.982-8.982m-9 9l3.193-3.193M21 3l-8.982 8.982m0 0l-3.193-3.193" /></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-extrabold text-sm text-white flex items-center gap-1">
+                                Assistant IA Français Facile
+                            </h4>
+                            <span class="text-[10px] text-red-400 font-medium">Calibré pour le Bac Algérien (3AS)</span>
+                        </div>
+                    </div>
+                    
+                    <button @click="clearChat()" class="text-[10px] text-slate-500 hover:text-slate-300 transition">
+                        Effacer
+                    </button>
+                </div>
+
+                <p class="text-[11px] text-slate-400 mb-3 leading-relaxed">
+                    Un mot que tu ne comprends pas ? Une phrase trop longue ? Écris-la ici ou clique sur **"M'expliquer simplement"** dans les fiches. Je vais t'expliquer de façon hyper simple.
+                </p>
+
+                <!-- Chat Messages Area -->
+                <div class="space-y-3 max-h-[220px] overflow-y-auto mb-3 p-2 bg-slate-950 rounded-xl border border-slate-850 text-xs">
+                    <template x-for="msg in chatHistory">
+                        <div :class="msg.role === 'user' ? 'text-right' : 'text-left'">
+                            <div 
+                                class="inline-block p-2.5 rounded-xl max-w-[90%] leading-relaxed"
+                                :class="msg.role === 'user' ? 'bg-red-500 text-white rounded-tr-none' : 'bg-slate-900 text-slate-200 rounded-tl-none border border-slate-800'"
+                            >
+                                <span x-html="msg.text"></span>
+                            </div>
+                        </div>
+                    </template>
+                    <div x-show="aiLoading" class="text-left">
+                        <div class="inline-block p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-400">
+                            <span class="flex items-center gap-2">
+                                <span class="animate-bounce h-1.5 w-1.5 bg-red-400 rounded-full"></span>
+                                <span class="animate-bounce delay-75 h-1.5 w-1.5 bg-red-400 rounded-full"></span>
+                                <span class="animate-bounce delay-150 h-1.5 w-1.5 bg-red-400 rounded-full"></span>
+                                Réflexion de l'assistant...
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input box -->
+                <div class="flex gap-2">
+                    <input 
+                        type="text" 
+                        x-model="aiQuery" 
+                        @keydown.enter="sendCustomQuery()"
+                        class="flex-grow bg-slate-950 border border-slate-850 rounded-lg px-2.5 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-red-500" 
+                        placeholder="Ex : Que veut dire 'Réseau Jeanson' ?"
+                    />
+                    <button 
+                        @click="sendCustomQuery()"
+                        class="px-3 py-1.5 bg-red-500 text-white rounded-lg text-xs font-bold hover:bg-red-600 transition"
+                    >
+                        OK
+                    </button>
+                </div>
+            </div>
+
+            <!-- "Chasse au Banal" Section -->
+            <div class="bg-slate-950 border border-slate-850 rounded-2xl p-4 md:p-5">
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="p-1.5 bg-red-500/10 text-red-400 rounded-lg">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0-10.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.249-8.25-3.286zm0 13.036h.008v.008H12v-.008z" /></svg>
+                    </div>
+                    <div>
+                        <h4 class="font-extrabold text-sm text-white">Chasse au Vocabulaire Banal</h4>
+                    </div>
+                </div>
+
+                <div class="space-y-2.5 max-h-[300px] overflow-y-auto pr-1">
+                    <template x-for="item in banishList">
+                        <div class="bg-slate-900/40 rounded-xl border border-slate-850 p-2.5 flex flex-col gap-1.5">
+                            <div class="flex items-center justify-between gap-1">
+                                <span class="text-[10px] px-1.5 py-0.5 rounded bg-rose-500/10 text-rose-400 border border-rose-500/20 line-through" x-text="item.banned"></span>
+                                <svg class="w-3 h-3 text-red-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+                                <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" x-text="item.premium"></span>
+                            </div>
+                            <p class="text-[9px] text-slate-400" x-text="item.context"></p>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Floating Toast for copying -->
+    <div 
+        x-show="showToast" 
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0 translate-y-4"
+        x-transition:enter-end="opacity-100 translate-y-0"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100 translate-y-0"
+        x-transition:leave-end="opacity-0 translate-y-4"
+        class="fixed bottom-5 left-5 z-50 bg-slate-950 border border-red-500 rounded-xl p-3.5 shadow-xl flex items-center gap-3 max-w-sm"
+        style="display: none;"
+    >
+        <div class="h-6 w-6 rounded-full bg-red-500/10 text-red-400 flex items-center justify-center shrink-0">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+        </div>
+        <div>
+            <p class="text-xs font-bold text-white">Phrase copiée !</p>
+            <p class="text-[10px] text-slate-400">Prête à être collée dans ton devoir d'expression écrite.</p>
+        </div>
+    </div>
+
+    <footer class="border-t border-slate-850 bg-slate-950 py-6 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-3">
+            <p>&copy; 2026 Bac HistoriQ DZ — Ton tremplin interactif vers la mention très bien.</p>
+        </div>
+    </footer>
+
+    <script>
+        function bacApp() {
+            return {
+                activeThemeId: 0,
+                categoryFilter: 'all',
+                userInput: '',
+                matchedReformulations: [],
+                showToast: false,
+                aiQuery: '',
+                aiLoading: false,
+                chatHistory: [
+                    { role: 'assistant', text: 'Marhaban ! Je suis ton assistant de français simplifié pour le Bac DZ. Clique sur un mot ou une phrase de l\'application, ou pose-moi directement tes questions ici !' }
+                ],
+                
+                // 10 subjects inédits
+                themes: [
+                    {
+                        id: 0,
+                        category: 'human',
+                        categoryName: 'Intellectuels',
+                        title: "La Grève du 19 Mai 1956 (Le Boycott Universitaire)",
+                        description: "La décision des étudiants algériens de quitter leurs études pour rejoindre les maquis.",
+                        visee: "Mettre en valeur le sacrifice patriotique de la jeunesse intellectuelle",
+                        icon: `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>`,
+                        structure: {
+                            intro: {
+                                explanation: "Expliquer l'appel de l'UGEMA en 1956 et le choix difficile des étudiants d'abandonner leur futur métier pour l'indépendance.",
+                                keywords: ["UGEMA", "boycott académique", "choix existentiel", "engagement"],
+                                example: "Le 19 mai 1956, les étudiants algériens ont pris la décision historique de boycotter leurs cours pour s'engager pleinement dans la lutte."
+                            },
+                            development: {
+                                explanation: "Voici 3 phrases ordonnées à utiliser directement pour construire ton développement :",
+                                sentences: [
+                                    "D'abord, les étudiants ont massivement déserté les universités et les lycées pour rejoindre les maquis de l'ALN.",
+                                    "Ensuite, cette élite intellectuelle a structuré la propagande révolutionnaire et géré les réseaux de transmission secrets.",
+                                    "Enfin, elle a également représenté la voix de l'Algérie combattante lors des assemblées diplomatiques à l'étranger."
+                                ],
+                                keywords: ["désertion académique", "structurer la propagande", "action diplomatique"]
+                            },
+                            conclusion: {
+                                explanation: "Rappeler le courage de cette jeunesse qui a compris qu'un diplôme ne sert à rien dans un pays colonisé.",
+                                keywords: ["abnégation", "génération sacrifiée", "liberté prioritaire"],
+                                example: "En conclusion, ce boycott historique démontre que l'amour de la patrie a surpassé les ambitions individuelles des étudiants."
+                            }
+                        }
+                    },
+                    {
+                        id: 1,
+                        category: 'human',
+                        categoryName: 'Enfance',
+                        title: "L'Héroïsme Silencieux des Enfants Messagers (Les Guetteurs)",
+                        description: "Le rôle vital joué par les enfants de moins de 15 ans comme agents secrets indétectables par l'armée ennemie.",
+                        visee: "Rendre hommage à l'héroïsme précoce de l'enfance algérienne",
+                        icon: `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>`,
+                        structure: {
+                            intro: {
+                                explanation: "Montrer comment l'innocence apparente des enfants a été utilisée pour contourner la surveillance des soldats ennemis.",
+                                keywords: ["innocence stratégique", "vigilance déjouée", "agents de l'ombre"],
+                                example: "Pendant la guerre, l'innocence apparente de l'enfance fut une arme stratégique essentielle pour passer inaperçue devant l'armée coloniale."
+                            },
+                            development: {
+                                explanation: "Voici 3 phrases ordonnées à utiliser directement pour construire ton développement :",
+                                sentences: [
+                                    "D'abord, grâce à leur petite taille et leur air inoffensif, les enfants franchissaient facilement les barrages militaires sans éveiller les soupçons.",
+                                    "Ensuite, ils transportaient des messages secrets pliés dans leurs cartables ou leurs vêtements pour informer les combattants.",
+                                    "Enfin, ils surveillaient également les mouvements des soldats coloniaux pour lancer des signaux d'alerte en cas de danger immédiat."
+                                ],
+                                keywords: ["barrages franchis", "messages confidentiels", "surveillance discrète"]
+                            },
+                            conclusion: {
+                                explanation: "Expliquer que ces enfants ont sacrifié leur enfance et risqué leur vie pour la liberté de leur peuple.",
+                                keywords: ["enfance privée d'insouciance", "lourd tribut", "mémoire éternelle"],
+                                example: "En résumé, le courage exceptionnel de ces jeunes guetteurs prouve que la soif de liberté n'avait pas de limite d'âge."
+                            }
+                        }
+                    },
+                    {
+                        id: 2,
+                        category: 'human',
+                        categoryName: 'Solidarité',
+                        title: "Le Réseau Jeanson et les \"Porteurs de Valises\"",
+                        description: "Le soutien secret des citoyens français anticolonialistes qui risquaient la prison pour aider le FLN.",
+                        visee: "Mettre en lumière la dimension éthique et internationale de la lutte",
+                        icon: `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z" /></svg>`,
+                        structure: {
+                            intro: {
+                                explanation: "Présenter le soutien clandestin venu de l'intérieur de la France, par solidarité avec le peuple algérien.",
+                                keywords: ["Réseau Jeanson", "solidarité active", "militants insoumis"],
+                                example: "Au cœur de la France colonisatrice, des hommes épris de justice ont choisi de trahir les lois injustes de leur pays pour aider la cause algérienne."
+                            },
+                            development: {
+                                explanation: "Voici 3 phrases ordonnées à utiliser directement pour construire ton développement :",
+                                sentences: [
+                                    "D'abord, ces militants français collectaient clandestinement l'argent de l'émigration pour l'envoyer de manière sécurisée en Suisse.",
+                                    "Ensuite, ils offraient des refuges sûrs et hébergeaient les responsables du FLN activement recherchés par la police.",
+                                    "Enfin, ils publiaient des manifestes courageux pour dénoncer la torture et sensibiliser l'opinion publique métropolitaine."
+                                ],
+                                keywords: ["collecte de fonds", "hébergement secret", "manifestes d'opposition"]
+                            },
+                            conclusion: {
+                                explanation: "Montrer comment ces français ont brisé les mensonges et prouvé la justice universelle de la révolution.",
+                                keywords: ["alliance morale", "humanisme partagé", "victoire de la justice"],
+                                example: "Finalement, l'existence de ces 'porteurs de valises' prouve que le combat pour la justice dépassait toutes les frontières nationales."
+                            }
+                        }
+                    },
+                    {
+                        id: 3,
+                        category: 'strategy',
+                        categoryName: 'Santé',
+                        title: "Le Service de Santé de l'ALN et la Médecine des Grottes",
+                        description: "Comment des médecins ont créé des hôpitaux secrets dans des cavernes pour soigner sous les bombes.",
+                        visee: "Glorifier l'ingéniosité humanitaire et médicale du maquis",
+                        icon: `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>`,
+                        structure: {
+                            intro: {
+                                explanation: "Poser le problème du manque de médicaments et de la création d'un système médical secret dans les montagnes.",
+                                keywords: ["isolement médical", "soins secrets", "résistance humanitaire"],
+                                example: "Pour résister au blocus de l'armée ennemie, l'ALN a construit clandestinement un service médical d'une incroyable ingéniosité."
+                            },
+                            development: {
+                                explanation: "Voici 3 phrases ordonnées à utiliser directement pour construire ton développement :",
+                                sentences: [
+                                    "D'abord, les médecins et infirmiers ont installé des cliniques secrètes cachées au fond des grottes de montagne.",
+                                    "Ensuite, ils opéraient les blessés de guerre dans des conditions d'hygiène très difficiles et sans matériel moderne.",
+                                    "Enfin, ils soignaient également les populations civiles des villages reculés qui n'avaient aucun autre accès aux soins."
+                                ],
+                                keywords: ["cliniques souterraines", "opérations de fortune", "aide aux civils"]
+                            },
+                            conclusion: {
+                                explanation: "Affirmer que ces médecins ont sauvé des vies et prouvé l'humanisme profond de la révolution.",
+                                keywords: ["héros en blouse blanche", "humanité préservée", "sacrifice médical"],
+                                example: "En conclusion, ces soignants ont opposé la sauvegarde de la vie humaine à la violence et à la destruction coloniale."
+                            }
+                        }
+                    },
+                    {
+                        id: 4,
+                        category: 'strategy',
+                        categoryName: 'Frontières',
+                        title: "La Résistance face aux Barrages Électrifiés (Challe et Morice)",
+                        description: "Le franchissement héroïque des frontières grillagées, minées et chargées d'électricité.",
+                        visee: "Valoriser l'intelligence tactique et le courage des combattants des frontières",
+                        icon: `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>`,
+                        structure: {
+                            intro: {
+                                explanation: "Décrire les barrières électriques installées aux frontières tunisienne et marocaine pour couper l'arrivée d'armes.",
+                                keywords: ["mur électrifié", "barrage de la mort", "blocus logistique"],
+                                example: "Afin de couper la révolution de l'extérieur, l'ennemi a érigé des lignes barbelées et électrifiées très dangereuses aux frontières."
+                            },
+                            development: {
+                                explanation: "Voici 3 phrases ordonnées à utiliser directement pour construire ton développement :",
+                                sentences: [
+                                    "D'abord, l'armée ennemie avait construit des clôtures de barbelés sous haute tension électrique pour isoler l'Algérie.",
+                                    "Ensuite, les soldats de l'ALN ont inventé des pinces isolées avec du caoutchouc pour couper les fils électriques.",
+                                    "Enfin, malgré les mines terrestres et les tirs automatiques, ils franchissaient ces lignes pour acheminer des armes."
+                                ],
+                                keywords: ["tension meurtrière", "système isolant de fortune", "transport de matériel"]
+                            },
+                            conclusion: {
+                                explanation: "Montrer qu'aucune technologie ou obstacle physique ne peut arrêter la volonté d'indépendance d'un peuple.",
+                                keywords: ["détermination absolue", "échec des obstacles", "victoire morale"],
+                                example: "En somme, le franchissement de ces barrages montre que la volonté humaine a vaincu la technologie de mort de l'oppresseur."
+                            }
+                        }
+                    },
+                    {
+                        id: 5,
+                        category: 'strategy',
+                        categoryName: 'Technologie',
+                        title: "Les \"Transmissions\" de l'ALN (La guerre des ondes)",
+                        description: "La mise en place de réseaux radio clandestins pour déjouer les plans de l'armée ennemie.",
+                        visee: "Souligner l'organisation moderne et secrète de l'armée algérienne",
+                        icon: `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.342 10.56a2.75 2.75 0 115.316 0m-7.437 2.122a6.75 6.75 0 119.558 0" /></svg>`,
+                        structure: {
+                            intro: {
+                                explanation: "Présenter le besoin de communication rapide entre les différentes régions d'Algérie pour unifier les attaques.",
+                                keywords: ["guerre des ondes", "unification de l'ALN", "communications secrètes"],
+                                example: "La communication rapide au sein des maquis était une arme essentielle pour contrer l'offensive technologique de l'ennemi."
+                            },
+                            development: {
+                                explanation: "Voici 3 phrases ordonnées à utiliser directement pour construire ton développement :",
+                                sentences: [
+                                    "D'abord, des techniciens algériens formés à la hâte ont installé des stations de radio clandestines dans les montagnes.",
+                                    "Ensuite, ils interceptaient les messages secrets de l'armée coloniale pour prévenir les moudjahidine des attaques surprises.",
+                                    "Enfin, ils utilisaient des codes secrets complexes pour envoyer des ordres militaires à toutes les régions d'Algérie."
+                                ],
+                                keywords: ["techniciens formés", "messages interceptés", "cryptographie de combat"]
+                            },
+                            conclusion: {
+                                explanation: "Conclure que la guerre de libération était moderne, planifiée et n'était pas une simple révolte désorganisée.",
+                                keywords: ["armée structurée", "guerre électronique", "indépendance des ondes"],
+                                example: "En conclusion, la guerre des ondes montre la grande intelligence organisationnelle de la révolution algérienne."
+                            }
+                        }
+                    },
+                    {
+                        id: 6,
+                        category: 'human',
+                        categoryName: 'Culture',
+                        title: "La Résistance par l'Art : La Troupe Artistique du FLN",
+                        description: "Le combat culturel des musiciens, acteurs et écrivains pour faire connaître la souffrance algérienne.",
+                        visee: "Valoriser le rôle des artistes et de l'art dans la révolution nationale",
+                        icon: `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 9l10.5-3m0 0L21 8.25m-1.5-2.25L9 9v9m0-9L4.5 10.5m15-1.5V18m0 0a3 3 0 11-6 0m6 0a3 3 0 11-6 0M9 18a3 3 0 11-6 0m6 0a3 3 0 11-6 0" /></svg>`,
+                        structure: {
+                            intro: {
+                                explanation: "Présenter comment les poètes, musiciens et acteurs algériens ont utilisé leur art pour lutter contre le colonisateur.",
+                                keywords: ["combat par la culture", "troupe révolutionnaire", "conscientisation"],
+                                example: "Au-delà des armes à feu, la révolution s'est également menée avec des instruments de musique et des pièces de théâtre engagées."
+                            },
+                            development: {
+                                explanation: "Voici 3 phrases ordonnées à utiliser directement pour construire ton développement :",
+                                sentences: [
+                                    "D'abord, cette troupe composée d'artistes engagés voyageait dans le monde entier pour présenter la culture algérienne.",
+                                    "Ensuite, elle jouait des pièces de théâtre poignantes pour raconter les souffrances et l'héroïsme du peuple opprimé.",
+                                    "Enfin, elle composait des chants patriotiques puissants qui redonnaient du courage aux réfugiés dans les camps."
+                                ],
+                                keywords: ["tournées internationales", "art dramatique engagé", "chants d'espoir"]
+                            },
+                            conclusion: {
+                                explanation: "Démontrer que la culture a permis de toucher le cœur du monde et de renforcer l'identité nationale.",
+                                keywords: ["identité affirmée", "résistance intellectuelle", "liberté culturelle"],
+                                example: "En conclusion, ces artistes ont montré au monde entier que le peuple algérien avait une culture vivante et une grande soif de liberté."
+                            }
+                        }
+                    },
+                    {
+                        id: 7,
+                        category: 'strategy',
+                        categoryName: 'Finance',
+                        title: "Le Combat Sacrifié de l'Émigration (Le 17 Octobre 1961)",
+                        description: "Le soutien financier et les manifestations des travailleurs algériens de Paris sous la violence policière.",
+                        visee: "Mettre en lumière la participation et les sacrifices des Algériens vivant à l'étranger",
+                        icon: `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" /></svg>`,
+                        structure: {
+                            intro: {
+                                explanation: "Parler du rôle de la Fédération de France du FLN et des sacrifices d'ouvriers algériens immigrés.",
+                                keywords: ["Fédération du FLN", "immigration solidaire", "combat en territoire ennemi"],
+                                example: "Les travailleurs algériens immigrés en France ont mené une résistance unique, directement au sein du pays colonisateur."
+                            },
+                            development: {
+                                explanation: "Voici 3 phrases ordonnées à utiliser directement pour construire ton développement :",
+                                sentences: [
+                                    "D'abord, chaque mois, les ouvriers algériens versaient secrètement une partie de leur salaire pour financer les armes du FLN.",
+                                    "Ensuite, le 17 octobre 1961, des milliers d'entre eux ont manifesté pacifiquement dans les rues de Paris pour l'indépendance.",
+                                    "Enfin, la police a réprimé cette marche pacifique de manière extrêmement violente, jetant de nombreux manifestants dans la Seine."
+                                ],
+                                keywords: ["cotisation obligatoire", "marche pacifique", "répression meurtrière"]
+                            },
+                            conclusion: {
+                                explanation: "Rappeler que cette journée noire a marqué l'internationalisation de la cause algérienne.",
+                                keywords: ["solidarité indéfectible", "martyrs de l'ombre", "journée historique"],
+                                example: "En conclusion, le massacre de Paris démontre que les immigrés ont payé de leur vie la conquête de la liberté de leur patrie."
+                            }
+                        }
+                    },
+                    {
+                        id: 8,
+                        category: 'human',
+                        categoryName: 'Femmes',
+                        title: "L'Héroïsme des Femmes au Maquis (Militantes & Maquisardes)",
+                        description: "Le rôle indispensable des femmes algériennes qui ont bravé la mort comme soldates ou soignantes.",
+                        visee: "Glorifier la contribution cruciale des femmes dans l'acquisition de la liberté",
+                        icon: `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>`,
+                        structure: {
+                            intro: {
+                                explanation: "Montrer comment les femmes ont quitté leur maison pour prendre une part active dans la guerre de libération.",
+                                keywords: ["émancipation armée", "femmes d'action", "militantisme féminin"],
+                                example: "L'engagement massif des femmes algériennes a profondément transformé la nature de la lutte populaire nationale."
+                            },
+                            development: {
+                                explanation: "Voici 3 phrases ordonnées à utiliser directement pour construire ton développement :",
+                                sentences: [
+                                    "D'abord, les maquisardes transportaient des armes cachées sous leurs vêtements traditionnels à travers les contrôles militaires.",
+                                    "Ensuite, dans les montagnes, elles assuraient la logistique vitale en préparant les repas et en gérant les stocks de nourriture.",
+                                    "Enfin, certaines combattaient directement les armes à la main ou posaient des bombes pour frapper les centres névralgiques ennemis."
+                                ],
+                                keywords: ["transport clandestin", "logistique des montagnes", "combat direct"]
+                            },
+                            conclusion: {
+                                explanation: "Faire le lien entre la libération nationale et l'émancipation de la femme algérienne.",
+                                keywords: ["femme libératrice", "pilier social", "honneur national"],
+                                example: "En somme, les combattantes ont écrit l'une des pages les plus glorieuses et héroïques de notre liberté nationale."
+                            }
+                        }
+                    },
+                    {
+                        id: 9,
+                        category: 'strategy',
+                        categoryName: 'Sport',
+                        title: "L'Équipe de Football du FLN (Le Onze de l'Indépendance)",
+                        description: "L'histoire de joueurs pros fuyant la France pour former une équipe nationale algérienne clandestine.",
+                        visee: "Valoriser l'efficacité de la diplomatie sportive pour la cause nationale",
+                        icon: `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" /></svg>`,
+                        structure: {
+                            intro: {
+                                explanation: "Expliquer comment le football est devenu un porte-drapeau unique pour faire exister l'Algérie sur la carte du monde.",
+                                keywords: ["diplomatie du ballon", "équipe nationale de l'ombre", "reconnaissance internationale"],
+                                example: "L'équipe de football du FLN a utilisé le sport pour briser l'isolement diplomatique de l'Algérie et proclamer sa souveraineté."
+                            },
+                            development: {
+                                explanation: "Voici 3 phrases ordonnées à utiliser directement pour construire ton développement :",
+                                sentences: [
+                                    "D'abord, des joueurs algériens professionnels jouant en France ont fui secrètement pour former l'équipe nationale du FLN.",
+                                    "Ensuite, ils ont parcouru le monde pour disputer des matchs amicaux et hisser le drapeau algérien bien avant l'indépendance.",
+                                    "Enfin, à travers le sport, ils ont sensibilisé les peuples étrangers à la cause algérienne de manière pacifique et efficace."
+                                ],
+                                keywords: ["fuite des joueurs", "matchs d'exhibition", "propagande pacifique"]
+                            },
+                            conclusion: {
+                                explanation: "Insister sur l'impact de ce onze légendaire qui a gagné la reconnaissance de nombreux pays.",
+                                keywords: ["ambassadeurs du ballon", "victoire diplomatique", "fierté nationale"],
+                                example: "En définitive, ces sportifs de génie ont prouvé que chaque match disputé était une victoire vers l'indépendance nationale."
+                            }
+                        }
+                    }
+                ],
+
+                // Sentences demo
+                demoSentences: [
+                    { theme: '1. Élite étudiante', original: 'Les étudiants ont décidé d\'arrêter d\'étudier pour aller faire la guerre de libération en 1956.' },
+                    { theme: '2. Enfants coursiers', original: 'Des petits enfants portaient des lettres de guerre sous le nez des français.' },
+                    { theme: '3. Solidarité française', original: 'Des civils français ont donné de la nourriture et caché l\'argent secret de la révolution.' },
+                    { theme: '4. Équipe de foot FLN', original: 'Des footballeurs algériens ont quitté la France en cachette pour jouer des matchs au nom du FLN.' }
+                ],
+
+                // Words to replace
+                banishList: [
+                    { banned: 'Faire la grève de l\'école', premium: 'Décréter le boycott académique', context: 'Pour la grève étudiante historique du 19 mai 1956.' },
+                    { banned: 'Enfants espions / petits messagers', premium: 'Jeunes agents de liaison clandestins', context: 'Pour qualifier les adolescents et enfants coursiers.' },
+                    { banned: 'Français gentils / amis français', premium: 'Militants anticolonialistes / Réseau de soutien métropolitain', context: 'Pour caractériser les porteurs de valises.' },
+                    { banned: 'Médecins de fortune / médecins de brousse', premium: 'Le Service de Santé de l\'ALN', context: 'Pour désigner la structure médicale clandestine.' },
+                    { banned: 'Grands murs en fer / murs de fils', premium: 'Les lignes électrifiées étanches (Challe et Morice)', context: 'Pour qualifier les barrages frontaliers fortifiés.' },
+                    { banned: 'Jouer au foot pour la guerre', premium: 'Mener une campagne de diplomatie sportive', context: 'Pour caractériser le rôle exceptionnel de l\'équipe FLN.' },
+                    { banned: 'Faire de la musique / faire des chants', premium: 'Mobiliser la conscience populaire par l\'art engagé', context: 'Pour parler de la troupe théâtrale et musicale.' },
+                    { banned: 'Femmes qui cuisinaient ou aidaient', premium: 'Piliers logistiques du réseau clandestin de montagne', context: 'Pour rehausser le rôle des femmes de l\'ombre.' }
+                ],
+
+                get filteredThemes() {
+                    if (this.categoryFilter === 'all') {
+                        return this.themes;
+                    }
+                    return this.themes.filter(t => t.category === this.categoryFilter);
+                },
+
+                getActiveTheme() {
+                    return this.themes.find(t => t.id === this.activeThemeId) || this.themes[0];
+                },
+
+                selectTheme(id) {
+                    this.activeThemeId = id;
+                },
+
+                // Insert word helper
+                addWordToInput(word) {
+                    if (this.userInput.length > 0) {
+                        this.userInput += " " + word;
+                    } else {
+                        this.userInput = word;
+                    }
+                    this.performReformulation();
+                },
+
+                // Rule-based processor
+                performReformulation() {
+                    const text = this.userInput.toLowerCase().trim();
+                    const suggestions = [];
+
+                    if (!text) {
+                        this.matchedReformulations = [];
+                        return;
+                    }
+
+                    // T1
+                    if (text.includes("grève") || text.includes("étudiant") || text.includes("ecole") || text.includes("cours") || text.includes("études") || text.includes("19 mai")) {
+                        suggestions.push("L'auteur met en relief la portée historique du boycott du 19 mai 1956, montrant que la jeunesse a préféré le sacrifice patriotique aux études.");
+                        suggestions.push("En décidant de boycotter les examens coloniaux, l'élite étudiante a mis ses compétences d'écriture au service de la diplomatie révolutionnaire.");
+                    }
+
+                    // T2
+                    if (text.includes("enfant") || text.includes("lettre") || text.includes("guetteur") || text.includes("adolescent") || text.includes("messager") || text.includes("petit")) {
+                        suggestions.push("Le texte rend un hommage poignant à ces jeunes messagers dont l'innocence masquait une audace et une détermination de fer.");
+                        suggestions.push("Grâce à leur vigilance secrète, ces enfants-guetteurs ont permis de déjouer les plans de patrouille et d'éviter des massacres.");
+                    }
+
+                    // T3
+                    if (text.includes("français") || text.includes("valise") || text.includes("jeanson") || text.includes("allié") || text.includes("argent")) {
+                        suggestions.push("L'écrivain met en valeur l'engagement moral des porteurs de valises, ces anticolonialistes français qui risquèrent la prison par amour de la justice.");
+                        suggestions.push("Cette solidarité française a prouvé que la cause de l'Algérie était universelle et ne s'arrêtait pas aux origines nationales.");
+                    }
+
+                    // T4
+                    if (text.includes("médecin") || text.includes("grotte") || text.includes("soigner") || text.includes("blessé") || text.includes("médicament") || text.includes("santé")) {
+                        suggestions.push("L'auteur glorifie le Service de Santé de l'ALN qui réalisait des prouesses médicales au cœur de grottes insalubres sous les bombes.");
+                        suggestions.push("Cette médecine de guerre a offert des soins d'urgence essentiels aux moudjahidines tout en sauvant les populations civiles isolées.");
+                    }
+
+                    // T5
+                    if (text.includes("ligne") || text.includes("challe") || text.includes("morice") || text.includes("mine") || text.includes("barrage") || text.includes("frontière")) {
+                        suggestions.push("L'historien explique le franchissement des lignes électrifiées de Challe et Morice, symboles de l'asphyxie militaire voulue par le pouvoir colonial.");
+                        suggestions.push("L'audace tactique de l'ALN a vaincu la technologie ennemie en créant des outils d'isolation rudimentaires pour détruire les fils électriques.");
+                    }
+
+                    // Football
+                    if (text.includes("foot") || text.includes("ballon") || text.includes("joueur") || text.includes("équipe") || text.includes("sport")) {
+                        suggestions.push("Le texte analyse la puissance de la diplomatie sportive à travers l'épopée glorieuse de l'équipe de football nationale du FLN.");
+                        suggestions.push("En désertant les stades professionnels français, ces joueurs de légende ont hissé les couleurs de l'Algérie sur l'arène médiatique internationale.");
+                    }
+
+                    // Art/Troupe
+                    if (text.includes("art") || text.includes("théâtre") || text.includes("musique") || text.includes("chant") || text.includes("artiste")) {
+                        suggestions.push("L'auteur glorifie le combat culturel de la troupe artistique du FLN, outil majeur pour conscientiser les opinions publiques mondiales.");
+                        suggestions.push("Par la force des planches théâtrales et des chants de résistance, les artistes ont réveillé la solidarité des pays frères.");
+                    }
+
+                    // Fallback
+                    if (suggestions.length === 0) {
+                        suggestions.push("Le texte cherche à rétablir la vérité sur ces aspects souvent passés sous silence par les historiens classiques.");
+                        suggestions.push("Cette analyse originale met en lumière l'extraordinaire résistance humaine et l'ingéniosité dont a fait preuve le peuple algérien.");
+                    }
+
+                    this.matchedReformulations = suggestions;
+                },
+
+                // Calls Gemini API to explain a text inside a chat
+                async callGeminiAPI(promptText) {
+                    const apiKey = ""; // Canvas platform injects the valid key automatically
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+                    // System instructions specifically designed to translate academic French into Dz-intermediate level
+                    const systemPrompt = `Act as a warm, encouraging Algerian French tutor for terminale high school students (Bac DZ). 
+                    Your job is to explain, simplify, or translate complex academic French vocabulary and historical ideas related to the Algerian Revolution into VERY simple, easy-to-understand French (intermediate level A2-B1). 
+                    Use short sentences, bullet points, and simple vocabulary. 
+                    If a word is very difficult, provide:
+                    1. A very simple definition.
+                    2. A basic synonym.
+                    3. A clear example.
+                    Keep the tone supportive and pedagogical. Avoid complex words. You can use simple Arabic-Algerian equivalents if it helps clarify a highly complex concept (e.g. "Chouhada", "Moudjahidine", "El-Moujahid").`;
+
+                    const payload = {
+                        contents: [{ parts: [{ text: promptText }] }],
+                        systemInstruction: {
+                            parts: [{ text: systemPrompt }]
+                        }
+                    };
+
+                    try {
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (!response.ok) {
+                            throw new Error('API request failed');
+                        }
+
+                        const result = await response.json();
+                        const candidate = result.candidates?.[0];
+                        if (candidate && candidate.content?.parts?.[0]?.text) {
+                            return candidate.content.parts[0].text;
+                        } else {
+                            return "Désolé, je n'ai pas pu décoder cette idée. Peux-tu reformuler ta question ?";
+                        }
+                    } catch (err) {
+                        console.error(err);
+                        return "Oups ! J'ai un petit problème de connexion. Peux-tu réessayer dans un instant ?";
+                    }
+                },
+
+                // Explains a single word clicked by the student
+                async explainWord(word) {
+                    this.openAssistant(`Explique-moi le mot difficile : "${word}"`);
+                    this.aiLoading = true;
+                    
+                    const responseText = await this.callGeminiAPI(`Explique le mot "${word}" en français très simple (niveau intermédiaire). Donne un exemple très facile.`);
+                    
+                    // Replace markdown bold with HTML bold
+                    const cleanedText = responseText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                    
+                    this.chatHistory.push({ role: 'assistant', text: cleanedText });
+                    this.aiLoading = false;
+                },
+
+                // Simplifies a complex sentence
+                async simplifyText(sentence) {
+                    this.openAssistant(`Simplifie et explique cette phrase : "${sentence}"`);
+                    this.aiLoading = true;
+                    
+                    const responseText = await this.callGeminiAPI(`Simplifie la phrase suivante pour qu'un élève de niveau intermédiaire comprenne parfaitement son sens : "${sentence}". Découpe la en plusieurs petites phrases simples si nécessaire.`);
+                    
+                    // Replace markdown bold with HTML bold
+                    const cleanedText = responseText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                    
+                    this.chatHistory.push({ role: 'assistant', text: cleanedText });
+                    this.aiLoading = false;
+                },
+
+                // Send a custom text typing
+                async sendCustomQuery() {
+                    if (!this.aiQuery.trim()) return;
+                    
+                    const userText = this.aiQuery;
+                    this.chatHistory.push({ role: 'user', text: userText });
+                    this.aiQuery = '';
+                    this.aiLoading = true;
+
+                    const responseText = await this.callGeminiAPI(userText);
+                    const cleanedText = responseText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+                    this.chatHistory.push({ role: 'assistant', text: cleanedText });
+                    this.aiLoading = false;
+                },
+
+                openAssistant(initialMessage) {
+                    // Open assistant view or pre-fill it
+                    const chatBox = document.querySelector('.sticky');
+                    if (chatBox) {
+                        chatBox.scrollIntoView({ behavior: 'smooth' });
+                    }
+                    if (initialMessage && !this.chatHistory.some(m => m.text.includes(initialMessage))) {
+                        this.chatHistory.push({ role: 'user', text: initialMessage });
+                    }
+                },
+
+                clearChat() {
+                    this.chatHistory = [
+                        { role: 'assistant', text: 'Boîte vidée ! De quoi as-tu besoin maintenant ?' }
+                    ];
+                },
+
+                // Fast clipboard action
+                copyText(text) {
+                    const tempInput = document.createElement("input");
+                    tempInput.value = text;
+                    document.body.appendChild(tempInput);
+                    tempInput.select();
+                    document.execCommand("copy");
+                    document.body.removeChild(tempInput);
+
+                    this.showToast = true;
+                    setTimeout(() => {
+                        this.showToast = false;
+                    }, 2500);
+                }
+            };
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,2 @@
+This Folder in here contains lots of Exams of science from different schools … some of them are seperated in folder each folder has one exam in 1 to 2 pdfs or you can find them outside a folder in just one PDF … Your mission is to do a download link for the whole folder containing all the exams in one download link … You can find the zip file Inside it called تجميعة 
+but you should list all the scholl mentioned in a list so the visitor know what schools does the this zip files contains

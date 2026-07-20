@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bac HistoriQ — Guide d'Expression Écrite & Réforme de Vocabulaire</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Google Fonts: Inter & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .serif-title {
+            font-family: 'Playfair Display', serif;
+        }
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col selection:bg-emerald-500 selection:text-white" x-data="bacApp()">
+
+    <!-- Header Section -->
+    <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="h-10 w-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+                    <svg class="w-6 h-6 text-slate-950" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                        Bac HistoriQ <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2.5 py-0.5 rounded-full border border-emerald-500/20 font-medium">Réussite Bac 2026</span>
+                    </h1>
+                    <p class="text-xs text-slate-400">Le compagnon de la production écrite du texte d'histoire</p>
+                </div>
+            </div>
+            
+            <nav class="hidden md:flex space-x-1">
+                <a href="#themes" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/50 transition">Les 5 Thèmes Clés</a>
+                <a href="#reformulator" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/50 transition">Réformulateur Magique</a>
+                <a href="#vocab" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/50 transition">Boîte à Outils</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero / Guide d'introduction -->
+    <section class="relative overflow-hidden py-12 lg:py-20 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-900">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(16,185,129,0.08),transparent_50%)]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="text-center max-w-3xl mx-auto">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-6">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Méthodologie Spéciale Algérie & Bac de Français
+                </span>
+                <h2 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight serif-title">
+                    Manque d'idées pour l'expression écrite ?
+                </h2>
+                <p class="mt-6 text-lg sm:text-xl text-slate-300 leading-relaxed">
+                    Découvre une méthode visuelle et interactive pour maîtriser les structures de paragraphes, acquérir le vocabulaire noble exigé par les correcteurs et réussir tes reformulations.
+                </p>
+                <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#themes" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-bold hover:shadow-lg hover:shadow-emerald-500/20 transition duration-300 flex items-center justify-center gap-2">
+                        Explorer les 5 thèmes probables
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                    </a>
+                    <a href="#reformulator" class="px-6 py-3.5 rounded-xl bg-slate-800 text-white font-medium hover:bg-slate-700 border border-slate-700/50 transition duration-300 flex items-center justify-center gap-2">
+                        Tester le réformulateur magique
+                        <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 21l8.982-8.982m-9 9l3.193-3.193M21 3l-8.982 8.982m0 0l-3.193-3.193" /></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Interactive Workspace -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
+        
+        <!-- Interactive Infographics Section -->
+        <section id="themes" class="mb-16">
+            <div class="mb-8 text-center md:text-left">
+                <h3 class="text-3xl font-extrabold text-white serif-title">Les 5 Thèmes les plus probables du Bac</h3>
+                <p class="text-slate-400 mt-2">Clique sur un thème pour charger l'infographie de sa structure (Intro, Dével., Conclusion) et ses mots clés.</p>
+            </div>
+
+            <!-- Tabs/Grid Selector -->
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-3 mb-8">
+                <template x-for="(theme, index) in themes" :key="index">
+                    <button 
+                        @click="selectTheme(index)" 
+                        class="p-4 rounded-xl text-left border transition-all duration-300 relative overflow-hidden"
+                        :class="activeThemeIndex === index 
+                            ? 'bg-gradient-to-br from-slate-800 to-slate-900 border-emerald-500 shadow-md shadow-emerald-500/10 text-white' 
+                            : 'bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700 hover:bg-slate-900/50'"
+                    >
+                        <!-- Floating Badge for theme number -->
+                        <div class="absolute right-2 top-2 text-xs font-bold font-mono opacity-25" :class="activeThemeIndex === index ? 'text-emerald-400 opacity-80' : 'text-slate-500'">
+                            #0<span x-text="index + 1"></span>
+                        </div>
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="p-1.5 rounded-lg text-emerald-400 bg-emerald-500/10" x-html="theme.icon"></span>
+                            <span class="text-xs font-semibold tracking-wider uppercase text-emerald-400">Probable</span>
+                        </div>
+                        <h4 class="font-bold text-sm leading-snug line-clamp-2 text-white" x-text="theme.title"></h4>
+                    </button>
+                </template>
+            </div>
+
+            <!-- Active Theme Infographic Display -->
+            <div class="bg-slate-950 border border-slate-800 rounded-3xl p-6 md:p-8 relative overflow-hidden">
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(52,211,153,0.03),transparent_40%)]"></div>
+                
+                <!-- Theme Header Banner -->
+                <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-800 pb-6 mb-8 gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                            <div class="w-8 h-8" x-html="themes[activeThemeIndex].icon"></div>
+                        </div>
+                        <div>
+                            <span class="text-xs uppercase font-bold tracking-widest text-emerald-400">Thème Historique sélectionné</span>
+                            <h3 class="text-2xl md:text-3xl font-extrabold text-white serif-title mt-1" x-text="themes[activeThemeIndex].title"></h3>
+                            <p class="text-sm text-slate-400 mt-1" x-text="themes[activeThemeIndex].description"></p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-800 text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                            Visée : <span class="text-emerald-400" x-text="themes[activeThemeIndex].visee"></span>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- The 3-Step Infographic Visual Flow (Intro, Dev, Conclusion) -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 relative z-10">
+                    
+                    <!-- STEP 1: INTRODUCTION -->
+                    <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1 text-xs font-bold rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase tracking-wider">
+                                    1. Introduction
+                                </span>
+                                <span class="text-xs text-slate-500 font-mono">Le Cadre</span>
+                            </div>
+                            
+                            <h4 class="font-bold text-white text-lg mb-2">Comment débuter ?</h4>
+                            <p class="text-sm text-slate-300 leading-relaxed mb-4" x-text="themes[activeThemeIndex].structure.intro.explanation"></p>
+                            
+                            <div class="bg-slate-950/80 rounded-xl p-4 border border-slate-800/60 mb-4">
+                                <h5 class="text-xs font-bold text-emerald-400 uppercase tracking-widest mb-2">Mots clés indispensables :</h5>
+                                <div class="flex flex-wrap gap-1.5">
+                                    <template x-for="word in themes[activeThemeIndex].structure.intro.keywords">
+                                        <span class="text-xs px-2.5 py-1 rounded bg-slate-800 text-slate-300 hover:text-emerald-400 transition cursor-pointer" @click="addWordToInput(word)" x-text="word"></span>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-800/80 pt-4 mt-4">
+                            <h5 class="text-xs font-bold text-slate-400 uppercase mb-2">Exemple de formulation :</h5>
+                            <blockquote class="text-xs italic text-slate-400 border-l-2 border-emerald-500 pl-3 py-1 bg-slate-950/40" x-text="themes[activeThemeIndex].structure.intro.example"></blockquote>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: DÉVELOPPEMENT -->
+                    <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition flex flex-col justify-between relative">
+                        <!-- Connective Arrow in background for desktop -->
+                        <div class="hidden lg:block absolute -right-4 top-1/2 -translate-y-1/2 text-slate-800 z-0">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+                        </div>
+                        <div class="hidden lg:block absolute -left-4 top-1/2 -translate-y-1/2 text-slate-800 z-0">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1 text-xs font-bold rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase tracking-wider">
+                                    2. Développement
+                                </span>
+                                <span class="text-xs text-slate-500 font-mono">Le Cœur</span>
+                            </div>
+                            
+                            <h4 class="font-bold text-white text-lg mb-2">Les arguments clés</h4>
+                            <p class="text-sm text-slate-300 leading-relaxed mb-4" x-text="themes[activeThemeIndex].structure.development.explanation"></p>
+                            
+                            <div class="bg-slate-950/80 rounded-xl p-4 border border-slate-800/60 mb-4">
+                                <h5 class="text-xs font-bold text-amber-400 uppercase tracking-widest mb-2">Mots clés indispensables :</h5>
+                                <div class="flex flex-wrap gap-1.5">
+                                    <template x-for="word in themes[activeThemeIndex].structure.development.keywords">
+                                        <span class="text-xs px-2.5 py-1 rounded bg-slate-800 text-slate-300 hover:text-amber-400 transition cursor-pointer" @click="addWordToInput(word)" x-text="word"></span>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-800/80 pt-4 mt-4">
+                            <h5 class="text-xs font-bold text-slate-400 uppercase mb-2">Exemple de formulation :</h5>
+                            <blockquote class="text-xs italic text-slate-400 border-l-2 border-amber-500 pl-3 py-1 bg-slate-950/40" x-text="themes[activeThemeIndex].structure.development.example"></blockquote>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: CONCLUSION -->
+                    <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1 text-xs font-bold rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 uppercase tracking-wider">
+                                    3. Conclusion
+                                </span>
+                                <span class="text-xs text-slate-500 font-mono">La Portée</span>
+                            </div>
+                            
+                            <h4 class="font-bold text-white text-lg mb-2">Quel bilan tirer ?</h4>
+                            <p class="text-sm text-slate-300 leading-relaxed mb-4" x-text="themes[activeThemeIndex].structure.conclusion.explanation"></p>
+                            
+                            <div class="bg-slate-950/80 rounded-xl p-4 border border-slate-800/60 mb-4">
+                                <h5 class="text-xs font-bold text-blue-400 uppercase tracking-widest mb-2">Mots clés indispensables :</h5>
+                                <div class="flex flex-wrap gap-1.5">
+                                    <template x-for="word in themes[activeThemeIndex].structure.conclusion.keywords">
+                                        <span class="text-xs px-2.5 py-1 rounded bg-slate-800 text-slate-300 hover:text-blue-400 transition cursor-pointer" @click="addWordToInput(word)" x-text="word"></span>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-800/80 pt-4 mt-4">
+                            <h5 class="text-xs font-bold text-slate-400 uppercase mb-2">Exemple de formulation :</h5>
+                            <blockquote class="text-xs italic text-slate-400 border-l-2 border-blue-500 pl-3 py-1 bg-slate-950/40" x-text="themes[activeThemeIndex].structure.conclusion.example"></blockquote>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Sentence Builder & Reformulator -->
+        <section id="reformulator" class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+            
+            <!-- Left 2 Cols: The Interactive Reformulator -->
+            <div class="lg:col-span-2 bg-slate-950 border border-slate-800 rounded-3xl p-6 md:p-8 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-2 bg-emerald-500/10 text-emerald-400 rounded-xl">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.656 48.656 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7C4.765 12 4.765 12 4.765 12s0 0 0 0c.092 1.209.138 2.43.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.092-1.209.138-2.43.138-3.662z" /><path stroke-linecap="round" stroke-linejoin="round" d="M9 10.5l3 3 3-3" /></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white serif-title">Le Réformulateur Magique (Bac Style)</h3>
+                            <p class="text-sm text-slate-400">Écris ou sélectionne une phrase simple pour la transformer en français soutenu de niveau Baccalauréat.</p>
+                        </div>
+                    </div>
+
+                    <!-- Direct Inputs -->
+                    <div class="space-y-4 mb-6">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Sélectionne ou écris une idée banale :</label>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
+                                <template x-for="demo in demoSentences">
+                                    <button 
+                                        @click="userInput = demo.original; performReformulation()" 
+                                        class="text-left text-xs p-2.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:border-emerald-500/50 hover:bg-slate-800/40 transition"
+                                        x-text="demo.original"
+                                    ></button>
+                                </template>
+                            </div>
+                            
+                            <textarea 
+                                x-model="userInput" 
+                                @input="performReformulation()"
+                                class="w-full bg-slate-900 border border-slate-800 rounded-xl p-4 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 min-h-[100px] transition" 
+                                placeholder="Tape ta propre idée simple ici... Ex: Le peuple était uni."
+                            ></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Output Reformulations -->
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Propositions nobles (A copier-coller dans ta copie) :</span>
+                            <span class="text-xs text-emerald-400 flex items-center gap-1">
+                                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                Optimisé pour le barème de langue
+                            </span>
+                        </div>
+
+                        <div class="space-y-3">
+                            <template x-for="(reformulation, idx) in matchedReformulations">
+                                <div class="bg-slate-900 border border-slate-800/80 rounded-xl p-4 hover:border-slate-700 transition relative group">
+                                    <div class="absolute right-3 top-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <button 
+                                            @click="copyText(reformulation)" 
+                                            class="p-1 rounded bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition"
+                                            title="Copier la phrase"
+                                        >
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5A3.375 3.375 0 006.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0015 2.25h-1.5a2.251 2.251 0 00-1.9 1.086M12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" /></svg>
+                                        </button>
+                                    </div>
+                                    <div class="flex items-center gap-2 mb-1.5">
+                                        <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" x-text="idx === 0 ? 'Niveau Excellent' : 'Alternative Formelle'"></span>
+                                    </div>
+                                    <p class="text-sm text-slate-200 font-medium pr-8" x-text="reformulation"></p>
+                                </div>
+                            </template>
+
+                            <div x-show="matchedReformulations.length === 0" class="text-center py-6 bg-slate-900/50 border border-dashed border-slate-800 rounded-xl text-slate-500 text-sm">
+                                Tape des mots comme "femme", "crime", "peuple", "aide", "mensonge", "média" pour générer des reformulations.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-slate-900 flex justify-between items-center text-xs text-slate-500">
+                    <span>* Astuce : Combine 2 à 3 propositions pour bâtir ton paragraphe complet.</span>
+                </div>
+            </div>
+
+            <!-- Right 1 Col: "Bannir vs Privilégier" interactive checklist -->
+            <div class="bg-slate-950 border border-slate-800 rounded-3xl p-6 md:p-8 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-2 bg-rose-500/10 text-rose-400 rounded-xl">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0-10.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.249-8.25-3.286zm0 13.036h.008v.008H12v-.008z" /></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white serif-title">Chasse au "Banal"</h3>
+                            <p class="text-sm text-slate-400">Remplace immédiatement ces mots pauvres par des formules académiques.</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <template x-for="item in banishList">
+                            <div class="bg-slate-900/50 rounded-xl border border-slate-850 p-4 flex flex-col gap-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xs font-semibold px-2 py-0.5 rounded bg-rose-500/10 text-rose-400 border border-rose-500/20 line-through" x-text="item.banned"></span>
+                                    <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+                                    <span class="text-xs font-semibold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" x-text="item.premium"></span>
+                                </div>
+                                <p class="text-xs text-slate-400" x-text="item.context"></p>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-slate-800 text-xs text-slate-500 text-center">
+                    Utiliser ce lexique garantit la note maximale en pertinence lexicale.
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Vocabulary Tools & Connectors Library -->
+        <section id="vocab" class="bg-slate-950 border border-slate-800 rounded-3xl p-6 md:p-8 mb-16">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+                <div>
+                    <h3 class="text-3xl font-extrabold text-white serif-title">Bibliothèque de Connecteurs & Verbes Introducteurs</h3>
+                    <p class="text-slate-400 mt-1">Pour enchaîner tes arguments avec élégance sans répéter "Ensuite" et "Après".</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <!-- Connectors for Intro/Chronology -->
+                <div class="bg-slate-900/40 border border-slate-800/80 rounded-2xl p-5">
+                    <h4 class="font-bold text-white mb-3 text-sm flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                        1. Débuter / Situer
+                    </h4>
+                    <ul class="space-y-2 text-xs">
+                        <li class="flex justify-between border-b border-slate-800/50 pb-1"><span class="text-emerald-400 font-mono">D'emblée</span> <span>= Dès le début</span></li>
+                        <li class="flex justify-between border-b border-slate-800/50 pb-1"><span class="text-emerald-400 font-mono">En premier lieu</span> <span>= Pour commencer</span></li>
+                        <li class="flex justify-between border-b border-slate-800/50 pb-1"><span class="text-emerald-400 font-mono">Dans ce sillage</span> <span>= Dans ce contexte</span></li>
+                        <li class="flex justify-between pb-1"><span class="text-emerald-400 font-mono">À l'entame de</span> <span>= Au début de</span></li>
+                    </ul>
+                </div>
+
+                <!-- Connectors for Opposition / Truth Correction -->
+                <div class="bg-slate-900/40 border border-slate-800/80 rounded-2xl p-5">
+                    <h4 class="font-bold text-white mb-3 text-sm flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+                        2. Rétablir / Opposer
+                    </h4>
+                    <ul class="space-y-2 text-xs">
+                        <li class="flex justify-between border-b border-slate-800/50 pb-1"><span class="text-blue-400 font-mono">Or, en réalité</span> <span>= Mais en vrai</span></li>
+                        <li class="flex justify-between border-b border-slate-800/50 pb-1"><span class="text-blue-400 font-mono">À l'inverse de</span> <span>= Contrairement à</span></li>
+                        <li class="flex justify-between border-b border-slate-800/50 pb-1"><span class="text-blue-400 font-mono">Néanmoins</span> <span>= Pourtant</span></li>
+                        <li class="flex justify-between pb-1"><span class="text-blue-400 font-mono">Loin de là</span> <span>= Pas du tout</span></li>
+                    </ul>
+                </div>
+
+                <!-- Connectors for Cause/Consequence of crimes -->
+                <div class="bg-slate-900/40 border border-slate-800/80 rounded-2xl p-5">
+                    <h4 class="font-bold text-white mb-3 text-sm flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                        3. Justifier / Insister
+                    </h4>
+                    <ul class="space-y-2 text-xs">
+                        <li class="flex justify-between border-b border-slate-800/50 pb-1"><span class="text-amber-400 font-mono">Eu égard à</span> <span>= À cause de / Vu</span></li>
+                        <li class="flex justify-between border-b border-slate-800/50 pb-1"><span class="text-amber-400 font-mono">En l'occurrence</span> <span>= Surtout</span></li>
+                        <li class="flex justify-between border-b border-slate-800/50 pb-1"><span class="text-amber-400 font-mono">Force est de...</span> <span>= On doit admettre</span></li>
+                        <li class="flex justify-between pb-1"><span class="text-amber-400 font-mono">Notamment</span> <span>= Comme par exemple</span></li>
+                    </ul>
+                </div>
+
+                <!-- Verbes introducteurs (Excellence) -->
+                <div class="bg-slate-900/40 border border-slate-800/80 rounded-2xl p-5">
+                    <h4 class="font-bold text-white mb-3 text-sm flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
+                        4. Remplacer "dit que"
+                    </h4>
+                    <ul class="space-y-2 text-xs">
+                        <li class="flex justify-between border-b border-slate-800/50 pb-1"><span class="text-indigo-400 font-mono">L'auteur avance</span> <span>= L'auteur dit</span></li>
+                        <li class="flex justify-between border-b border-slate-800/50 pb-1"><span class="text-indigo-400 font-mono">Il fustige</span> <span>= Il critique</span></li>
+                        <li class="flex justify-between border-b border-slate-800/50 pb-1"><span class="text-indigo-400 font-mono">Il corrobore</span> <span>= Il confirme</span></li>
+                        <li class="flex justify-between pb-1"><span class="text-indigo-400 font-mono">Il soutient</span> <span>= Il affirme</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic Modal notification for copied items -->
+        <div 
+            x-show="showToast" 
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 translate-y-4"
+            x-transition:enter-end="opacity-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100 translate-y-0"
+            x-transition:leave-end="opacity-0 translate-y-4"
+            class="fixed bottom-5 right-5 z-50 bg-slate-950 border border-emerald-500 rounded-xl p-4 shadow-xl flex items-center gap-3 max-w-sm"
+            style="display: none;"
+        >
+            <div class="h-8 w-8 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+            </div>
+            <div>
+                <p class="text-sm font-bold text-white">Copié avec succès !</p>
+                <p class="text-xs text-slate-400">Prêt à être utilisé dans ta production écrite.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 bg-slate-950 py-8 text-center text-sm text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-2">
+                <span class="font-bold text-white">Bac HistoriQ</span>
+                <span>— Apprendre l'Histoire par le beau langage.</span>
+            </div>
+            <p>&copy; 2026. Conçu pour les élèves du Baccalauréat Algérien.</p>
+        </div>
+    </footer>
+
+    <!-- Alpine App Logic & Static JSON data -->
+    <script>
+        function bacApp() {
+            return {
+                activeThemeIndex: 0,
+                userInput: '',
+                matchedReformulations: [],
+                showToast: false,
+                
+                // Demo Sentences to trigger fast interactions
+                demoSentences: [
+                    { original: 'Le peuple a aidé le FLN durant la guerre.' },
+                    { original: 'La femme a combattu comme les hommes.' },
+                    { original: 'Le colonialisme a fait beaucoup de crimes violents.' },
+                    { original: 'La radio du FLN a montré les mensonges de la France.' }
+                ],
+
+                // Banish list mapping banned words to academic equivalents
+                banishList: [
+                    { banned: 'Faire la révolution', premium: 'Mener la lutte armée', context: 'Pour parler de l\'entrée en guerre.' },
+                    { banned: 'Beaucoup de crimes', premium: 'Des exactions innombrables', context: 'Pour qualifier les sévices coloniaux.' },
+                    { banned: 'Aider le FLN', premium: 'Soutenir indéfectiblement', context: 'Pour qualifier l\'action du peuple.' },
+                    { banned: 'Dire des mensonges', premium: 'Falsifier la réalité / Propager des contre-vérités', context: 'Pour la presse coloniale.' },
+                    { banned: 'La femme a travaillé', premium: 'La femme s\'est engagée activement', context: 'Pour l\'hommage aux combattantes.' }
+                ],
+
+                // Themes Data containing SVG Icons & Structures
+                themes: [
+                    {
+                        title: "Les Crimes Coloniaux et la Répression (ex: 8 mai 1945)",
+                        description: "Analyse critique et démonstration des massacres de masse et de la violence d'État.",
+                        visee: "Dénoncer les crimes et la sauvagerie coloniale",
+                        icon: `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v13.5m0-13.5L16.5 7.5M12 3L7.5 7.5m9 13.5H18a2.25 2.25 0 002.25-2.25V15M6 15v3.25A2.25 2.25 0 008.25 20.5h1.5" /></svg>`,
+                        structure: {
+                            intro: {
+                                explanation: "Présenter le cadre spatio-temporel de la tragédie et contextualiser la fureur coloniale suite aux revendications légitimes de paix.",
+                                keywords: ["Répression sanglante", "8 mai 1945", "Exactions coloniales", "Pacifique", "Massacre"],
+                                example: "Au lendemain de la Seconde Guerre mondiale, alors que le monde célébrait la victoire sur le fascisme, le peuple algérien manifestait pacifiquement pour revendiquer son droit à l'autodétermination."
+                            },
+                            development: {
+                                explanation: "Apporter des preuves formelles des atrocités commises (militaires et milices civiles) pour légitimer la rupture finale avec l'illusion assimilationniste.",
+                                keywords: ["Génocide", "Sauvagerie innommable", "Violence systémique", "Bafouer", "Prémédité"],
+                                example: "L'auteur s'attache à dénoncer la sauvagerie coloniale à travers l'énumération de chiffres terrifiants et de témoignages accablants, démontrant que la violence n'était pas un accident mais une politique préméditée."
+                            },
+                            conclusion: {
+                                explanation: "Montrer que ce traumatisme national a agi comme le catalyseur inéluctable du déclenchement du 1er Novembre 1954.",
+                                keywords: ["Prise de conscience", "Catalyseur révolutionnaire", "Rupture définitive", "Indépendance"],
+                                example: "En définitive, cette tragédie nationale scelle la rupture définitive avec l'ordre colonial et convainc le mouvement national que seule la lutte armée peut restituer la souveraineté spoliée."
+                            }
+                        }
+                    },
+                    {
+                        title: "L'Engagement de la Femme Algérienne dans la Lutte",
+                        description: "Hommage au rôle fondamental et polyvalent des femmes moudjahidates.",
+                        visee: "Rendre hommage au courage de la femme",
+                        icon: `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" /></svg>`,
+                        structure: {
+                            intro: {
+                                explanation: "Briser le silence de l'histoire patriarcale pour poser la femme comme acteur à part entière de la guerre de libération.",
+                                keywords: ["Héroïnes oubliées", "Moudjahidates", "Sacrifice suprême", "Combat", "Révolution"],
+                                example: "La guerre de libération nationale n'a pas été l'œuvre exclusive des hommes ; les femmes algériennes y ont écrit les pages les plus glorieuses de notre histoire contemporaine."
+                            },
+                            development: {
+                                explanation: "Détailler la pluralité de son action (logistique, armée, médicale, de liaison) en insistant sur le courage indomptable dont elle a fait preuve face à la torture.",
+                                keywords: ["Agente de liaison", "Soutien logistique", "Bravoure exceptionnelle", "Infirmière", "Résistance"],
+                                example: "Qu'elles soient infirmières dans les maquis, agentes de liaison transportant des documents secrets au péril de leur vie, ou combattantes armées, les femmes ont constitué le pilier invisible de la logistique du FLN."
+                            },
+                            conclusion: {
+                                explanation: "Consacrer la place éternelle de la femme algérienne dans la libération et la reconstruction de la nation moderne.",
+                                keywords: ["Émancipation", "Hommage vibrant", "Égalité légitime", "Postérité", "Souveraineté"],
+                                example: "En somme, rendre hommage à ces militantes revient à reconnaître que le triomphe de la révolution algérienne eût été chimérique sans leur dévouement et leur patriotisme absolu."
+                            }
+                        }
+                    },
+                    {
+                        title: "L'Unité Nationale et l'Élan Populaire (11 Déc. 1960)",
+                        description: "Mise en lumière de la symbiose parfaite entre le peuple et ses dirigeants politiques.",
+                        visee: "Valoriser l'unité nationale face à la division",
+                        icon: `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.771m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" /></svg>`,
+                        structure: {
+                            intro: {
+                                explanation: "Définir le concept de l'unité nationale comme arme ultime d'un peuple colonisé face à la puissance asymétrique de l'occupant.",
+                                keywords: ["Bloc monolithique", "Symbiose", "Conscience collective", "Défier", "Cohésion"],
+                                example: "Face aux manœuvres coloniales visant à diviser les Algériens, le peuple a opposé une union sacrée et une cohésion sociale à toute épreuve."
+                            },
+                            development: {
+                                explanation: "Présenter des événements historiques majeurs qui illustrent ce bloc indivisible (Grève des 8 jours, manifestations populaires massives).",
+                                keywords: ["Élan unanime", "Clamer la liberté", "Solidarité infaillible", "Symbiose ALN-Peuple", "Rejet"],
+                                example: "Lors des soulèvements décisifs de décembre 1960, des foules entières bravèrent le feu des blindés coloniaux pour clamer d'une seule voix la légitimité du FLN et l'exigence de l'indépendance."
+                            },
+                            conclusion: {
+                                explanation: "Confirmer que cette démonstration d'unité a définitivement brisé la légitimité internationale du pouvoir colonial.",
+                                keywords: ["Plébiscite populaire", "Victoire politique", "Destin commun", "Souveraineté", "Consécration"],
+                                example: "En conclusion, ces manifestations populaires ont constitué le véritable référendum populaire prouvant au monde entier l'indivisibilité de la nation algérienne."
+                            }
+                        }
+                    },
+                    {
+                        title: "Le Rôle des Armes non-militaires (Presse, Diplomatie & Sport)",
+                        description: "La guerre menée sur le plan des idées, de la diplomatie et de la culture.",
+                        visee: "Glorifier la portée internationale de la lutte",
+                        icon: `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25H5.625A2.25 2.25 0 013.375 18V6.125C3.375 5.504 3.879 5 4.5 5h9.75M12 7.5V18a.75.75 0 00.75.75h.375a.75.75 0 00.75-.75V7.5a.75.75 0 00-.75-.75h-.375a.75.75 0 00-.75.75z" /></svg>`,
+                        structure: {
+                            intro: {
+                                explanation: "Élargir la vision de la guerre : montrer que la libération s'est également jouée sur les ondes, les terrains de sport et les tribunes de l'ONU.",
+                                keywords: ["Arme médiatique", "Guerre asymétrique", "Diplomatie", "Tribunes mondiales", "Internationalisation"],
+                                example: "La révolution algérienne fut un modèle de guerre totale, où la plume, la voix radiophonique et la diplomatie ont appuyé de façon décisive l'action militaire des moudjahidine."
+                            },
+                            development: {
+                                explanation: "Analyser les exploits de la diplomatie du FLN et la création d'institutions fortes (Sawt El Arab, l'équipe de football du FLN, la presse clandestine d'El Moudjahid).",
+                                keywords: ["Combattants de la plume", "Propagande légitime", "Sensibiliser", "Opinion internationale", "Symbole"],
+                                example: "Grâce aux émissions de la « Voix de l'Algérie Combattante » et à l'action d'ambassadeurs sportifs d'exception, le FLN a su briser le blocus de la censure française et internationaliser la cause."
+                            },
+                            conclusion: {
+                                explanation: "Glorifier l'importance capitale de cette diplomatie qui a fini par asphyxier politiquement la puissance coloniale à l'échelle de l'ONU.",
+                                keywords: ["Victoire diplomatique", "Triomphe intellectuel", "Armes pacifiques", "Reconnaissance internationale"],
+                                example: "Au bout du compte, cette ingéniosité dans la lutte non-violente a permis d'isoler diplomatiquement le colonisateur et d'accélérer la chute irrémédiable de son empire."
+                            }
+                        }
+                    },
+                    {
+                        title: "Le Témoignage Historique et le Rétablissement de la Vérité",
+                        description: "Le devoir de mémoire et la lutte contre la falsification de l'histoire.",
+                        visee: "Rétablir la vérité historique objective",
+                        icon: `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" /></svg>`,
+                        structure: {
+                            intro: {
+                                explanation: "Souligner l'importance de l'écrit historique pour démanteler la propagande et la mémoire altérée par l'oppresseur.",
+                                keywords: ["Vérité historique", "Démanteler", "Propagande officielle", "Archives", "Falsification"],
+                                example: "Longtemps étouffée par le discours colonial unilatéral, l'histoire de la révolution algérienne trouve aujourd'hui son salut dans la réappropriation objective et scientifique des faits."
+                            },
+                            development: {
+                                explanation: "Mettre en opposition la version officielle mensongère face aux témoignages vivants et aux documents incontestables.",
+                                keywords: ["En réalité", "Contrairement à", "Corroborer les faits", "Témoignages poignants", "Vérité indéniable"],
+                                example: "En s'appuyant sur des confessions d'anciens bourreaux et des mémoires de combattants, le texte oppose la vérité incontestable des faits aux euphémismes trompeurs utilisés par l'administration impériale."
+                            },
+                            conclusion: {
+                                explanation: "Insister sur le devoir de mémoire comme garante de la dignité des martyrs et de l'instruction de la jeunesse.",
+                                keywords: ["Devoir de mémoire", "Mémoire éternelle", "Éduquer", "Impartialité", "Justice historique"],
+                                example: "Rétablir la vérité n'est pas un simple exercice académique, c'est un acte de justice morale indispensable pour honorer la mémoire de nos martyrs et immuniser l'avenir de la patrie."
+                            }
+                        }
+                    }
+                ],
+
+                selectTheme(index) {
+                    this.activeThemeIndex = index;
+                },
+
+                // Push a keyword word directly inside reformulator input for ease
+                addWordToInput(word) {
+                    if (this.userInput.length > 0) {
+                        this.userInput += " " + word.toLowerCase();
+                    } else {
+                        this.userInput = word;
+                    }
+                    this.performReformulation();
+                },
+
+                // The magical rule-based local generator
+                performReformulation() {
+                    const text = this.userInput.toLowerCase().trim();
+                    const suggestions = [];
+
+                    if (!text) {
+                        this.matchedReformulations = [];
+                        return;
+                    }
+
+                    // Theme 1 Rules : Crime / Violence / Massacres
+                    if (text.includes("crime") || text.includes("violence") || text.includes("tuer") || text.includes("massacre") || text.includes("8 mai")) {
+                        suggestions.push("L'auteur fustige avec virulence la barbarie coloniale en apportant des preuves tangibles de massacres de masse prémédités.");
+                        suggestions.push("L'œuvre dénonce des exactions innombrables et une répression aveugle orchestrée à l'encontre de civils désarmés.");
+                        suggestions.push("À travers un lexique de la violence, l'auteur met à nu la sauvagerie d'un système qui bafouait délibérément les droits humains.");
+                    }
+
+                    // Theme 2 Rules : Femme / Femme combattante / moudjahidates
+                    if (text.includes("femme") || text.includes("militante") || text.includes("combattre") || text.includes("moudjahida")) {
+                        suggestions.push("L'auteur dresse un portrait mélioratif des moudjahidates pour rendre un hommage vibrant à leur bravoure exceptionnelle.");
+                        suggestions.push("Loin d'avoir un rôle passif, la femme s'est engagée activement dans les maquis comme soutien logistique indéfectible.");
+                        suggestions.push("Il convient de mettre en lumière l'héroïsme au féminin qui a constitué l'un des piliers stratégiques de la lutte armée.");
+                    }
+
+                    // Theme 3 Rules : Peuple / Unité / FLN / Aide / Union
+                    if (text.includes("peuple") || text.includes("aide") || text.includes("union") || text.includes("uni") || text.includes("solidarité")) {
+                        suggestions.push("Le texte met en exergue la cohésion nationale et l'élan de solidarité infaillible qui liait le peuple algérien à l'ALN.");
+                        suggestions.push("L'auteur valorise la symbiose parfaite et la conscience collective d'une nation déterminée à clamer haut et fort son indépendance.");
+                        suggestions.push("Le soulèvement populaire montre que le peuple formait un bloc monolithique pour défier le système colonialiste.");
+                    }
+
+                    // Theme 4 Rules : Radio / Presse / Média / Mensonge / Diplomatie
+                    if (text.includes("média") || text.includes("radio") || text.includes("presse") || text.includes("mensonge") || text.includes("diplomatie") || text.includes("fln")) {
+                        suggestions.push("L'auteur démontre l'impact crucial de l'arme médiatique pour démanteler la propagande officielle coloniale.");
+                        suggestions.push("Le combat diplomatique et intellectuel a permis d'internationaliser la cause algérienne sur les tribunes mondiales.");
+                        suggestions.push("L'ingéniosité des moyens de lutte pacifiques, comme la presse clandestine, a su éveiller l'opinion internationale.");
+                    }
+
+                    // Fallback smart general rules if no keyword matches
+                    if (suggestions.length === 0) {
+                        suggestions.push("L'historien s'attache à rétablir la vérité factuelle en opposant une démonstration rigoureuse aux thèses officielles falsifiées.");
+                        suggestions.push("À l'aide d'un vocabulaire fortement appréciatif, l'auteur cherche à valoriser la portée morale du sacrifice des martyrs.");
+                        suggestions.push("Par le biais de ce témoignage poignant, l'auteur tente de perpétuer le devoir de mémoire pour éduquer les générations futures.");
+                    }
+
+                    this.matchedReformulations = suggestions;
+                },
+
+                // Clipboard copy tool
+                copyText(text) {
+                    const tempInput = document.createElement("input");
+                    tempInput.value = text;
+                    document.body.appendChild(tempInput);
+                    tempInput.select();
+                    document.execCommand("copy");
+                    document.body.removeChild(tempInput);
+
+                    // Show success notification toast
+                    this.showToast = true;
+                    setTimeout(() => {
+                        this.showToast = false;
+                    }, 2500);
+                }
+            };
+        }
+    </script>
+</body>
+</html>

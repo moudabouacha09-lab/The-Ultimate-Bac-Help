@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>البوابة التفاعلية لمصطلحات الحرب الباردة - بكالوريا</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Tajawal & Cairo & Share Tech Mono) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Tajawal:wght@400;500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <!-- FontAwesome for educational icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Tajawal', 'Cairo', sans-serif;
+            background-color: #0b0f19;
+            color: #f1f5f9;
+        }
+        /* Custom scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ef4444;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f43f5e;
+        }
+        .glossy-card {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(239, 68, 68, 0.15);
+        }
+        .active-tab {
+            background: linear-gradient(135deg, #ef4444 0%, #991b1b 100%);
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.35);
+        }
+        .term-item-active {
+            border-right: 4px solid #f59e0b;
+            background: rgba(245, 158, 11, 0.08);
+        }
+        .mono-font {
+            font-family: 'Share Tech Mono', 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between overflow-x-hidden">
+
+    <!-- Header/Navigation Bar -->
+    <header class="glossy-card border-b border-rose-950/60 sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 py-3 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-tr from-red-600 to-amber-500 p-2.5 rounded-xl shadow-lg shadow-red-950/40">
+                    <i class="fa-solid fa-person-military-pointing text-2xl text-white animate-pulse"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-amber-300 to-rose-400">
+                        منظومة مصطلحات الحرب الباردة
+                    </h1>
+                    <p class="text-xs text-slate-400">حقيبة التاريخ الذكية لبكالوريا تفاعلية متميزة</p>
+                </div>
+            </div>
+            
+            <!-- Tab Switchers -->
+            <nav class="flex gap-2 bg-slate-950 p-1.5 rounded-xl border border-rose-950/40">
+                <button onclick="switchTab('browse')" id="tab-browse" class="active-tab px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition-all duration-300">
+                    <i class="fa-solid fa-folder-open"></i>
+                    <span>المصطلحات التفاعلية</span>
+                </button>
+                <button onclick="switchTab('quiz')" id="tab-quiz" class="px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 text-slate-400 hover:text-white hover:bg-slate-900 transition-all duration-300">
+                    <i class="fa-solid fa-circle-question"></i>
+                    <span>صفحة الاختبار الذكي</span>
+                </button>
+                <button onclick="switchTab('stats')" id="tab-stats" class="px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 text-slate-400 hover:text-white hover:bg-slate-900 transition-all duration-300">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>الإحصائيات والتقدم</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8 flex-grow w-full">
+        
+        <!-- BROWSE TAB -->
+        <section id="view-browse" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- Sidebar: Term Selection & Filters -->
+            <div class="lg:col-span-4 flex flex-col gap-4">
+                <!-- Search & Filters Container -->
+                <div class="glossy-card p-4 rounded-2xl flex flex-col gap-3">
+                    <h3 class="font-bold text-sm text-red-400 flex items-center gap-2">
+                        <i class="fa-solid fa-filter"></i> تصفية وبحث ذكي
+                    </h3>
+                    
+                    <!-- Search input -->
+                    <div class="relative">
+                        <input type="text" id="searchTerm" onkeyup="filterTerms()" placeholder="ابحث عن مصطلح تاريخي..." class="w-full bg-slate-950 border border-rose-950/40 rounded-xl py-2.5 pr-10 pl-4 text-sm text-white focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 placeholder-slate-500 text-right">
+                        <span class="absolute right-3.5 top-3.5 text-slate-500">
+                            <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                        </span>
+                    </div>
+
+                    <!-- Category filter -->
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-xs text-slate-400 font-medium">مجموعات المصطلحات:</label>
+                        <select id="categoryFilter" onchange="filterTerms()" class="w-full bg-slate-950 border border-rose-950/40 rounded-xl py-2 px-3 text-sm text-slate-300 focus:outline-none focus:border-red-500">
+                            <option value="all">جميع الفئات التعليمية (36 مصطلحاً)</option>
+                            <option value="systems">1. الأنظمة والمفاهيم الأساسية</option>
+                            <option value="strategies">2. الاستراتيجيات والسياسات</option>
+                            <option value="rapprochement">3. التقارب وتخفيف الصراع</option>
+                            <option value="organizations">4. المنظمات والمؤسسات الدولية</option>
+                        </select>
+                    </div>
+
+                    <!-- Random Picker Button -->
+                    <button onclick="pickRandomTerm()" class="w-full bg-gradient-to-r from-red-500 to-rose-700 hover:from-red-600 hover:to-rose-800 text-white font-extrabold py-2.5 px-4 rounded-xl text-sm flex items-center justify-center gap-2 transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg shadow-red-950/30">
+                        <i class="fa-solid fa-shuffle"></i>
+                        <span>اختر مصطلحاً عشوائياً</span>
+                    </button>
+                </div>
+
+                <!-- Terms List Card -->
+                <div class="glossy-card rounded-2xl p-4 flex flex-col flex-grow max-h-[500px] lg:max-h-[580px]">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="font-bold text-slate-300 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-list-check"></i> فهرس المصطلحات
+                        </h3>
+                        <span id="termCountBadge" class="bg-red-950/50 text-red-400 border border-red-900/60 text-xs px-2.5 py-0.5 rounded-full font-bold">36 مصطلحاً</span>
+                    </div>
+                    
+                    <!-- Scrollable list of terms -->
+                    <div id="termsList" class="flex-grow overflow-y-auto pr-1 flex flex-col gap-2">
+                        <!-- Dynamic list items will be injected here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Viewer: Definition & Custom Vector Graphics -->
+            <div class="lg:col-span-8 flex flex-col">
+                <div class="glossy-card rounded-3xl p-6 md:p-8 flex-grow flex flex-col justify-between gap-6 relative overflow-hidden min-h-[450px]">
+                    <!-- Subtle background visual effects -->
+                    <div class="absolute -right-24 -top-24 w-80 h-80 bg-red-600/10 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="absolute -left-24 -bottom-24 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                    <!-- Info/Action Bar inside card -->
+                    <div class="flex justify-between items-center border-b border-rose-950/40 pb-4 z-10">
+                        <span id="view-unit-badge" class="bg-slate-900 border border-rose-950/40 text-slate-300 text-xs px-3 py-1.5 rounded-xl font-medium">الأنظمة والمفاهيم الأساسية</span>
+                        <div class="flex items-center gap-2">
+                            <span id="view-id-badge" class="mono-font bg-red-950/60 text-red-400 border border-red-900/50 text-xs px-2.5 py-1.5 rounded-xl font-bold">TERM: 01</span>
+                            <button id="favorite-btn" onclick="toggleFavorite()" class="bg-slate-900 border border-rose-950/40 hover:bg-slate-800 text-slate-400 hover:text-red-500 w-9 h-9 rounded-xl flex items-center justify-center transition-colors">
+                                <i class="fa-solid fa-heart text-base"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Main Term and Definition layout -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center flex-grow z-10 my-4">
+                        <!-- Left text side -->
+                        <div class="md:col-span-7 flex flex-col gap-4 text-right">
+                            <h2 id="view-term-title" class="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-red-200 leading-tight">
+                                الثنائية القطبية
+                            </h2>
+                            <div class="bg-slate-950/60 p-5 rounded-2xl border border-rose-950/30">
+                                <h4 class="text-xs text-red-400 font-bold mb-2 tracking-widest uppercase flex items-center gap-2">
+                                    <i class="fa-solid fa-quote-right text-amber-500"></i> الشرح والتعريف المنهجي:
+                                </h4>
+                                <p id="view-term-definition" class="text-slate-300 text-base md:text-lg leading-relaxed font-normal">
+                                    نظام دولي ظهر بعد الحرب العالمية الثانية يتميز بوجود قطبين متصارعين على الزعامة هما الولايات المتحدة والاتحاد السوفياتي ظهر بعد مؤتمر يالطا ب 4-11 فيفري 1945.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Right vector visual side (dynamic image placeholder built dynamically) -->
+                        <div class="md:col-span-5 flex justify-center">
+                            <div id="vector-container" class="relative w-full max-w-[260px] aspect-square rounded-2xl bg-slate-950 border border-rose-950/40 flex flex-col items-center justify-center p-6 shadow-2xl transition-all duration-300">
+                                <!-- Dynamic SVG / HTML representation goes here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation inside browse view -->
+                    <div class="flex justify-between items-center border-t border-rose-950/40 pt-4 z-10">
+                        <button onclick="navigateTerm(-1)" class="bg-slate-900 border border-rose-950/40 hover:bg-slate-800 text-white px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition-colors">
+                            <i class="fa-solid fa-arrow-right"></i>
+                            <span>المصطلح السابق</span>
+                        </button>
+                        <button onclick="speakSelectedTerm()" class="bg-slate-900 border border-rose-950/40 hover:bg-slate-800 text-slate-300 hover:text-white p-2.5 rounded-xl transition-colors" title="استمع لنطق المصطلح">
+                            <i class="fa-solid fa-volume-high text-lg"></i>
+                        </button>
+                        <button onclick="navigateTerm(1)" class="bg-slate-900 border border-rose-950/40 hover:bg-slate-800 text-white px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition-colors">
+                            <span>المصطلح التالي</span>
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUIZ TAB -->
+        <section id="view-quiz" class="hidden max-w-4xl mx-auto flex flex-col gap-6">
+            <!-- Quiz Configuration & Settings Card -->
+            <div class="glossy-card rounded-2xl p-4 flex flex-wrap justify-between items-center gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="bg-red-600/20 p-2.5 rounded-xl border border-red-500/30">
+                        <i class="fa-solid fa-shield-halved text-red-400 text-lg animate-pulse"></i>
+                    </div>
+                    <div class="text-right">
+                        <h3 class="font-bold text-slate-200 text-sm">الاختبار الذكي المنهجي (الفلاش كاردز)</h3>
+                        <p class="text-xs text-slate-400">نظام ذكي يعرض التعريف عشوائياً بدون إظهار الإجابة حتى تضغط على "أظهر"</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-3">
+                    <!-- Category Selector for quiz -->
+                    <select id="quizCategorySelector" onchange="resetQuiz()" class="bg-slate-950 border border-rose-950/40 rounded-xl py-2 px-3 text-xs text-slate-300 focus:outline-none focus:border-red-500">
+                        <option value="all">جميع الفئات (36 مصطلحاً)</option>
+                        <option value="systems">الأنظمة الأساسية</option>
+                        <option value="strategies">الاستراتيجيات والسياسات</option>
+                        <option value="rapprochement">التقارب وتخفيف الصراع</option>
+                        <option value="organizations">المنظمات والمؤسسات</option>
+                    </select>
+
+                    <!-- Toggle quiz direction -->
+                    <select id="quizDirectionSelector" onchange="resetQuiz()" class="bg-slate-950 border border-rose-950/40 rounded-xl py-2 px-3 text-xs text-slate-300 focus:outline-none focus:border-red-500">
+                        <option value="def_to_term">عرض التعريف ➔ وتخمين المصطلح</option>
+                        <option value="term_to_def">عرض المصطلح ➔ وتخمين التعريف</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Quiz Flashcard Card -->
+            <div class="relative min-h-[460px] flex flex-col justify-between glossy-card rounded-3xl p-6 sm:p-8 overflow-hidden">
+                <!-- Background ambient lights -->
+                <div class="absolute -right-32 -bottom-32 w-96 h-96 bg-red-600/5 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -left-32 -top-32 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl pointer-events-none"></div>
+
+                <!-- Upper info bar -->
+                <div class="flex justify-between items-center z-10 border-b border-rose-950/40 pb-4">
+                    <span id="quiz-badge" class="bg-red-950/50 text-red-400 border border-red-900/60 text-xs px-3 py-1 rounded-xl font-bold">بطاقة عشوائية</span>
+                    <div class="flex items-center gap-3">
+                        <span id="quiz-progress-text" class="text-xs text-slate-400 font-medium">عدد البطاقات المتبقية: 36</span>
+                        <button onclick="resetQuizStats()" class="text-xs text-rose-400 hover:text-rose-300 transition-colors" title="تصفير نتائج الاختبار">
+                            <i class="fa-solid fa-rotate"></i> إعادة تهيئة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Main Quiz Card body (Interactive Reveal Logic) -->
+                <div class="flex-grow flex flex-col items-center justify-center my-6 py-6 z-10 text-center px-4">
+                    <!-- Prompt Icon / Graphic -->
+                    <div class="w-16 h-16 bg-gradient-to-br from-red-500/10 to-amber-500/10 border border-red-500/20 rounded-2xl flex items-center justify-center mb-6 shadow-inner">
+                        <i id="quiz-card-icon" class="fa-solid fa-eye-slash text-2xl text-red-400 animate-bounce"></i>
+                    </div>
+
+                    <!-- Target prompt text -->
+                    <span id="quiz-instruction-label" class="text-xs text-amber-400 font-extrabold uppercase tracking-widest mb-2 block">اقرأ الشرح التالي وخمّن المصطلح الصحيح:</span>
+                    <div id="quiz-question-box" class="max-w-2xl text-xl sm:text-2xl font-bold leading-relaxed text-slate-100 min-h-[100px] flex items-center justify-center">
+                        جاري تهيئة الاستخبارات الاستراتيجية...
+                    </div>
+
+                    <!-- Revealed Answer box (Initially Hidden) -->
+                    <div id="quiz-answer-box" class="hidden mt-6 w-full max-w-2xl bg-red-950/20 border border-red-900/40 rounded-2xl p-5 transform transition-all duration-500 scale-95 opacity-0">
+                        <span class="text-xs text-rose-400 font-extrabold block mb-1">الإجابة الصحيحة المسجلة:</span>
+                        <h3 id="quiz-answer-term" class="text-2xl font-black text-white mb-2">الثنائية القطبية</h3>
+                        <p id="quiz-answer-def" class="text-sm text-slate-300 leading-relaxed max-w-xl mx-auto">
+                            نظام دولي ظهر بعد الحرب العالمية الثانية يتميز بوجود قطبين متصارعين على الزعامة...
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Interactive Reveal Controls -->
+                <div class="z-10 flex flex-col sm:flex-row gap-3 justify-center items-center border-t border-rose-950/40 pt-4">
+                    <!-- Show Answer Trigger -->
+                    <button id="quiz-reveal-btn" onclick="revealQuizAnswer()" class="w-full sm:w-auto bg-gradient-to-r from-red-500 to-rose-600 hover:from-red-600 hover:to-rose-700 text-white font-extrabold px-8 py-3 rounded-xl shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">
+                        <i class="fa-solid fa-eye mr-1"></i> أظهر الإجابة والتعريف
+                    </button>
+
+                    <!-- Score/Evaluation triggers (Visible only after reveal) -->
+                    <div id="quiz-feedback-controls" class="hidden flex-wrap justify-center items-center gap-3 w-full sm:w-auto">
+                        <button onclick="submitQuizFeedback(true)" class="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-slate-950 font-extrabold px-6 py-3 rounded-xl flex items-center gap-2 shadow-md transition-all duration-300">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>عرفتها بنجاح! (+10 نقاط)</span>
+                        </button>
+                        <button onclick="submitQuizFeedback(false)" class="bg-slate-900 hover:bg-slate-800 text-rose-400 border border-rose-950 px-6 py-3 rounded-xl flex items-center gap-2 font-bold transition-all duration-300">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                            <span>أحتاج لإعادة مراجعتها</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STATS & PROGRESS TAB -->
+        <section id="view-stats" class="hidden flex flex-col gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <!-- Stat Card 1 -->
+                <div class="glossy-card p-5 rounded-2xl flex items-center gap-4">
+                    <div class="p-3 bg-red-500/10 border border-red-500/20 text-red-400 rounded-xl text-xl">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <div class="text-right">
+                        <h4 class="text-xs text-slate-400">إجمالي النقاط المكتسبة</h4>
+                        <p id="stats-total-score" class="text-2xl font-mono font-black text-white">0</p>
+                    </div>
+                </div>
+                <!-- Stat Card 2 -->
+                <div class="glossy-card p-5 rounded-2xl flex items-center gap-4">
+                    <div class="p-3 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-xl text-xl">
+                        <i class="fa-solid fa-book-bookmark"></i>
+                    </div>
+                    <div class="text-right">
+                        <h4 class="text-xs text-slate-400">مصطلحات تمت إجابتها</h4>
+                        <p id="stats-completed-count" class="text-2xl font-mono font-black text-white">0</p>
+                    </div>
+                </div>
+                <!-- Stat Card 3 -->
+                <div class="glossy-card p-5 rounded-2xl flex items-center gap-4">
+                    <div class="p-3 bg-rose-500/10 border border-rose-500/20 text-rose-400 rounded-xl text-xl">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <div class="text-right">
+                        <h4 class="text-xs text-slate-400">المصطلحات المفضلة</h4>
+                        <p id="stats-favorites-count" class="text-2xl font-mono font-black text-white">0</p>
+                    </div>
+                </div>
+                <!-- Stat Card 4 -->
+                <div class="glossy-card p-5 rounded-2xl flex items-center gap-4">
+                    <div class="p-3 bg-blue-500/10 border border-blue-500/20 text-blue-400 rounded-xl text-xl">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <div class="text-right">
+                        <h4 class="text-xs text-slate-400">دقة الإجابات في الاختبار</h4>
+                        <p id="stats-accuracy" class="text-2xl font-mono font-black text-white">0%</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed breakdown per Unit -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Stats Overview -->
+                <div class="glossy-card rounded-2xl p-6 text-right">
+                    <h3 class="font-bold text-lg text-slate-200 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-chart-bar text-red-500"></i> نسبة حفظ المصطلحات بحسب الأبواب التكتيكية
+                    </h3>
+                    <div class="flex flex-col gap-4">
+                        <!-- Group 1 -->
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-slate-300 font-bold">1. الأنظمة والمفاهيم الأساسية (8 مصطلحات)</span>
+                                <span id="progress-g1-label" class="text-red-400">0%</span>
+                            </div>
+                            <div class="w-full bg-slate-900 rounded-full h-2">
+                                <div id="progress-g1-bar" class="bg-red-500 h-2 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <!-- Group 2 -->
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-slate-300 font-bold">2. الاستراتيجيات والسياسات المتبعة (10 مصطلحات)</span>
+                                <span id="progress-g2-label" class="text-amber-400">0%</span>
+                            </div>
+                            <div class="w-full bg-slate-900 rounded-full h-2">
+                                <div id="progress-g2-bar" class="bg-amber-500 h-2 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <!-- Group 3 -->
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-slate-300 font-bold">3. التقارب وتخفيف الصراع (5 مصطلحات)</span>
+                                <span id="progress-g3-label" class="text-rose-400">0%</span>
+                            </div>
+                            <div class="w-full bg-slate-900 rounded-full h-2">
+                                <div id="progress-g3-bar" class="bg-rose-500 h-2 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <!-- Group 4 -->
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-slate-300 font-bold">4. المنظمات والمؤسسات الدولية (13 مصطلحاً)</span>
+                                <span id="progress-g4-label" class="text-blue-400">0%</span>
+                            </div>
+                            <div class="w-full bg-slate-900 rounded-full h-2">
+                                <div id="progress-g4-bar" class="bg-blue-500 h-2 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Learning Achievements/Badges system -->
+                <div class="glossy-card rounded-2xl p-6 flex flex-col justify-between text-right">
+                    <div>
+                        <h3 class="font-bold text-lg text-slate-200 mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-trophy text-amber-500"></i> الأوسمة والميداليات العسكرية المكتسبة
+                        </h3>
+                        <div class="grid grid-cols-3 gap-3">
+                            <div id="badge-first" class="opacity-40 bg-slate-950 p-3 rounded-xl border border-rose-950/40 text-center flex flex-col items-center gap-1">
+                                <i class="fa-solid fa-medal text-amber-600 text-2xl"></i>
+                                <span class="text-[10px] font-bold text-slate-300">مبتدئ ميداني</span>
+                            </div>
+                            <div id="badge-half" class="opacity-40 bg-slate-950 p-3 rounded-xl border border-rose-950/40 text-center flex flex-col items-center gap-1">
+                                <i class="fa-solid fa-shield-halved text-rose-500 text-2xl"></i>
+                                <span class="text-[10px] font-bold text-slate-300">ضابط تكتيكي</span>
+                            </div>
+                            <div id="badge-master" class="opacity-40 bg-slate-950 p-3 rounded-xl border border-rose-950/40 text-center flex flex-col items-center gap-1">
+                                <i class="fa-solid fa-star-of-life text-yellow-400 text-2xl animate-spin" style="animation-duration: 8s;"></i>
+                                <span class="text-[10px] font-bold text-slate-300">جنرال التاريخ</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-950 p-4 rounded-xl border border-rose-950/20 mt-4 text-center">
+                        <p class="text-xs text-slate-400">احرز نقاطاً إضافية في صفحة الاختبار المنهجي حتى تتمكن من إيقاظ وتفعيل ميدالياتك التاريخية الذهبية!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer credits referencing the source images verbatim -->
+    <footer class="glossy-card border-t border-rose-950/40 py-4 mt-6">
+        <div class="max-w-7xl mx-auto px-4 text-center flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-slate-500">
+            <div>
+                تم إعداد وتطوير النظام بمطابقة كاملة للبرنامج الوزاري المحدث للبكالوريا.
+            </div>
+            <div>
+                &copy; 2026 بوابة التاريخ التفاعلية - تمنياتنا لطلبة البكالوريا بالنجاح والتفوق.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sound elements generated natively with Web Audio API -->
+    <script>
+        const historyTerms = [
+            // CATEGORY 1: الأنظمة والمفاهيم الأساسية
+            { id: 1, category: "systems", name: "الثنائية القطبية", definition: "نظام دولي ظهر بعد الحرب العالمية الثانية يتميز بوجود قطبين متصارعين على الزعامة هما الولايات المتحدة والاتحاد السوفياتي ظهر بعد مؤتمر يالطا ب 4-11 فيفري 1945.", visual: "bipolar" },
+            { id: 2, category: "systems", name: "الحرب الباردة", definition: "صراع إيديولوجي امتد من 1945 إلى 1989 بين المعسكر الشرقي والغربي، استُعملت فيه جميع الوسائل ما عدا المواجهة العسكرية المباشرة.", visual: "coldwar" },
+            { id: 3, category: "systems", name: "الصراع الإيديولوجي", definition: "هو صراع عقائدي، فكري واجتماعي ظهر بعد الحرب العالمية الثانية بين المعسكر الشرقي الشيوعي (بقيادة الاتحاد السوفيتي) والمعسكر الغربي الرأسمالي (بقيادة الميريكان)، استخدمت فيه كل الوسائل باستثناء المواجهة العسكرية المباشرة.", visual: "ideology" },
+            { id: 4, category: "systems", name: "الرأسمالية", definition: "نظام اقتصادي يقوم على الملكية الفردية لوسائل الإنتاج و حرية السوق تبنته الو.م.أ و دول أوروبا الغربية.", visual: "capitalism" },
+            { id: 5, category: "systems", name: "الاشتراكية", definition: "نظام اقتصادي اجتماعي يقوم على الملكية الجماعية لوسائل الإنتاج و تدخل الدولة في الاقتصاد ظهر بعد نجاح الثورة الشيوعية ب 1917 بالاتحاد السوفياتي. تبناه المعسكر الشرقي بزعامة الاتحاد السوفيتي.", visual: "socialism" },
+            { id: 6, category: "systems", name: "الليبرالية", definition: "هو كلمة مشتقة من الكلمة الانجلزية Libertyو تعني الحرية المطلقة للفرد وهي مذهب سياسي يقوم على التعددية الحزبية و حرية اعتناق الأفكار والمعتقدات وهو قمة الرأسمالية. تبناه المعسكر الغربي بزعامة الو.م.أ.", visual: "liberalism" },
+            { id: 7, category: "systems", name: "الشيوعية", definition: "مذهب سياسي واجتماعي يقوم على فكرة الحزب الواحد والمساواة و محاربة اللبرالية و الرأسمالية و هو قمة الاشتراكية. تبناه المعسكر الشرقي بزعامة الاتحاد السوفيتي.", visual: "communism" },
+            { id: 8, category: "systems", name: "الإمبريالية", definition: "سياسة هيمنة اقتصادية وعسكرية تمارسها الدول القوية (الرأسمالية) لفرض قوتها وسيطرتها على الدول الضعيفة.", visual: "imperialism" },
+
+            // CATEGORY 2: مصطلحات الاستراتيجيات والسياسات
+            { id: 9, category: "strategies", name: "سياسة التكتل", definition: "سياسة تعني التحالف والتعاون بين مجموعة من الدول ذات المصالح المشتركة، في المجالات السياسية، الاقتصادية، أو العسكرية. ظهرت بقوة خلال الحرب الباردة مثل التكتلات الاقتصادية.", visual: "coalition" },
+            { id: 10, category: "strategies", name: "سياسة الأحلاف العسكرية", definition: "سياسة تقوم على تأسيس تكتلات عسكرية تجمع عدة دول لمواجهة المعسكر الآخر والدفاع المشترك. مثل حلف الناتو و حلف وارسو.", visual: "alliances" },
+            { id: 11, category: "strategies", name: "سياسة المشاريع", definition: "سياسة اقتصادية تعتمد على تقديم مساعدات مالية للعديد من الدول (مثل مشروع مارشال) بهدف استقطابها للمعسكر.", visual: "projects" },
+            { id: 12, category: "strategies", name: "سياسة الاستقطاب", definition: "سعي كل طرف لجذب وجمع أكبر عدد من الدول لصفه باستخدام شتى الوسائل الاغرائية كالمساعدات المالية او الاقتصادية او الضغوط السياسة والعسكرية خلال الحرب الباردة.", visual: "polarization" },
+            { id: 13, category: "strategies", name: "سياسة الإحتواء", definition: "هي سياسة تبنتها الولايات المتحدة الامريكية. تقوم على تقديم المساعدات و القروض الى الدول المجاورة للاتحاد السوفياتي بهدف إغرائها و منع الزحف الشيوعي و انتشار الاشتراكية.", visual: "containment" },
+            { id: 14, category: "strategies", name: "سياسة التطويق", definition: "هي سياسة تبنتها الولايات المتحدة الامريكية. تقوم على انشاء الاحلاف و القواعد العسكرية حول الاتحاد السوفياتي بهدف محاصرته و تضييق الخناق عليه و عزله جغرافيا.", visual: "encirclement" },
+            { id: 15, category: "strategies", name: "سياسة ملء الفراغ", definition: "سياسة أمريكية تهدف لتعويض الاستعمار التقليدي (فرنسا وبريطانيا) والحلول محله في مستعمراته السابقة بعد خروجه.", visual: "vacuum" },
+            { id: 16, category: "strategies", name: "الدعاية المغرضة", definition: "أحد وسائل الحرب الباردة. استخدام وسائل الإعلام لتشويه صورة الطرف الآخر وتحسين صورة المعسكر الخاص.", visual: "propaganda" },
+            { id: 17, category: "strategies", name: "سباق التسلح", definition: "التنافس الحاد بين القوتين ظهر خلال الحرب الباردة بين الولايات المتحدة والاتحاد السوفياتي، لامتلاك أكبر ترسانة عسكرية، خاصة الأسلحة النووية.", visual: "armsrace" },
+            { id: 18, category: "strategies", name: "الستار الحديدي", definition: "مصطلح أطلقه رئيس وزراء بريطانيا وينستون تشرشل لوصف الهيمنة والعزلة التي فرضها الاتحاد السوفياتي على دول أوروبا الشرقية.", visual: "ironcurtain" },
+
+            // CATEGORY 3: مصطلحات التقارب وتخفيف الصراع
+            { id: 19, category: "rapprochement", name: "التعايش السلمي", definition: "سياسة جاء بها الزعيم السوفياتي خروتشوف عام 1956 (بعد وفاة ستالين)، تدعو لتقريب وجهات النظر وتقبل تعدد المذاهب والعيش بسلام لتجنب حرب نووية.", visual: "coexistence" },
+            { id: 20, category: "rapprochement", name: "الانفراج الدولي", definition: "سياسة تقارب وتعاون وتبادل وتذويب للجليد اتبعها المعسكران، خاصة بعد أزمة الصواريخ في كوبا عام 1962.", visual: "detente" },
+            { id: 21, category: "rapprochement", name: "توازن الرعب النووي", definition: "امتلاك كلا الطرفين لأسلحة دمار شامل بين المعسكرين خلال الحرب الباردة، مما جعل انتصار طرف على آخر مستحيلاً، ومنع اندلاع حرب عالمية ثالثة خوفاً من الدمار الشامل.", visual: "nuke_balance" },
+            { id: 22, category: "rapprochement", name: "الترويكا", definition: "كلمة روسية تعني 'القيادة الثلاثية'، وتطلق على (خروتشوف، بولغانين، مالينكوف) الذين حكموا الاتحاد السوفياتي بعد وفاة ستالين وأظهروا رغبة في السلم.", visual: "troika" },
+            { id: 23, category: "rapprochement", name: "اتفاقية سالت (1 و 2)", definition: "معاهدات للحد من انتشار الأسلحة النووية الاستراتيجية وُقّعت بين أمريكا والاتحاد السوفياتي عامي 1972 و 1979 .", visual: "salt" },
+
+            // CATEGORY 4: مصطلحات المنظمات والمؤسسات الدولية
+            { id: 24, category: "organizations", name: "هيئة الأمم المتحدة", definition: "منظمة دولية تأسست في 24 أكتوبر 1945 مقرها نيويورك، تهدف لنشر السلم والأمن في العالم وحل القضايا بالطرق السلمية.", visual: "un" },
+            { id: 25, category: "organizations", name: "مجلس الأمن", definition: "أهم أجهزة هيئة الأمم، يتكون من 15 دولة (5 دائمة العضوية و10 تتغير كل سنتين).", visual: "security_council" },
+            { id: 26, category: "organizations", name: "حق الفيتو (حق النقض)", definition: "حق امتياز تتمتع به الدول الخمس الدائمة في مجلس الأمن، يسمح لها بمعارضة وإلغاء أي قرار لا يخدم مصالحها.", visual: "veto" },
+            { id: 27, category: "organizations", name: "المنظمات الحكومية", definition: "هيئات تؤسس من طرف الدول والحكومات الرسمية (مثل هيئة الأمم وحركة عدم الانحياز).", visual: "gov_org" },
+            { id: 28, category: "organizations", name: "المنظمات غير الحكومية", definition: "هيئات ونوادي وجمعيات تؤسس من طرف أفراد المجتمع المدني. وتنشط في مجالات إنسانية، بيئية، أو حقوقية دون تحقيق ربح مادي.", visual: "ngo" },
+            { id: 29, category: "organizations", name: "مؤتمر باندونغ", definition: "مؤتمر عُقد عام 1955 بإندونيسيا، نتج عنه إنشاء 'الحركة الأفرو-آسيوية' للدفاع عن حقوق شعوب القارتين.", visual: "bandung" },
+            { id: 30, category: "organizations", name: "حركة عدم الانحياز", definition: "منظمة سياسية تأسست رسميا عام بمؤتمر بلغراد بتاريخ 1-6 سبتمبر 1961، و تعود فكرة انشائها الى مؤتمر باندونغ 1955 تضم دول العالم الثالث التي تبنت سياسة الحياد الإيجابي.", visual: "nam" },
+            { id: 31, category: "organizations", name: "الحياد الإيجابي", definition: "مبدأ يعني عدم الميل لأي من المعسكرين المتصارعين، والمطالبة بحل الأزمات دولياً بطرق سلمية.", visual: "neutrality" },
+            { id: 32, category: "organizations", name: "الأزمات الدولية", definition: "فترات زمنية اشتد فيها التوتر بين الكتلتين كادت أن تؤدي لصدام مباشر (مثل أزمة برلين وكوبا).", visual: "crises" },
+            { id: 33, category: "organizations", name: "الأحادية القطبية", definition: "نظام دولي ظهر بعد 1989 تقوده وتهيمن عليه الولايات المتحدة بمفردها بعد سقوط الاتحاد السوفياتي.", visual: "unipolar" },
+            { id: 34, category: "organizations", name: "الشرعية الدولية", definition: "غطاء قانوني تستخدمه الولايات المتحدة وتضفيه على أعمالها وتدخلاتها (عبر هيئة الأمم المتحدة) لتبرير قراراتها وتمرير مصالحها في العالم.", visual: "legitimacy" },
+            { id: 35, category: "organizations", name: "الشركات متعددة الجنسيات", definition: "أو الشركات العابرة للقارات، وهي شركات اقتصاديه كبرى (مثل كوكاكولا) تنتمي لدول قوية كالولايات المتحدة، وتستخدمها كأداة للسيطرة على الاقتصاد العالمي وفرض هيمنتها على دول العالم الثالث.", visual: "multinationals" },
+            { id: 36, category: "organizations", name: "الحركة الأفرو-آسيوية", definition: "هيئة سياسية تأسست عام 1955 إثر مؤتمر باندونغ، ضمت 28 دولة أفريقية وآسيوية، وكان هدفها الدفاع عن حقوق شعوب القارتين المقهورة، وهي التي مهدت لظهور حركه عدم الانحياز .", visual: "afro_asian" }
+        ];
+
+        // State variables
+        let selectedTermId = 1;
+        let filteredTerms = [...historyTerms];
+        let quizTerms = [...historyTerms];
+        let currentQuizIndex = 0;
+        let isQuizAnswerRevealed = false;
+        
+        // Progress statistics from localStorage
+        let stats = JSON.parse(localStorage.getItem('histColdWarStats')) || {
+            score: 0,
+            reviewedCount: 0,
+            accuracy: 0,
+            correctCount: 0,
+            totalQuizAttempts: 0,
+            favorites: [],
+            reviewedTermsList: [] // list of mastered term IDs
+        };
+
+        // Synthesizer logic for auditory feedback
+        function playFeedbackSound(type) {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                if (type === 'correct') {
+                    // Military alert / sweet secure ping melody
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
+                    gain.gain.setValueAtTime(0.12, ctx.currentTime);
+                    osc.start();
+                    osc.frequency.setValueAtTime(698.46, ctx.currentTime + 0.1); // F5
+                    osc.frequency.setValueAtTime(880.00, ctx.currentTime + 0.2); // A5
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+                    osc.stop(ctx.currentTime + 0.55);
+                } else if (type === 'incorrect') {
+                    // Alert sonar error buzz
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(120, ctx.currentTime);
+                    gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                    osc.start();
+                    osc.frequency.setValueAtTime(90, ctx.currentTime + 0.15);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
+                    osc.stop(ctx.currentTime + 0.45);
+                } else {
+                    // Click mechanical feedback
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(600, ctx.currentTime);
+                    gain.gain.setValueAtTime(0.04, ctx.currentTime);
+                    osc.start();
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
+                    osc.stop(ctx.currentTime + 0.1);
+                }
+            } catch (e) {
+                console.log("Web Audio Context initialized after interaction.");
+            }
+        }
+
+        // TEXT TO SPEECH (Arabic dialect configuration)
+        function speakSelectedTerm() {
+            const currentTerm = historyTerms.find(t => t.id === selectedTermId);
+            if (!currentTerm) return;
+            
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(currentTerm.name);
+                utterance.lang = 'ar';
+                utterance.rate = 0.85;
+                
+                const voices = window.speechSynthesis.getVoices();
+                const arabicVoice = voices.find(voice => voice.lang.startsWith('ar'));
+                if (arabicVoice) utterance.voice = arabicVoice;
+                
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("نظام تشغيل الصوت غير مدعوم في هذا المتصفح.");
+            }
+        }
+
+        // Dynamic Infographic Illustrator (Cold War theme)
+        function getCategoryIllustration(category) {
+            const styles = {
+                systems: { color: '#ef4444', bg: '#7f1d1d', icon: 'fa-cubes' },
+                strategies: { color: '#f59e0b', bg: '#78350f', icon: 'fa-bullseye' },
+                rapprochement: { color: '#ec4899', bg: '#831843', icon: 'fa-handshake-angle' },
+                organizations: { color: '#3b82f6', bg: '#172554', icon: 'fa-globe' }
+            };
+
+            const cfg = styles[category] || styles.systems;
+
+            return `
+                <div class="flex flex-col items-center justify-center text-center gap-3 w-full h-full relative">
+                    <!-- Retro military radar/target dynamic vector outline -->
+                    <div class="absolute inset-0 rounded-2xl opacity-10 pointer-events-none border border-dashed border-red-500/30 animate-spin" style="animation-duration: 20s;"></div>
+                    <div class="absolute inset-4 rounded-full opacity-10 pointer-events-none border border-rose-500/20 animate-ping"></div>
+
+                    <div class="relative w-24 h-24 rounded-full flex items-center justify-center border-4 border-slate-900 shadow-2xl" style="background: radial-gradient(circle, ${cfg.color}18 0%, ${cfg.color}02 100%)">
+                        <i class="fa-solid ${cfg.icon} text-4xl" style="color: ${cfg.color}"></i>
+                    </div>
+                    <div class="flex flex-col gap-1 mt-2 z-10">
+                        <span class="text-xs font-black uppercase tracking-wider text-slate-500">الفئة التكتيكية</span>
+                        <span class="text-xs font-bold px-3 py-1 rounded-full border border-rose-950/40 capitalize" style="color: ${cfg.color}; background-color: ${cfg.bg}20">
+                            ${category === 'systems' ? 'الأنظمة والمفاهيم' : 
+                              category === 'strategies' ? 'الاستراتيجيات والسياسات' :
+                              category === 'rapprochement' ? 'التقارب وتخفيف الصراع' : 'المنظمات والمؤسسات'}
+                        </span>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Tab Switch logic
+        function switchTab(tabId) {
+            playFeedbackSound('click');
+            
+            document.getElementById('view-browse').classList.add('hidden');
+            document.getElementById('view-quiz').classList.add('hidden');
+            document.getElementById('view-stats').classList.add('hidden');
+
+            const tabs = ['browse', 'quiz', 'stats'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`tab-${t}`);
+                btn.className = "px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 text-slate-400 hover:text-white hover:bg-slate-900 transition-all duration-300";
+            });
+
+            document.getElementById(`view-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('active-tab');
+            document.getElementById(`tab-${tabId}`).classList.remove('text-slate-400', 'hover:text-white', 'hover:bg-slate-900');
+
+            if (tabId === 'quiz') {
+                resetQuiz();
+            } else if (tabId === 'stats') {
+                renderStatistics();
+            }
+        }
+
+        // Render Terms List Sidebar
+        function renderTermsList() {
+            const listContainer = document.getElementById('termsList');
+            listContainer.innerHTML = '';
+
+            filteredTerms.forEach(term => {
+                const isSelected = term.id === selectedTermId;
+                const isFavorite = stats.favorites.includes(term.id);
+                const isMastered = stats.reviewedTermsList.includes(term.id);
+                
+                const item = document.createElement('button');
+                item.onclick = () => selectTerm(term.id);
+                item.className = `w-full text-right p-3 rounded-xl border border-rose-950/20 flex justify-between items-center transition-all duration-200 hover:bg-rose-950/10 hover:-translate-x-1 ${isSelected ? 'term-item-active text-white' : 'text-slate-400'}`;
+                
+                let iconsHtml = '<div class="flex items-center gap-1.5">';
+                if (isFavorite) {
+                    iconsHtml += '<i class="fa-solid fa-heart text-red-500 text-xs"></i>';
+                }
+                if (isMastered) {
+                    iconsHtml += '<i class="fa-solid fa-circle-check text-emerald-500 text-xs"></i>';
+                }
+                iconsHtml += `<span class="mono-font text-[10px] bg-slate-950 border border-rose-950/40 px-2 py-0.5 rounded-full text-slate-500 font-bold">#${term.id < 10 ? '0' + term.id : term.id}</span></div>`;
+
+                item.innerHTML = `
+                    <div class="flex flex-col gap-1 items-start text-right">
+                        <span class="text-sm font-bold ${isSelected ? 'text-amber-400 font-extrabold' : 'text-slate-200'}">${term.name}</span>
+                        <span class="text-[10px] text-slate-500">
+                            ${term.category === 'systems' ? 'مفاهيم أساسية' : 
+                              term.category === 'strategies' ? 'استراتيجيات' :
+                              term.category === 'rapprochement' ? 'تقارب دولي' : 'منظمات دولية'}
+                        </span>
+                    </div>
+                    ${iconsHtml}
+                `;
+                listContainer.appendChild(item);
+            });
+
+            document.getElementById('termCountBadge').innerText = `${filteredTerms.length} مصطلحاً`;
+        }
+
+        function filterTerms() {
+            const s = document.getElementById('searchTerm').value.toLowerCase();
+            const cat = document.getElementById('categoryFilter').value;
+
+            filteredTerms = historyTerms.filter(term => {
+                const matchSearch = term.name.toLowerCase().includes(s) || term.definition.toLowerCase().includes(s);
+                const matchCategory = cat === 'all' || term.category === cat;
+                return matchSearch && matchCategory;
+            });
+
+            renderTermsList();
+
+            if (filteredTerms.length > 0 && !filteredTerms.some(t => t.id === selectedTermId)) {
+                selectTerm(filteredTerms[0].id);
+            }
+        }
+
+        function selectTerm(id) {
+            selectedTermId = id;
+            const term = historyTerms.find(t => t.id === id);
+            if (!term) return;
+
+            // Render detailed viewer
+            document.getElementById('view-term-title').innerText = term.name;
+            document.getElementById('view-term-definition').innerText = term.definition;
+            document.getElementById('view-id-badge').innerText = `TERM: ${term.id < 10 ? '0' + term.id : term.id}`;
+            
+            const catNames = {
+                systems: "1. الأنظمة والمفاهيم الأساسية",
+                strategies: "2. الاستراتيجيات والسياسات المتبعة",
+                rapprochement: "3. التقارب وتخفيف الصراع (التعايش السلمي)",
+                organizations: "4. المنظمات والمؤسسات الدولية"
+            };
+            document.getElementById('view-unit-badge').innerText = `${catNames[term.category]}`;
+
+            // Check favorite status
+            const favBtn = document.getElementById('favorite-btn');
+            if (stats.favorites.includes(term.id)) {
+                favBtn.className = "bg-red-950/60 hover:bg-red-900/50 text-red-500 border border-red-900/60 w-9 h-9 rounded-xl flex items-center justify-center transition-colors";
+            } else {
+                favBtn.className = "bg-slate-900 border border-rose-950/40 hover:bg-slate-800 text-slate-400 hover:text-red-500 w-9 h-9 rounded-xl flex items-center justify-center transition-colors";
+            }
+
+            // Vector container logic
+            document.getElementById('vector-container').innerHTML = getCategoryIllustration(term.category);
+
+            renderTermsList();
+        }
+
+        function toggleFavorite() {
+            playFeedbackSound('click');
+            const index = stats.favorites.indexOf(selectedTermId);
+            if (index > -1) {
+                stats.favorites.splice(index, 1);
+            } else {
+                stats.favorites.push(selectedTermId);
+            }
+            saveStats();
+            selectTerm(selectedTermId);
+        }
+
+        function pickRandomTerm() {
+            playFeedbackSound('correct');
+            if (filteredTerms.length === 0) return;
+            const rand = filteredTerms[Math.floor(Math.random() * filteredTerms.length)];
+            selectTerm(rand.id);
+        }
+
+        function navigateTerm(dir) {
+            playFeedbackSound('click');
+            const currentIndex = filteredTerms.findIndex(t => t.id === selectedTermId);
+            if (currentIndex === -1) return;
+
+            let nextIndex = currentIndex + dir;
+            if (nextIndex >= filteredTerms.length) nextIndex = 0;
+            if (nextIndex < 0) nextIndex = filteredTerms.length - 1;
+
+            selectTerm(filteredTerms[nextIndex].id);
+        }
+
+        // Quiz System implementation
+        function resetQuiz() {
+            const cat = document.getElementById('quizCategorySelector').value;
+            
+            quizTerms = historyTerms.filter(term => {
+                return cat === 'all' || term.category === cat;
+            });
+
+            // Fisher-Yates Shuffle
+            for (let i = quizTerms.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [quizTerms[i], quizTerms[j]] = [quizTerms[j], quizTerms[i]];
+            }
+
+            currentQuizIndex = 0;
+            isQuizAnswerRevealed = false;
+            loadQuizQuestion();
+        }
+
+        function loadQuizQuestion() {
+            if (quizTerms.length === 0) {
+                document.getElementById('quiz-question-box').innerHTML = "<span class='text-rose-400 text-lg'>لا توجد مصطلحات كافية في التصفية المختارة!</span>";
+                return;
+            }
+
+            const term = quizTerms[currentQuizIndex];
+            const direction = document.getElementById('quizDirectionSelector').value;
+
+            document.getElementById('quiz-progress-text').innerText = `عدد البطاقات المتبقية: ${quizTerms.length - currentQuizIndex}`;
+            document.getElementById('quiz-badge').innerText = `البطاقة ${currentQuizIndex + 1} من ${quizTerms.length}`;
+
+            document.getElementById('quiz-reveal-btn').classList.remove('hidden');
+            document.getElementById('quiz-feedback-controls').classList.add('hidden');
+            
+            const ansBox = document.getElementById('quiz-answer-box');
+            ansBox.classList.add('hidden', 'scale-95', 'opacity-0');
+
+            if (direction === 'def_to_term') {
+                document.getElementById('quiz-instruction-label').innerText = "اقرأ التعريف والمفهوم وخمّن المصطلح الصحيح له:";
+                document.getElementById('quiz-question-box').innerText = term.definition;
+                document.getElementById('quiz-answer-term').innerText = term.name;
+                document.getElementById('quiz-answer-def').innerText = "فئة المصطلح: " + (term.category === 'systems' ? 'مفاهيم أساسية' : term.category === 'strategies' ? 'استراتيجيات وسياسات' : term.category === 'rapprochement' ? 'تقارب وتخفيف الصراع' : 'منظمات ومؤسسات');
+                document.getElementById('quiz-card-icon').className = "fa-solid fa-file-invoice text-2xl text-red-400 animate-bounce";
+            } else {
+                document.getElementById('quiz-instruction-label').innerText = "خمّن شروح وتعريف هذا المصطلح في عقلك:";
+                document.getElementById('quiz-question-box').innerHTML = `<span class="text-3xl font-black text-amber-400 underline decoration-red-500 decoration-wavy decoration-2">${term.name}</span>`;
+                document.getElementById('quiz-answer-term').innerText = term.name;
+                document.getElementById('quiz-answer-def').innerText = term.definition;
+                document.getElementById('quiz-card-icon').className = "fa-solid fa-graduation-cap text-2xl text-amber-400 animate-bounce";
+            }
+
+            isQuizAnswerRevealed = false;
+        }
+
+        function revealQuizAnswer() {
+            playFeedbackSound('click');
+            isQuizAnswerRevealed = true;
+            
+            document.getElementById('quiz-reveal-btn').classList.add('hidden');
+            document.getElementById('quiz-feedback-controls').classList.remove('hidden');
+
+            const ansBox = document.getElementById('quiz-answer-box');
+            ansBox.classList.remove('hidden');
+            
+            setTimeout(() => {
+                ansBox.classList.remove('scale-95', 'opacity-0');
+                ansBox.classList.add('scale-100', 'opacity-100');
+            }, 50);
+        }
+
+        function submitQuizFeedback(isCorrect) {
+            const term = quizTerms[currentQuizIndex];
+            stats.totalQuizAttempts += 1;
+
+            if (isCorrect) {
+                playFeedbackSound('correct');
+                stats.score += 10;
+                stats.correctCount += 1;
+                
+                if (!stats.reviewedTermsList.includes(term.id)) {
+                    stats.reviewedTermsList.push(term.id);
+                }
+            } else {
+                playFeedbackSound('incorrect');
+                const index = stats.reviewedTermsList.indexOf(term.id);
+                if (index > -1) {
+                    stats.reviewedTermsList.splice(index, 1);
+                }
+            }
+
+            saveStats();
+
+            currentQuizIndex += 1;
+            if (currentQuizIndex >= quizTerms.length) {
+                document.getElementById('quiz-question-box').innerHTML = `
+                    <div class="flex flex-col gap-3 items-center">
+                        <i class="fa-solid fa-flag-checkered text-red-500 text-5xl animate-bounce mb-2"></i>
+                        <h4 class="text-2xl font-black text-white">ممتاز! لقد اختبرت جميع البطاقات المستهدفة!</h4>
+                        <p class="text-sm text-slate-300">راجع لوحة التحليل والإحصائيات لقياس مستوى ثبات معلوماتك.</p>
+                    </div>
+                `;
+                document.getElementById('quiz-reveal-btn').classList.add('hidden');
+                document.getElementById('quiz-feedback-controls').classList.add('hidden');
+                document.getElementById('quiz-answer-box').classList.add('hidden');
+            } else {
+                loadQuizQuestion();
+            }
+        }
+
+        function resetQuizStats() {
+            playFeedbackSound('click');
+            stats.score = 0;
+            stats.correctCount = 0;
+            stats.totalQuizAttempts = 0;
+            stats.reviewedTermsList = [];
+            saveStats();
+            resetQuiz();
+        }
+
+        function saveStats() {
+            localStorage.setItem('histColdWarStats', JSON.stringify(stats));
+        }
+
+        function renderStatistics() {
+            document.getElementById('stats-total-score').innerText = stats.score;
+            document.getElementById('stats-completed-count').innerText = stats.reviewedTermsList.length;
+            document.getElementById('stats-favorites-count').innerText = stats.favorites.length;
+            
+            const accuracy = stats.totalQuizAttempts > 0 ? Math.round((stats.correctCount / stats.totalQuizAttempts) * 100) : 0;
+            document.getElementById('stats-accuracy').innerText = `${accuracy}%`;
+
+            // Calculate ratios per Cold War Term group
+            const g1Total = historyTerms.filter(t => t.category === "systems").length;
+            const g2Total = historyTerms.filter(t => t.category === "strategies").length;
+            const g3Total = historyTerms.filter(t => t.category === "rapprochement").length;
+            const g4Total = historyTerms.filter(t => t.category === "organizations").length;
+
+            const g1Done = historyTerms.filter(t => t.category === "systems" && stats.reviewedTermsList.includes(t.id)).length;
+            const g2Done = historyTerms.filter(t => t.category === "strategies" && stats.reviewedTermsList.includes(t.id)).length;
+            const g3Done = historyTerms.filter(t => t.category === "rapprochement" && stats.reviewedTermsList.includes(t.id)).length;
+            const g4Done = historyTerms.filter(t => t.category === "organizations" && stats.reviewedTermsList.includes(t.id)).length;
+
+            const g1Pct = g1Total > 0 ? Math.round((g1Done / g1Total) * 100) : 0;
+            const g2Pct = g2Total > 0 ? Math.round((g2Done / g2Total) * 100) : 0;
+            const g3Pct = g3Total > 0 ? Math.round((g3Done / g3Total) * 100) : 0;
+            const g4Pct = g4Total > 0 ? Math.round((g4Done / g4Total) * 100) : 0;
+
+            document.getElementById('progress-g1-label').innerText = `${g1Pct}%`;
+            document.getElementById('progress-g1-bar').style.width = `${g1Pct}%`;
+
+            document.getElementById('progress-g2-label').innerText = `${g2Pct}%`;
+            document.getElementById('progress-g2-bar').style.width = `${g2Pct}%`;
+
+            document.getElementById('progress-g3-label').innerText = `${g3Pct}%`;
+            document.getElementById('progress-g3-bar').style.width = `${g3Pct}%`;
+
+            document.getElementById('progress-g4-label').innerText = `${g4Pct}%`;
+            document.getElementById('progress-g4-bar').style.width = `${g4Pct}%`;
+
+            // Unlocking military ranks
+            const totalMastered = stats.reviewedTermsList.length;
+            if (totalMastered >= 1) {
+                document.getElementById('badge-first').classList.remove('opacity-40');
+                document.getElementById('badge-first').classList.add('border-amber-500/50', 'bg-slate-900');
+            }
+            if (totalMastered >= 18) {
+                document.getElementById('badge-half').classList.remove('opacity-40');
+                document.getElementById('badge-half').classList.add('border-rose-500/50', 'bg-slate-900');
+            }
+            if (totalMastered >= 34) {
+                document.getElementById('badge-master').classList.remove('opacity-40');
+                document.getElementById('badge-master').classList.add('border-yellow-500/50', 'bg-slate-900');
+            }
+        }
+
+        window.onload = function() {
+            renderTermsList();
+            selectTerm(1);
+        };
+    </script>
+</body>
+</html>

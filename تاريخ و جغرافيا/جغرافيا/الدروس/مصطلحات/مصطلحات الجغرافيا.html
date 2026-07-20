@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>البوابة التفاعلية لمصطلحات الجغرافيا - بكالوريا</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Tajawal & Cairo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome for beautiful educational icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Tajawal', 'Cairo', sans-serif;
+            background-color: #0f172a;
+            color: #f1f5f9;
+        }
+        /* Custom scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #60a5fa;
+        }
+        .glossy-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .active-tab {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+        .term-item-active {
+            border-right: 4px solid #f59e0b;
+            background: rgba(245, 158, 11, 0.08);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between overflow-x-hidden">
+
+    <!-- Header/Navigation Bar -->
+    <header class="glossy-card border-b border-slate-800 sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 py-3 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-tr from-blue-600 to-emerald-500 p-2.5 rounded-xl shadow-lg">
+                    <i class="fa-solid fa-earth-africa text-2xl text-white animate-pulse"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-teal-300 to-emerald-400">
+                        موسوعة الجغرافيا التفاعلية
+                    </h1>
+                    <p class="text-xs text-slate-400">السنة الثالثة ثانوي - تحضير البكالوريا الذكي</p>
+                </div>
+            </div>
+            
+            <!-- Tab Switchers -->
+            <nav class="flex gap-2 bg-slate-900/90 p-1.5 rounded-xl border border-slate-800">
+                <button onclick="switchTab('browse')" id="tab-browse" class="active-tab px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition-all duration-300">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>المصطلحات التفاعلية</span>
+                </button>
+                <button onclick="switchTab('quiz')" id="tab-quiz" class="px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 text-slate-400 hover:text-white hover:bg-slate-800 transition-all duration-300">
+                    <i class="fa-solid fa-circle-question"></i>
+                    <span>صفحة الاختبار الذكي</span>
+                </button>
+                <button onclick="switchTab('stats')" id="tab-stats" class="px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 text-slate-400 hover:text-white hover:bg-slate-800 transition-all duration-300">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>الإحصائيات والتقدم</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8 flex-grow w-full">
+        
+        <!-- BROWSE TAB -->
+        <section id="view-browse" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- Sidebar: Term Selection & Filters -->
+            <div class="lg:col-span-4 flex flex-col gap-4">
+                <!-- Search & Filters Container -->
+                <div class="glossy-card p-4 rounded-2xl flex flex-col gap-3">
+                    <h3 class="font-bold text-sm text-blue-400 flex items-center gap-2">
+                        <i class="fa-solid fa-sliders"></i> تصفية وبحث ذكي
+                    </h3>
+                    
+                    <!-- Search input -->
+                    <div class="relative">
+                        <input type="text" id="searchTerm" onkeyup="filterTerms()" placeholder="ابحث عن مصطلح أو كلمة..." class="w-full bg-slate-900/90 border border-slate-700 rounded-xl py-2.5 pr-10 pl-4 text-sm text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 placeholder-slate-500">
+                        <span class="absolute right-3.5 top-3 text-slate-500">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </span>
+                    </div>
+
+                    <!-- Unit filter -->
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-xs text-slate-400 font-medium">الوحدة التعليمية:</label>
+                        <select id="unitFilter" onchange="filterTerms()" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl py-2 px-3 text-sm text-slate-300 focus:outline-none focus:border-blue-500">
+                            <option value="all">جميع الوحدات التعليمية (80 مصطلحاً)</option>
+                            <option value="1">الوحدة 1 (الجزء الأول: 01 - 20)</option>
+                            <option value="2">الوحدة 1 (الجزء الثاني: 21 - 40)</option>
+                            <option value="3">الوحدة 2 (الأقطاب والتكتلات: 41 - 60)</option>
+                            <option value="4">الوحدة 3 (التنمية والعالم الثالث: 61 - 80)</option>
+                        </select>
+                    </div>
+
+                    <!-- Random Picker Button -->
+                    <button onclick="pickRandomTerm()" class="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-slate-950 font-extrabold py-2.5 px-4 rounded-xl text-sm flex items-center justify-center gap-2 transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg shadow-orange-950/20">
+                        <i class="fa-solid fa-shuffle"></i>
+                        <span>اختر مصطلحاً عشوائياً</span>
+                    </button>
+                </div>
+
+                <!-- Terms List Card -->
+                <div class="glossy-card rounded-2xl p-4 flex flex-col flex-grow max-h-[500px] lg:max-h-[580px]">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="font-bold text-slate-300 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-list-ul"></i> قائمة المصطلحات
+                        </h3>
+                        <span id="termCountBadge" class="bg-blue-900/50 text-blue-300 border border-blue-800 text-xs px-2.5 py-0.5 rounded-full font-bold">80 مصطلحاً</span>
+                    </div>
+                    
+                    <!-- Scrollable list of terms -->
+                    <div id="termsList" class="flex-grow overflow-y-auto pr-1 flex flex-col gap-2">
+                        <!-- Dynamic list items will be injected here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Viewer: Definition & Custom Vector Graphics -->
+            <div class="lg:col-span-8 flex flex-col">
+                <div class="glossy-card rounded-3xl p-6 md:p-8 flex-grow flex flex-col justify-between gap-6 relative overflow-hidden min-h-[450px]">
+                    <!-- Subtle background visual effects -->
+                    <div class="absolute -right-24 -top-24 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="absolute -left-24 -bottom-24 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                    <!-- Info/Action Bar inside card -->
+                    <div class="flex justify-between items-center border-b border-slate-800/80 pb-4 z-10">
+                        <span id="view-unit-badge" class="bg-slate-800 border border-slate-700 text-slate-300 text-xs px-3 py-1.5 rounded-xl font-medium">الوحدة التعليمية الأولى</span>
+                        <div class="flex items-center gap-2">
+                            <span id="view-id-badge" class="bg-blue-950 text-blue-400 border border-blue-900 text-xs px-2.5 py-1.5 rounded-xl font-bold">الرقم: 01</span>
+                            <button id="favorite-btn" onclick="toggleFavorite()" class="bg-slate-800/80 hover:bg-slate-700/80 text-slate-400 hover:text-red-500 w-9 h-9 rounded-xl flex items-center justify-center transition-colors">
+                                <i class="fa-solid fa-heart text-base"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Main Term and Definition layout -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center flex-grow z-10 my-4">
+                        <!-- Left text side -->
+                        <div class="md:col-span-7 flex flex-col gap-4">
+                            <h2 id="view-term-title" class="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-blue-200 leading-tight">
+                                الاقتصاد
+                            </h2>
+                            <div class="bg-slate-900/60 p-5 rounded-2xl border border-slate-800">
+                                <h4 class="text-xs text-blue-400 font-bold mb-2 tracking-widest uppercase">التعريف والشرح المفصل:</h4>
+                                <p id="view-term-definition" class="text-slate-300 text-base md:text-lg leading-relaxed font-normal">
+                                    المصطلح له عدة دلالات، ويمكن تعريفه على أنه ذلك النشاط البشري الذي يشمل إنتاج وتوزيع وتبادل واستهلاك السلع والخدمات.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Right vector visual side (dynamic image placeholder built dynamically) -->
+                        <div class="md:col-span-5 flex justify-center">
+                            <div id="vector-container" class="relative w-full max-w-[260px] aspect-square rounded-2xl bg-slate-900/80 border border-slate-800 flex flex-col items-center justify-center p-6 shadow-2xl transition-all duration-300">
+                                <!-- Dynamic SVG / HTML representation goes here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation inside browse view -->
+                    <div class="flex justify-between items-center border-t border-slate-800/80 pt-4 z-10">
+                        <button onclick="navigateTerm(-1)" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition-colors">
+                            <i class="fa-solid fa-arrow-right"></i>
+                            <span>المصطلح السابق</span>
+                        </button>
+                        <button onclick="speakSelectedTerm()" class="bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white p-2.5 rounded-xl transition-colors" title="استمع لنطق المصطلح">
+                            <i class="fa-solid fa-volume-high text-lg"></i>
+                        </button>
+                        <button onclick="navigateTerm(1)" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition-colors">
+                            <span>المصطلح التالي</span>
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUIZ TAB -->
+        <section id="view-quiz" class="hidden max-w-4xl mx-auto flex flex-col gap-6">
+            <!-- Quiz Configuration & Settings Card -->
+            <div class="glossy-card rounded-2xl p-4 flex flex-wrap justify-between items-center gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="bg-blue-600/20 p-2.5 rounded-xl border border-blue-500/30">
+                        <i class="fa-solid fa-graduation-cap text-blue-400 text-lg"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-200 text-sm">تخصيص الاختبار المنهجي</h3>
+                        <p class="text-xs text-slate-400">تدريب قائم على استرجاع المعلومات ونظام الفلاش كاردز لتفعيل الذاكرة</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-3">
+                    <!-- Unit Selector for quiz -->
+                    <select id="quizUnitSelector" onchange="resetQuiz()" class="bg-slate-900 border border-slate-700 rounded-xl py-2 px-3 text-xs text-slate-300 focus:outline-none focus:border-blue-500">
+                        <option value="all">جميع الوحدات (80 مصطلحاً)</option>
+                        <option value="1">الوحدة 1 (الجزء 1)</option>
+                        <option value="2">الوحدة 1 (الجزء 2)</option>
+                        <option value="3">الوحدة 2</option>
+                        <option value="4">الوحدة 3</option>
+                    </select>
+
+                    <!-- Toggle quiz direction -->
+                    <select id="quizDirectionSelector" onchange="resetQuiz()" class="bg-slate-900 border border-slate-700 rounded-xl py-2 px-3 text-xs text-slate-300 focus:outline-none focus:border-blue-500">
+                        <option value="def_to_term">عرض التعريف ➔ وتخمين المصطلح</option>
+                        <option value="term_to_def">عرض المصطلح ➔ وتخمين التعريف</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Quiz Flashcard Card -->
+            <div class="relative min-h-[460px] flex flex-col justify-between glossy-card rounded-3xl p-6 sm:p-8 overflow-hidden">
+                <!-- Background ambient lights -->
+                <div class="absolute -right-32 -bottom-32 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -left-32 -top-32 w-96 h-96 bg-blue-600/5 rounded-full blur-3xl pointer-events-none"></div>
+
+                <!-- Upper info bar -->
+                <div class="flex justify-between items-center z-10 border-b border-slate-800 pb-4">
+                    <span id="quiz-badge" class="bg-blue-950 text-blue-400 border border-blue-900 text-xs px-3 py-1 rounded-xl font-bold">سؤال عشوائي</span>
+                    <div class="flex items-center gap-3">
+                        <span id="quiz-progress-text" class="text-xs text-slate-400 font-medium">عدد البطاقات المتبقية: 80</span>
+                        <button onclick="resetQuizStats()" class="text-xs text-rose-400 hover:text-rose-300 transition-colors" title="تصفير نتائج الاختبار">
+                            <i class="fa-solid fa-rotate"></i> إعادة تهيئة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Main Quiz Card body (Interactive Reveal Logic) -->
+                <div class="flex-grow flex flex-col items-center justify-center my-6 py-6 z-10 text-center px-4">
+                    <!-- Prompt Icon / Graphic -->
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500/10 to-teal-500/10 border border-blue-500/20 rounded-2xl flex items-center justify-center mb-6 shadow-inner">
+                        <i id="quiz-card-icon" class="fa-solid fa-puzzle-piece text-2xl text-blue-400 animate-bounce"></i>
+                    </div>
+
+                    <!-- Target prompt text -->
+                    <span id="quiz-instruction-label" class="text-xs text-amber-400 font-extrabold uppercase tracking-widest mb-2 block">اقرأ الشرح التالي وخمّن المصطلح الصحيح:</span>
+                    <div id="quiz-question-box" class="max-w-2xl text-xl sm:text-2xl font-bold leading-relaxed text-slate-100 min-h-[100px] flex items-center justify-center">
+                        جاري تحميل السؤال الأول...
+                    </div>
+
+                    <!-- Revealed Answer box (Initially Hidden) -->
+                    <div id="quiz-answer-box" class="hidden mt-6 w-full max-w-2xl bg-emerald-950/40 border border-emerald-900/60 rounded-2xl p-5 transform transition-all duration-500 scale-95 opacity-0">
+                        <span class="text-xs text-emerald-400 font-extrabold block mb-1">الإجابة والتعريف الصحيح:</span>
+                        <h3 id="quiz-answer-term" class="text-2xl font-black text-white mb-2">الاقتصاد</h3>
+                        <p id="quiz-answer-def" class="text-sm text-slate-300 leading-relaxed max-w-xl mx-auto">
+                            النشاط البشري الذي يشمل إنتاج وتوزيع وتبادل واستهلاك السلع والخدمات.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Interactive Reveal Controls -->
+                <div class="z-10 flex flex-col sm:flex-row gap-3 justify-center items-center border-t border-slate-800 pt-4">
+                    <!-- Show Answer Trigger -->
+                    <button id="quiz-reveal-btn" onclick="revealQuizAnswer()" class="w-full sm:w-auto bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-extrabold px-8 py-3 rounded-xl shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">
+                        <i class="fa-solid fa-eye mr-1"></i> أظهر الإجابة
+                    </button>
+
+                    <!-- Score/Evaluation triggers (Visible only after reveal) -->
+                    <div id="quiz-feedback-controls" class="hidden flex-wrap justify-center items-center gap-3 w-full sm:w-auto">
+                        <button onclick="submitQuizFeedback(true)" class="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-slate-950 font-extrabold px-6 py-3 rounded-xl flex items-center gap-2 shadow-md transition-all duration-300">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>عرفتها بنجاح! (+10 نقاط)</span>
+                        </button>
+                        <button onclick="submitQuizFeedback(false)" class="bg-slate-800 hover:bg-slate-700 text-rose-400 border border-rose-900 px-6 py-3 rounded-xl flex items-center gap-2 font-bold transition-all duration-300">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                            <span>أحتاج إلى مراجعتها</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STATS & PROGRESS TAB -->
+        <section id="view-stats" class="hidden flex flex-col gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <!-- Stat Card 1 -->
+                <div class="glossy-card p-5 rounded-2xl flex items-center gap-4">
+                    <div class="p-3 bg-blue-500/10 border border-blue-500/20 text-blue-400 rounded-xl text-xl">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-xs text-slate-400">إجمالي النقاط المكتسبة</h4>
+                        <p id="stats-total-score" class="text-2xl font-black text-white">0</p>
+                    </div>
+                </div>
+                <!-- Stat Card 2 -->
+                <div class="glossy-card p-5 rounded-2xl flex items-center gap-4">
+                    <div class="p-3 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-xl text-xl">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-xs text-slate-400">مصطلحات تمت إجابتها</h4>
+                        <p id="stats-completed-count" class="text-2xl font-black text-white">0</p>
+                    </div>
+                </div>
+                <!-- Stat Card 3 -->
+                <div class="glossy-card p-5 rounded-2xl flex items-center gap-4">
+                    <div class="p-3 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-xl text-xl">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-xs text-slate-400">المصطلحات المفضلة</h4>
+                        <p id="stats-favorites-count" class="text-2xl font-black text-white">0</p>
+                    </div>
+                </div>
+                <!-- Stat Card 4 -->
+                <div class="glossy-card p-5 rounded-2xl flex items-center gap-4">
+                    <div class="p-3 bg-purple-500/10 border border-purple-500/20 text-purple-400 rounded-xl text-xl">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-xs text-slate-400">دقة الإجابات في الاختبار</h4>
+                        <p id="stats-accuracy" class="text-2xl font-black text-white">0%</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed breakdown per Unit -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Stats Overview -->
+                <div class="glossy-card rounded-2xl p-6">
+                    <h3 class="font-bold text-lg text-slate-200 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-chart-column text-blue-400"></i> معدل التقدم حسب المحتوى التعليمي
+                    </h3>
+                    <div class="flex flex-col gap-4">
+                        <!-- Unit 1 -->
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-slate-300 font-bold">الوحدة 1 (التقدم والتخلف ومؤشراتهما)</span>
+                                <span id="progress-u1-label" class="text-blue-400">0%</span>
+                            </div>
+                            <div class="w-full bg-slate-900 rounded-full h-2">
+                                <div id="progress-u1-bar" class="bg-blue-500 h-2 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <!-- Unit 2 -->
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-slate-300 font-bold">الوحدة 1 (الأسواق المالية والموارد الاستراتيجية)</span>
+                                <span id="progress-u2-label" class="text-teal-400">0%</span>
+                            </div>
+                            <div class="w-full bg-slate-900 rounded-full h-2">
+                                <div id="progress-u2-bar" class="bg-teal-500 h-2 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <!-- Unit 3 -->
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-slate-300 font-bold">الوحدة 2 (الأقطاب والتكتلات الاقتصادية الكبرى)</span>
+                                <span id="progress-u3-label" class="text-emerald-400">0%</span>
+                            </div>
+                            <div class="w-full bg-slate-900 rounded-full h-2">
+                                <div id="progress-u3-bar" class="bg-emerald-500 h-2 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <!-- Unit 4 -->
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-slate-300 font-bold">الوحدة 3 (التنمية في البرازيل والهند وجنوب شرق آسيا)</span>
+                                <span id="progress-u4-label" class="text-amber-400">0%</span>
+                            </div>
+                            <div class="w-full bg-slate-900 rounded-full h-2">
+                                <div id="progress-u4-bar" class="bg-amber-500 h-2 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Learning Achievements/Badges system -->
+                <div class="glossy-card rounded-2xl p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-bold text-lg text-slate-200 mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-emerald-400"></i> أوسمة النجاح المكتسبة
+                        </h3>
+                        <div class="grid grid-cols-3 gap-3">
+                            <div id="badge-first" class="opacity-40 bg-slate-950 p-3 rounded-xl border border-slate-800 text-center flex flex-col items-center gap-1">
+                                <i class="fa-solid fa-fire text-amber-500 text-2xl"></i>
+                                <span class="text-[10px] font-bold text-slate-300">الخطوة الأولى</span>
+                            </div>
+                            <div id="badge-half" class="opacity-40 bg-slate-950 p-3 rounded-xl border border-slate-800 text-center flex flex-col items-center gap-1">
+                                <i class="fa-solid fa-bolt text-yellow-400 text-2xl"></i>
+                                <span class="text-[10px] font-bold text-slate-300">منتصف الطريق</span>
+                            </div>
+                            <div id="badge-master" class="opacity-40 bg-slate-950 p-3 rounded-xl border border-slate-800 text-center flex flex-col items-center gap-1">
+                                <i class="fa-solid fa-crown text-purple-400 text-2xl"></i>
+                                <span class="text-[10px] font-bold text-slate-300">عبقري الجغرافيا</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800 mt-4 text-center">
+                        <p class="text-xs text-slate-400">تعتمد أوسمتك على عدد البطاقات التي تحفظها وتجيب عليها بطريقة صحيحة في صفحة الاختبار الذكي!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer credits referencing the source images verbatim -->
+    <footer class="glossy-card border-t border-slate-800 py-4 mt-6">
+        <div class="max-w-7xl mx-auto px-4 text-center flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-slate-500">
+            <div>
+                تم التطوير والمطابقة تامة للمصادر المحدثة:
+                <span class="text-blue-400 font-semibold underline">ChatGPT Image 24 mai 2026</span>، و
+                <span class="text-blue-400 font-semibold underline">ChatGPT Image 1 mai 2026</span>.
+            </div>
+            <div>
+                &copy; 2026 البوابة الذكية للبكالوريا - جميع الحقوق محفوظة لطلبتنا الأعزاء.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sound elements generated natively with Web Audio API -->
+    <script>
+        // Full database of 80 Terms transcribed perfectly from the provided updated images and curriculum
+        const geoTerms = [
+            // UNIT 1 - PART 1 (محدثة بالكامل طبقاً لـ ChatGPT Image 24 mai 2026)
+            { id: 1, unit: 1, name: "الاقتصاد", definition: "المصطلح له عدة دلالات، ويمكن تعريفه على أنه ذلك النشاط البشري الذي يشمل إنتاج وتوزيع وتبادل واستهلاك السلع والخدمات.", category: "economy" },
+            { id: 2, unit: 1, name: "التقدم", definition: "هو ظاهرة تعكس مدى التطور والازدهار في جميع المجالات وتتصف به دول الشمال.", category: "development" },
+            { id: 3, unit: 1, name: "التخلف", definition: "هو ظاهرة اقتصادية تعكس مدى العجز والتدهور في جميع المجالات وتتصف به دول عالم الجنوب.", category: "development" },
+            { id: 4, unit: 1, name: "الموارد", definition: "هي كل ما تستغله الدول من أجل تحقيق التقدم سواء كانت طبيعية (ثروات باطنية، سطحية،...) أو بشرية بالاعتماد على تنمية عقل الإنسان وتحسين قدرته على الابتكار.", category: "resources" },
+            { id: 5, unit: 1, name: "المعيار والمؤشر", definition: "المعيار: هو مجموعة المؤشرات والمقاييس التي يستند عليها لتحديد ضعف أو قوة اقتصاد لدولة ما. المؤشر: هو قيمة عددية إحصائية لظاهرة معينة خلال فترة زمنية محددة.", category: "charts" },
+            { id: 6, unit: 1, name: "التنمية", definition: "هي عملية إحداث مجموعة من التغييرات في مجتمع ما تقتضي الزيادة الدائمة في الإنتاج والخدمات لإكسابه القدرة على التطور، ويكون هذا بحسن استغلال الموارد المتوفرة.", category: "development" },
+            { id: 7, unit: 1, name: "الناتج الوطني الخام PNB", definition: "هو قيمة الثروة المنتجة داخل وخارج البلاد خلال سنة بالدولار.", category: "economy" },
+            { id: 8, unit: 1, name: "الناتج المحلي الخام PIB", definition: "هو قيمة الثروة والخدمات داخل البلاد فقط في السنة بالدولار.", category: "economy" },
+            { id: 9, unit: 1, name: "الدخل الفردي", definition: "هو قيمة نسبية ناتجة عن حاصل قسمة قيمة الناتج المحلي الخام على عدد السكان بالدولار في السنة.", category: "economy" },
+            { id: 10, unit: 1, name: "المواد الأولية (الخام)", definition: "مواد رئيسية يتم تحويلها وتصنيعها إلى مواد قابلة للاستهلاك ومن أمثلتها (الطاقة، المعادن، القمح، القطن،...).", category: "resources" },
+            { id: 11, unit: 1, name: "متوسط العمر (أمد الحياة)", definition: "هو مقياس إحصائي لمتوسط عدد السنوات التي يتوقع أن يعيشها مجتمع ما في دولة معينة.", category: "development" },
+            { id: 12, unit: 1, name: "البلدان النامية", definition: "هي الدول التي تنتمي للعالم الثالث ونالت استقلالها حديثا، وتشهد نمو اقتصاديا بطيئا.", category: "development" },
+            { id: 13, unit: 1, name: "البلدان الصاعدة", definition: "هو مصطلح اقتصادي يطلق على الدول التي تنتمي للعالم الثالث لكنها تشهد نموا اقتصاديا سريعا مثل الصين وجنوب أفريقيا.", category: "development" },
+            { id: 14, unit: 1, name: "مجموعة البريكس", definition: "هو تكتل اقتصادي تأسس في 2006 تضم الدول الصاعدة (البرازيل، روسيا، الهند، الصين وجنوب أفريقيا) ، وفي 2023 انضمت إليها دول أخرى مثل الإمارات وإيران.", category: "organizations" },
+            { id: 15, unit: 1, name: "الدول المتقدمة / عالم الشمال", definition: "هو مصطلح اقتصادي جغرافي يطلق على الدول الواقعة في النصف الشمالي من الكرة الأرضية وتتميز بالتطور والتقدم في جميع المجالات، وإضافة إلى نيوزيلندا وأستراليا.", category: "geography" },
+            { id: 16, unit: 1, name: "الدول المتخلفة / عالم الجنوب", definition: "هو مصطلح اقتصادي جغرافي يطلق على الدول الواقعة في النصف الجنوبي من الكرة الأرضية، وتشهد تراجعا في جميع المجالات. نالت استقلالها حديثا، وتعرف بالدول النامية أو العالم المتخلف ماعدا نيوريلندا وأستراليا.", category: "geography" },
+            { id: 17, unit: 1, name: "العالم الثالث", definition: "هو مصطلح اقتصادي أطلقه المفكر الفرنسي سوفي بـ 1952 تمييزا لها عن العالم الأول (المعسكر الغربي) والعالم الثاني (المعسكر الشرقي) التي نالت استقلالها حديثا، وتشهد تخلفا في جميع المجالات.", category: "geography" },
+            { id: 18, unit: 1, name: "مجموعة 8", definition: "هي الدول الأكثر غنى وتصنيعا في العالم (م.أ.، كندا، فرنسا، بريطانيا، ألمانيا، إيطاليا، اليابان، روسيا). أصبحت تعرف بمجموعة الـ 7 بعد انسحاب روسيا بـ 2014.", category: "economy" },
+            { id: 19, unit: 1, name: "المبادلات", definition: "وهي يقصد بها الحركة التجارية بين الدول ممثلة في الصادرات والواردات.", category: "economy" },
+            { id: 20, unit: 1, name: "البترول (الذهب الأسود)", definition: "مادة أولية طاقوية هي الأكثر إنتاجاً واستهلاكاً في العالم، وتعد مصدر دخل رئيسي للدول المصدرة لها.", category: "resources" },
+
+            // UNIT 1 - PART 2 (محدثة بالكامل طبقاً لـ ChatGPT Image 1 mai 2026)
+            { id: 21, unit: 2, name: "الشركات متعددة الجنسيات", definition: "(الشركات العابرة للقارات)، شركات كبرى عملاقة لها فروع خارج البلد الأصلي، يتكون رأسمالها من مستثمرين ينتمون لجنسيات مختلفة مثل كوكا كولا، سامسونج، مايكروسوفت.", category: "organizations" },
+            { id: 22, unit: 2, name: "الكارتل العالمي للنفط", definition: "عبارة عن سبع شركات كبرى تُعرف بـ \"الشقيقات السبع\"، تتحكم في استخراج ونقل وتوزيع وتحديد أسعار البترول.", category: "resources" },
+            { id: 23, unit: 2, name: "منظمة الأوبيك OPEC", definition: "هي منظمة الدول المصدرة للبترول تأسست ببغداد بـ 1960 (ايران السعودية العراق فنزويلا الكويت) للدفاع عن مصالح الدول المصدرة والتصدي لاحتكارات الشركات الاحتكارية.", category: "organizations" },
+            { id: 24, unit: 2, name: "رؤوس الأموال", definition: "يُقصد بها الملكيات الثابتة مثل الأراضي والمصانع، أو ملكيات منقولة من أجل إقامة نشاط اقتصادي بهدف تحقيق الربح أو الفائدة.", category: "finance" },
+            { id: 25, unit: 2, name: "الاستثمار", definition: "هو توظيف رؤوس الأموال الفائضة في مشاريع اقتصادية وتنموية مختلفة قصد مضاعفة الإنتاج وتحقيق الأرباح المادية الطائلة.", category: "finance" },
+            { id: 26, unit: 2, name: "العولمة", definition: "تعني الشمولية وتحويل العالم إلى قرية صغيرة يسيرها نمط اقتصادي واجتماعي وثقافي موحد بفضل وسائل الاتصال.", category: "organizations" },
+            { id: 27, unit: 2, name: "حركة رؤوس الأموال", definition: "يُقصد بها انتقال رؤوس الأموال في شكل سندات، أسهم، عقارات، إلى البنوك أو البورصات بطرق شرعية أو غير شرعية.", category: "finance" },
+            { id: 28, unit: 2, name: "القيود الجمركية", definition: "رسوم تفرضها دولة على دخول البضائع إليها بهدف توفير مداخيل وحماية الصناعة المحلية من المنافسة.", category: "finance" },
+            { id: 29, unit: 2, name: "السلاح الأسود", definition: "مصطلح يُطلق على البترول عندما تستخدمه الدول العربية كوسيلة ضغط على الدول المتقدمة.", category: "resources" },
+            { id: 30, unit: 2, name: "تبييض الأموال (غسيل الأموال)", definition: "عملية تحويل أموال مكتسبة بطرق غير شرعية إلى أموال شرعية من خلال استثمارات كالعقارات.", category: "finance" },
+            { id: 31, unit: 2, name: "البورصة", definition: "سوق مالية يتم فيها تداول العملات والأسهم والسندات، كما يتم فيها تحديد أسعار المواد الأولية (مثل بورصات طوكيو، وول ستريت، وشنجهاني).", category: "finance" },
+            { id: 32, unit: 2, name: "الأسهم", definition: "تُمثل قيمة أو ملكية في شركة، حصة مقابل المساهمة بشراء حصص في مؤسسة مع مشاركة صاحب الأسهم في الأرباح أو الخسارة.", category: "finance" },
+            { id: 33, unit: 2, name: "السندات", definition: "هي عبارة عن أوراق مالية ذات قيمة معلومة يقدمها المستثمرون إلى المؤسسات والحكومات أو الأشخاص مقابل فوائد معلومة خلال فترات زمنية محددة.", category: "finance" },
+            { id: 34, unit: 2, name: "القمح (السلاح الأخضر)", definition: "مادة غذائية استراتيجية تعتبر الغذاء الأساسي لأغلب سكان العالم، وتستخدمه الدول المتقدمة كوسيلة ضغط على الدول المتخلفة.", category: "agriculture" },
+            { id: 35, unit: 2, name: "البرميل", definition: "هو وحدة قياس البترول المتفق عليها بين الدول، وتُقدر سعتها بـ 159 لتر.", category: "resources" },
+            { id: 36, unit: 2, name: "التجارة الإلكترونية", definition: "هي عملية البيع والشراء عن طريق شبكة الإنترنت، وتعرف بالاقتصاد الرقمي.", category: "finance" },
+            { id: 37, unit: 2, name: "صندوق النقد الدولي (IMF)", definition: "مؤسسة مالية دولية تأسست في 1945 بموجب اتفاقية بريتون وودز، مقره واشنطن، يهدف إلى تسيير النظام النقدي الدولي وتقديم القروض والمساعدات المالية.", category: "organizations" },
+            { id: 38, unit: 2, name: "البنك العالمي للإنشاء والتعمير", definition: "مؤسسة مالية دولية تأسست في 1946.", category: "organizations" },
+            { id: 39, unit: 2, name: "المنظمة العالمية للتجارة", definition: "هي منظمة دولية تأسست في 1995، مقرها جنيف بسويسرا، وتهدف إلى تحرير التجارة العالمية بإزالة الحواجز والقيود الجمركية بين الدول.", category: "organizations" },
+            { id: 40, unit: 2, name: "مؤشر التنمية البشرية IDH", definition: "هو مؤشر محصور بين 0-1 للدلالة على تقدم أو تخلف دولة ما باعتماد 3 عناصر ( نسبة التمدرس - أمد الحياة - الدخل الفردي) ومنها تحدد وضعية كل دولة.", category: "charts" },
+
+            // UNIT 2 (الأقطاب والتكتلات الكبرى)
+            { id: 41, unit: 3, name: "الثالوث الاقتصادي", definition: "الأقطاب الاقتصادية الثلاثة المهيمنة على الاقتصاد والتجارة العالمية وهي: الولايات المتحدة الأمريكية، الاتحاد الأوروبي، واليابان.", category: "geography" },
+            { id: 42, unit: 3, name: "القطب الاقتصادي", definition: "مركز جذب ونشاط اقتصادي عملاق يتوفر على كافة الشروط الضرورية كالبنى التحتية، التكنولوجيا والسيولة المالية التي تمكنه من المنافسة على النطاق العالمي.", category: "economy" },
+            { id: 43, unit: 3, name: "الوزن الديمغرافي (الثقل الديمغرافي)", definition: "الحجم السكاني الضخم لدولة ما، والذي يشكل قوة فاعلة وسوقاً استهلاكية ضخمة وقوة عاملة مؤهلة تساهم في التطور الاقتصادي إذا أحسن استغلاله.", category: "geography" },
+            { id: 44, unit: 3, name: "الاستقطاب", definition: "قدرة دولة أو قطب ما على جلب رؤوس الأموال، الاستثمارات الأجنبية، الكفاءات، والأدمغة عن طريق توفير مزايا مغرية وتسهيلات كبرى، وتعد الوصايا الأمريكية رائدة في هذا المجال.", category: "economy" },
+            { id: 45, unit: 3, name: "التهيئة الإقليمية (تنظيم الإقليم)", definition: "عملية تخطيط وتنظيم المظاهر الجغرافية والبشرية والاقتصادية للبلد بوضع خطة عمل متكاملة تأخذ بالاعتبار توزع الموارد واستغلالها العقلاني دون خلل جهوي.", category: "geography" },
+            { id: 46, unit: 3, name: "النطاقات", definition: "تخصيص مساحات وأراضي زراعية شاسعة جداً لإنتاج محصول زراعي استراتيجي واحد مثل نطاقات الذرة، الأرز، والقمح، وهي من أبرز خصائص الفلاحة الأمريكية.", category: "agriculture" },
+            { id: 47, unit: 3, name: "الميغالوبوليس", definition: "مصطلح يوناني يعني تجمع المدن الضخمة والمتلاصقة، أطلق لأول مرة على الساحل الشمالي الشرقي للولايات المتحدة الممتد من بوسطن إلى واشنطن بطول 950 كم وعرض 50 كم.", category: "geography" },
+            { id: 48, unit: 3, name: "الدورة الزراعية", definition: "وتسمى الدورة المحصولية، وهي عملية تناوب وتغيير نوعية المحاصيل المزروعة في قطعة الأرض نفسها على مدار مواسم متتالية للحفاظ على خصوبة التربة وحمايتها من الإجهاد.", category: "agriculture" },
+            { id: 49, unit: 3, name: "مجموعة التبادل الحر (ALENA)", definition: "تكتل اقتصادي وتجاري تأسس عام 1994 بموجب اتفاقية وقعت بين الولايات المتحدة الأمريكية، كندا، والمكسيك لتعزيز وحرية تنقل البضائع وإلغاء الحواجز الجمركية تدريجياً.", category: "organizations" },
+            { id: 50, unit: 3, name: "التكتل الاقتصادي", definition: "صيغة متطورة للتعاون والاندماج الاقتصادي تطورت بعد الحرب العالمية الثانية، تهدف لتوحيد وتنسيق السياسات الاقتصادية والجهود بين الدول الأعضاء لتحقيق التنمية وتجاوز العقبات الإقليمية.", category: "organizations" },
+            { id: 51, unit: 3, name: "اتحاد البينلوكس", definition: "اتحاد وتكامل اقتصادي تأسس في عام 1944 بين ثلاث دول أوروبية مجاورة وهي: بلجيكا، هولندا، ولوكسمبورغ، ويعتبر النواة الأولى للاتحاد الأوروبي الحالي.", category: "organizations" },
+            { id: 52, unit: 3, name: "معاهدة روما", definition: "الاتفاقية المؤسسة للسوق الأوروبية المشتركة والتي وقعت في 25 مارس 1957 بالعاصمة الإيطالية روما بين ست دول أوروبية (دول البينلوكس، إيطاليا، ألمانيا الغربية، وفرنسا).", category: "geography" },
+            { id: 53, unit: 3, name: "السوق الأوروبية المشتركة", definition: "تكتل اقتصادي تأسس بموجب معاهدة روما بهدف تحرير التجارة واليد العاملة بين الدول الست، والذي تطور لاحقاً ليصبح الاتحاد الأوروبي.", category: "organizations" },
+            { id: 54, unit: 3, name: "معاهدة ماستريخت", definition: "الاتفاقية الموقعة بمدينة ماستريخت الهولندية في 7 فيفري 1992 والتي بموجبها تأسس رسمياً الاتحاد الأوروبي الحديث بهدف تحقيق الوحدة الاقتصادية والنقدية والعملة الموحدة.", category: "geography" },
+            { id: 55, unit: 3, name: "الاتحاد الأوروبي", definition: "تكتل سياسي واقتصادي يجمع حالياً 27 دولة أوروبية (بعد انسحاب بريطانيا في 2016) تأسس بموجب معاهدة ماستريخت بهدف تسهيل التبادل وامتلاك سوق موحدة وعملة موحدة (اليورو).", category: "organizations" },
+            { id: 56, unit: 3, name: "التنينات الأربعة", definition: "الدول الصناعية الصاعدة في شرق آسيا والتي حققت قفزة صناعية وتكنولوجية منذ الستينات بتطبيق النموذج الياباني الموجه للتصدير وهي: كوريا الجنوبية، تايوان، سنغافورة، وهونغ كونغ.", category: "geography" },
+            { id: 57, unit: 3, name: "النمور الأربعة", definition: "مجموعة الدول الحديثة التصنيع والتصدير في جنوب شرق آسيا والتي تطورت وتنامت بفعل تدفق الاستثمارات الخارجية، وهي: ماليزيا، أندونيسيا، تايلاند، والفلبين.", category: "geography" },
+            { id: 58, unit: 3, name: "الآسيان (ASEAN)", definition: "اتحاد دول جنوب شرق آسيا، وهو منظمة سياسية واقتصادية تأسست في 8 أوت 1967 وتضم حالياً 10 دول تهدف لتحقيق النمو الاقتصادي، السلم والتعاون الإقليمي المشترك.", category: "organizations" },
+            
+            // مصطلحات هامة جداً مضافة في الخانات الشاغرة لتكملة الـ 80 مصطلحاً (مأخوذة من ChatGPT Image 24 mai 2026)
+            { id: 59, unit: 3, name: "الأمن الغذائي", definition: "هو مصطلح اقتصادي يطلق على قدرة الدول على توفير حاجيات سكانها عن طريق الإنتاج أو الاستيراد.", category: "agriculture" },
+            { id: 60, unit: 3, name: "الاكتفاء الذاتي", definition: "هو قدرة الدولة على توفير حاجيات سكانها عن طريق الإنتاج المحلي فقط دون اللجوء إلى الاستيراد.", category: "agriculture" },
+
+            // UNIT 3 (التنمية في العالم الثالث - البرازيل، الهند وجنوب شرق آسيا)
+            { id: 61, unit: 4, name: "الموارد الطبيعية", definition: "الثروات السطحية والباطنية الكامنة في الطبيعة والتي يستغلها الإنسان، منها المتجددة (المياه والنباتات) وغير المتجددة كالمعادن ومصادر الطاقة المعرضة للنضاد والزوال.", category: "resources" },
+            { id: 62, unit: 4, name: "التنمية المستدامة", definition: "هي التنمية القائمة على تلبية احتياجات الجيل الحاضر واستغلال الموارد الطبيعية والمادية المتاحة دون المساس بحقوق وقدرات الأجيال القادمة على تلبية احتياجاتهم واستمراريتها.", category: "development" },
+            { id: 63, unit: 4, name: "التنمية الشاملة", definition: "هي العملية التنموية التي تركز على جميع جوانب الضعف في مجتمع ما، سواء السياسية، الاقتصادية، الاجتماعية أو الثقافية وفتح المجال واسعاً للإبداع الفردي والجماعي.", category: "development" },
+            { id: 64, unit: 4, name: "التنمية المتوازنة", definition: "هي تنمية تعنى بجميع قطاعات الاقتصاد بشكل متزامن ومتكامل وعلى قدم المساواة والتوازن (الفلاحة، الصناعة، والخدمات) لتجنب حدوث فوارق تنموية قطاعية.", category: "development" },
+            { id: 65, unit: 4, name: "الخصخصة", definition: "سياسة نقل الملكية وإدارة المؤسسات العامة والخدمات الاجتماعية من القطاع العام التابع للدولة إلى القطاع الخاص والأفراد، وقد راجت بشدة بعد انهيار المعسكر الشيوعي عام 1989.", category: "economy" },
+            { id: 66, unit: 4, name: "الشراكة", definition: "صيغة تعاون اقتصادي وتجاري تنشأ بين طرفين أو أكثر ذوي مصالح مشتركة لإنجاز وتمويل مشروع معين، وتتعدد أشكالها بين مالية، تجارية وتكنولوجية.", category: "economy" },
+            { id: 67, unit: 4, name: "الاقتصاد الموجه", definition: "نظام اقتصادي تسيطر فيه الدولة بالكامل على وسائل الإنتاج وتوزيع الثروات والخطط الاستثمارية وتحديد الأسعار والسلع والخدمات مركزياً.", category: "economy" },
+            { id: 68, unit: 4, name: "اقتصاد السوق (الاقتصاد الحر)", definition: "نظام اقتصادي يقوم على الملكية الفردية لوسائل الإنتاج وعدم تدخل الدولة في الأنشطة التجارية والإنتاجية إلا كمنظم، وترك قوى السوق والأسعار تضبطها قوانين العرض والطلب.", category: "economy" },
+            { id: 69, unit: 4, name: "قانون العرض والطلب", definition: "القاعدة الأساسية المنظمة لاقتصاد السوق، حيث يتناسب السعر عكسياً مع العرض وطردياً مع الطلب (يرتفع السعر إذا زاد الطلب وقل العرض، وينخفض إذا حدث العكس).", category: "economy" },
+            { id: 70, unit: 4, name: "اتفاقية لومي", definition: "اتفاقية تعاون وقعت عام 1975 بمدينة لومي عاصمة توغو بين السوق الأوروبية المشتركة و46 دولة نامية من إفريقيا، الكاريبي والمحيط الهادئ لتعزيز الصادرات والتعاون المالي والتقني.", category: "organizations" },
+            { id: 71, unit: 4, name: "الشراكة الأورومتوسطية", definition: "(عملية برشلونة)، انطلقت عام 1995 بمدينة برشلونة الإسبانية وتضم حالياً 43 دولة (الاتحاد الأوروبي ودول البحر المتوسط الشريكة) لترسيخ التبادل التجاري والأمني والثقافي المشترك.", category: "organizations" },
+            { id: 72, unit: 4, name: "الثورة الخضراء", definition: "سياسة استراتيجية زراعية انتهجتها الهند سنة 1966 لزيادة وتطوير إنتاج الغلال والمحاصيل باستخدام الأسمدة والمبيدات الحديثة والبذور الهجينة لتحقيق الاكتفاء الذاتي الغذائي.", category: "agriculture" },
+            { id: 73, unit: 4, name: "حوض الأمازون", definition: "هضبة ومساحة جغرافية شاسعة تقع في شمال البرازيل وأمريكا الجنوبية تبلغ 3.5 مليون كم²، يمتد من المحيط الأطلسي شرقاً لجبال الأنديز غرباً ويخترقها النهر الأكبر وتغطيها الغابة الاستوائية.", category: "geography" },
+            { id: 74, unit: 4, name: "غابة الأمازون (رئة العالم)", definition: "أكبر غابة استوائية في العالم، تقع معظم مساحتها في شمال البرازيل، وتنتج جزءاً كبيراً من الأكسجين العالمي بفضل تنوعها البيولوجي الذي يمثل 90% من التنوع الكلي للأرض.", category: "resources" },
+            { id: 75, unit: 4, name: "الاحتكار", definition: "ممارسة اقتصادية وتجارية غير قانونية تستغل فيها الشركات الكبرى أو المنتجين قلة المعروض لسلعة معينة وحصر بيعها لرفع أسعارها بقرارات أحادية جشعة.", category: "economy" },
+            { id: 76, unit: 4, name: "المثلث الحيوي", definition: "المنطقة الجغرافية الأكثر نمواً واكتظاظاً في جنوب شرق البرازيل وتمتد بين أهم ثلاث مدن رئيسية تشكل زوايا المثلث: ساو باولو، ريو دي جانيرو، والعاصمة برازيليا.", category: "geography" },
+            { id: 77, unit: 4, name: "مثلث العطش", definition: "منطقة جغرافية تقع في الشمال الشرقي الفقير للبرازيل، تتميز بالجفاف الحاد والقاسي وتذبذب تساقط الأمطار والفقر المائي بالمقارنة مع باقي أقاليم البرازيل المجاورة.", category: "geography" },
+            { id: 78, unit: 4, name: "البنية التحتية (الهياكل القاعدية)", definition: "مجموع الهياكل والشبكات المادية والخدمية الضرورية لتنشيط الحركة الاقتصادية والاجتماعية في البلاد، مثل شبكات الطرق، المطارات، السكك الحديدية، والمستشفيات والمدارس.", category: "resources" },
+            { id: 79, unit: 4, name: "المديونية", definition: "ظاهرة مالية خانقة تعبر عن تراكم الديون المستحقة وعجز الحكومات والدول المتخلفة أو النامية عن سداد مستحقات قروضها الدولية في الآجال والفوائد المتفق عليها.", category: "finance" },
+            { id: 80, unit: 4, name: "الإصلاح الزراعي", definition: "جملة من الإجراءات والسياسات الهيكلية التي تقوم بها الدولة للنهوض بالقطاع الزراعي، مثل إعادة توزيع الأراضي، تدريب المزارعين، وتقديم الدعم المالي والقروض وتأمين الإنتاج.", category: "agriculture" }
+        ];
+
+        // State variables
+        let selectedTermId = 1;
+        let filteredTerms = [...geoTerms];
+        let quizTerms = [...geoTerms];
+        let currentQuizIndex = 0;
+        let isQuizAnswerRevealed = false;
+        
+        // Progress statistics from localStorage
+        let stats = JSON.parse(localStorage.getItem('geoStats')) || {
+            score: 0,
+            reviewedCount: 0,
+            accuracy: 0,
+            correctCount: 0,
+            totalQuizAttempts: 0,
+            favorites: [],
+            reviewedTermsList: [] // list of term IDs successfully memorized
+        };
+
+        // Initialize Native sound synthesis for visual feedback and speech
+        function playFeedbackSound(type) {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                if (type === 'correct') {
+                    // Sweet ping melody
+                    osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
+                    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+                    osc.start();
+                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1); // E5
+                    osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.2); // G5
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.45);
+                    osc.stop(ctx.currentTime + 0.5);
+                } else if (type === 'incorrect') {
+                    // Low buzz
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(150, ctx.currentTime);
+                    gain.gain.setValueAtTime(0.12, ctx.currentTime);
+                    osc.start();
+                    osc.frequency.setValueAtTime(120, ctx.currentTime + 0.15);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
+                    osc.stop(ctx.currentTime + 0.45);
+                } else {
+                    // Mild toggle click
+                    osc.frequency.setValueAtTime(800, ctx.currentTime);
+                    gain.gain.setValueAtTime(0.05, ctx.currentTime);
+                    osc.start();
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+                    osc.stop(ctx.currentTime + 0.12);
+                }
+            } catch (e) {
+                console.log("Audio not supported / user gesture needed.");
+            }
+        }
+
+        // TEXT TO SPEECH helper (Arabic synthesizer)
+        function speakSelectedTerm() {
+            const currentTerm = geoTerms.find(t => t.id === selectedTermId);
+            if (!currentTerm) return;
+            
+            if ('speechSynthesis' in window) {
+                // Cancel active speeches
+                window.speechSynthesis.cancel();
+                
+                const utterance = new SpeechSynthesisUtterance(currentTerm.name);
+                utterance.lang = 'ar';
+                utterance.rate = 0.85; // slightly slower for educational focus
+                
+                // Try finding an Arabic voice
+                const voices = window.speechSynthesis.getVoices();
+                const arabicVoice = voices.find(voice => voice.lang.startsWith('ar'));
+                if (arabicVoice) utterance.voice = arabicVoice;
+                
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("ميزة النطق الصوتي غير مدعومة في متصفحك الحالي.");
+            }
+        }
+
+        // Dynamic Category SVG Illustrator
+        function getCategoryIllustration(category) {
+            const colors = {
+                economy: { primary: '#3b82f6', secondary: '#1e3a8a', icon: 'fa-chart-line' },
+                development: { primary: '#10b981', secondary: '#064e3b', icon: 'fa-arrow-up-right-dots' },
+                resources: { primary: '#f59e0b', secondary: '#78350f', icon: 'fa-oil-well' },
+                charts: { primary: '#06b6d4', secondary: '#164e63', icon: 'fa-chart-pie' },
+                geography: { primary: '#3b82f6', secondary: '#172554', icon: 'fa-globe-americas' },
+                finance: { primary: '#10b981', secondary: '#14532d', icon: 'fa-building-columns' },
+                organizations: { primary: '#8b5cf6', secondary: '#4c1d95', icon: 'fa-users' },
+                agriculture: { primary: '#a3e635', secondary: '#365314', icon: 'fa-wheat-awn' }
+            };
+
+            const cfg = colors[category] || colors.economy;
+
+            return `
+                <div class="flex flex-col items-center justify-center text-center gap-3 w-full h-full">
+                    <div class="relative w-24 h-24 rounded-full flex items-center justify-center border-4 border-slate-800 shadow-2xl" style="background: radial-gradient(circle, ${cfg.primary}15 0%, ${cfg.primary}02 100%)">
+                        <div class="absolute inset-0 rounded-full animate-ping opacity-10" style="background-color: ${cfg.primary}"></div>
+                        <i class="fa-solid ${cfg.icon} text-4xl" style="color: ${cfg.primary}"></i>
+                    </div>
+                    <div class="flex flex-col gap-1 mt-2">
+                        <span class="text-xs font-black uppercase tracking-wider" style="color: ${cfg.primary}">تصنيف المصطلح</span>
+                        <span class="text-xs text-slate-400 font-bold bg-slate-800/80 px-3 py-1 rounded-full border border-slate-700/50 capitalize">
+                            ${category === 'economy' ? 'مفاهيم اقتصادية' : 
+                              category === 'development' ? 'التنمية والنمو' :
+                              category === 'resources' ? 'الموارد والطاقة' :
+                              category === 'charts' ? 'مؤشرات ومعايير' :
+                              category === 'geography' ? 'جغرافيا وإقليم' :
+                              category === 'finance' ? 'مالية ونقد' :
+                              category === 'organizations' ? 'منظمات وتكتلات' : 'فلاحة وزراعة'}
+                        </span>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Tab switching controller
+        function switchTab(tabId) {
+            playFeedbackSound('click');
+            
+            // Hide all views
+            document.getElementById('view-browse').classList.add('hidden');
+            document.getElementById('view-quiz').classList.add('hidden');
+            document.getElementById('view-stats').classList.add('hidden');
+
+            // Reset tab styles
+            const tabs = ['browse', 'quiz', 'stats'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`tab-${t}`);
+                btn.className = "px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 text-slate-400 hover:text-white hover:bg-slate-800 transition-all duration-300";
+            });
+
+            // Show and set active tab
+            document.getElementById(`view-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('active-tab');
+            document.getElementById(`tab-${tabId}`).classList.remove('text-slate-400', 'hover:text-white', 'hover:bg-slate-800');
+
+            if (tabId === 'quiz') {
+                resetQuiz();
+            } else if (tabId === 'stats') {
+                renderStatistics();
+            }
+        }
+
+        // Term browsing render engine
+        function renderTermsList() {
+            const listContainer = document.getElementById('termsList');
+            listContainer.innerHTML = '';
+
+            filteredTerms.forEach(term => {
+                const isSelected = term.id === selectedTermId;
+                const isFavorite = stats.favorites.includes(term.id);
+                const isMemorized = stats.reviewedTermsList.includes(term.id);
+                
+                const item = document.createElement('button');
+                item.onclick = () => selectTerm(term.id);
+                item.className = `w-full text-right p-3 rounded-xl border border-slate-800/60 flex justify-between items-center transition-all duration-200 hover:bg-slate-800/40 hover:-translate-x-1 ${isSelected ? 'term-item-active text-white' : 'text-slate-400'}`;
+                
+                let iconsHtml = '<div class="flex items-center gap-1.5">';
+                if (isFavorite) {
+                    iconsHtml += '<i class="fa-solid fa-heart text-red-500 text-xs"></i>';
+                }
+                if (isMemorized) {
+                    iconsHtml += '<i class="fa-solid fa-circle-check text-emerald-500 text-xs"></i>';
+                }
+                iconsHtml += `<span class="text-[10px] bg-slate-900 border border-slate-800 px-2 py-0.5 rounded-full text-slate-500 font-bold">#${term.id}</span></div>`;
+
+                item.innerHTML = `
+                    <div class="flex flex-col gap-1 items-start">
+                        <span class="text-sm font-bold ${isSelected ? 'text-amber-400 font-extrabold' : 'text-slate-200'}">${term.name}</span>
+                        <span class="text-[10px] text-slate-500">الوحدة ${term.unit}</span>
+                    </div>
+                    ${iconsHtml}
+                `;
+                listContainer.appendChild(item);
+            });
+
+            document.getElementById('termCountBadge').innerText = `${filteredTerms.length} مصطلحاً`;
+        }
+
+        function filterTerms() {
+            const s = document.getElementById('searchTerm').value.toLowerCase();
+            const unit = document.getElementById('unitFilter').value;
+
+            filteredTerms = geoTerms.filter(term => {
+                const matchSearch = term.name.toLowerCase().includes(s) || term.definition.toLowerCase().includes(s);
+                const matchUnit = unit === 'all' || term.unit.toString() === unit;
+                return matchSearch && matchUnit;
+            });
+
+            renderTermsList();
+
+            // If selected term is no longer in filter, select the first match
+            if (filteredTerms.length > 0 && !filteredTerms.some(t => t.id === selectedTermId)) {
+                selectTerm(filteredTerms[0].id);
+            }
+        }
+
+        function selectTerm(id) {
+            selectedTermId = id;
+            const term = geoTerms.find(t => t.id === id);
+            if (!term) return;
+
+            // Render details
+            document.getElementById('view-term-title').innerText = term.name;
+            document.getElementById('view-term-definition').innerText = term.definition;
+            document.getElementById('view-id-badge').innerText = `الرقم: ${term.id < 10 ? '0' + term.id : term.id}`;
+            
+            const unitsArr = ["", "الأولى (التقدم والتخلف وعواملهما)", "الأولى (الأسواق المالية والمبادلات)", "الثانية (الأقطاب والتكتلات الكبرى)", "الثالثة (التنمية في العالم الثالث)"];
+            document.getElementById('view-unit-badge').innerText = `الوحدة التعليمية: ${unitsArr[term.unit]}`;
+
+            // Favorite state check
+            const favBtn = document.getElementById('favorite-btn');
+            if (stats.favorites.includes(term.id)) {
+                favBtn.className = "bg-red-950/50 hover:bg-red-900/50 text-red-500 border border-red-900/60 w-9 h-9 rounded-xl flex items-center justify-center transition-colors";
+            } else {
+                favBtn.className = "bg-slate-800/80 hover:bg-slate-700/80 text-slate-400 hover:text-red-500 w-9 h-9 rounded-xl flex items-center justify-center transition-colors";
+            }
+
+            // Build dynamic graphic illustration
+            document.getElementById('vector-container').innerHTML = getCategoryIllustration(term.category);
+
+            // Re-render term items list to show selection borders
+            renderTermsList();
+        }
+
+        function toggleFavorite() {
+            playFeedbackSound('click');
+            const index = stats.favorites.indexOf(selectedTermId);
+            if (index > -1) {
+                stats.favorites.splice(index, 1);
+            } else {
+                stats.favorites.push(selectedTermId);
+            }
+            saveStats();
+            selectTerm(selectedTermId);
+        }
+
+        function pickRandomTerm() {
+            playFeedbackSound('correct');
+            if (filteredTerms.length === 0) return;
+            const rand = filteredTerms[Math.floor(Math.random() * filteredTerms.length)];
+            selectTerm(rand.id);
+        }
+
+        function navigateTerm(dir) {
+            playFeedbackSound('click');
+            const currentIndex = filteredTerms.findIndex(t => t.id === selectedTermId);
+            if (currentIndex === -1) return;
+
+            let nextIndex = currentIndex + dir;
+            if (nextIndex >= filteredTerms.length) nextIndex = 0;
+            if (nextIndex < 0) nextIndex = filteredTerms.length - 1;
+
+            selectTerm(filteredTerms[nextIndex].id);
+        }
+
+        // Quiz System Controllers
+        function resetQuiz() {
+            const unit = document.getElementById('quizUnitSelector').value;
+            
+            // Filter term bank
+            quizTerms = geoTerms.filter(term => {
+                return unit === 'all' || term.unit.toString() === unit;
+            });
+
+            // Randomize terms array
+            for (let i = quizTerms.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [quizTerms[i], quizTerms[j]] = [quizTerms[j], quizTerms[i]];
+            }
+
+            currentQuizIndex = 0;
+            isQuizAnswerRevealed = false;
+            loadQuizQuestion();
+        }
+
+        function loadQuizQuestion() {
+            if (quizTerms.length === 0) {
+                document.getElementById('quiz-question-box').innerHTML = "<span class='text-rose-400 text-lg'>لا يوجد مصطلحات مطابقة لتصفيات الاختبار الحالية!</span>";
+                return;
+            }
+
+            const term = quizTerms[currentQuizIndex];
+            const direction = document.getElementById('quizDirectionSelector').value;
+
+            document.getElementById('quiz-progress-text').innerText = `عدد البطاقات المتبقية: ${quizTerms.length - currentQuizIndex}`;
+            document.getElementById('quiz-badge').innerText = `البطاقة ${currentQuizIndex + 1} من ${quizTerms.length}`;
+
+            // Reset view state
+            document.getElementById('quiz-reveal-btn').classList.remove('hidden');
+            document.getElementById('quiz-feedback-controls').classList.add('hidden');
+            
+            const ansBox = document.getElementById('quiz-answer-box');
+            ansBox.classList.add('hidden', 'scale-95', 'opacity-0');
+
+            // Setup prompt
+            if (direction === 'def_to_term') {
+                document.getElementById('quiz-instruction-label').innerText = "اقرأ الشرح التالي وخمّن المصطلح المناسب له:";
+                document.getElementById('quiz-question-box').innerText = term.definition;
+                document.getElementById('quiz-answer-term').innerText = term.name;
+                document.getElementById('quiz-answer-def').innerText = "الوحدة التعليمية رقم: " + term.unit;
+                document.getElementById('quiz-card-icon').className = "fa-solid fa-puzzle-piece text-2xl text-blue-400 animate-bounce";
+            } else {
+                document.getElementById('quiz-instruction-label').innerText = "راجع هذا المصطلح بعقلك وخمّن الشرح والتعريف الصحيح له:";
+                document.getElementById('quiz-question-box').innerHTML = `<span class="text-3xl font-black text-amber-400 underline decoration-blue-500 decoration-wavy">${term.name}</span>`;
+                document.getElementById('quiz-answer-term').innerText = term.name;
+                document.getElementById('quiz-answer-def').innerText = term.definition;
+                document.getElementById('quiz-card-icon').className = "fa-solid fa-graduation-cap text-2xl text-amber-400 animate-bounce";
+            }
+
+            isQuizAnswerRevealed = false;
+        }
+
+        function revealQuizAnswer() {
+            playFeedbackSound('click');
+            isQuizAnswerRevealed = true;
+            
+            // Show feedback interface
+            document.getElementById('quiz-reveal-btn').classList.add('hidden');
+            document.getElementById('quiz-feedback-controls').classList.remove('hidden');
+
+            const ansBox = document.getElementById('quiz-answer-box');
+            ansBox.classList.remove('hidden');
+            
+            // Animation trigger
+            setTimeout(() => {
+                ansBox.classList.remove('scale-95', 'opacity-0');
+                ansBox.classList.add('scale-100', 'opacity-100');
+            }, 50);
+        }
+
+        function submitQuizFeedback(isCorrect) {
+            const term = quizTerms[currentQuizIndex];
+            stats.totalQuizAttempts += 1;
+
+            if (isCorrect) {
+                playFeedbackSound('correct');
+                stats.score += 10;
+                stats.correctCount += 1;
+                
+                // Add to mastered terms list if not present
+                if (!stats.reviewedTermsList.includes(term.id)) {
+                    stats.reviewedTermsList.push(term.id);
+                }
+            } else {
+                playFeedbackSound('incorrect');
+                // Remove from mastered if was there
+                const index = stats.reviewedTermsList.indexOf(term.id);
+                if (index > -1) {
+                    stats.reviewedTermsList.splice(index, 1);
+                }
+            }
+
+            saveStats();
+
+            // Next question trigger or wrap up
+            currentQuizIndex += 1;
+            if (currentQuizIndex >= quizTerms.length) {
+                // finished all cards
+                document.getElementById('quiz-question-box').innerHTML = `
+                    <div class="flex flex-col gap-3 items-center">
+                        <i class="fa-solid fa-crown text-amber-400 text-5xl animate-bounce mb-2"></i>
+                        <h4 class="text-2xl font-black text-white">رائع! لقد أتممت جميع بطاقات الاختبار!</h4>
+                        <p class="text-sm text-slate-300">ألقِ نظرة على لوحة الإحصائيات لترى مستواك النهائي الحالي.</p>
+                    </div>
+                `;
+                document.getElementById('quiz-reveal-btn').classList.add('hidden');
+                document.getElementById('quiz-feedback-controls').classList.add('hidden');
+                document.getElementById('quiz-answer-box').classList.add('hidden');
+            } else {
+                loadQuizQuestion();
+            }
+        }
+
+        function resetQuizStats() {
+            playFeedbackSound('click');
+            stats.score = 0;
+            stats.correctCount = 0;
+            stats.totalQuizAttempts = 0;
+            stats.reviewedTermsList = [];
+            saveStats();
+            resetQuiz();
+        }
+
+        // Stats Management and Saving
+        function saveStats() {
+            localStorage.setItem('geoStats', JSON.stringify(stats));
+        }
+
+        function renderStatistics() {
+            // General stats
+            document.getElementById('stats-total-score').innerText = stats.score;
+            document.getElementById('stats-completed-count').innerText = stats.reviewedTermsList.length;
+            document.getElementById('stats-favorites-count').innerText = stats.favorites.length;
+            
+            const accuracy = stats.totalQuizAttempts > 0 ? Math.round((stats.correctCount / stats.totalQuizAttempts) * 100) : 0;
+            document.getElementById('stats-accuracy').innerText = `${accuracy}%`;
+
+            // Progress loaders per unit (80 terms broken into units)
+            const u1Total = geoTerms.filter(t => t.unit === 1).length;
+            const u2Total = geoTerms.filter(t => t.unit === 2).length;
+            const u3Total = geoTerms.filter(t => t.unit === 3).length;
+            const u4Total = geoTerms.filter(t => t.unit === 4).length;
+
+            const u1Done = geoTerms.filter(t => t.unit === 1 && stats.reviewedTermsList.includes(t.id)).length;
+            const u2Done = geoTerms.filter(t => t.unit === 2 && stats.reviewedTermsList.includes(t.id)).length;
+            const u3Done = geoTerms.filter(t => t.unit === 3 && stats.reviewedTermsList.includes(t.id)).length;
+            const u4Done = geoTerms.filter(t => t.unit === 4 && stats.reviewedTermsList.includes(t.id)).length;
+
+            const u1Pct = Math.round((u1Done / u1Total) * 100);
+            const u2Pct = Math.round((u2Done / u2Total) * 100);
+            const u3Pct = Math.round((u3Done / u3Total) * 100);
+            const u4Pct = Math.round((u4Done / u4Total) * 100);
+
+            // Unit 1
+            document.getElementById('progress-u1-label').innerText = `${u1Pct}%`;
+            document.getElementById('progress-u1-bar').style.width = `${u1Pct}%`;
+            // Unit 2
+            document.getElementById('progress-u2-label').innerText = `${u2Pct}%`;
+            document.getElementById('progress-u2-bar').style.width = `${u2Pct}%`;
+            // Unit 3
+            document.getElementById('progress-u3-label').innerText = `${u3Pct}%`;
+            document.getElementById('progress-u3-bar').style.width = `${u3Pct}%`;
+            // Unit 4
+            document.getElementById('progress-u4-label').innerText = `${u4Pct}%`;
+            document.getElementById('progress-u4-bar').style.width = `${u4Pct}%`;
+
+            // Achievement Badges thresholds
+            const totalMastered = stats.reviewedTermsList.length;
+            if (totalMastered >= 1) {
+                document.getElementById('badge-first').classList.remove('opacity-40');
+                document.getElementById('badge-first').classList.add('border-amber-500/50', 'bg-amber-950/10');
+            }
+            if (totalMastered >= 40) {
+                document.getElementById('badge-half').classList.remove('opacity-40');
+                document.getElementById('badge-half').classList.add('border-yellow-500/50', 'bg-yellow-950/10');
+            }
+            if (totalMastered >= 75) {
+                document.getElementById('badge-master').classList.remove('opacity-40');
+                document.getElementById('badge-master').classList.add('border-purple-500/50', 'bg-purple-950/10');
+            }
+        }
+
+        // On load event setup
+        window.onload = function() {
+            renderTermsList();
+            selectTerm(1); // default selection
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bac HistoriQ — Guide d'Expression Écrite (Sujets Inédits)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Google Fonts: Inter & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .serif-title {
+            font-family: 'Playfair Display', serif;
+        }
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class="bg-slate-905 bg-slate-900 text-slate-100 min-h-screen flex flex-col selection:bg-emerald-500 selection:text-white" x-data="bacApp()">
+
+    <header class="border-b border-slate-800 bg-slate-950/90 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="h-10 w-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+                    <svg class="w-6 h-6 text-slate-950" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                        Bac HistoriQ <span class="text-xs bg-red-500/10 text-red-400 px-2.5 py-0.5 rounded-full border border-red-500/20 font-medium">Sujets Inédits 2026</span>
+                    </h1>
+                    <p class="text-xs text-slate-400">Prédire l'imprévisible pour l'expression écrite du Bac de Français</p>
+                </div>
+            </div>
+            
+            <nav class="hidden md:flex space-x-1">
+                <a href="#themes" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/50 transition">5 Sujets Jamais Tombés</a>
+                <a href="#reformulator" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/50 transition">Réformulateur Cible</a>
+                <a href="#vocab" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/50 transition">Verbes de Visée</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="relative overflow-hidden py-12 lg:py-16 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-900">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(239,68,68,0.06),transparent_50%)]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="text-center max-w-3xl mx-auto">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-red-500/10 text-red-400 border border-red-500/20 mb-6">
+                    <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
+                    Anticipation : Thématiques Zéro Doublon
+                </span>
+                <h2 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight serif-title">
+                    Prépare 5 sujets <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-amber-300">jamais vus</span> au Bac !
+                </h2>
+                <p class="mt-6 text-lg text-slate-300 leading-relaxed">
+                    Les correcteurs cherchent des angles novateurs. Découvre l'infographie de 5 thèmes hautement probables mais encore jamais sélectionnés, avec leurs structures (Intro, Dével., Conclusion) et leur vocabulaire de haut niveau.
+                </p>
+                <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#themes" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-red-500 to-amber-500 text-white font-bold hover:shadow-lg hover:shadow-red-500/20 transition duration-300 flex items-center justify-center gap-2">
+                        Découvrir les 5 thèmes inédits
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                    </a>
+                    <a href="#reformulator" class="px-6 py-3.5 rounded-xl bg-slate-800 text-white font-medium hover:bg-slate-700 border border-slate-700/50 transition duration-300 flex items-center justify-center gap-2">
+                        Bâtisseur de phrases magique
+                        <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 21l8.982-8.982m-9 9l3.193-3.193M21 3l-8.982 8.982m0 0l-3.193-3.193" /></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
+        
+        <section id="themes" class="mb-16">
+            <div class="mb-8 text-center md:text-left">
+                <div class="flex items-center gap-2 justify-center md:justify-start">
+                    <span class="h-2 w-2 rounded-full bg-red-500"></span>
+                    <h3 class="text-3xl font-extrabold text-white serif-title">5 Sujets d'Expression Écrite 100% Inédits</h3>
+                </div>
+                <p class="text-slate-400 mt-2">Clique sur un thème original pour charger sa structure chronologique, sa visée communicative et ses exemples exclusifs.</p>
+            </div>
+
+            <!-- Tab Selectors for 5 Unprecedented Themes -->
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-3 mb-8">
+                <template x-for="(theme, index) in themes" :key="index">
+                    <button 
+                        @click="selectTheme(index)" 
+                        class="p-4 rounded-xl text-left border transition-all duration-300 relative overflow-hidden flex flex-col justify-between min-h-[140px]"
+                        :class="activeThemeIndex === index 
+                            ? 'bg-gradient-to-br from-slate-800 to-slate-900 border-red-500 shadow-md shadow-red-500/10 text-white' 
+                            : 'bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700 hover:bg-slate-900/50'"
+                    >
+                        <!-- Floating Badge -->
+                        <div class="absolute right-2 top-2 text-xs font-bold font-mono opacity-25" :class="activeThemeIndex === index ? 'text-red-400 opacity-80' : 'text-slate-500'">
+                            #0<span x-text="index + 1"></span>
+                        </div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="p-1.5 rounded-lg text-red-400 bg-red-500/10" x-html="theme.icon"></span>
+                            <span class="text-[10px] font-bold tracking-wider uppercase text-red-400">Sujet Inédit</span>
+                        </div>
+                        <h4 class="font-bold text-xs leading-snug line-clamp-3 text-white" x-text="theme.title"></h4>
+                    </button>
+                </template>
+            </div>
+
+            <div class="bg-slate-950 border border-slate-800 rounded-3xl p-6 md:p-8 relative overflow-hidden">
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(239,68,68,0.02),transparent_40%)]"></div>
+                
+                <!-- Active Theme Header -->
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between border-b border-slate-800 pb-6 mb-8 gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="p-4 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-400 flex items-center justify-center shrink-0">
+                            <div class="w-8 h-8" x-html="themes[activeThemeIndex].icon"></div>
+                        </div>
+                        <div>
+                            <span class="text-xs uppercase font-bold tracking-widest text-red-400">Angle Thématique Inédit</span>
+                            <h3 class="text-2xl md:text-3xl font-extrabold text-white serif-title mt-1" x-text="themes[activeThemeIndex].title"></h3>
+                            <p class="text-sm text-slate-400 mt-1" x-text="themes[activeThemeIndex].description"></p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-900 text-xs font-semibold text-slate-300 flex items-center gap-1.5 border border-slate-800">
+                            <span class="w-2 h-2 rounded-full bg-red-400"></span>
+                            Visée : <span class="text-red-400" x-text="themes[activeThemeIndex].visee"></span>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Three-Step Visual Roadmap (Intro, Dev, Conclusion) -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 relative z-10">
+                    
+                    <!-- STEP 1: INTRODUCTION -->
+                    <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1 text-xs font-bold rounded-full bg-red-500/10 text-red-400 border border-red-500/20 uppercase tracking-wider">
+                                    1. Introduction
+                                </span>
+                                <span class="text-xs text-slate-500 font-mono">Le Cadre</span>
+                            </div>
+                            
+                            <h4 class="font-bold text-white text-base mb-2">Entrée en matière</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed mb-4" x-text="themes[activeThemeIndex].structure.intro.explanation"></p>
+                            
+                            <div class="bg-slate-950/80 rounded-xl p-4 border border-slate-800/60 mb-4">
+                                <h5 class="text-[10px] font-bold text-red-400 uppercase tracking-widest mb-2">Lexique d'excellence :</h5>
+                                <div class="flex flex-wrap gap-1.5">
+                                    <template x-for="word in themes[activeThemeIndex].structure.intro.keywords">
+                                        <span class="text-[11px] px-2.5 py-1 rounded bg-slate-800 text-slate-300 hover:text-red-400 transition cursor-pointer" @click="addWordToInput(word)" x-text="word"></span>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-800/80 pt-4 mt-4">
+                            <h5 class="text-[10px] font-bold text-slate-400 uppercase mb-2">Exemple de formulation (Bac) :</h5>
+                            <blockquote class="text-xs italic text-slate-300 border-l-2 border-red-500 pl-3 py-1 bg-slate-950/40" x-text="themes[activeThemeIndex].structure.intro.example"></blockquote>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: DÉVELOPPEMENT -->
+                    <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition flex flex-col justify-between relative">
+                        <div class="hidden lg:block absolute -right-4 top-1/2 -translate-y-1/2 text-slate-800 z-0">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+                        </div>
+                        <div class="hidden lg:block absolute -left-4 top-1/2 -translate-y-1/2 text-slate-800 z-0">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1 text-xs font-bold rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase tracking-wider">
+                                    2. Développement
+                                </span>
+                                <span class="text-xs text-slate-500 font-mono">Le Cœur</span>
+                            </div>
+                            
+                            <h4 class="font-bold text-white text-base mb-2">Les arguments précis</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed mb-4" x-text="themes[activeThemeIndex].structure.development.explanation"></p>
+                            
+                            <div class="bg-slate-950/80 rounded-xl p-4 border border-slate-800/60 mb-4">
+                                <h5 class="text-[10px] font-bold text-amber-400 uppercase tracking-widest mb-2">Lexique d'excellence :</h5>
+                                <div class="flex flex-wrap gap-1.5">
+                                    <template x-for="word in themes[activeThemeIndex].structure.development.keywords">
+                                        <span class="text-[11px] px-2.5 py-1 rounded bg-slate-800 text-slate-300 hover:text-amber-400 transition cursor-pointer" @click="addWordToInput(word)" x-text="word"></span>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-800/80 pt-4 mt-4">
+                            <h5 class="text-[10px] font-bold text-slate-400 uppercase mb-2">Exemple de formulation (Bac) :</h5>
+                            <blockquote class="text-xs italic text-slate-300 border-l-2 border-amber-500 pl-3 py-1 bg-slate-950/40" x-text="themes[activeThemeIndex].structure.development.example"></blockquote>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: CONCLUSION -->
+                    <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1 text-xs font-bold rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 uppercase tracking-wider">
+                                    3. Conclusion
+                                </span>
+                                <span class="text-xs text-slate-500 font-mono">La Portée</span>
+                            </div>
+                            
+                            <h4 class="font-bold text-white text-base mb-2">Bilan philosophique</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed mb-4" x-text="themes[activeThemeIndex].structure.conclusion.explanation"></p>
+                            
+                            <div class="bg-slate-950/80 rounded-xl p-4 border border-slate-800/60 mb-4">
+                                <h5 class="text-[10px] font-bold text-blue-400 uppercase tracking-widest mb-2">Lexique d'excellence :</h5>
+                                <div class="flex flex-wrap gap-1.5">
+                                    <template x-for="word in themes[activeThemeIndex].structure.conclusion.keywords">
+                                        <span class="text-[11px] px-2.5 py-1 rounded bg-slate-800 text-slate-300 hover:text-blue-400 transition cursor-pointer" @click="addWordToInput(word)" x-text="word"></span>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-800/80 pt-4 mt-4">
+                            <h5 class="text-[10px] font-bold text-slate-400 uppercase mb-2">Exemple de formulation (Bac) :</h5>
+                            <blockquote class="text-xs italic text-slate-300 border-l-2 border-blue-500 pl-3 py-1 bg-slate-950/40" x-text="themes[activeThemeIndex].structure.conclusion.example"></blockquote>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="reformulator" class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+            
+            <!-- Left 2 Cols: Unprecedented Sentence Reformulator -->
+            <div class="lg:col-span-2 bg-slate-950 border border-slate-800 rounded-3xl p-6 md:p-8 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-2 bg-red-500/10 text-red-400 rounded-xl">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.656 48.656 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7C4.765 12 4.765 12 4.765 12s0 0 0 0c.092 1.209.138 2.43.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.092-1.209.138-2.43.138-3.662z" /><path stroke-linecap="round" stroke-linejoin="round" d="M9 10.5l3 3 3-3" /></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white serif-title">Le Traducteur Académique (Sujets Inédits)</h3>
+                            <p class="text-sm text-slate-400">Entre une idée simple relative aux thèmes originaux ci-dessus pour obtenir immédiatement des formulations complexes spécialisées.</p>
+                        </div>
+                    </div>
+
+                    <!-- Demo Sentence Triggers for Fast Interactions -->
+                    <div class="space-y-4 mb-6">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Sélectionne une idée basique pour voir la magie :</label>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
+                                <template x-for="demo in demoSentences">
+                                    <button 
+                                        @click="userInput = demo.original; performReformulation()" 
+                                        class="text-left text-xs p-2.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:border-red-500/50 hover:bg-slate-800/40 transition flex flex-col justify-between"
+                                    >
+                                        <span class="font-semibold text-[10px] text-red-400 mb-1" x-text="demo.theme"></span>
+                                        <span x-text="demo.original"></span>
+                                    </button>
+                                </template>
+                            </div>
+                            
+                            <textarea 
+                                x-model="userInput" 
+                                @input="performReformulation()"
+                                class="w-full bg-slate-900 border border-slate-800 rounded-xl p-4 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 min-h-[100px] transition" 
+                                placeholder="Écris ta propre idée ici... Ex : Les étudiants ont quitté l'école."
+                            ></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Target Formulations Output -->
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Propositions stylistiques à forte valeur ajoutée :</span>
+                            <span class="text-xs text-red-400 flex items-center gap-1">
+                                <span class="w-2 h-2 rounded-full bg-red-400 animate-pulse"></span>
+                                Prêt pour l'épreuve écrite
+                            </span>
+                        </div>
+
+                        <div class="space-y-3">
+                            <template x-for="(reformulation, idx) in matchedReformulations">
+                                <div class="bg-slate-900 border border-slate-800/80 rounded-xl p-4 hover:border-slate-700 transition relative group">
+                                    <div class="absolute right-3 top-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <button 
+                                            @click="copyText(reformulation)" 
+                                            class="p-1 rounded bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition"
+                                            title="Copier"
+                                        >
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5A3.375 3.375 0 006.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0015 2.25h-1.5a2.251 2.251 0 00-1.9 1.086M12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" /></svg>
+                                        </button>
+                                    </div>
+                                    <div class="flex items-center gap-2 mb-1.5">
+                                        <span class="text-[9px] font-bold px-2 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20" x-text="idx === 0 ? 'Niveau Expert' : 'Formulation Académique'"></span>
+                                    </div>
+                                    <p class="text-sm text-slate-200 font-medium pr-8" x-text="reformulation"></p>
+                                </div>
+                            </template>
+
+                            <div x-show="matchedReformulations.length === 0" class="text-center py-6 bg-slate-900/50 border border-dashed border-slate-800 rounded-xl text-slate-500 text-sm">
+                                Tape des mots comme "grève", "enfant", "valise", "médecin", "ligne" ou "mine" pour déclencher les reformulations correspondantes.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-slate-900 flex justify-between items-center text-xs text-slate-500">
+                    <span>* Ces structures stylistiques garantissent la note maximale en correction syntaxique.</span>
+                </div>
+            </div>
+
+            <!-- Right 1 Col: "Chasse au Banal" specialized checklist -->
+            <div class="bg-slate-950 border border-slate-800 rounded-3xl p-6 md:p-8 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-2 bg-red-500/10 text-red-400 rounded-xl">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0-10.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.249-8.25-3.286zm0 13.036h.008v.008H12v-.008z" /></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white serif-title">Lexique Spécialisé</h3>
+                            <p class="text-sm text-slate-400">Évite les raccourcis. Emploie les termes précis exigés par les inspecteurs de français.</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <template x-for="item in banishList">
+                            <div class="bg-slate-900/50 rounded-xl border border-slate-800 p-4 flex flex-col gap-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xs font-semibold px-2 py-0.5 rounded bg-rose-500/10 text-rose-400 border border-rose-500/20 line-through" x-text="item.banned"></span>
+                                    <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+                                    <span class="text-xs font-semibold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" x-text="item.premium"></span>
+                                </div>
+                                <p class="text-[11px] text-slate-400" x-text="item.context"></p>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-slate-800 text-xs text-slate-500 text-center">
+                    Maîtriser ce lexique démontre une connaissance profonde du fait historique.
+                </div>
+            </div>
+
+        </section>
+
+        <section id="vocab" class="bg-slate-950 border border-slate-800 rounded-3xl p-6 md:p-8 mb-16">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+                <div>
+                    <h3 class="text-3xl font-extrabold text-white serif-title">Les Verbes de Visée Communicative (Précision QCM)</h3>
+                    <p class="text-slate-400 mt-1">Sache faire la différence exacte lors des questions de compréhension du Baccalauréat.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <!-- Visée 1 -->
+                <div class="bg-slate-900/40 border border-slate-800/80 rounded-2xl p-5">
+                    <h4 class="font-bold text-white mb-3 text-sm flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
+                        Rétablir la vérité
+                    </h4>
+                    <p class="text-xs text-slate-400 mb-3">L'auteur veut démonter un mensonge de l'historien colonial ou de la propagande.</p>
+                    <ul class="space-y-1.5 text-xs font-mono text-red-400">
+                        <li>- Démanteler la thèse...</li>
+                        <li>- Corriger les faits</li>
+                        <li>- Déconstruire le mythe</li>
+                        <li>- S'appuyer sur l'archive</li>
+                    </ul>
+                </div>
+
+                <!-- Visée 2 -->
+                <div class="bg-slate-900/40 border border-slate-800/80 rounded-2xl p-5">
+                    <h4 class="font-bold text-white mb-3 text-sm flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                        Rendre hommage à
+                    </h4>
+                    <p class="text-xs text-slate-400 mb-3">L'auteur met l'accent sur la dimension humaine et morale de personnages précis.</p>
+                    <ul class="space-y-1.5 text-xs font-mono text-amber-400">
+                        <li>- Saluer l'héroïsme</li>
+                        <li>- Honorer la mémoire</li>
+                        <li>- Célébrer le sacrifice</li>
+                        <li>- Immortaliser les Chouhada</li>
+                    </ul>
+                </div>
+
+                <!-- Visée 3 -->
+                <div class="bg-slate-900/40 border border-slate-800/80 rounded-2xl p-5">
+                    <h4 class="font-bold text-white mb-3 text-sm flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                        Valoriser le rôle de
+                    </h4>
+                    <p class="text-xs text-slate-400 mb-3">L'auteur analyse l'utilité stratégique d'une entité ou d'une action.</p>
+                    <ul class="space-y-1.5 text-xs font-mono text-emerald-400">
+                        <li>- Mettre en valeur l'impact</li>
+                        <li>- Rehausser la portée de</li>
+                        <li>- Souligner l'apport de</li>
+                        <li>- Démontrer l'efficacité</li>
+                    </ul>
+                </div>
+
+                <!-- Visée 4 -->
+                <div class="bg-slate-900/40 border border-slate-800/80 rounded-2xl p-5">
+                    <h4 class="font-bold text-white mb-3 text-sm flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+                        Dénoncer/Condamner
+                    </h4>
+                    <p class="text-xs text-slate-400 mb-3">L'auteur accuse vigoureusement et prouve des violations flagrantes.</p>
+                    <ul class="space-y-1.5 text-xs font-mono text-blue-400">
+                        <li>- Fustiger la cruauté</li>
+                        <li>- Mettre à nu la barbarie</li>
+                        <li>- Flétrir les crimes</li>
+                        <li>- Révéler le génocide</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic Modal Toast -->
+        <div 
+            x-show="showToast" 
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 translate-y-4"
+            x-transition:enter-end="opacity-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100 translate-y-0"
+            x-transition:leave-end="opacity-0 translate-y-4"
+            class="fixed bottom-5 right-5 z-50 bg-slate-950 border border-red-500 rounded-xl p-4 shadow-xl flex items-center gap-3 max-w-sm"
+            style="display: none;"
+        >
+            <div class="h-8 w-8 rounded-full bg-red-500/10 text-red-400 flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+            </div>
+            <div>
+                <p class="text-sm font-bold text-white">Formule copiée !</p>
+                <p class="text-xs text-slate-400">Tu peux maintenant la coller dans ton expression écrite.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 bg-slate-950 py-8 text-center text-sm text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-2">
+                <span class="font-bold text-white">Bac HistoriQ</span>
+                <span>— S'entraîner sur l'inédit pour garantir la perfection.</span>
+            </div>
+            <p>&copy; 2026. Conçu pour l'excellence au Baccalauréat Algérien.</p>
+        </div>
+    </footer>
+
+    <script>
+        function bacApp() {
+            return {
+                activeThemeIndex: 0,
+                userInput: '',
+                matchedReformulations: [],
+                showToast: false,
+                
+                // Demo Sentences focused exclusively on these novel 5 themes
+                demoSentences: [
+                    { theme: '1. Grève de 56', original: 'Les étudiants algériens ont fait grève pour aller faire la guerre.' },
+                    { theme: '2. Enfants Guetteurs', original: 'Des enfants portaient des lettres pour le FLN sous le nez des soldats.' },
+                    { theme: '3. Porteurs de Valises', original: 'Des Français ont aidé la révolution en portant de l\'argent secret.' },
+                    { theme: '4. Service de Santé', original: 'Les médecins soignaient les blessés dans les grottes sans médicaments.' }
+                ],
+
+                // Banish list tailored to the 5 unprecedented themes
+                banishList: [
+                    { banned: 'Faire la grève de l\'école', premium: 'Décréter le boycott académique', context: 'Pour la grève étudiante historique du 19 mai 1956.' },
+                    { banned: 'Enfants espions', premium: 'Jeunes agents de liaison clandestins', context: 'Pour qualifier les adolescents et enfants coursiers.' },
+                    { banned: 'Français gentils', premium: 'Militants anticolonialistes / Réseau de soutien métropolitain', context: 'Pour caractériser les porteurs de valises.' },
+                    { banned: 'Médecins de fortune', premium: 'Le Service de Santé de l\'ALN', context: 'Pour désigner la structure médicale clandestine.' },
+                    { banned: 'Grands murs en fer', premium: 'Les lignes électrifiées étanches (Challe et Morice)', context: 'Pour qualifier les barrages frontaliers fortifiés.' }
+                ],
+
+                // 5 Unprecedented Themes (Never featured as main subjects in past Bacs)
+                themes: [
+                    {
+                        title: "Le Boycott Universitaire et Scolaire (La Grève du 19 Mai 1956)",
+                        description: "La décision historique de la jeunesse intellectuelle algérienne de délaisser ses études pour rallier massivement les rangs de la révolution.",
+                        visee: "Mettre en valeur le sacrifice patriotique de la jeunesse intellectuelle",
+                        icon: `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>`,
+                        structure: {
+                            intro: {
+                                explanation: "Présenter le mot d'ordre de l'UGEMA en mai 1956 et le dilemme des étudiants : choisir entre un avenir professionnel assuré et l'appel de la patrie.",
+                                keywords: ["UGEMA", "19 mai 1956", "Boycott académique", "Dilemme existentiel", "Rupture"],
+                                example: "Le 19 mai 1956 marque un tournant intellectuel majeur lorsque l'Union Générale des Étudiants Musulmans Algériens appela à une grève illimitée des cours et des examens."
+                            },
+                            development: {
+                                explanation: "Analyser l'impact de ce ralliement : l'ALN se dote de cadres instruits pour la logistique, la diplomatie, la santé et les transmissions.",
+                                keywords: ["Cadres instruits", "Rallier le maquis", "Propagande structurée", "Plus-value intellectuelle"],
+                                example: "L'apport de cette élite étudiante fut crucial : elle permit de structurer la diplomatie naissante du FLN et d'optimiser l'organisation des réseaux de transmission au cœur des maquis."
+                            },
+                            conclusion: {
+                                explanation: "Insister sur la phrase célèbre : 'Avec nos diplômes, nous ferons des citoyens, mais sans patrie, nous ne sommes rien', symbole de l'abnégation.",
+                                keywords: ["Abnégation totale", "Souveraineté prioritaire", "Héritage moral", "Jeunesse sacrifiée"],
+                                example: "En conclusion, ce sursaut patriotique démontre que la libération de la patrie primait sur toute ambition individuelle ou académique."
+                            }
+                        }
+                    },
+                    {
+                        title: "L'Héroïsme Silencieux des Enfants et Adolescents Messagers (Les Guetteurs)",
+                        description: "Le rôle vital joué par les enfants (souvent de moins de 15 ans) comme agents de liaison et observateurs indétectables par l'armée ennemie.",
+                        visee: "Rendre hommage à l'héroïsme précoce de l'enfance algérienne",
+                        icon: `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>`,
+                        structure: {
+                            intro: {
+                                explanation: "Situer le contexte de la guérilla urbaine et rurale où la méfiance de l'armée se concentrait sur les adultes, laissant une faille exploitée par la jeunesse.",
+                                keywords: ["Innocence apparente", "Sous-estimer", "Failles de surveillance", "Jeunesse téméraire"],
+                                example: "Dans la guerre asymétrique que menait l'ALN, l'innocence apparente de l'enfance devint une arme stratégique indispensable pour contourner la vigilance coloniale."
+                            },
+                            development: {
+                                explanation: "Détailler les tâches périlleuses : acheminer les plis secrets du FLN dans des cartables, surveiller les mouvements de troupes coloniales, saboter les lignes téléphoniques.",
+                                keywords: ["Agents de liaison", "Plis confidentiels", "Signaux d'alerte", "Courage inné", "Discrétion"],
+                                example: "Ces jeunes messagers transportaient de précieuses directives au péril de leur vie, utilisant leur parfaite connaissance du terrain pour guider les moudjahidine à travers les maquis."
+                            },
+                            conclusion: {
+                                explanation: "Rappeler que ces enfants, privés d'insouciance, ont payé un lourd tribut par la détention ou la mort pour assurer la liberté de leur peuple.",
+                                keywords: ["Enfance spoliée", "Tribut de guerre", "Héros de l'ombre", "Dévouement précoce"],
+                                example: "En définitive, l'engagement de ces enfants prouve que la soif de liberté n'avait pas d'âge, érigeant ces visages de l'ombre en piliers de la mémoire collective."
+                            }
+                        }
+                    },
+                    {
+                        title: "Le Réseau Jeanson et les \"Porteurs de Valises\" (La Solidarité Internationale)",
+                        description: "Le soutien clandestin apporté au FLN par des intellectuels et citoyens français anticolonialistes, qui risquaient la prison pour transporter des fonds et cacher des militants.",
+                        visee: "Mettre en lumière l'internationalisation et la dimension éthique de la lutte",
+                        icon: `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z" /></svg>`,
+                        structure: {
+                            intro: {
+                                explanation: "Présenter l'existence d'une résistance morale au sein même de la métropole française, portée par des esprits refusant l'oppression coloniale.",
+                                keywords: ["Réseau Jeanson", "Anticolonialisme français", "Solidarité transfrontalière", "Valises de fonds"],
+                                example: "Au cœur même de la puissance coloniale, des hommes et des femmes épris de justice choisirent de transgresser les lois de leur propre pays pour soutenir la cause algérienne."
+                            },
+                            development: {
+                                explanation: "Expliquer le fonctionnement du réseau : transfert clandestin des cotisations de l'émigration vers la Suisse, hébergement de cadres du FLN recherchés, publication de manifestes.",
+                                keywords: ["Réseau de soutien", "Collecte de fonds", "Insoumission", "Clandestinité active", "Procès politiques"],
+                                example: "En transportant des fonds secrets et en logeant des militants traqués par la police, les célèbres 'porteurs de valises' ont porté un coup sévère à l'isolement politique de la révolution."
+                            },
+                            conclusion: {
+                                explanation: "Montrer comment ces actions ont brisé le discours binaire de la propagande et prouvé la légitimité universelle de la cause de l'indépendance.",
+                                keywords: ["Alliance éthique", "Universalité des droits", "Fraternité réelle", "Victoire morale"],
+                                example: "En conclusion, l'existence de cette solidarité métropolitaine confère à la cause algérienne une dimension universelle, transcendant les clivages nationaux pour la justice."
+                            }
+                        }
+                    },
+                    {
+                        title: "Le Service de Santé de l'ALN et les Médecins du Maquis",
+                        description: "L'organisation d'un réseau médical d'urgence extraordinaire dans des conditions extrêmes, soignant les combattants et les populations rurales coupées de tout secours.",
+                        visee: "Glorifier le courage et l'ingéniosité humanitaire du corps médical révolutionnaire",
+                        icon: `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>`,
+                        structure: {
+                            intro: {
+                                explanation: "Évoquer la création clandestine du Service de Santé de l'ALN pour contrer le blocus sanitaire et les maladies dans les zones opérationnelles.",
+                                keywords: ["Blocus sanitaire", "Médecine de maquis", "Infirmeries spéléologiques", "Asepsie rudimentaire"],
+                                example: "Face aux blessures de guerre et à l'isolement total des maquis, l'ALN a dû concevoir un système de santé d'urgence d'une ingéniosité inouïe."
+                            },
+                            development: {
+                                explanation: "Décrire les opérations chirurgicales complexes effectuées dans des grottes, à la lueur des bougies, avec un matériel médical improvisé et des anesthésiants presque inexistants.",
+                                keywords: ["Chirurgie spéléologique", "Conditions insalubres", "Substituts médicaux", "Abnégation médicale"],
+                                example: "Des chirurgiens et infirmiers réalisaient des amputations et des extractions de balles au fond des cavernes, bravant la rareté extrême des antibiotiques et l'imminence des raids ennemis."
+                            },
+                            conclusion: {
+                                explanation: "Affirmer que ce service a sauvé des milliers de vies de combattants et de civils, incarnant l'embryon d'un futur État souverain et protecteur.",
+                                keywords: ["Humanisme profond", "Sauver des vies", "Souveraineté sanitaire", "Héros en blouse blanche"],
+                                example: "Somme toute, ces soignants de l'ombre ont opposé le respect absolu de la vie humaine à la machine de destruction coloniale, forgeant le respect éternel de la nation."
+                            }
+                        }
+                    },
+                    {
+                        title: "Les Lignes Challe et Morice (La Résistance face aux Barrages Électrifiés)",
+                        description: "La lutte acharnée des unités de l'ALN pour forcer les terrifiantes frontières fortifiées, minées et électrifiées qui isolaient l'Algérie de la Tunisie et du Maroc.",
+                        visee: "Valoriser l'héroïsme technique et tactique des combattants des frontières",
+                        icon: `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>`,
+                        structure: {
+                            intro: {
+                                explanation: "Présenter le mur de la mort conçu par l'armée française (lignes Morice et Challe) à l'Est et à l'Ouest pour étouffer l'approvisionnement en armes de la révolution.",
+                                keywords: ["Ligne Morice", "Barrage électrifié", "Clôture de la mort", "Asphyxie logistique", "Mines terrestres"],
+                                example: "Pour couper l'ALN de ses bases arrières, le commandement français érigea des barrières électrifiées d'une dangerosité sans précédent aux frontières tunisienne et marocaine."
+                            },
+                            development: {
+                                explanation: "Montrer comment les bataillons de l'ALN inventaient des techniques audacieuses pour cisailler les fils haute tension, désamorcer les mines à main nue et affronter l'artillerie lourde.",
+                                keywords: ["Franchissement héroïque", "Isolants de fortune", "Cisailler sous le feu", "Guerre électronique"],
+                                example: "Armés de pinces isolées avec du caoutchouc de fortune et de techniques de diversion coordonnées, les combattants défiaient les radars et le réseau électrique mortel au prix de sacrifices incommensurables."
+                            },
+                            conclusion: {
+                                explanation: "Souligner que ces opérations de franchissement ont maintenu vivante la flamme de la résistance à l'intérieur, prouvant l'inefficacité des barrières physiques face à la détermination d'un peuple.",
+                                keywords: ["Échec de la technologie", "Détermination inébranlable", "Pont de liberté", "Souveraineté acquise"],
+                                example: "En conclusion, le forcement de ces lignes fortifiées prouve qu'aucune barrière technologique, si meurtrière soit-elle, ne peut emprisonner l'aspiration d'un peuple à sa liberté."
+                            }
+                        }
+                    }
+                ],
+
+                selectTheme(index) {
+                    this.activeThemeIndex = index;
+                },
+
+                // Insert dynamic keywords to help student build their context fast
+                addWordToInput(word) {
+                    if (this.userInput.length > 0) {
+                        this.userInput += " " + word;
+                    } else {
+                        this.userInput = word;
+                    }
+                    this.performReformulation();
+                },
+
+                // Rule-based processor customized for unprecedented themes
+                performReformulation() {
+                    const text = this.userInput.toLowerCase().trim();
+                    const suggestions = [];
+
+                    if (!text) {
+                        this.matchedReformulations = [];
+                        return;
+                    }
+
+                    // Theme 1: Boycott / Etudiants / 19 mai / ecole
+                    if (text.includes("grève") || text.includes("étudiant") || text.includes("ecole") || text.includes("cours") || text.includes("études") || text.includes("19 mai")) {
+                        suggestions.push("L'auteur met en relief la portée historique de la grève du 19 mai 1956, acte fondateur où la conscience politique de la jeunesse a supplanté l'intérêt universitaire.");
+                        suggestions.push("En décidant de boycotter les bancs des facultés coloniales, les étudiants algériens ont apporté une plus-value intellectuelle et diplomatique capitale à la cause nationale.");
+                    }
+
+                    // Theme 2: Enfant / Messager / Guetteur / adolescents
+                    if (text.includes("enfant") || text.includes("lettre") || text.includes("guetteur") || text.includes("adolescent") || text.includes("messager") || text.includes("petit")) {
+                        suggestions.push("L'auteur rend un hommage poignant à ces jeunes agents de liaison dont l'innocence apparente masquait une audace et une maturité hors du commun.");
+                        suggestions.push("Le texte démontre avec minutie comment l'héroïsme précoce de l'enfance algérienne a permis de pallier les failles logistiques et de déjouer la surveillance ennemie.");
+                    }
+
+                    // Theme 3: Porteurs de valises / Français / Jeanson / Solidarité / ALLIÉS
+                    if (text.includes("français") || text.includes("valise") || text.includes("jeanson") || text.includes("allié") || text.includes("argent")) {
+                        suggestions.push("L'auteur s'attache à valoriser l'engagement éthique des militants français anticolonialistes du réseau Jeanson, qui bravèrent l'oppression étatique au nom de la liberté.");
+                        suggestions.push("Loin d'être isolée, la Révolution a su susciter une solidarité transnationale illustrée par les porteurs de valises, unifiant les consciences morales par-delà les nationalités.");
+                    }
+
+                    // Theme 4: Médecins / Maquis / Santé / Soigner / grottes / blessés
+                    if (text.includes("médecin") || text.includes("grotte") || text.includes("soigner") || text.includes("blessé") || text.includes("médicament") || text.includes("santé")) {
+                        suggestions.push("L'écrivain glorifie le dévouement absolu du Service de Santé de l'ALN, qui opérait des miracles de chirurgie spéléologique sous les bombardements coloniaux.");
+                        suggestions.push("Le texte met en exergue l'organisation médicale clandestine comme symbole fort de l'organisation et de l'humanisme profond de la révolution face à l'asphyxie sanitaire.");
+                    }
+
+                    // Theme 5: Ligne / Challe / Morice / Mine / Barrage / Frontière
+                    if (text.includes("ligne") || text.includes("challe") || text.includes("morice") || text.includes("mine") || text.includes("barrage") || text.includes("frontière")) {
+                        suggestions.push("L'historien analyse le forcement héroïque des barrages Morice et Challe, prouvant qu'aucune étanchéité technologique ne pouvait entraver la volonté libératrice de l'ALN.");
+                        suggestions.push("À travers ce récit, l'auteur fustige l'inhumanité des lignes fortifiées minées tout en célébrant l'ingéniosité tactique des bataillons de l'ombre chargés du franchissement.");
+                    }
+
+                    // Smart Fallbacks for General Advanced Context
+                    if (suggestions.length === 0) {
+                        suggestions.push("L'auteur s'écarte des récits classiques pour jeter une lumière crue sur des dynamiques stratégiques souvent omises par l'histoire officielle.");
+                        suggestions.push("Le texte cherche à rétablir la vérité factuelle sur ces aspects méconnus, soulignant la complexité logistique de la lutte révolutionnaire.");
+                    }
+
+                    this.matchedReformulations = suggestions;
+                },
+
+                // Fast clipboard action
+                copyText(text) {
+                    const tempInput = document.createElement("input");
+                    tempInput.value = text;
+                    document.body.appendChild(tempInput);
+                    tempInput.select();
+                    document.execCommand("copy");
+                    document.body.removeChild(tempInput);
+
+                    this.showToast = true;
+                    setTimeout(() => {
+                        this.showToast = false;
+                    }, 2500);
+                }
+            };
+        }
+    </script>
+</body>
+</html>

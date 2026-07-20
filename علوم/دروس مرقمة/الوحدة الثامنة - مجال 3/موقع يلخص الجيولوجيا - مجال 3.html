@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>البنية الداخلية للكرة الأرضية - بكالوريا 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #0f172a; /* slate-900 */
+            color: #f8fafc; /* slate-50 */
+        }
+        /* Custom styles for the geological core sample */
+        .layer-btn {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .layer-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+        .layer-active {
+            border: 2px solid #38bdf8; /* sky-400 */
+            transform: scale(1.03);
+            z-index: 20;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+        }
+        .discontinuity {
+            border-top: 2px dashed #fbbf24; /* amber-400 */
+            position: relative;
+            margin-top: -2px;
+            z-index: 30;
+            pointer-events: none;
+        }
+        .discontinuity::after {
+            content: attr(data-name);
+            position: absolute;
+            left: -80px;
+            top: -12px;
+            background: #1e293b;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            color: #fbbf24;
+            border: 1px solid #fbbf24;
+        }
+        /* Graph Styles */
+        .graph-line-p { stroke: #38bdf8; stroke-width: 3; fill: none; }
+        .graph-line-s { stroke: #f43f5e; stroke-width: 3; stroke-dasharray: 5,5; fill: none; }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8 flex flex-col items-center">
+
+    <!-- Header Section -->
+    <header class="w-full max-w-6xl text-center mb-8">
+        <h1 class="text-3xl md:text-5xl font-bold text-sky-400 mb-3">البنية الداخلية للكرة الأرضية</h1>
+        <p class="text-slate-400 text-lg md:text-xl">ملخص تفاعلي مخصص لبطل بكالوريا 2026 - وحدة الجيولوجيا</p>
+        <div class="mt-4 inline-block bg-slate-800 border border-slate-700 rounded-lg px-4 py-2">
+            <span class="text-rose-400 font-bold text-sm">💡 نصيحة:</span>
+            <span class="text-slate-300 text-sm">اضغط على الطبقات في المقطع الجيولوجي أدناه لاستكشاف خصائصها.</span>
+        </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Left: Geological Core Sample (Interactive) -->
+        <section class="col-span-1 flex flex-col items-center">
+            <h2 class="text-xl font-bold text-slate-200 mb-4 border-b border-slate-700 pb-2 w-full text-center">المقطع الجيولوجي</h2>
+            
+            <div class="w-full max-w-xs flex flex-col rounded-xl overflow-hidden border border-slate-700 bg-slate-800 shadow-2xl">
+                
+                <!-- Crust -->
+                <button onclick="selectLayer('crust')" id="btn-crust" class="layer-btn bg-stone-500 h-16 flex items-center justify-center font-bold text-white cursor-pointer layer-active">
+                    القشرة الأرضية (0 - 30 كم)
+                </button>
+                
+                <div class="discontinuity" data-name="انقطاع موهو"></div>
+                
+                <!-- Upper Mantle (Lithosphere part) -->
+                <button onclick="selectLayer('lithosphere')" id="btn-lithosphere" class="layer-btn bg-orange-700 h-20 flex flex-col items-center justify-center font-bold text-white cursor-pointer">
+                    <span>الجزء الصلب من البرنص</span>
+                    <span class="text-xs font-normal text-orange-200">(يشكل مع القشرة: الليتوسفير)</span>
+                </button>
+                
+                <!-- Upper Mantle (Asthenosphere) -->
+                <button onclick="selectLayer('asthenosphere')" id="btn-asthenosphere" class="layer-btn bg-orange-600 h-24 flex flex-col items-center justify-center font-bold text-white cursor-pointer">
+                    <span>الأستينوسفير (LVZ)</span>
+                    <span class="text-xs font-normal text-orange-200">(150 - 700 كم)</span>
+                </button>
+                
+                <!-- Lower Mantle (Mesosphere) -->
+                <button onclick="selectLayer('mesosphere')" id="btn-mesosphere" class="layer-btn bg-red-700 h-32 flex items-center justify-center font-bold text-white cursor-pointer">
+                    البرنص السفلي (حتى 2900 كم)
+                </button>
+                
+                <div class="discontinuity" data-name="انقطاع غوتنبرغ"></div>
+                
+                <!-- Outer Core -->
+                <button onclick="selectLayer('outerCore')" id="btn-outerCore" class="layer-btn bg-yellow-600 h-32 flex items-center justify-center font-bold text-white cursor-pointer">
+                    النواة الخارجية (حتى 5100 كم)
+                </button>
+                
+                <div class="discontinuity" data-name="انقطاع ليمان"></div>
+                
+                <!-- Inner Core -->
+                <button onclick="selectLayer('innerCore')" id="btn-innerCore" class="layer-btn bg-yellow-200 h-24 flex flex-col items-center justify-center font-bold text-yellow-900 cursor-pointer">
+                    <span>النواة الداخلية (البذرة)</span>
+                    <span class="text-xs font-normal text-yellow-700">(حتى 6371 كم)</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Right: Details & Graph Panel -->
+        <section class="col-span-1 lg:col-span-2 flex flex-col gap-6">
+            
+            <!-- Details Card -->
+            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 shadow-xl relative overflow-hidden">
+                <!-- Decorative background blur -->
+                <div class="absolute -top-10 -left-10 w-32 h-32 bg-sky-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+                
+                <h2 id="info-title" class="text-2xl font-bold text-sky-400 mb-4 flex items-center gap-2">
+                    القشرة الأرضية (La Croûte)
+                </h2>
+                
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div class="bg-slate-900 p-3 rounded-lg border border-slate-700">
+                        <p class="text-slate-400 text-sm mb-1">العمق</p>
+                        <p id="info-depth" class="font-semibold text-lg text-slate-100">0 إلى 30 كم (متوسط)</p>
+                    </div>
+                    <div class="bg-slate-900 p-3 rounded-lg border border-slate-700">
+                        <p class="text-slate-400 text-sm mb-1">الحالة الفيزيائية</p>
+                        <p id="info-state" class="font-semibold text-lg text-slate-100">صلبة</p>
+                    </div>
+                    <div class="bg-slate-900 p-3 rounded-lg border border-slate-700">
+                        <p class="text-slate-400 text-sm mb-1">الصخر المميز (الكيميائي)</p>
+                        <p id="info-rock" class="font-semibold text-lg text-slate-100">غرانيت (قارية) / بازلت (محيطية)</p>
+                    </div>
+                    <div class="bg-slate-900 p-3 rounded-lg border border-slate-700">
+                        <p class="text-slate-400 text-sm mb-1">الكثافة</p>
+                        <p id="info-density" class="font-semibold text-lg text-slate-100">2.7 (قارية) / 3.0 (محيطية)</p>
+                    </div>
+                </div>
+                
+                <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+                    <p class="text-slate-400 text-sm mb-2">الشرح والتفاصيل:</p>
+                    <p id="info-desc" class="text-slate-200 leading-relaxed">
+                        هي الطبقة الخارجية الصلبة للكرة الأرضية. تنقسم إلى قشرة قارية خفيفة نسبياً وسميكة، وقشرة محيطية أثقل وأقل سمكاً. تشكل مع الجزء العلوي الصلب للبرنص ما يسمى بـ "الليتوسفير".
+                    </p>
+                </div>
+            </div>
+
+            <!-- Seismic Graph Card -->
+            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 shadow-xl">
+                <h3 class="text-xl font-bold text-slate-200 mb-4">سلوك الموجات الزلزالية P و S</h3>
+                <div class="relative w-full h-64 bg-slate-900 rounded-lg border border-slate-700 overflow-hidden flex items-center justify-center p-4">
+                    
+                    <!-- SVG Graph -->
+                    <svg viewBox="0 0 500 300" class="w-full h-full" preserveAspectRatio="none">
+                        <!-- Grid Lines (Depths) -->
+                        <line x1="0" y1="50" x2="500" y2="50" stroke="#334155" stroke-dasharray="4" />
+                        <text x="10" y="45" fill="#94a3b8" font-size="12">100km (موهو تقريباً)</text>
+                        
+                        <line x1="0" y1="150" x2="500" y2="150" stroke="#fbbf24" stroke-dasharray="4" opacity="0.5" />
+                        <text x="10" y="145" fill="#fbbf24" font-size="12">2900km (غوتنبرغ)</text>
+                        
+                        <line x1="0" y1="230" x2="500" y2="230" stroke="#fbbf24" stroke-dasharray="4" opacity="0.5" />
+                        <text x="10" y="225" fill="#fbbf24" font-size="12">5100km (ليمان)</text>
+
+                        <!-- P-Wave (Solid Line) -->
+                        <path d="M 100 0 L 120 50 C 140 100, 200 140, 250 150 L 150 155 C 180 190, 220 220, 230 230 L 280 235 L 300 300" class="graph-line-p" />
+                        
+                        <!-- S-Wave (Dashed Line) -->
+                        <path d="M 60 0 L 70 50 C 90 100, 140 140, 160 150" class="graph-line-s" />
+                    </svg>
+
+                    <!-- Graph Legend -->
+                    <div class="absolute top-4 right-4 bg-slate-800/80 p-2 rounded border border-slate-600 backdrop-blur-sm">
+                        <div class="flex items-center gap-2 mb-1">
+                            <div class="w-4 h-1 bg-sky-400"></div>
+                            <span class="text-xs text-slate-300">موجات P (تنتشر في الصلب والسائل)</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-4 h-1 border-t-2 border-dashed border-rose-400"></div>
+                            <span class="text-xs text-slate-300">موجات S (تنتشر في الصلب فقط)</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-400 mt-3 text-center">لاحظ الاختفاء المفاجئ للموجات S عند عمق 2900 كم (انقطاع غوتنبرغ)، مما يثبت أن النواة الخارجية سائلة!</p>
+            </div>
+
+        </section>
+    </main>
+
+    <footer class="mt-12 text-slate-500 text-sm text-center">
+        تم التصميم لمساعدتك على التفوق. بالتوفيق في البكالوريا! 🎓
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Database of geological layers based on Algerian BAC Curriculum
+        const geologyData = {
+            crust: {
+                title: "القشرة الأرضية (La Croûte)",
+                depth: "0 إلى 30 كم (في المتوسط)",
+                state: "صلبة",
+                rock: "غرانيت (قارية) / بازلت وغابرو (محيطية)",
+                density: "2.7 (قارية) / 3.0 (محيطية)",
+                desc: "هي الطبقة الخارجية الصلبة للكرة الأرضية. تنقسم إلى قشرة قارية خفيفة نسبياً وسميكة، وقشرة محيطية أثقل وأقل سمكاً. تشكل مع الجزء العلوي الصلب للبرنص ما يسمى بـ 'الليتوسفير' أو الغلاف الصخري."
+            },
+            lithosphere: {
+                title: "البرنص العلوي الصلب (Manteau Supérieur)",
+                depth: "من موهو إلى غاية 100-150 كم",
+                state: "صلبة جداً",
+                rock: "بيريدوتيت (Péridotite)",
+                density: "حوالي 3.3",
+                desc: "هذا الجزء من البرنص صلب تماماً، وهو متصل بالقشرة الأرضية ليكوّنا معاً 'الليتوسفير' (الغلاف الصخري). الليتوسفير هو الذي يتجزأ إلى صفائح تكتونية تتحرك."
+            },
+            asthenosphere: {
+                title: "الأستينوسفير (Asthénosphère - LVZ)",
+                depth: "من 150 كم إلى 700 كم",
+                state: "مرنة / مطاطية (Ductile)",
+                rock: "بيريدوتيت (Péridotite)",
+                density: "تتزايد تدريجياً (حوالي 3.3 إلى 4.5)",
+                desc: "هي منطقة السرعات المنخفضة (LVZ). تتراجع فيها سرعة الموجات الزلزالية بسبب الحالة الفيزيائية المرنة لصخر البيريدوتيت (قريب من نقطة الانصهار). تلعب دوراً أساسياً في حركة الصفائح التكتونية."
+            },
+            mesosphere: {
+                title: "البرنص السفلي (Mésosphère)",
+                depth: "من 700 كم إلى 2900 كم",
+                state: "صلبة",
+                rock: "بيريدوتيت عالي الكثافة (معادن متحولة)",
+                density: "تصل إلى 5.5",
+                desc: "طبقة سميكة جداً وصلبة بسبب الضغط الهائل الذي يمنع انصهار الصخور رغم الحرارة المرتفعة. ترتفع فيها سرعة الموجات الزلزالية P و S بشكل ملحوظ."
+            },
+            outerCore: {
+                title: "النواة الخارجية (Noyau Externe)",
+                depth: "من 2900 كم إلى 5100 كم",
+                state: "سائلة",
+                rock: "عناصر ثقيلة: حديد (Fe) ونيكل (Ni)",
+                density: "10.0 إلى 11.5",
+                desc: "تبدأ عند انقطاع غوتنبرغ. الدليل القاطع على حالتها السائلة هو اختفاء الموجات الزلزالية S كلياً في هذا العمق، وتباطؤ حاد في سرعة الموجات P."
+            },
+            innerCore: {
+                title: "النواة الداخلية / البذرة (Graine)",
+                depth: "من 5100 كم إلى 6371 كم (المركز)",
+                state: "صلبة جداً",
+                rock: "حديد ونيكل",
+                density: "تتجاوز 12.0",
+                desc: "تبدأ عند انقطاع ليمان. رغم الحرارة القصوى التي تفوق 5000 درجة مئوية، إلا أن الضغط الجبار في مركز الأرض يبقي هذه الطبقة في حالة صلبة، مما يعيد تسريع موجات P."
+            }
+        };
+
+        function selectLayer(layerId) {
+            // Remove active class from all buttons
+            document.querySelectorAll('.layer-btn').forEach(btn => {
+                btn.classList.remove('layer-active');
+            });
+
+            // Add active class to clicked button
+            document.getElementById('btn-' + layerId).classList.add('layer-active');
+
+            // Update UI with data
+            const data = geologyData[layerId];
+            
+            // Subtle animation effect
+            const rightPanel = document.getElementById('info-title').parentElement;
+            rightPanel.style.opacity = '0.5';
+            rightPanel.style.transform = 'translateY(10px)';
+            
+            setTimeout(() => {
+                document.getElementById('info-title').innerText = data.title;
+                document.getElementById('info-depth').innerText = data.depth;
+                document.getElementById('info-state').innerText = data.state;
+                document.getElementById('info-rock').innerText = data.rock;
+                document.getElementById('info-density').innerText = data.density;
+                document.getElementById('info-desc').innerText = data.desc;
+                
+                rightPanel.style.transition = 'all 0.3s ease';
+                rightPanel.style.opacity = '1';
+                rightPanel.style.transform = 'translateY(0)';
+            }, 150);
+        }
+    </script>
+</body>
+</html>

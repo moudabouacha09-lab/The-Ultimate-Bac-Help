@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنفوجرافيك رؤساء أمريكا - بكالوريا الجزائر</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for Arabic -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #0b0f19; /* Deep Capitalist Slate */
+        }
+        .us-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #172554 50%, #0f172a 100%);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2563eb;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3b82f6;
+        }
+    </style>
+</head>
+<body class="text-slate-100 min-h-screen pb-12 overflow-x-hidden">
+
+    <!-- Header Section -->
+    <header class="relative us-gradient py-12 px-4 border-b-4 border-amber-500 shadow-2xl">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.08)_0%,transparent_70%)] pointer-events-none"></div>
+        <div class="max-w-6xl mx-auto text-center relative z-10">
+            <!-- US Eagle/Star SVG Icon -->
+            <div class="flex justify-center mb-4 animate-pulse">
+                <svg class="w-16 h-16 text-amber-500" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.787 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.132 9.21l8.2-1.192z"/>
+                </svg>
+            </div>
+            <h1 class="text-3xl md:text-5xl font-black text-amber-400 mb-3 tracking-wide">
+                زعماء ورؤساء الولايات المتحدة الأمريكية
+            </h1>
+            <p class="text-lg md:text-2xl text-slate-300 font-bold mb-6">
+                خلال الحرب الباردة: الشخصيات، المنجزات والأزمات من الصورة المنهجية الرسمية
+            </p>
+            <div class="flex flex-wrap justify-center gap-3 max-w-2xl mx-auto">
+                <span class="bg-blue-950/80 text-blue-200 text-xs md:text-sm px-3 py-1.5 rounded-full border border-blue-500/30 flex items-center gap-1.5 font-bold">
+                    🛡️ مطابق للتدرج السنوي 2026
+                </span>
+                <span class="bg-amber-950/80 text-amber-200 text-xs md:text-sm px-3 py-1.5 rounded-full border border-amber-500/30 flex items-center gap-1.5 font-bold">
+                    🎯 منهجية الـ 1.5 كاملة مضمونة
+                </span>
+                <span class="bg-slate-900 text-slate-300 text-xs md:text-sm px-3 py-1.5 rounded-full border border-slate-700 flex items-center gap-1.5 font-bold">
+                    🚀 مراجعة تفاعلية ذكية
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <div class="max-w-6xl mx-auto px-4 mt-8">
+        <div class="flex flex-wrap justify-center gap-2 border-b border-slate-800 pb-4">
+            <button onclick="switchTab('infographic')" id="tab-infographic" class="tab-btn px-5 py-2.5 rounded-lg font-bold text-sm md:text-base transition duration-300 bg-amber-500 text-slate-950 shadow-lg">
+                📋 إنفوجرافيك الشخصيات
+            </button>
+            <button onclick="switchTab('simulator')" id="tab-simulator" class="tab-btn px-5 py-2.5 rounded-lg font-bold text-sm md:text-base transition duration-300 bg-slate-900 text-slate-400 hover:text-slate-100">
+                ⚖️ محاكي تنقيط البكالوريا
+            </button>
+            <button onclick="switchTab('versus')" id="tab-versus" class="tab-btn px-5 py-2.5 rounded-lg font-bold text-sm md:text-base transition duration-300 bg-slate-900 text-slate-400 hover:text-slate-100">
+                ⚔️ وضع المواجهة (أمريكي vs سوفياتي)
+            </button>
+            <button onclick="switchTab('quiz')" id="tab-quiz" class="tab-btn px-5 py-2.5 rounded-lg font-bold text-sm md:text-base transition duration-300 bg-slate-900 text-slate-400 hover:text-slate-100">
+                🧠 اختبار الحفظ النشط
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT CONTAINERS -->
+    <main class="max-w-6xl mx-auto px-4 mt-8">
+
+        <!-- TAB 1: INFOGRAPHIC VIEW -->
+        <section id="content-infographic" class="tab-content block">
+            
+            <!-- Unified Definition Box -->
+            <div class="bg-gradient-to-r from-blue-950/80 to-amber-950/80 border-2 border-amber-500/40 rounded-2xl p-6 md:p-8 mb-10 shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 bg-amber-500 text-slate-950 font-black px-4 py-1 text-xs rounded-br-xl uppercase tracking-wider">
+                    سر النجاح في البكالوريا
+                </div>
+                <h3 class="text-xl md:text-2xl font-black text-amber-400 mb-3 mt-2 flex items-center gap-2">
+                    <span>🗝️</span> القالب المشترك (مفتاح التصحيح للبكالوريا)
+                </h3>
+                <p class="text-slate-200 text-sm md:text-base leading-relaxed mb-4">
+                    احفظ هذا القالب البسيط والموحد كبداية لتعريف أي رئيس من قادة المعسكر الغربي لضمان نصف نقطة الهوية فوراً:
+                </p>
+                <div class="bg-slate-950/70 border-l-4 border-blue-600 p-4 rounded-lg font-bold text-amber-100 text-center text-base md:text-lg">
+                    "شخصية أمريكية، رئيس للولايات المتحدة الأمريكية، قاد المعسكر الغربي الرأسمالي خلال فترة الحرب الباردة، وأحد صناع سياسته الخارجية."
+                </div>
+            </div>
+
+            <!-- Stage 1 -->
+            <div class="mb-12">
+                <div class="flex items-center gap-3 mb-6 border-b border-blue-900 pb-2">
+                    <span class="bg-blue-600 text-slate-100 px-3 py-1 text-xs md:text-sm rounded font-black">المرحلة الأولى</span>
+                    <h2 class="text-xl md:text-2xl font-black text-blue-400">الحرب العالمية الثانية وبداية الصراع</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- FRANKLIN ROOSEVELT -->
+                    <div class="bg-slate-900/90 rounded-2xl border border-blue-900/60 overflow-hidden shadow-lg transition duration-300 hover:border-blue-500">
+                        <div class="bg-gradient-to-r from-blue-950 to-slate-900 p-6 flex flex-col sm:flex-row items-center gap-6 border-b border-blue-900/40">
+                            <div class="relative w-24 h-24 flex-shrink-0 bg-slate-850 rounded-full border-4 border-blue-700 overflow-hidden flex items-center justify-center shadow-lg">
+                                <span class="text-4xl">🏛️</span>
+                                <span class="absolute bottom-1 bg-blue-600 text-slate-100 px-2 py-0.5 text-[10px] rounded-full font-bold">روزفلت</span>
+                            </div>
+                            <div class="text-center sm:text-right">
+                                <h3 class="text-2xl font-black text-slate-100">فرانكلين روزفلت</h3>
+                                <p class="text-amber-400 font-bold text-sm mt-1">مهندس النصر والأزمات الاقتصادية</p>
+                                <p class="text-xs text-slate-400 mt-2">قاد أمريكا في الحرب العالمية الثانية والاتفاقيات التأسيسية</p>
+                            </div>
+                        </div>
+                        <div class="p-6 bg-slate-900/50 space-y-3">
+                            <h4 class="text-blue-400 font-black text-sm">⭐ أهم المنجزات والأزمات:</h4>
+                            <ul class="space-y-2 text-slate-300 text-xs md:text-sm">
+                                <li class="flex items-start gap-1.5"><span class="text-amber-500">✦</span><span>حقق <strong>الانتصار في الحرب العالمية الثانية</strong> كقائد أعلى للقوات المسلحة.</span></li>
+                                <li class="flex items-start gap-1.5"><span class="text-amber-500">✦</span><span>أخرج أمريكا من <strong>أزمة 1929 الاقتصادية الكبرى</strong> عبر خطته الشهيرة (الخطة الجديدة New Deal).</span></li>
+                                <li class="flex items-start gap-1.5"><span class="text-amber-500">✦</span><span>أعلن الحرب رسمياً على اليابان بعد هجوم بيرل هاربر وعاصر مؤتمر <strong>يالطا 1945</strong>.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- HARRY TRUMAN -->
+                    <div class="bg-slate-900/90 rounded-2xl border border-blue-900/60 overflow-hidden shadow-lg transition duration-300 hover:border-blue-500">
+                        <div class="bg-gradient-to-r from-blue-950 to-slate-900 p-6 flex flex-col sm:flex-row items-center gap-6 border-b border-blue-900/40">
+                            <div class="relative w-24 h-24 flex-shrink-0 bg-slate-850 rounded-full border-4 border-blue-700 overflow-hidden flex items-center justify-center shadow-lg">
+                                <span class="text-4xl">☢️</span>
+                                <span class="absolute bottom-1 bg-blue-600 text-slate-100 px-2 py-0.5 text-[10px] rounded-full font-bold">ترومان</span>
+                            </div>
+                            <div class="text-center sm:text-right">
+                                <h3 class="text-2xl font-black text-slate-100">هاري ترومان</h3>
+                                <p class="text-amber-400 font-bold text-sm mt-1">صاحب المبدأ والقرارات النووية</p>
+                                <p class="text-xs text-slate-400 mt-2">دشن سياسة الاحتواء والمواجهة الأيديولوجية الفعلية</p>
+                            </div>
+                        </div>
+                        <div class="p-6 bg-slate-900/50 space-y-3">
+                            <h4 class="text-blue-400 font-black text-sm">⭐ أهم المنجزات والأزمات:</h4>
+                            <ul class="space-y-2 text-slate-300 text-xs md:text-sm">
+                                <li class="flex items-start gap-1.5"><span class="text-amber-500">✦</span><span>أمر بإلقاء <strong>القنابل الذرية على اليابان</strong> (هيروشيما وناجازاكي 1945) لإنهاء الحرب العالمية.</span></li>
+                                <li class="flex items-start gap-1.5"><span class="text-amber-500">✦</span><span>أطلق <strong>"مبدأ ترومان" (1947)</strong> لدعم اليونان وتركيا ومكافحة المد الشيوعي (سياسة الاحتواء).</span></li>
+                                <li class="flex items-start gap-1.5"><span class="text-amber-500">✦</span><span>عُرف بدعمه المباشر وتأييده لهجرة اليهود إلى فلسطين والاعتراف بـ <strong>الكيان الصهيوني 1948</strong>.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stage 2 -->
+            <div class="mb-12">
+                <div class="flex items-center gap-3 mb-6 border-b border-amber-900 pb-2">
+                    <span class="bg-amber-600 text-slate-950 px-3 py-1 text-xs md:text-sm rounded font-black">المرحلة الثانية</span>
+                    <h2 class="text-xl md:text-2xl font-black text-amber-400">سياسة الأحلاف والتعصب الأيديولوجي</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- DWIGHT EISENHOWER -->
+                    <div class="bg-slate-900/90 rounded-2xl border border-slate-800 overflow-hidden shadow-lg transition duration-300 hover:border-amber-500/50 flex flex-col justify-between">
+                        <div>
+                            <div class="bg-gradient-to-r from-amber-950/60 to-slate-900 p-6 flex items-center gap-4 border-b border-slate-800">
+                                <span class="text-4xl">🛡️</span>
+                                <div>
+                                    <h3 class="text-xl font-black text-slate-100">دوايت أيزنهاور</h3>
+                                    <p class="text-amber-400 font-bold text-xs mt-0.5">قائد الأطلسي وسياسة ملء الفراغ</p>
+                                </div>
+                            </div>
+                            <div class="p-6 space-y-3">
+                                <h4 class="text-blue-400 font-black text-sm">⭐ أهم المنجزات والأزمات:</h4>
+                                <ul class="space-y-2 text-slate-300 text-xs md:text-sm">
+                                    <li class="flex items-start gap-1.5"><span class="text-amber-500">✦</span><span>صاحب <strong>مبدأ أيزنهاور (1957)</strong> الموجه للشرق الأوسط وتبني سياسة <strong>"ملء الفراغ"</strong>.</span></li>
+                                    <li class="flex items-start gap-1.5"><span class="text-amber-500">✦</span><span>أنهى <strong>الحرب الكورية (توقيع الهدنة 1953)</strong> بعد سنوات من القتال العنيف بين الكوريتين.</span></li>
+                                    <li class="flex items-start gap-1.5"><span class="text-amber-500">✦</span><span>كان بطلاً عسكرياً في ع2 وأول قائد عام لقوات <strong>حلف شمال الأطلسي (الناتو) 1949</strong>.</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- JOHN KENNEDY -->
+                    <div class="bg-slate-900/90 rounded-2xl border border-slate-800 overflow-hidden shadow-lg transition duration-300 hover:border-amber-500/50 flex flex-col justify-between">
+                        <div>
+                            <div class="bg-gradient-to-r from-amber-950/60 to-slate-900 p-6 flex items-center gap-4 border-b border-slate-800">
+                                <span class="text-4xl">🚀</span>
+                                <div>
+                                    <h3 class="text-xl font-black text-slate-100">جون كينيدي</h3>
+                                    <p class="text-amber-400 font-bold text-xs mt-0.5">غزو الفضاء وأزمة الصواريخ</p>
+                                </div>
+                            </div>
+                            <div class="p-6 space-y-3">
+                                <h4 class="text-blue-400 font-black text-sm">⭐ أهم المنجزات والأزمات:</h4>
+                                <ul class="space-y-2 text-slate-300 text-xs md:text-sm">
+                                    <li class="flex items-start gap-1.5"><span class="text-amber-500">✦</span><span>أطلق مشروع <strong>"أبولو" الفضائي</strong> لتمكين أمريكا من الهبوط على القمر والتفوق على السوفيات.</span></li>
+                                    <li class="flex items-start gap-1.5"><span class="text-amber-500">✦</span><span>عُرف بـ <strong>تشدده السياسي</strong> وتصديه بقوة للمد الشيوعي المباشر في قارة أمريكا اللاتينية.</span></li>
+                                    <li class="flex items-start gap-1.5"><span class="text-amber-500">✦</span><span>شهدت فترته أخطر مرحلة في الحرب الباردة وهي <strong>أزمة الصواريخ في كوبا (أزمة الكاريبي 1962)</strong>، واغتيل عام 1963.</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stage 3 -->
+            <div class="mb-12">
+                <div class="flex items-center gap-3 mb-6 border-b border-blue-900 pb-2">
+                    <span class="bg-blue-600 text-slate-100 px-3 py-1 text-xs md:text-sm rounded font-black">المرحلة الثالثة</span>
+                    <h2 class="text-xl md:text-2xl font-black text-blue-400">التعايش السلمي والاتفاقيات الدولية</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- RICHARD NIXON -->
+                    <div class="bg-slate-900/90 rounded-2xl border border-slate-800 overflow-hidden shadow-lg transition duration-300 hover:border-blue-500 flex flex-col justify-between">
+                        <div>
+                            <div class="bg-gradient-to-r from-blue-950/60 to-slate-900 p-6 flex items-center gap-4 border-b border-slate-800">
+                                <span class="text-4xl">🤝</span>
+                                <div>
+                                    <h3 class="text-xl font-black text-slate-100">ريتشارد نيكسون</h3>
+                                    <p class="text-amber-400 font-bold text-xs mt-0.5">اتفاقيات سالت وفضيحة ووترغيت</p>
+                                </div>
+                            </div>
+                            <div class="p-6 space-y-3">
+                                <h4 class="text-blue-400 font-black text-sm">⭐ أهم المنجزات والأزمات:</h4>
+                                <ul class="space-y-2 text-slate-300 text-xs md:text-sm">
+                                    <li class="flex items-start gap-1.5"><span class="text-amber-500">✦</span><span>وقع على اتفاقية الحد من الأسلحة الاستراتيجية <strong>"سالت 1" عام 1972</strong> في موسكو.</span></li>
+                                    <li class="flex items-start gap-1.5"><span class="text-amber-500">✦</span><span>ساند <strong>ودعم إسرائيل</strong> في حرب 1973، وزار الصين الشعبية لتهدئة الأوضاع وتطبيق التعايش السلمي.</span></li>
+                                    <li class="flex items-start gap-1.5"><span class="text-amber-500">✦</span><span>انتهت فترته الرئاسية بـ <strong>"فضيحة ووترغيت"</strong> الشهيرة مما اضطره لتقديم استقالته رسمياً عام 1974.</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- JIMMY CARTER -->
+                    <div class="bg-slate-900/90 rounded-2xl border border-slate-800 overflow-hidden shadow-lg transition duration-300 hover:border-blue-500 flex flex-col justify-between">
+                        <div>
+                            <div class="bg-gradient-to-r from-blue-950/60 to-slate-900 p-6 flex items-center gap-4 border-b border-slate-800">
+                                <span class="text-4xl">🕊️</span>
+                                <div>
+                                    <h3 class="text-xl font-black text-slate-100">جيمي كارتر</h3>
+                                    <p class="text-amber-400 font-bold text-xs mt-0.5">حوار السلاح والتعايش السلمي</p>
+                                </div>
+                            </div>
+                            <div class="p-6 space-y-3">
+                                <h4 class="text-blue-400 font-black text-sm">⭐ أهم المنجزات والأزمات:</h4>
+                                <ul class="space-y-2 text-slate-300 text-xs md:text-sm">
+                                    <li class="flex items-start gap-1.5"><span class="text-amber-500">✦</span><span>وقع على اتفاقية الحد من الأسلحة الاستراتيجية <strong>"سالت 2" عام 1979</strong> مع السوفيات.</span></li>
+                                    <li class="flex items-start gap-1.5"><span class="text-amber-500">✦</span><span>شهدت أواخر فترته اندلاع <strong>حرب أفغانستان (الغزو السوفياتي 1979)</strong> مما أعاد تجميد العلاقات.</span></li>
+                                    <li class="flex items-start gap-1.5"><span class="text-amber-500">✦</span><span>كان من دعاة التعايش وحماية حقوق الإنسان ورعى اتفاقية السلام في <strong>كامب ديفيد 1978</strong>.</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stage 4 -->
+            <div class="mb-12">
+                <div class="flex items-center gap-3 mb-6 border-b border-amber-900 pb-2">
+                    <span class="bg-amber-600 text-slate-950 px-3 py-1 text-xs md:text-sm rounded font-black">المرحلة الرابعة</span>
+                    <h2 class="text-xl md:text-2xl font-black text-amber-400">التصعيد ونهاية الحرب الباردة</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- RONALD REAGAN -->
+                    <div class="bg-slate-900/90 rounded-2xl border border-slate-800 overflow-hidden shadow-lg transition duration-300 hover:border-amber-500/50 flex flex-col justify-between">
+                        <div>
+                            <div class="bg-gradient-to-r from-amber-950/60 to-slate-900 p-6 flex items-center gap-4 border-b border-slate-800">
+                                <span class="text-4xl">🛰️</span>
+                                <div>
+                                    <h3 class="text-xl font-black text-slate-100">رونالد ريغان</h3>
+                                    <p class="text-amber-400 font-bold text-xs mt-0.5">حرب النجوم وإمبراطورية الشر</p>
+                                </div>
+                            </div>
+                            <div class="p-6 space-y-3">
+                                <h4 class="text-blue-400 font-black text-sm">⭐ أهم المنجزات والأزمات:</h4>
+                                <ul class="space-y-2 text-slate-300 text-xs md:text-sm">
+                                    <li class="flex items-start gap-1.5"><span class="text-amber-500">✦</span><span><strong>ممثل سينمائي سابق</strong>، تميزت سياسته بالتصلب والتشدد الشديد والتفوق النووي الساحق.</span></li>
+                                    <li class="flex items-start gap-1.5"><span class="text-amber-500">✦</span><span>اشتهر بمبادرة الدفاع الاستراتيجي المعروفة باسم مبادرة <strong>"حرب النجوم"</strong>.</span></li>
+                                    <li class="flex items-start gap-1.5"><span class="text-amber-500">✦</span><span>نعت الاتحاد السوفياتي بأنه <strong>"إمبراطورية الشر"</strong> وعمل على إنهاكه اقتصادياً وتكنولوجياً.</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GEORGE BUSH SR -->
+                    <div class="bg-slate-900/90 rounded-2xl border border-slate-800 overflow-hidden shadow-lg transition duration-300 hover:border-amber-500/50 flex flex-col justify-between">
+                        <div>
+                            <div class="bg-gradient-to-r from-amber-950/60 to-slate-900 p-6 flex items-center gap-4 border-b border-slate-800">
+                                <span class="text-4xl">🌍</span>
+                                <div>
+                                    <h3 class="text-xl font-black text-slate-100">جورج بوش الأب</h3>
+                                    <p class="text-amber-400 font-bold text-xs mt-0.5">مهندس النظام الدولي الجديد</p>
+                                </div>
+                            </div>
+                            <div class="p-6 space-y-3">
+                                <h4 class="text-blue-400 font-black text-sm">⭐ أهم المنجزات والأزمات:</h4>
+                                <ul class="space-y-2 text-slate-300 text-xs md:text-sm">
+                                    <li class="flex items-start gap-1.5"><span class="text-amber-500">✦</span><span>وقع رسمياً على نهاية الصراع في مؤتمر <strong>مالطا (1989)</strong> وقمة <strong>باريس (1990)</strong> مع غورباتشوف.</span></li>
+                                    <li class="flex items-start gap-1.5"><span class="text-amber-500">✦</span><span>قاد بلاده لتزعم التحالف الدولي في <strong>حرب الخليج الثانية 1991</strong> لترسيخ الهيمنة الأمريكية.</span></li>
+                                    <li class="flex items-start gap-1.5"><span class="text-amber-500">✦</span><span>هو صاحب ومطلق نظرية <strong>"النظام الدولي الجديد"</strong> القائم على الأحادية القطبية وتفوق أمريكا.</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- TAB 2: BAC SCORE SIMULATOR -->
+        <section id="content-simulator" class="tab-content hidden">
+            <div class="bg-slate-900 border border-amber-500/30 rounded-2xl p-6 md:p-8 max-w-4xl mx-auto shadow-xl">
+                <h3 class="text-2xl font-black text-amber-400 mb-4 flex items-center gap-2">
+                    <span>⚖️</span> محاكي علامة بكالوريا للشخصيات الأمريكية (1.5 / 1.5)
+                </h3>
+                <p class="text-slate-300 text-sm md:text-base leading-relaxed mb-6">
+                    العديد من الطلاب يفقدون نقاطاً بسبب نسيان المنصب أو الاقتصار على منجز واحد. قم بتركيب إجابتك للرؤساء الأمريكيين وجرب التنقيط التلقائي لتضمن العلامة الكاملة!
+                </p>
+
+                <!-- Interactive Simulator Logic Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Step 1: Character Select -->
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                        <label class="block text-blue-400 font-black mb-2 text-sm">1. اختر الرئيس الأمريكي:</label>
+                        <select id="sim-char-select" onchange="updateSimulator()" class="w-full bg-slate-900 border border-slate-700 text-slate-100 rounded-lg p-2.5 focus:border-blue-500 focus:outline-none font-bold text-sm">
+                            <option value="roosevelt">فرانكلين روزفلت</option>
+                            <option value="truman">هاري ترومان</option>
+                            <option value="eisenhower">دوايت أيزنهاور</option>
+                            <option value="kennedy">جون كينيدي</option>
+                            <option value="nixon">ريتشارد نيكسون</option>
+                            <option value="carter">جيمي كارتر</option>
+                            <option value="reagan">رونالد ريغان</option>
+                            <option value="bush">جورج بوش الأب</option>
+                        </select>
+                    </div>
+
+                    <!-- Step 2: Checklist components -->
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 md:col-span-2">
+                        <span class="block text-amber-400 font-black mb-2 text-sm">2. حدد العناصر التي ستكتبها في ورقة الإجابة:</span>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <label class="flex items-center gap-2 text-xs md:text-sm cursor-pointer hover:text-amber-200">
+                                <input type="checkbox" id="sim-chk-nationality" checked onchange="updateSimulator()" class="rounded bg-slate-900 border-slate-700 text-amber-500 focus:ring-amber-500">
+                                الجنسية والمنصب (رئيس أمريكي) <span class="text-amber-500 font-bold">(0.5ن)</span>
+                            </label>
+                            <label class="flex items-center gap-2 text-xs md:text-sm cursor-pointer hover:text-amber-200">
+                                <input type="checkbox" id="sim-chk-ach1" checked onchange="updateSimulator()" class="rounded bg-slate-900 border-slate-700 text-amber-500 focus:ring-amber-500">
+                                المنجز الأول للرئيس <span class="text-amber-500 font-bold">(0.5ن)</span>
+                            </label>
+                            <label class="flex items-center gap-2 text-xs md:text-sm cursor-pointer hover:text-amber-200">
+                                <input type="checkbox" id="sim-chk-ach2" checked onchange="updateSimulator()" class="rounded bg-slate-900 border-slate-700 text-amber-500 focus:ring-amber-500">
+                                المنجز الثاني للرئيس <span class="text-amber-500 font-bold">(0.5ن)</span>
+                            </label>
+                            <label class="flex items-center gap-2 text-xs md:text-sm cursor-pointer hover:text-amber-200">
+                                <input type="checkbox" id="sim-chk-date" onchange="updateSimulator()" class="rounded bg-slate-900 border-slate-700 text-amber-500 focus:ring-amber-500">
+                                تواريخ المولد والوفاة المعقدة <span class="text-red-500 font-bold">(لا تهم في التصحيح!)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Scoreboard -->
+                <div class="bg-slate-950 rounded-xl p-5 border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="w-full">
+                        <span class="text-xs text-slate-400 font-bold uppercase block mb-1">صياغة إجابتك للامتحان:</span>
+                        <p id="sim-output-text" class="text-slate-200 font-medium text-base leading-relaxed bg-slate-900 p-4 rounded-lg border border-slate-800 min-h-[100px]"></p>
+                    </div>
+                    <div class="text-center bg-slate-900 border-2 border-amber-500 rounded-2xl py-4 px-6 min-w-[150px]">
+                        <span class="text-xs text-slate-400 font-black block uppercase mb-1">العلامة المتوقعة</span>
+                        <div class="text-3xl md:text-4xl font-black text-amber-400" id="sim-score-display">1.5 / 1.5</div>
+                        <span class="text-[10px] text-green-400 font-bold block mt-1" id="sim-score-comment">إجابة مثالية كاملة!</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: VERSUS / COMPARISON MODE -->
+        <section id="content-versus" class="tab-content hidden">
+            <div class="bg-slate-900 border border-blue-500/30 rounded-2xl p-6 md:p-8 shadow-xl">
+                <h3 class="text-2xl font-black text-amber-400 mb-4 flex items-center gap-2">
+                    <span>⚔️</span> وضع المواجهة والندية (الغرب الرأسمالي vs الشرق الشيوعي)
+                </h3>
+                <p class="text-slate-300 text-sm md:text-base mb-8">
+                    شهدت الحرب الباردة تنافساً شديداً وقرارات حاسمة وجهاً لوجه. قارن هنا بين الرؤساء الأمريكيين وخصومهم السوفيات لتعرف كيف تفاعل المعسكران في فترات الأزمات الكبرى!
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center relative">
+                    <!-- VS Badge -->
+                    <div class="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-amber-500 text-slate-950 font-black h-12 w-12 rounded-full border-4 border-slate-900 justify-center items-center text-lg shadow-xl z-20">
+                        VS
+                    </div>
+
+                    <!-- US Leader (Left) -->
+                    <div class="bg-blue-950/40 p-6 rounded-2xl border border-blue-500/30">
+                        <div class="text-center mb-4">
+                            <span class="bg-blue-600 text-slate-100 text-xs px-2.5 py-1 rounded font-bold">الولايات المتحدة الأمريكية 🇺🇸</span>
+                        </div>
+                        <label class="block text-slate-300 font-bold mb-2 text-sm text-center">اختر الرئيس الأمريكي:</label>
+                        <select id="vs-us-select" onchange="updateVersus()" class="w-full bg-slate-900 border border-blue-800 text-slate-100 rounded-lg p-2.5 font-bold mb-6">
+                            <option value="roosevelt">فرانكلين روزفلت</option>
+                            <option value="truman">هاري ترومان</option>
+                            <option value="eisenhower">دوايت أيزنهاور</option>
+                            <option value="kennedy">جون كينيدي</option>
+                            <option value="nixon">ريتشارد نيكسون</option>
+                            <option value="carter">جيمي كارتر</option>
+                            <option value="reagan">رونالد ريغان</option>
+                            <option value="bush">جورج بوش الأب</option>
+                        </select>
+                        <div id="vs-us-data" class="bg-slate-950 p-4 rounded-xl border border-slate-850 min-h-[220px]">
+                            <!-- Will be populated dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Soviet Leader (Right) -->
+                    <div class="bg-red-950/40 p-6 rounded-2xl border border-red-500/30">
+                        <div class="text-center mb-4">
+                            <span class="bg-red-600 text-slate-100 text-xs px-2.5 py-1 rounded font-bold">الاتحاد السوفياتي ☭</span>
+                        </div>
+                        <label class="block text-slate-300 font-bold mb-2 text-sm text-center">اختر القائد السوفياتي المقابل:</label>
+                        <select id="vs-soviet-select" onchange="updateVersus()" class="w-full bg-slate-900 border border-red-800 text-slate-100 rounded-lg p-2.5 font-bold mb-6">
+                            <option value="stalin">جوزيف ستالين</option>
+                            <option value="zhdanov">أندري جدانوف</option>
+                            <option value="khrushchev">نيكيتا خروتشوف</option>
+                            <option value="bulganin">نيكولاي بولغانين</option>
+                            <option value="malenkov">غيورغي مالينكوف</option>
+                            <option value="brezhnev">ليونيد بريجنيف</option>
+                            <option value="gorbachev">ميخائيل غورباتشوف</option>
+                        </select>
+                        <div id="vs-soviet-data" class="bg-slate-950 p-4 rounded-xl border border-slate-850 min-h-[220px]">
+                            <!-- Will be populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analysis of the selected matchup -->
+                <div class="bg-slate-950 p-5 rounded-xl border border-slate-850 mt-8">
+                    <h4 class="text-amber-400 font-black text-sm mb-2 flex items-center gap-1.5">
+                        <span>💡</span> جبهة الالتقاء والصدام التاريخي:
+                    </h4>
+                    <p id="vs-clash-analysis" class="text-slate-300 text-sm leading-relaxed"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: ACTIVE RECALL QUIZ -->
+        <section id="content-quiz" class="tab-content hidden">
+            <div class="bg-slate-900 border border-amber-500/30 rounded-2xl p-6 md:p-8 max-w-3xl mx-auto shadow-xl">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
+                    <h3 class="text-2xl font-black text-amber-400 flex items-center gap-2">
+                        <span>🧠</span> اختبار الذاكرة لرؤساء أمريكا
+                    </h3>
+                    <div class="bg-blue-950 px-3 py-1 rounded text-blue-300 text-xs md:text-sm font-bold border border-blue-500/30">
+                        درجة التفوق الكاملة: 8/8
+                    </div>
+                </div>
+
+                <!-- Quiz Interactive Container -->
+                <div id="quiz-container">
+                    <div class="mb-4">
+                        <span class="text-slate-400 text-xs md:text-sm font-bold block" id="quiz-progress-text">السؤال 1 من 8</span>
+                        <div class="w-full bg-slate-950 h-2.5 rounded-full mt-1.5 overflow-hidden">
+                            <div class="bg-blue-600 h-full transition-all duration-300" id="quiz-progress-bar" style="width: 12.5%;"></div>
+                        </div>
+                    </div>
+                    
+                    <h4 class="text-slate-100 text-base md:text-lg font-bold mb-6 leading-relaxed" id="quiz-question-text">
+                        السؤال يظهر هنا...
+                    </h4>
+
+                    <div class="space-y-3" id="quiz-options-container">
+                        <!-- Options populated dynamically -->
+                    </div>
+
+                    <div class="mt-6 flex justify-end gap-3 hidden" id="quiz-actions">
+                        <button onclick="nextQuestion()" class="bg-amber-500 text-slate-950 font-black px-6 py-2.5 rounded-lg text-sm hover:bg-amber-400 transition">
+                            السؤال التالي 🎯
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quiz Results -->
+                <div id="quiz-results" class="hidden text-center py-8">
+                    <span class="text-5xl block mb-4" id="quiz-results-emoji">🎉</span>
+                    <h4 class="text-2xl font-black text-slate-100 mb-2" id="quiz-results-title">عمل مذهل يا بطل!</h4>
+                    <p class="text-slate-300 text-sm md:text-base max-w-md mx-auto mb-6" id="quiz-results-desc">
+                        لقد أكملت اختبار الشخصيات الأمريكية بنجاح تام!
+                    </p>
+                    <div class="inline-block bg-slate-950 rounded-2xl py-4 px-8 border border-amber-500/30 mb-8">
+                        <span class="text-xs text-slate-400 font-bold block">علامتك المستحقة</span>
+                        <div class="text-4xl font-black text-amber-400" id="quiz-results-score">8 / 8</div>
+                    </div>
+                    <div>
+                        <button onclick="restartQuiz()" class="bg-blue-700 hover:bg-blue-600 text-slate-100 font-black px-6 py-2.5 rounded-lg text-sm transition">
+                            أعد الاختبار لترسيخ الذاكرة النشطة 🔄
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="max-w-6xl mx-auto px-4 mt-16 text-center text-slate-500 text-xs md:text-sm border-t border-slate-900 pt-6">
+        <p class="font-bold">مبادرة تفاعلية تعليمية لتلاميذ بكالوريا 2026 في الجزائر 🇩🇿</p>
+        <p class="mt-1">تصميم مخصص لمراجعة الشخصيات بسهولة تامة وضمان العلامة الكاملة.</p>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <script>
+        // Tab Navigation
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('block');
+            });
+            document.getElementById('content-' + tabName).classList.remove('hidden');
+            document.getElementById('content-' + tabName).classList.add('block');
+
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-amber-500', 'text-slate-950', 'shadow-lg');
+                btn.classList.add('bg-slate-900', 'text-slate-400', 'hover:text-slate-100');
+            });
+            const activeTabBtn = document.getElementById('tab-' + tabName);
+            activeTabBtn.classList.add('bg-amber-500', 'text-slate-950', 'shadow-lg');
+            activeTabBtn.classList.remove('bg-slate-900', 'text-slate-400', 'hover:text-slate-100');
+        }
+
+        // Simulator Data
+        const simulatorData = {
+            roosevelt: {
+                name: "فرانكلين روزفلت",
+                nationality: "رئيس الولايات المتحدة الأمريكية، قاد المعسكر الغربي في الحرب العالمية الثانية والاتفاقيات الدولية الأولى،",
+                ach1: "حقق الانتصار التاريخي للحلفاء على الأنظمة الفاشية والنازية في الحرب العالمية الثانية،",
+                ach2: "أخرج بلاده من أزمة 1929 الاقتصادية العالمية الكبرى بالاعتماد على خطته الشهيرة (الخطة الجديدة New Deal)."
+            },
+            truman: {
+                name: "هاري ترومان",
+                nationality: "رئيس الولايات المتحدة الأمريكية، قاد بلاده في المرحلة الأولى من تأسيس الصراع الإيديولوجي،",
+                ach1: "أمر بإلقاء القنابل الذرية على هيروشيما وناجازاكي باليابان عام 1945 لإجبارها على الاستسلام،",
+                ach2: "أطلق 'مبدأ ترومان' 1947 لدعم الدول واحتواء التمدد الشيوعي، وكان من أكبر الداعمين لهجرة اليهود وتأسيس الكيان الصهيوني."
+            },
+            eisenhower: {
+                name: "دوايت أيزنهاور",
+                nationality: "رئيس الولايات المتحدة الأمريكية وقائد عسكري، قاد بلاده في مرحلة سياسة الأحلاف،",
+                ach1: "صاحب 'مبدأ أيزنهاور' (1957) وسياسة ملء الفراغ بالشرق الأوسط بعد تراجع الاستعمار التقليدي،",
+                ach2: "أنهى الحرب الكورية بتوقيع الهدنة 1953، وكان بطلاً عسكرياً وأول قائد عام لقوات حلف شمال الأطلسي (الناتو)."
+            },
+            kennedy: {
+                name: "جون كينيدي",
+                nationality: "رئيس الولايات المتحدة الأمريكية، تميزت فترته بالتصعيد وغزو الفضاء، واغتيل عام 1963،",
+                ach1: "أطلق مشروع 'أبولو' الضخم لتمكين أمريكا من التفوق في غزو الفضاء والوصول للقمر،",
+                ach2: "عاصر أخطر الأزمات العسكرية كأزمة جدار برلين وأطلق أزمة الصواريخ في كوبا (أزمة الكاريبي 1962)."
+            },
+            nixon: {
+                name: "ريتشارد نيكسون",
+                nationality: "رئيس الولايات المتحدة الأمريكية، قاد بلاده في مرحلة تميزت بالتعايش والوفاق،",
+                ach1: "وقع على اتفاقية الحد من الأسلحة الاستراتيجية 'سالت 1' عام 1972 بمسكو،",
+                ach2: "زار الصين الشعبية والاتحاد السوفياتي لتطبيق السلم، وانتهت فترته بفضيحة 'ووترغيت' مما اضطره للاستقالة 1974."
+            },
+            carter: {
+                name: "جيمي كارتر",
+                nationality: "رئيس الولايات المتحدة الأمريكية، عُرف كأحد دعاة التعايش السلمي وحقوق الإنسان،",
+                ach1: "وقع معاهدة 'سالت 2' (1979) للحد من التسليح، ورعى اتفاقية السلام التاريخية في كامب ديفيد 1978،",
+                ach2: "شهدت أواخر فترته اندلاع حرب أفغانستان 1979 إثر الغزو السوفياتي مما أعاد تجسيد الصراع الساخن."
+            },
+            reagan: {
+                name: "رونالد ريغان",
+                nationality: "رئيس الولايات المتحدة الأمريكية وممثل سينمائي سابق، تميزت سياسته بالتصلب الشديد والتشدد،",
+                ach1: "أطلق مشروع الدفاع الاستراتيجي ومبادرة 'حرب النجوم' العسكرية لحماية بلاده صاروخياً،",
+                ach2: "وصف ونعت الاتحاد السوفياتي بأنه 'إمبراطورية الشر' واعتمد سياسة الضغط الاقتصادي لإنهاكه."
+            },
+            bush: {
+                name: "جورج بوش الأب",
+                nationality: "رئيس الولايات المتحدة الأمريكية، مهندس حقبة القطبية الأحادية ونهاية الحرب الباردة،",
+                ach1: "وقع رسمياً على نهاية الصراع مع غورباتشوف في قمتي مالطا (1989) وباريس (1990)،",
+                ach2: "أطلق نظرية 'النظام الدولي الجديد' وقاد التحالف الدولي ضد العراق في حرب الخليج الثانية 1991."
+            }
+        };
+
+        function updateSimulator() {
+            const charKey = document.getElementById('sim-char-select').value;
+            const data = simulatorData[charKey];
+
+            const chkNationality = document.getElementById('sim-chk-nationality').checked;
+            const chkAch1 = document.getElementById('sim-chk-ach1').checked;
+            const chkAch2 = document.getElementById('sim-chk-ach2').checked;
+            const chkDate = document.getElementById('sim-chk-date').checked;
+
+            let textSegments = [];
+            let score = 0;
+
+            if (chkNationality) {
+                textSegments.push(data.nationality);
+                score += 0.5;
+            }
+            if (chkAch1) {
+                textSegments.push(data.ach1);
+                score += 0.5;
+            }
+            if (chkAch2) {
+                textSegments.push(data.ach2);
+                score += 0.5;
+            }
+            if (chkDate) {
+                textSegments.push(`(ولد وتوفي وتولى المنصب في فترات وتواريخ معقدة للغاية)`);
+            }
+
+            let finalOutput = textSegments.join(" ");
+            if (finalOutput === "") {
+                finalOutput = "يرجى اختيار عنصر واحد على الأقل لتوليد صياغة الإجابة...";
+            } else {
+                finalOutput = `<strong>تعريفك المقترح في ورقة البكالوريا:</strong><br>${data.name} هو: ${finalOutput}`;
+            }
+
+            document.getElementById('sim-output-text').innerHTML = finalOutput;
+
+            const scoreDisplay = document.getElementById('sim-score-display');
+            const scoreComment = document.getElementById('sim-score-comment');
+
+            scoreDisplay.textContent = score.toFixed(1) + " / 1.5";
+
+            if (score === 1.5) {
+                scoreDisplay.className = "text-3xl md:text-4xl font-black text-green-400";
+                scoreComment.textContent = "إجابة نموذجية ممتازة وكافية تماماً لحصد الـ 1.5ن في شهادة البكالوريا!";
+                scoreComment.className = "text-[10px] text-green-400 font-bold block mt-1";
+            } else if (score >= 1.0) {
+                scoreDisplay.className = "text-3xl md:text-4xl font-black text-amber-400";
+                scoreComment.textContent = "إجابة جيدة ولكنك تفرط في 0.5ن ثمينة لغياب المنصب أو منجز ثانٍ.";
+                scoreComment.className = "text-[10px] text-amber-400 font-bold block mt-1";
+            } else {
+                scoreDisplay.className = "text-3xl md:text-4xl font-black text-red-500";
+                scoreComment.textContent = "تحذير: التعريف غير كافٍ ونسب التعويض منخفضة.";
+                scoreComment.className = "text-[10px] text-red-500 font-bold block mt-1";
+            }
+        }
+
+        // Versus Matchup Logic
+        const versusUsData = {
+            roosevelt: {
+                name: "فرانكلين روزفلت (1933-1945)",
+                desc: "رائد الانفتاح الرأسمالي وحضر يالطا لبناء عالم ما بعد ع2، واجه السوفيات باتفاقيات حذرة وامتنع عن التصعيد الأيديولوجي المباشر.",
+                icon: "🏛️"
+            },
+            truman: {
+                name: "هاري ترومان (1945-1953)",
+                desc: "مطلق سياسة الاحتواء ومشاريع الدعم لمواجهة الشيوعية، استعمل السلاح الذري وصنف السوفيات كعدو مباشر لبلاده.",
+                icon: "💥"
+            },
+            eisenhower: {
+                name: "دوايت أيزنهاور (1953-1961)",
+                desc: "بنى الأحلاف العسكرية (الناتو، حلف بغداد، جنوب شرق آسيا) واعتمد سياسة ملء الفراغ الاستعماري بالشرق الأوسط.",
+                icon: "🛡️"
+            },
+            kennedy: {
+                name: "جون كينيدي (1961-1963)",
+                desc: "قائد شاب متشدد سياسياً وواجه الأزمات بشكل صلب للغاية (برلين وكوبا) وسعى لردع الصواريخ الشيوعية في ساحته الخلفية.",
+                icon: "🚀"
+            },
+            nixon: {
+                name: "ريتشارد نيكسون (1969-1974)",
+                desc: "مهندس سياسة الانفراج الدولي لتهدئة الصراعات وعقد معاهدة سالت 1، وسعى لبناء علاقات دبلوماسية مع الصين والسوفيات.",
+                icon: "🤝"
+            },
+            carter: {
+                name: "جيمي كارتر (1977-1981)",
+                desc: "زعيم ركز على الحقوق والحريات وعقد معاهدة سالت 2، إلا أن الغزو السوفياتي لأفغانستان دفع فترته لتجميد التوافق.",
+                icon: "🕊️"
+            },
+            reagan: {
+                name: "رونالد ريغان (1981-1989)",
+                desc: "مطلق التصعيد الفلكي والأيديولوجي وصاحب مشروع حرب النجوم، حارب الشيوعية بفرض حصار شامل لإنهاكها اقتصادياً.",
+                icon: "🛰️"
+            },
+            bush: {
+                name: "جورج بوش الأب (1989-1993)",
+                desc: "رئيس قاد الانتقال للحقبة أحادية القطب وصاغ مبادئ النظام الدولي الجديد بعد تفكك السوفيات وحروب الهيمنة الإقليمية.",
+                icon: "🌍"
+            }
+        };
+
+        const versusSovietData = {
+            stalin: {
+                name: "جوزيف ستالين (1945-1953)",
+                desc: "قائد سوفياتي شديد التعصب والصلابة بنى قوة السوفيات الذرية ونظام الستار الحديدي وتوفي 1953.",
+                icon: "☭"
+            },
+            zhdanov: {
+                name: "أندري جدانوف (منظر الحزب)",
+                desc: "الساعد الأيمن لستالين وموجه سياسة الردع الفكري، قسم العالم لمعسكرين بمبدأ جدانوف الشهير 1947.",
+                icon: "📰"
+            },
+            khrushchev: {
+                name: "نيكيتا خروتشوف (1953-1964)",
+                desc: "أطلق مبادرة التعايش السلمي لكنه قاد صراع الصواريخ في كوبا وغزو الفضاء وأسس حلف وارسو.",
+                icon: "🚀"
+            },
+            bulganin: {
+                name: "نيكولاي بولغانين (وزير الدفاع)",
+                desc: "وزير دفاع ورجل دولة في الترويكا، دعم سياسات السلم والدبلوماسية لتخفيف وطأة الحرب الباردة.",
+                icon: "🛡️"
+            },
+            malenkov: {
+                name: "غيورغي مالينكوف (عضو الترويكا)",
+                desc: "رئيس مجلس الوزراء الذي عارض خروتشوف وانتهى صراعه الحزبي بالعزل والنفي لكازاخستان.",
+                icon: "❄️"
+            },
+            brezhnev: {
+                name: "ليونيد بريجنيف (1964-1982)",
+                desc: "تميز بالوفاق والحد من السلاح (سالت)، لكنه تسبب بالركود الاقتصادي وقاد الغزو على أفغانستان 1979.",
+                icon: "📜"
+            },
+            gorbachev: {
+                name: "ميخائيل غورباتشوف (1985-1991)",
+                desc: "آخر رئيس سوفياتي، أطلق البيرسترويكا الفاشلة وحل الاتحاد ووقع نهاية الحرب من طرف واحد.",
+                icon: "🍂"
+            }
+        };
+
+        function updateVersus() {
+            const usKey = document.getElementById('vs-us-select').value;
+            const sovKey = document.getElementById('vs-soviet-select').value;
+
+            const us = versusUsData[usKey];
+            const sov = versusSovietData[sovKey];
+
+            document.getElementById('vs-us-data').innerHTML = `
+                <div class="flex items-center gap-3 mb-3">
+                    <span class="text-3xl">${us.icon}</span>
+                    <h5 class="text-lg font-black text-blue-400">${us.name}</h5>
+                </div>
+                <p class="text-slate-300 text-sm leading-relaxed">${us.desc}</p>
+            `;
+
+            document.getElementById('vs-soviet-data').innerHTML = `
+                <div class="flex items-center gap-3 mb-3">
+                    <span class="text-3xl">${sov.icon}</span>
+                    <h5 class="text-lg font-black text-red-400">${sov.name}</h5>
+                </div>
+                <p class="text-slate-300 text-sm leading-relaxed">${sov.desc}</p>
+            `;
+
+            // Comparison analysis
+            let clashText = "";
+            if (usKey === "truman" && sovKey === "stalin") {
+                clashText = "<strong>مواجهة التأسيس وبداية الصراع:</strong> شكّل هذا الثنائي الجناح الصلب للحرب الباردة، حيث واجه مبدأ ترومان ومشروع مارشال مباشرة حصار ستالين لبرلين وردوده بتأسيس الكوميكون والكومينفورم.";
+            } else if (usKey === "truman" && sovKey === "zhdanov") {
+                clashText = "<strong>الصراع الأيديولوجي الفكري 1947:</strong> واجه 'مبدأ ترومان' الرأسمالي الهادف لاحتواء الشيوعية مباشرة 'مبدأ جدانوف' لتقسيم العالم وتأسيس الكومينفورم ككتلة مدافعة فكرياً.";
+            } else if (usKey === "kennedy" && sovKey === "khrushchev") {
+                clashText = "<strong>ذروة الحرب الباردة وأخطر تهديد (أزمة الصواريخ 1962):</strong> واجه كينيدي خروتشوف في كوبا، وانتهت الأزمة بتفكيك الصواريخ مقابل عدم غزو كوبا وسحب صواريخ أمريكا من تركيا وتدشين الخط الأحمر الهاتفي.";
+            } else if (usKey === "carter" && sovKey === "brezhnev") {
+                clashText = "<strong>اتفاقية سالت 2 والانهيار الأفغاني:</strong> رعى الطرفان الحد من التسلح وتوقيع سالت 2 عام 1979، لكن الغزو السوفياتي لأفغانستان عصف بالاتفاقية وعاد بالتصعيد لمستويات ساخنة.";
+            } else if (usKey === "reagan" && sovKey === "gorbachev") {
+                clashText = "<strong>حرب النجوم وضغوط الانهيار:</strong> فرض ريغان ضغوطاً هائلة بحرب النجوم وتصنيفه للسوفيات كـ 'إمبراطورية الشر'، مما دفع غورباتشوف لبدء إصلاحاته واستعداده لإنهاء الصراع الدبلوماسي لتوفير النفقات.";
+            } else if (usKey === "bush" && sovKey === "gorbachev") {
+                clashText = "<strong>النظام الدولي الجديد وإعلان وفاة السوفيات:</strong> التقى الثنائي في قمة مالطا 1989 معلنين رسمياً انتهاء صراع الحرب الباردة، مما مهد لتفكك السوفيات وانفراد أمريكا بزعامة العالم.";
+            } else {
+                clashText = `التقاء غير مباشر وتفاعل السياسات: قاد <strong>${us.name}</strong> بلاده بموازاة قرارات وإستراتيجيات <strong>${sov.name}</strong> الساعية لمد النفوذ أو الدفاع عن مناطق الصراع والأحلاف الإقليمية.`;
+            }
+
+            document.getElementById('vs-clash-analysis').innerHTML = clashText;
+        }
+
+        // 4. Interactive Quiz Logic
+        const quizQuestions = [
+            {
+                q: "من هو الرئيس الأمريكي بطل الحرب العالمية الثانية والمسؤول الأول عن تأسيس قوات حلف الناتو وصاحب سياسة ملء الفراغ بالشرق الأوسط؟",
+                options: ["ريتشارد نيكسون", "هاري ترومان", "دوايت أيزنهاور", "جيمي كارتر"],
+                answer: 2,
+                hint: "أطلق مبدأ باسمه عام 1957 موجه لمواجهة النفوذ بالشرق الأوسط."
+            },
+            {
+                q: "من هو صاحب 'مبادرة حرب النجوم' العسكرية، والمسؤول عن نعت السوفيات بعبارة 'إمبراطورية الشر'؟",
+                options: ["جورج بوش الأب", "رونالد ريغان", "ريتشارد نيكسون", "فرانكلين روزفلت"],
+                answer: 1,
+                hint: "ممثل سينمائي سابق ومتبني سياسة التصلب الشديد."
+            },
+            {
+                q: "من هو الرئيس الأمريكي الذي واجه أخطر الأزمات النووية (أزمة كوبا 1962) وأطلق مشروع أبولو لغزو الفضاء؟",
+                options: ["جون كينيدي", "جيمي كارتر", "هاري ترومان", "دوايت أيزنهاور"],
+                answer: 0,
+                hint: "تم اغتياله في نوفمبر 1963 في حادثة شهيرة."
+            },
+            {
+                q: "من هو الرئيس الأمريكي الذي اضطر لتقديم استقالته بعد فضيحة 'ووترغيت' الكبرى عام 1974؟",
+                options: ["جيمي كارتر", "ريتشارد نيكسون", "رونالد ريغان", "جورج بوش الأب"],
+                answer: 1,
+                hint: "هو موقع معاهدة الحد من الأسلحة سالت 1 عام 1972."
+            },
+            {
+                q: "أي رئيس أمريكي وقع على اتفاقية 'سالت 2' عام 1979 وشهدت فترته الغزو السوفياتي لأفغانستان وكان راعياً لكامب ديفيد؟",
+                options: ["جيمي كارتر", "دوايت أيزنهاور", "فرانكلين روزفلت", "ريتشارد نيكسون"],
+                answer: 0,
+                hint: "تميزت فترته برعاية السلام وحقوق الإنسان."
+            },
+            {
+                q: "من هو الرئيس الأمريكي الذي أطلق نظرية 'النظام الدولي الجديد' وأعلن رسمياً نهاية الحرب الباردة في مالطا وباريس؟",
+                options: ["رونالد ريغان", "جورج بوش الأب", "جون كينيدي", "هاري ترومان"],
+                answer: 1,
+                hint: "قاد التحالف الدولي وحرب الخليج الثانية عام 1991."
+            },
+            {
+                q: "من هو الرئيس الأمريكي الملقب بـ 'مهندس النصر' والذي عاصر يالطا 1945 وأخرج بلاده من أزمة الكساد 1929؟",
+                options: ["فرانكلين روزفلت", "هاري ترومان", "ريتشارد نيكسون", "دوايت أيزنهاور"],
+                answer: 0,
+                hint: "صاحب الخطة الجديدة (New Deal) قبل اندلاع الحرب الباردة."
+            },
+            {
+                q: "من هو الرئيس الأمريكي صاحب القرار التاريخي بإلقاء القنابل الذرية على اليابان عام 1945 ومطلق مبدأ الاحتواء ومبدأ ترومان 1947؟",
+                options: ["هاري ترومان", "جون كينيدي", "رونالد ريغان", "جيمي كارتر"],
+                answer: 0,
+                hint: "عُرف بدعمه الكبير وتأييده المباشر لتأسيس الكيان الصهيوني."
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let userScore = 0;
+
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            userScore = 0;
+            document.getElementById('quiz-container').classList.remove('hidden');
+            document.getElementById('quiz-results').classList.add('hidden');
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const qData = quizQuestions[currentQuestionIndex];
+            
+            document.getElementById('quiz-progress-text').textContent = `السؤال ${currentQuestionIndex + 1} من ${quizQuestions.length}`;
+            const percent = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
+            document.getElementById('quiz-progress-bar').style.width = percent + '%';
+
+            document.getElementById('quiz-question-text').textContent = qData.q;
+
+            const optionsContainer = document.getElementById('quiz-options-container');
+            optionsContainer.innerHTML = '';
+            
+            qData.options.forEach((opt, idx) => {
+                const button = document.createElement('button');
+                button.className = "w-full text-right bg-slate-950 hover:bg-slate-850 border border-slate-800 p-4 rounded-xl text-slate-200 text-sm md:text-base font-medium transition flex items-center justify-between group";
+                button.onclick = () => selectOption(idx);
+                button.innerHTML = `
+                    <span>${opt}</span>
+                    <span class="h-6 w-6 rounded-full border border-slate-700 group-hover:border-blue-500 transition flex items-center justify-center text-[10px] text-slate-400">
+                        ${String.fromCharCode(65 + idx)}
+                    </span>
+                `;
+                optionsContainer.appendChild(button);
+            });
+
+            document.getElementById('quiz-actions').classList.add('hidden');
+        }
+
+        function selectOption(selectedIdx) {
+            const qData = quizQuestions[currentQuestionIndex];
+            const optionsContainer = document.getElementById('quiz-options-container');
+            
+            Array.from(optionsContainer.children).forEach((btn, idx) => {
+                btn.removeAttribute('onclick');
+                btn.classList.remove('hover:bg-slate-850');
+                
+                if (idx === qData.answer) {
+                    btn.classList.add('bg-green-950/80', 'border-green-500', 'text-green-100');
+                    btn.innerHTML += `<span class="text-green-400 font-bold text-xs">✓ إجابة صحيحة</span>`;
+                } else if (idx === selectedIdx) {
+                    btn.classList.add('bg-red-950/80', 'border-red-500', 'text-red-100');
+                    btn.innerHTML += `<span class="text-red-400 font-bold text-xs">✗ إجابة خاطئة</span>`;
+                }
+            });
+
+            if (selectedIdx === qData.answer) {
+                userScore++;
+            }
+
+            document.getElementById('quiz-actions').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizQuestions.length) {
+                showQuestion();
+            } else {
+                showQuizResults();
+            }
+        }
+
+        function showQuizResults() {
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('quiz-results').classList.remove('hidden');
+
+            const scoreDisplay = document.getElementById('quiz-results-score');
+            const resultsTitle = document.getElementById('quiz-results-title');
+            const resultsDesc = document.getElementById('quiz-results-desc');
+            const resultsEmoji = document.getElementById('quiz-results-emoji');
+
+            scoreDisplay.textContent = `${userScore} / ${quizQuestions.length}`;
+
+            if (userScore === quizQuestions.length) {
+                resultsEmoji.textContent = "🏆";
+                resultsTitle.textContent = "كامل الأوصاف والتفوق!";
+                resultsDesc.textContent = "لقد أجبت بشكل صحيح على جميع الأسئلة! أنت الآن مستعد تماماً لحصد العلامة الكاملة لشخصيات أمريكا في بكالوريا التاريخ.";
+            } else if (userScore >= 5) {
+                resultsEmoji.textContent = "👍";
+                resultsTitle.textContent = "نتيجة جيدة جداً!";
+                resultsDesc.textContent = "لقد أجبت على غالبية الأسئلة بشكل صحيح. أعد المحاولة لتصحيح الأخطاء الطفيفة وترسيخ الذاكرة تماماً.";
+            } else {
+                resultsEmoji.textContent = "⚠️";
+                resultsTitle.textContent = "تحتاج لمراجعة البطاقات!";
+                resultsDesc.textContent = "لا تقلق، أعد مراجعة بطاقات الإنفوجرافيك من التبويب الأول ثم أعد الاختبار لتصحيح معلوماتك بسهولة.";
+            }
+        }
+
+        function restartQuiz() {
+            startQuiz();
+        }
+
+        window.onload = function() {
+            updateSimulator();
+            updateVersus();
+            startQuiz();
+        };
+    </script>
+</body>
+</html>
