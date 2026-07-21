@@ -4,14 +4,15 @@ import { useMemo, useState } from "react";
 import { AppShell } from "@/components/layout/app-shell";
 
 type SubjectField = { id: string; name: string; coefficient: number };
-type Stream = "Scientific" | "Mathematical" | "Literature" | "Technical" | "Languages";
+type Stream = "Scientific" | "Mathematical" | "Literature" | "Technical" | "Languages" | "Management";
 
 const streamLabels: Record<Stream, string> = {
   Scientific: "علوم تجريبية",
   Mathematical: "رياضيات",
   Technical: "تقني رياضي",
   Literature: "آداب وفلسفة",
-  Languages: "لغات أجنبية"
+  Languages: "لغات أجنبية",
+  Management: "تسيير واقتصاد"
 };
 
 const streamSubjects: Record<Stream, SubjectField[]> = {
@@ -70,6 +71,19 @@ const streamSubjects: Record<Stream, SubjectField[]> = {
     { id: "history", name: "التاريخ والجغرافيا", coefficient: 2 },
     { id: "philosophy", name: "الفلسفة", coefficient: 2 },
     { id: "math", name: "الرياضيات", coefficient: 2 },
+    { id: "sports", name: "التربية البدنية والرياضية", coefficient: 1 }
+  ],
+  Management: [
+    { id: "accounting", name: "تسيير محاسبي", coefficient: 6 },
+    { id: "math", name: "الرياضيات", coefficient: 5 },
+    { id: "economics", name: "إقتصاد ومناجمنت", coefficient: 5 },
+    { id: "history", name: "التاريخ والجغرافيا", coefficient: 4 },
+    { id: "arabic", name: "اللغة العربية", coefficient: 3 },
+    { id: "law", name: "قانون", coefficient: 2 },
+    { id: "islamic", name: "العلوم الإسلامية", coefficient: 2 },
+    { id: "philosophy", name: "الفلسفة", coefficient: 2 },
+    { id: "french", name: "اللغة الفرنسية", coefficient: 2 },
+    { id: "english", name: "اللغة الإنجليزية", coefficient: 2 },
     { id: "sports", name: "التربية البدنية والرياضية", coefficient: 1 }
   ]
 };
