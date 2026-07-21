@@ -4,11 +4,12 @@ import { useMemo, useState } from "react";
 import { AppShell } from "@/components/layout/app-shell";
 
 type SubjectField = { id: string; name: string; coefficient: number };
-type Stream = "Scientific" | "Mathematical" | "Literature";
+type Stream = "Scientific" | "Mathematical" | "Literature" | "Technical";
 
 const streamLabels: Record<Stream, string> = {
   Scientific: "علوم تجريبية",
   Mathematical: "رياضيات",
+  Technical: "تقني رياضي",
   Literature: "آداب وفلسفة"
 };
 
@@ -22,7 +23,8 @@ const streamSubjects: Record<Stream, SubjectField[]> = {
     { id: "english", name: "اللغة الإنجليزية", coefficient: 2 },
     { id: "philosophy", name: "الفلسفة", coefficient: 2 },
     { id: "history", name: "التاريخ والجغرافيا", coefficient: 2 },
-    { id: "islamic", name: "العلوم الإسلامية", coefficient: 2 }
+    { id: "islamic", name: "العلوم الإسلامية", coefficient: 2 },
+    { id: "sports", name: "التربية البدنية والرياضية", coefficient: 1 }
   ],
   Mathematical: [
     { id: "math", name: "الرياضيات", coefficient: 7 },
@@ -33,7 +35,20 @@ const streamSubjects: Record<Stream, SubjectField[]> = {
     { id: "english", name: "اللغة الإنجليزية", coefficient: 2 },
     { id: "philosophy", name: "الفلسفة", coefficient: 2 },
     { id: "history", name: "التاريخ والجغرافيا", coefficient: 2 },
-    { id: "islamic", name: "العلوم الإسلامية", coefficient: 2 }
+    { id: "islamic", name: "العلوم الإسلامية", coefficient: 2 },
+    { id: "sports", name: "التربية البدنية والرياضية", coefficient: 1 }
+  ],
+  Technical: [
+    { id: "technology", name: "التكنولوجيا", coefficient: 7 },
+    { id: "math", name: "الرياضيات", coefficient: 6 },
+    { id: "physics", name: "العلوم الفيزيائية", coefficient: 6 },
+    { id: "arabic", name: "اللغة العربية", coefficient: 3 },
+    { id: "islamic", name: "العلوم الإسلامية", coefficient: 2 },
+    { id: "history", name: "التاريخ والجغرافيا", coefficient: 2 },
+    { id: "philosophy", name: "الفلسفة", coefficient: 2 },
+    { id: "french", name: "اللغة الفرنسية", coefficient: 2 },
+    { id: "english", name: "اللغة الإنجليزية", coefficient: 2 },
+    { id: "sports", name: "التربية البدنية والرياضية", coefficient: 1 }
   ],
   Literature: [
     { id: "arabic", name: "اللغة العربية", coefficient: 6 },
@@ -42,7 +57,8 @@ const streamSubjects: Record<Stream, SubjectField[]> = {
     { id: "french", name: "اللغة الفرنسية", coefficient: 3 },
     { id: "english", name: "اللغة الإنجليزية", coefficient: 3 },
     { id: "math", name: "الرياضيات", coefficient: 2 },
-    { id: "islamic", name: "العلوم الإسلامية", coefficient: 2 }
+    { id: "islamic", name: "العلوم الإسلامية", coefficient: 2 },
+    { id: "sports", name: "التربية البدنية والرياضية", coefficient: 1 }
   ]
 };
 
