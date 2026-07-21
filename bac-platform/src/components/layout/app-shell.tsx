@@ -53,7 +53,7 @@ export function AppShell({ children, activeSubject }: AppShellProps) {
         <div className="sidebar-card">
           <span aria-hidden="true">✦</span>
           <p>ابدأ بمراجعة قصيرة اليوم.</p>
-          <Link href="/subject/physics">ابدأ المراجعة</Link>
+          <Link href="/tools">ابدأ المراجعة</Link>
         </div>
       </aside>
 
