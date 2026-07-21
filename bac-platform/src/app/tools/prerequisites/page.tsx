@@ -34,7 +34,7 @@ export default function PrerequisitesPage() {
             <p style={{ color: 'var(--text-muted)', lineHeight: '1.6', flex: '1 1 300px' }}>
               <strong>الأستاذ نور الدين:</strong> فيديو 20 ساعة. يستحق تقسيمه على فترات والإحاطة بجميع المعارف السابقة، بل وبنسبة عالية من معارف البكالوريا.
             </p>
-            <a href="https://youtu.be/pWJsnK4TGiY" target="_blank" rel="noopener noreferrer" style={{ backgroundColor: 'var(--red-600)', color: '#fff', padding: '0.5rem 1rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 500, whiteSpace: 'nowrap' }}>
+            <a href="https://youtu.be/pWJsnK4TGiY" target="_blank" rel="noopener noreferrer" style={{ backgroundColor: '#cc0000', color: '#fff', padding: '0.5rem 1rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 500, whiteSpace: 'nowrap' }}>
               الأفضل المشاهدة من اليوتيوب ↗
             </a>
           </div>
@@ -58,7 +58,7 @@ export default function PrerequisitesPage() {
             <p style={{ color: 'var(--text-muted)', lineHeight: '1.6', flex: '1 1 300px' }}>
               <strong>الأستاذ شاوش:</strong> العلوم ليست جميع معارفها سابقة من السنة 2 و 1 ثانوي لأنه سيعاد التطرق لها مرة أخرى في البكالوريا، لكن للاحتياط هذا الفيديو سينعش الذاكرة.
             </p>
-            <a href="https://youtu.be/EPv7qV4ryX8" target="_blank" rel="noopener noreferrer" style={{ backgroundColor: 'var(--red-600)', color: '#fff', padding: '0.5rem 1rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 500, whiteSpace: 'nowrap' }}>
+            <a href="https://youtu.be/EPv7qV4ryX8" target="_blank" rel="noopener noreferrer" style={{ backgroundColor: '#cc0000', color: '#fff', padding: '0.5rem 1rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 500, whiteSpace: 'nowrap' }}>
               الأفضل المشاهدة من اليوتيوب ↗
             </a>
           </div>
@@ -78,7 +78,7 @@ export default function PrerequisitesPage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
             <div>
               <div style={{ marginBottom: '0.5rem', textAlign: 'left' }}>
-                <a href="https://youtu.be/X0yKn_MP-fM" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', backgroundColor: 'var(--red-600)', color: '#fff', padding: '0.4rem 0.8rem', borderRadius: '6px', textDecoration: 'none', fontSize: '0.8rem', fontWeight: 500 }}>
+                <a href="https://youtu.be/X0yKn_MP-fM" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', backgroundColor: '#cc0000', color: '#fff', padding: '0.4rem 0.8rem', borderRadius: '6px', textDecoration: 'none', fontSize: '0.8rem', fontWeight: 500 }}>
                   شاهد في اليوتيوب ↗
                 </a>
               </div>
@@ -93,7 +93,7 @@ export default function PrerequisitesPage() {
             </div>
             <div>
               <div style={{ marginBottom: '0.5rem', textAlign: 'left' }}>
-                <a href="https://youtu.be/MG_EbEpMQoY" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', backgroundColor: 'var(--red-600)', color: '#fff', padding: '0.4rem 0.8rem', borderRadius: '6px', textDecoration: 'none', fontSize: '0.8rem', fontWeight: 500 }}>
+                <a href="https://youtu.be/MG_EbEpMQoY" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', backgroundColor: '#cc0000', color: '#fff', padding: '0.4rem 0.8rem', borderRadius: '6px', textDecoration: 'none', fontSize: '0.8rem', fontWeight: 500 }}>
                   شاهد في اليوتيوب ↗
                 </a>
               </div>
@@ -119,7 +119,7 @@ export default function PrerequisitesPage() {
             <p style={{ color: 'var(--text-muted)', lineHeight: '1.6', flex: '1 1 300px' }}>
               <strong>الأستاذ عبد اللطيف:</strong> يوفر 6 فيديوهات تأسيسية (ليست طويلة) للفيزياء. يرجى إكمالها كقاعدة صلبة قبل البداية.
             </p>
-            <a href="https://www.youtube.com/playlist?list=PLlkvPioEFgAILdlft6aIzWjrjreH0RBY3" target="_blank" rel="noopener noreferrer" style={{ backgroundColor: 'var(--red-600)', color: '#fff', padding: '0.5rem 1rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 500, whiteSpace: 'nowrap' }}>
+            <a href="https://www.youtube.com/playlist?list=PLlkvPioEFgAILdlft6aIzWjrjreH0RBY3" target="_blank" rel="noopener noreferrer" style={{ backgroundColor: '#cc0000', color: '#fff', padding: '0.5rem 1rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 500, whiteSpace: 'nowrap' }}>
               الأفضل المشاهدة من اليوتيوب ↗
             </a>
           </div>
