@@ -19,6 +19,11 @@ function FileCard({ file }: { file: FileItem }) {
   const info = formatIcons[file.format] ?? { icon: "📄", label: file.format };
   const isPreview = file.type === "preview";
 
+  const getFileUrl = (path: string) => {
+    if (path.startsWith('http')) return path;
+    return `https://moudabouacha09-lab.github.io/The-Ultimate-Bac-Help/${path.replace('/materials/', '')}`;
+  };
+
   return (
     <article className="file-card">
       <span className={`file-icon file-icon-${file.format}`} aria-hidden="true">{info.icon}</span>
@@ -27,9 +32,9 @@ function FileCard({ file }: { file: FileItem }) {
         <span className="file-format-badge">{info.label}</span>
       </div>
       {isPreview ? (
-        <a className="file-action file-action-preview" href={file.path} target="_blank" rel="noopener noreferrer">عرض</a>
+        <a className="file-action file-action-preview" href={getFileUrl(file.path)} target="_blank" rel="noopener noreferrer">عرض</a>
       ) : (
-        <a className="file-action file-action-download" href={`${file.path}?download=1`} download>تحميل</a>
+        <a className="file-action file-action-download" href={getFileUrl(file.path)} download>تحميل</a>
       )}
     </article>
   );
@@ -104,7 +109,13 @@ export default function SubjectView({ subject, content }: { subject: Subject, co
                   <h3>تحميل كل الاختبارات التجريبية</h3>
                   <p>ملف أرشيف واحد يحتوي على اختبارات {content.examCollection.schools.length} ثانوية</p>
                 </div>
-                <a className="file-action file-action-download exam-collection-btn" href={content.examCollection.downloadPath} download>تحميل الأرشيف</a>
+                <a 
+                  className="file-action file-action-download exam-collection-btn" 
+                  href={content.examCollection.downloadPath.startsWith('http') ? content.examCollection.downloadPath : `https://moudabouacha09-lab.github.io/The-Ultimate-Bac-Help/${content.examCollection.downloadPath.replace('/materials/', '')}`} 
+                  download
+                >
+                  تحميل الأرشيف
+                </a>
               </div>
               <details className="school-list-details">
                 <summary>عرض قائمة الثانويات ({content.examCollection.schools.length})</summary>

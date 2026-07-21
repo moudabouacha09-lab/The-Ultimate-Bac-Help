@@ -19,6 +19,30 @@ export default function ToolsPage() {
           </span>
           <span className="tool-card-arrow" aria-hidden="true">←</span>
         </Link>
+        <Link className="tool-card" href="/tools/apps">
+          <span className="tool-card-icon" aria-hidden="true" style={{ color: "var(--purple-600)" }}>📱</span>
+          <span className="tool-card-content">
+            <strong>التطبيقات الموصى بها</strong>
+            <small>أفضل التطبيقات المجربة لإدارة الوقت والدراسة.</small>
+          </span>
+          <span className="tool-card-arrow" aria-hidden="true">←</span>
+        </Link>
+        <Link className="tool-card" href="/tools/notebooks">
+          <span className="tool-card-icon" aria-hidden="true" style={{ color: "var(--blue-600)" }}>🤖</span>
+          <span className="tool-card-content">
+            <strong>My Notebooks</strong>
+            <small>مذكرات الذكاء الاصطناعي (NotebookLM) ومراجع دقيقة.</small>
+          </span>
+          <span className="tool-card-arrow" aria-hidden="true">←</span>
+        </Link>
+        <Link className="tool-card" href="/tools/teachers">
+          <span className="tool-card-icon" aria-hidden="true" style={{ color: "var(--red-600)" }}>▶️</span>
+          <span className="tool-card-content">
+            <strong>قائمة اليوتيوب الذهبية</strong>
+            <small>أفضل القنوات والأساتذة الذين تابعتهم للمراجعة.</small>
+          </span>
+          <span className="tool-card-arrow" aria-hidden="true">←</span>
+        </Link>
       </section>
     </AppShell>
   );

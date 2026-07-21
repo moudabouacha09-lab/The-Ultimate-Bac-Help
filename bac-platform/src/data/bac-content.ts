@@ -135,7 +135,7 @@ const bacContent: Record<string, SubjectContent> = {
     ],
     examCollection: {
       title: "تجميعة بكالوريا تجريبية 2026 في العلوم الطبيعية",
-      downloadPath: "/materials/علوم/تجميعة بكالوريا تجريبية 2026/تجميعة.rar",
+      downloadPath: "https://drive.google.com/file/d/1QLz9njfVXKxwq-_zKkK64CYYz4mWixMV/view?usp=drive_link",
       schools: [
         "ثا حامد بن ديمراد تلمسان", "ثا مفدي زكرياء", "موحد لدوائر ولاية الجلفة",
         "الادريسية", "ثا الامير عبد القادر الاغواط", "ثا بلعيد فاطمة خميس الخشنة",
