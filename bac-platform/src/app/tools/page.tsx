@@ -43,6 +43,14 @@ export default function ToolsPage() {
           </span>
           <span className="tool-card-arrow" aria-hidden="true">←</span>
         </Link>
+        <Link className="tool-card" href="/tools/prerequisites">
+          <span className="tool-card-icon" aria-hidden="true" style={{ color: "var(--orange-600)" }}>🌱</span>
+          <span className="tool-card-content">
+            <strong>المكتسبات القبلية</strong>
+            <small>فيديوهات ونصائح ضرورية قبل الدخول المدرسي.</small>
+          </span>
+          <span className="tool-card-arrow" aria-hidden="true">←</span>
+        </Link>
       </section>
     </AppShell>
   );
