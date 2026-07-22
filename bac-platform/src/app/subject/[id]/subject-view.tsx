@@ -34,7 +34,10 @@ function FileCard({ file }: { file: FileItem }) {
       {isPreview ? (
         <a className="file-action file-action-preview" href={getFileUrl(file.path)} target="_blank" rel="noopener noreferrer">👁️ معاينة</a>
       ) : (
-        <a className="file-action file-action-download" href={getFileUrl(file.path)} download>⬇️ تحميل</a>
+        <div className="file-actions">
+          <a className="file-action file-action-preview" href={getFileUrl(file.path)} target="_blank" rel="noopener noreferrer">👁️ معاينة</a>
+          <a className="file-action file-action-download" href={getFileUrl(file.path)} download>⬇️ تحميل</a>
+        </div>
       )}
     </article>
   );

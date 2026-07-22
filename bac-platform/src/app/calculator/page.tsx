@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { AppShell } from "@/components/layout/app-shell";
+import { useLocalStorage } from "@/hooks/use-local-storage";
 
 type SubjectField = { id: string; name: string; coefficient: number };
 type Stream = "Scientific" | "Mathematical" | "Literature" | "Technical" | "Languages" | "Management";
@@ -89,18 +90,17 @@ const streamSubjects: Record<Stream, SubjectField[]> = {
 };
 
 export default function CalculatorPage() {
-  const [stream, setStream] = useState<Stream>("Scientific");
-  const [grades, setGrades] = useState<Record<string, string>>({});
+  const [stream, setStream] = useLocalStorage<Stream>("bac_user_stream", "Scientific");
+  const [grades, setGrades] = useLocalStorage<Record<string, string>>("bac_user_grades", {});
   const subjects = streamSubjects[stream];
 
   const totalStreamCoefficients = useMemo(() => {
     return subjects.reduce((sum, subject) => sum + subject.coefficient, 0);
   }, [subjects]);
 
-  const { average, enteredCoefficients, enteredCount } = useMemo(() => {
+  const { average } = useMemo(() => {
     let points = 0;
     let coefficients = 0;
-    let count = 0;
 
     subjects.forEach((subject) => {
       const val = grades[subject.id];
@@ -108,19 +108,20 @@ export default function CalculatorPage() {
         const grade = Math.min(20, Math.max(0, Number(val)));
         points += grade * subject.coefficient;
         coefficients += subject.coefficient;
-        count += 1;
       }
     });
 
     return {
       average: coefficients > 0 ? points / coefficients : 0,
-      enteredCoefficients: coefficients,
-      enteredCount: count,
     };
   }, [grades, subjects]);
 
   function changeStream(nextStream: Stream) {
     setStream(nextStream);
+    setGrades({});
+  }
+
+  function clearGrades() {
     setGrades({});
   }
 
@@ -130,7 +131,7 @@ export default function CalculatorPage() {
         <div>
           <p className="eyebrow">خطّط لهدفك</p>
           <h1>حاسبة معدل البكالوريا</h1>
-          <p>أدخل نقاطك لتحصل على معدل تقريبي في الوقت الحقيقي حسب شعبتك.</p>
+          <p>أدخل نقاطك لتحصل على معدل تقريبي في الوقت الحقيقي. تُحفظ النقاط والشعبة تلقائياً على جهازك!</p>
         </div>
         <div className="calculator-result" aria-live="polite">
           <span>المعدل الحالي</span>
@@ -140,14 +141,25 @@ export default function CalculatorPage() {
       </section>
 
       <section className="calculator-card">
-        <label className="stream-select">
-          <span>اختر الشعبة ({streamLabels[stream]})</span>
-          <select value={stream} onChange={(event) => changeStream(event.target.value as Stream)}>
-            {(Object.keys(streamLabels) as Stream[]).map((option) => (
-              <option value={option} key={option}>{streamLabels[option]}</option>
-            ))}
-          </select>
-        </label>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem", marginBottom: "1rem" }}>
+          <label className="stream-select" style={{ flex: 1, minWidth: "200px" }}>
+            <span>اختر الشعبة ({streamLabels[stream]})</span>
+            <select value={stream} onChange={(event) => changeStream(event.target.value as Stream)}>
+              {(Object.keys(streamLabels) as Stream[]).map((option) => (
+                <option value={option} key={option}>{streamLabels[option]}</option>
+              ))}
+            </select>
+          </label>
+
+          <button
+            type="button"
+            onClick={clearGrades}
+            className="file-action file-action-preview"
+            style={{ padding: "0.5rem 1rem", fontSize: "0.85rem", cursor: "pointer", background: "var(--red-100, #fee2e2)", color: "var(--red-800, #991b1b)" }}
+          >
+            🗑️ مسح النقاط
+          </button>
+        </div>
 
         <div className="calculator-form-heading">
           <div>
@@ -169,14 +181,17 @@ export default function CalculatorPage() {
                 inputMode="decimal"
                 placeholder="—"
                 value={grades[subject.id] ?? ""}
-                onChange={(event) => setGrades((current) => ({ ...current, [subject.id]: event.target.value }))}
+                onChange={(event) => {
+                  const val = event.target.value;
+                  setGrades((prev) => ({ ...prev, [subject.id]: val }));
+                }}
                 aria-label={`نقطة ${subject.name}`}
               />
             </label>
           ))}
         </div>
 
-        <p className="calculator-note">هذه النتيجة تقريبية للمراجعة والتخطيط، وقد تختلف عن المعدل الرسمي حسب طريقة احتساب المواد.</p>
+        <p className="calculator-note">تنبيه: النقاط والحسابات محفوظة محلياً في متصفحك لسهولة المتابعة أثناء المراجعة.</p>
       </section>
     </AppShell>
   );

@@ -71,7 +71,7 @@ export default function NotebooksPage() {
               target="_blank" 
               rel="noopener noreferrer" 
               className="file-action file-action-preview"
-              style={{ textDecoration: 'none', padding: '0.5rem 1rem' }}
+              style={{ textDecoration: 'none' }}
             >
               افتح المحادثة
             </a>
