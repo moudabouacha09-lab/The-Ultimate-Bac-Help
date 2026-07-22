@@ -26,19 +26,26 @@ function FileCard({ file }: { file: FileItem }) {
 
   return (
     <article className="file-card">
-      <span className={`file-icon file-icon-${file.format}`} aria-hidden="true">{info.icon}</span>
-      <div className="file-card-body">
-        <h3>{file.title}</h3>
-        <span className="file-format-badge">{info.label}</span>
-      </div>
-      {isPreview ? (
-        <a className="file-action file-action-preview" href={getFileUrl(file.path)} target="_blank" rel="noopener noreferrer">👁️ معاينة</a>
-      ) : (
-        <div className="file-actions">
-          <a className="file-action file-action-preview" href={getFileUrl(file.path)} target="_blank" rel="noopener noreferrer">👁️ معاينة</a>
-          <a className="file-action file-action-download" href={getFileUrl(file.path)} download>⬇️ تحميل</a>
+      {/* القسم العلوي: الأيقونة والعنوان */}
+      <div className="file-card-header">
+        <span className={`file-icon file-icon-${file.format}`} aria-hidden="true">{info.icon}</span>
+        <div className="file-card-body">
+          <h3 title={file.title}>{file.title}</h3>
+          <span className="file-format-badge">{info.label}</span>
         </div>
-      )}
+      </div>
+
+      {/* القسم السفلي: الإجراءات (دائماً في الأسفل) */}
+      <div className="file-actions">
+        {isPreview ? (
+          <a className="file-action file-action-preview" href={getFileUrl(file.path)} target="_blank" rel="noopener noreferrer">👁️ معاينة</a>
+        ) : (
+          <>
+            <a className="file-action file-action-preview" href={getFileUrl(file.path)} target="_blank" rel="noopener noreferrer">👁️ معاينة</a>
+            <a className="file-action file-action-download" href={getFileUrl(file.path)} download>⬇️ تحميل</a>
+          </>
+        )}
+      </div>
     </article>
   );
 }
