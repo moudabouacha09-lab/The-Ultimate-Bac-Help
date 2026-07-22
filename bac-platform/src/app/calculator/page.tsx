@@ -143,7 +143,7 @@ export default function CalculatorPage() {
 
         <div className="grade-grid">
           {subjects.map((subject) => (
-            <label className="grade-field" key={subject.id}>
+            <label className="grade-field subject-input-card" key={subject.id}>
               <span><strong>{subject.name}</strong><small>المعامل {subject.coefficient}</small></span>
               <input
                 type="number"

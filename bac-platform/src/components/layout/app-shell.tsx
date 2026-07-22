@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { subjects } from "@/lib/subjects";
+import { BottomNav } from "@/components/layout/bottom-nav";
 
 type AppShellProps = {
   children: ReactNode;
@@ -58,6 +59,8 @@ export function AppShell({ children, activeSubject }: AppShellProps) {
       </aside>
 
       <main className="main-content" id="main-content">{children}</main>
+
+      <BottomNav />
     </div>
   );
 }
