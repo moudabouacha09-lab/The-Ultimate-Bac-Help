@@ -258,3 +258,215 @@ html, body {
     text-align: center;
   }
 }
+
+/* Progress Dashboard Card */
+.progress-dashboard-card {
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--blue-900), var(--blue-800));
+  color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.progress-dashboard-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.eyebrow-badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #9ee6ce;
+}
+
+.progress-score {
+  margin: 0.2rem 0;
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.progress-subtext {
+  margin: 0;
+  font-size: 0.78rem;
+  color: #c9e4ef;
+}
+
+.progress-flat-stats {
+  display: flex;
+  gap: 1rem;
+}
+
+.stat-pill {
+  display: flex;
+  flex-direction: column;
+  padding: 0.6rem 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.75rem;
+}
+
+.stat-pill span {
+  font-size: 0.68rem;
+  color: #b9d8e5;
+}
+
+.stat-pill strong {
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+.progress-bar-track-large {
+  width: 100%;
+  height: 0.75rem;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 1.25rem;
+}
+
+.progress-bar-fill-large {
+  height: 100%;
+  background: linear-gradient(90deg, #1f8d68, #2d93c8);
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+/* Checklist Details Card */
+.subject-checklist-card {
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  box-shadow: 0 4px 18px rgba(18, 50, 74, 0.04);
+}
+
+.checklist-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.checklist-header h2 {
+  margin: 0;
+  color: var(--blue-900);
+  font-size: 1.3rem;
+}
+
+.checklist-header p {
+  margin: 0.2rem 0 0;
+  color: var(--ink-500);
+  font-size: 0.78rem;
+}
+
+.subject-progress-badge {
+  text-align: center;
+  padding: 0.4rem 0.8rem;
+  background: var(--blue-100);
+  border-radius: 0.6rem;
+  color: var(--blue-800);
+}
+
+.subject-progress-badge span {
+  display: block;
+  font-size: 0.65rem;
+}
+
+.subject-progress-badge strong {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.lesson-category-title {
+  margin: 1.2rem 0 0.5rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid var(--line);
+  color: var(--blue-700);
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.lesson-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0.9rem;
+  margin-bottom: 0.45rem;
+  background: var(--canvas);
+  border: 1px solid var(--line);
+  border-radius: 0.65rem;
+  transition: all 0.15s ease;
+}
+
+.lesson-title {
+  color: var(--ink-900);
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.status-actions {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.status-chip {
+  padding: 0.25rem 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: 0.45rem;
+  background: var(--surface);
+  color: var(--ink-500);
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.status-chip:hover {
+  border-color: var(--blue-500);
+}
+
+.active-not-started {
+  background: #eef2f5;
+  color: var(--ink-900);
+  border-color: #cbd5e1;
+}
+
+.active-in-progress {
+  background: #fff8e1;
+  color: #b78103;
+  border-color: #ffe082;
+  font-weight: 800;
+}
+
+.active-completed {
+  background: var(--green-100);
+  color: var(--green-800);
+  border-color: #a3e7c8;
+  font-weight: 800;
+}
+
+@media (max-width: 600px) {
+  .lesson-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .status-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .status-chip {
+    flex: 1;
+    text-align: center;
+  }
+}

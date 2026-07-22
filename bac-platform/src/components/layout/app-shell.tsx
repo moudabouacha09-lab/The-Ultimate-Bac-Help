@@ -23,6 +23,7 @@ export function AppShell({ children, activeSubject }: AppShellProps) {
         </Link>
 
         <nav className="top-nav" aria-label="التنقل الرئيسي">
+          <Link href="/progress">تقدمي في الدروس</Link>
           <Link href="/tools">أدوات المراجعة</Link>
           <Link href="/calculator">حاسبة المعدل</Link>
         </nav>
