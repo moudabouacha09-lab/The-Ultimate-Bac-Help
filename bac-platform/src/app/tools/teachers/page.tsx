@@ -3,6 +3,9 @@
 import { AppShell } from "@/components/layout/app-shell";
 import Link from "next/link";
 import Image from "next/image";
+import { Play, Hourglass, Zap, Dna, Globe, Brain } from "lucide-react";
+import type { ReactNode } from "react";
+import { FadeInSection } from "@/components/effects/fade-in-section";
 
 interface Teacher {
   id: string;
@@ -13,7 +16,7 @@ interface Teacher {
 
 interface Category {
   title: string;
-  icon: string;
+  icon: ReactNode;
   color: string;
   teachers: Teacher[];
 }
@@ -30,7 +33,7 @@ const categories: Category[] = [
   },
   {
     title: "العلوم الفيزيائية",
-    icon: "⚡",
+    icon: <Zap size={20} />,
     color: "cyan",
     teachers: [
       { id: "Abdellah", name: "الأستاذ عبد الله", url: "https://www.youtube.com/@prof_Abdellah", description: "شرح القوانين الفيزيائية بطريقة مبسطة مع تمارين تطبيقية." },
@@ -39,7 +42,7 @@ const categories: Category[] = [
   },
   {
     title: "العلوم الطبيعية",
-    icon: "🧬",
+    icon: <Dna size={20} />,
     color: "green",
     teachers: [
       { id: "Khira-Fliti", name: "الأستاذة خيرة فليتي", url: "https://www.youtube.com/@%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%A7%D8%B0%D8%A9%D8%AE%D9%8A%D8%B1%D8%A9%D9%81%D9%84%D9%8A%D8%AA%D9%8A%D9%81%D9%8A%D8%B9%D9%84%D9%88%D9%85%D8%A7%D9%84%D8%B7%D8%A8%D9%8A%D8%B9%D8%A9", description: "تركيز كبير على منهجية الإجابة واستغلال الوثائق بشكل مثالي." },
@@ -61,7 +64,7 @@ const categories: Category[] = [
   },
   {
     title: "التاريخ والجغرافيا",
-    icon: "🌍",
+    icon: <Globe size={20} />,
     color: "orange",
     teachers: [
       { id: "Bournan", name: "الأستاذ بورنان", url: "https://www.youtube.com/@%D8%A7%D9%84%D8%A3%D8%B3%D8%AA%D8%A7%D8%B0%D8%A8%D9%88%D8%B1%D9%86%D8%A7%D9%86", description: "طرق حفظ ذكية بالخرائط الذهنية وتسهيل المصطلحات والتواريخ." },
@@ -70,7 +73,7 @@ const categories: Category[] = [
   },
   {
     title: "العلوم الإسلامية والفلسفة",
-    icon: "🧠",
+    icon: <Brain size={20} />,
     color: "purple",
     teachers: [
       { id: "Boussaadi", name: "الأستاذة بوسعادي (إسلامية)", url: "https://www.youtube.com/@BOUSSAADI", description: "تبسيط الدروس وتحديد ما يجب حفظه بدقة مع الشواهد." },
@@ -81,7 +84,7 @@ const categories: Category[] = [
   },
   {
     title: "التنظيم والتحفيز (Time Management & Motivation)",
-    icon: "⏳",
+    icon: <Hourglass size={20} />,
     color: "yellow",
     teachers: [
       { id: "Prof-3lilou", name: "Prof 3lilou", url: "https://www.youtube.com/@prof_3lilo_10", description: "نصائح ذهبية في تنظيم الوقت، التغلب على الكسل، ورفع المعنويات بطريقة واقعية." },
@@ -108,7 +111,7 @@ export default function TeachersPage() {
           </p>
         </div>
         <span className="subject-hero-icon subject-icon-red" aria-hidden="true">
-          ▶️
+          <Play size={32} />
         </span>
       </section>
 
@@ -123,21 +126,23 @@ export default function TeachersPage() {
             </h2>
             
             <div className="teachers-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.5rem' }}>
-              {category.teachers.map((teacher) => (
-                <article className="teacher-card" key={teacher.id} style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '1rem',
-                  padding: '1.5rem',
-                  backgroundColor: 'var(--card-bg)',
-                  borderRadius: '12px',
-                  border: '1px solid var(--border)',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
-                  transition: 'transform 0.2s',
-                }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              {category.teachers.map((teacher, index) => (
+                <FadeInSection key={teacher.id} delay={index * 80}>
+                  <article className="teacher-card" style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '1rem',
+                    padding: '1.5rem',
+                    backgroundColor: 'var(--card-bg)',
+                    borderRadius: '12px',
+                    border: '1px solid var(--border)',
+                    boxShadow: 'var(--shadow-sm)',
+                    transition: 'transform 0.2s',
+                    height: '100%'
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     {teacher.id === "motivation-placeholder" ? (
-                      <div style={{ width: '50px', height: '50px', borderRadius: '50%', backgroundColor: 'var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>⏳</div>
+                      <div style={{ width: '50px', height: '50px', borderRadius: '50%', backgroundColor: 'var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)' }}><Hourglass size={24} /></div>
                     ) : (
                       <img 
                         src={`/avatars/${teacher.id}.jpg`} 
@@ -157,6 +162,7 @@ export default function TeachersPage() {
                     {teacher.description}
                   </p>
                 </article>
+                </FadeInSection>
               ))}
             </div>
           </section>

@@ -1,0 +1,786 @@
+أهلاً بك يا معاذ! بصفتي **Antigravity-BAC Lead** والمطور الرئيسي للمنصة، يُسعدني جداً أن أضع بين يديك المعمارية التقنية والتصميمية الكاملة لإدماج **مخطط اختبار المكتسبات القبلية الشامل** لمواد الرياضيات، العلوم الفيزيائية، والعلوم الطبيعية ضمن مشروعنا **"The Ultimate BAC Help"**.
+
+---
+
+## 📐 المراحل والخطة التنفيذية للواجهة (UI/UX Roadmap)
+
+لضمان تجربة هاتف ممتازة (`Mobile-First` بحد أدنى لمساحة اللمس $\ge 48\text{px}$)، سنقسم الصفحة إلى **أربع مراحل بيداغوجية تفاعلية**:
+
+```
+ ┌─────────────────────────────────────────────────────────────────┐
+ │ 1. اختيار المادة والتحدي (Subject & Mode Selection)               │
+ │    - أزرار سريعة: الرياضيات ∑ | الفيزياء ⚛ | العلوم الطبيعية 🧬   │
+ │    - نمطين: ⏱ الاختبار التفاعلي (10 أسئلة)  أو  📝 التمرين الشامل  │
+ └────────────────────────────────┬────────────────────────────────┘
+                                  │
+                                  ▼
+ ┌─────────────────────────────────────────────────────────────────┐
+ │ 2. واجهة الأسئلة التفاعلية (Interactive Quiz Interface)          │
+ │    - شريط تقدم حي (Progress Bar) مع رقم السؤال (مثلاً 4 / 10)    │
+ │    - بطاقة السؤال + خيارات اللمس بألوان HSL متجاوبة             │
+ │    - أزرار إظهار الشرح والتصحيح الفوري بعد كل إجابة             │
+ └────────────────────────────────┬────────────────────────────────┘
+                                  │
+                                  ▼
+ ┌─────────────────────────────────────────────────────────────────┐
+ │ 3. شاشة التقرير والتشخيص النهائي (Diagnostic Report Screen)       │
+ │    - النتيجة الإجمالية والشارة التحفيزية (ممتاز / تحتاج مراجعة)  │
+ │    - تحليل نقاط القوة والضعف حسب الأسئلة[cite: 4]                │
+ └────────────────────────────────┬────────────────────────────────┘
+                                  │
+                                  ▼
+ ┌─────────────────────────────────────────────────────────────────┐
+ │ 4. مستعرض التمرين الشامل والحل المفصل (Exercise & Solution View) │
+ │    - عرض نص التمرين الشامل مع حواضن أكواد ومقاطع رياضية         │
+ │    - زِر إظهار / إخفاء الحل النموذجي خطوة بخطوة[cite: 4]        │
+ └─────────────────────────────────────────────────────────────────┘
+
+```
+
+---
+
+## 1️⃣ هيكلة قاعدة البيانات (`src/data/prerequisites-quiz-data.ts`)
+
+إليك الملف الموحد الذي يجمع كافة الأسئلة الـ 10 والتمرين الشامل لكل مادة علمية بناءً على محتواك المعتمد:
+
+```typescript
+// src/data/prerequisites-quiz-data.ts
+
+export type QuestionType = "mcq" | "boolean";
+
+export interface QuizQuestion {
+  id: number;
+  type: QuestionType;
+  questionText: string;
+  options?: string[]; // مخصص لأسئلة الاختيار من متعدد
+  correctAnswer: number | boolean; // رقم الخيار الصحيح (0-index) أو true/false
+  explanation: string;
+}
+
+export interface ComprehensiveExercise {
+  title: string;
+  statement: string;
+  solution: string;
+}
+
+export interface SubjectDiagnostic {
+  subjectSlug: "math" | "physics" | "science";
+  subjectName: string;
+  icon: string;
+  color: "blue" | "green" | "violet";
+  questions: QuizQuestion[];
+  exercise: ComprehensiveExercise;
+}
+
+export const diagnosticData: Record<string, SubjectDiagnostic> = {
+  math: {
+    subjectSlug: "math",
+    subjectName: "الرياضيات",
+    icon: "∑",
+    color: "blue",
+    questions: [
+      {
+        id: 1,
+        type: "mcq",
+        questionText: "مميز العبارة من الدرجة الثانية $x^2 - 5x + 6$ يساوي:",
+        options: ["1", "-1", "25", "49"],
+        correctAnswer: 0,
+        explanation: "القانون: $\\Delta = b^2 - 4ac = (-5)^2 - 4(1)(6) = 25 - 24 = 1$."
+      },
+      {
+        id: 2,
+        type: "mcq",
+        questionText: "إذا كان منحنى الدالة $f$ يقترب عند $+\\infty$ من المستقيم ذي المعادلة $y = 2x - 1$، فإن هذا المستقيم يُسمى:",
+        options: ["مستقيم مقارب عمودي", "مستقيم مقارب أفقي", "مستقيم مقارب مائل", "محور تناظر للمنحنى"],
+        correctAnswer: 2,
+        explanation: "عندما تكون المعادلة من الشكل $y = ax + b$ بجوار اللانهاية، يُسمى مستقيماً مقارباً مائلاً."
+      },
+      {
+        id: 3,
+        type: "mcq",
+        questionText: "لدراسة الوضعية النسبية لمنحنى $(C_f)$ بالنسبة لمستقيم مقارب $(\\Delta)$ ذي المعادلة $y = ax+b$، ندرس إشارة:",
+        options: ["f(x)", "f(x) - (ax+b)", "f'(x)", "\\lim_{x\\to 0} f(x)"],
+        correctAnswer: 1,
+        explanation: "الوضعية النسبية تتحدد بإشارة الفرق $f(x) - y$."
+      },
+      {
+        id: 4,
+        type: "mcq",
+        questionText: "إذا كانت $f'(x) > 0$ على مجال $I$، فإن الدالة $f$ على $I$ تكون:",
+        options: ["متناقصة تماماً", "متزايدة تماماً", "ثابتة", "لا يمكن تحديد ذلك"],
+        correctAnswer: 1,
+        explanation: "إشارة المشتقة الموجبة تماماً تعني اتجاه تغير متزايد تماماً للدالة."
+      },
+      {
+        id: 5,
+        type: "mcq",
+        questionText: "لإزالة حالة عدم التعيين $\\frac{0}{0}$ في عبارة دالة ناطقة، الطريقة الأنسب غالباً هي:",
+        options: ["الضرب في المرافق دائماً", "تحليل البسط والمقام إلى عوامل ثم الاختزال", "حساب $f'(x)$ فقط", "دراسة شفعية الدالة"],
+        correctAnswer: 1,
+        explanation: "في الدوال الناطقة، التحليل إلى عوامل بالاختزال بـ $(x-a)$ يزيل حالة عدم التعيين $\\frac{0}{0}$."
+      },
+      {
+        id: 6,
+        type: "boolean",
+        questionText: "المستقيم $x = a$ يكون مستقيماً مقارباً عمودياً لمنحنى $f$ إذا كانت نهاية $f$ عند $a$ تساوي $+\\infty$ أو $-\\infty$.",
+        correctAnswer: true,
+        explanation: "صحيح، لأن $\\lim_{x \\to a} f(x) = \\pm\\infty$ تعني هندسياً وجود مقارب عمودي معادلته $x = a$."
+      },
+      {
+        id: 7,
+        type: "boolean",
+        questionText: "إذا كانت الدالة $f$ زوجية، فإن منحناها البياني متناظر بالنسبة لمبدأ المعلم $O$.",
+        correctAnswer: false,
+        explanation: "خطأ، الدالة الزوجية منحناها متناظر بالنسبة لمحور التراتيب $(Oy)$، بينما الدالة الفردية متناظرة بالنسبة للمبدأ $O$."
+      },
+      {
+        id: 8,
+        type: "boolean",
+        questionText: "إذا كان مميز عبارة من الدرجة الثانية سالباً تماماً ($\\Delta < 0$)، فإن للعبارة جذرين حقيقيين متمايزين.",
+        correctAnswer: false,
+        explanation: "خطأ، إذا كان $\\Delta < 0$ فإن العبارة لا تقبل أي جذر حقيقي في $\\mathbb{R}$ وإشارتها من إشارة $a$."
+      },
+      {
+        id: 9,
+        type: "boolean",
+        questionText: "لتعيين معادلة المماس لمنحنى $f$ عند نقطة أفصولها $a$، يكفي معرفة $f(a)$ و $f'(a)$.",
+        correctAnswer: true,
+        explanation: "صحيح، لأن معادلة المماس هي: $y = f'(a)(x - a) + f(a)$."
+      },
+      {
+        id: 10,
+        type: "boolean",
+        questionText: "حالة عدم التعيين من الشكل $0 \\times \\infty$ يمكن غالباً تحويلها إلى الشكل $\\frac{0}{0}$ أو $\\frac{\\infty}{\\infty}$ لمعالجتها.",
+        correctAnswer: true,
+        explanation: "صحيح، عبر كتابة $A \\times B = \\frac{A}{1/B}$ أو بالتحليل والتفكيك."
+      }
+    ],
+    exercise: {
+      title: "التمرين التفصيلي الشامل - دراسة دالة ناطقة وخواص المنحنى",
+      statement: `تعتبر الدالة العددية $f$ المعرفة على $D_f = \\mathbb{R} \\setminus \\{1\\}$ بالعبارة:
+$$f(x) = \\frac{x^2 - x + 1}{1 - x}$$
+وليكن $(C_f)$ منحناها البياني في معلم متعامد ومتجانس $(O;\\vec{i},\\vec{j})$.
+
+1. أحسب $f'(x)$.
+2. أحسب نهايات $f$ عند أطراف مجالات $D_f$ وفسّرها هندسياً.
+3. أ) عيّن الأعداد $a,b,c$ بحيث $f(x) = ax+b+\\dfrac{c}{1-x}$.
+   ب) استنتج معادلة المستقيم المقارب المائل $(\\Delta)$.
+   جـ) ادرس الوضعية النسبية لـ $(C_f)$ بالنسبة لـ $(\\Delta)$.
+4. ادرس تغيرات $f$ وشكّل جدول تغيراتها.
+5. أ) بيّن أن $\\Omega(1,-1)$ مركز تناظر لـ $(C_f)$.
+   ب) أثبت أنه لا يوجد مماس لـ $(C_f)$ يشمل $\\Omega$.
+6. ناقش بيانياً حسب قيم $m$ عدد وإشارة حلول المعادلة $f(x)+x=m$.
+7. لتكن $h(x) = f(|x|)$ المعرفة على $\\mathbb{R}\\setminus\\{-1,1\\}$. ادرس شفعية $h$ ووضّح كيفية إنشاء $(C_h)$ انطلاقاً من $(C_f)$.`,
+      solution: `1. حساب المشتقة:
+$$f'(x) = \\dfrac{(2x-1)(1-x) - (-1)(x^2-x+1)}{(1-x)^2} = \\dfrac{x(2-x)}{(1-x)^2}$$
+
+2. النهايات والتفسير الهندسي:
+- $\\lim_{x\\to-\\infty} f(x) = +\\infty$ ، $\\lim_{x\\to+\\infty} f(x) = -\\infty$
+- $\\lim_{x\\to 1^-} f(x) = +\\infty$ ، $\\lim_{x\\to 1^+} f(x) = -\\infty$
+التفسير: $(C_f)$ يقبل مستقيماً مقارباً عمودياً معادلته $x=1$.
+
+3. المقارب المائل والوضعية النسبية:
+أ) بالمطابقة نجد: $a=-1$، $b=0$، $c=1$ فتصبح $f(x) = -x + \\dfrac{1}{1-x}$.
+ب) المستقيم المقارب المائل هو $(\\Delta): y = -x$.
+جـ) إشارة $f(x) - y = \\dfrac{1}{1-x}$:
+- على $]-\\infty, 1[$: $(C_f)$ يقع فوق $(\\Delta)$.
+- على $]1, +\\infty[$: $(C_f)$ يقع تحت $(\\Delta)$.
+
+4. جدول التغيرات:
+$f'(x)=0$ عند $x=0$ (قيمة حدية صغرى $f(0)=1$) وعند $x=2$ (قيمة حدية عظمى $f(2)=-3$).
+
+5. التناظر والمماس:
+أ) $f(2-x) + f(x) = -2 = 2(-1)$ إذن $\\Omega(1,-1)$ مركز تناظر.
+ب) فرض وجود مماس يشمل $\\Omega$ يؤدي لتناقض حتمي $1 = -1$، إذن لا يوجد مماس يشمل $\\Omega$.
+
+6. المناقشة البيانية:
+المعادلة تكافئ $f(x) = -x + m$:
+- $m < -1$: حلان موجبان.
+- $m = -1$: حل مضاعف $x=2$.
+- $-1 < m < 1$: لا توجد حلول.
+- $m = 1$: حل مضاعف $x=0$.
+- $m > 1$: حلان مختلفا الإشارة.
+
+7. الدالة الزوجية $h(x)$:
+$h(-x) = f(|-x|) = f(|x|) = h(x)$ إذن $h$ زوجية.
+إنشاء $(C_h)$: لما $x \\ge 0$ ينطبق على $(C_f)$، ولما $x < 0$ يُرسم بالتناظر المحوري بالنسبة لمحور التراتيب.`
+    }
+  },
+  physics: {
+    subjectSlug: "physics",
+    subjectName: "العلوم الفيزيائية",
+    icon: "⚛",
+    color: "blue",
+    questions: [
+      {
+        id: 1,
+        type: "mcq",
+        questionText: "الوحدة الدولية لقياس كمية المادة $n$ هي:",
+        options: ["الغرام (g)", "المول (mol)", "اللتر (L)", "المول لكل لتر (mol/L)"],
+        correctAnswer: 1,
+        explanation: "الوحدة الدولية الأساسية لكمية المادة في الجملة الدولية هي المول (mol)."
+      },
+      {
+        id: 2,
+        type: "mcq",
+        questionText: "التركيز المولي للمحلول التجاري يُحسب بالعلاقة:",
+        options: ["C = (10 * P * d) / M", "C = M / (10 * P * d)", "C = P * d * M", "C = d / (P * M)"],
+        correctAnswer: 0,
+        explanation: "القانون التجاري الأساسي: $C_0 = \\frac{10 \\cdot P \\cdot d}{M}$."
+      },
+      {
+        id: 3,
+        type: "mcq",
+        questionText: "في تفاعل أكسدة-إرجاع، الجسم الذي يفقد إلكترونات يُسمى:",
+        options: ["مؤكسِد (Oxydant)", "مرجِع (Réducteur)", "حمض", "قاعدة"],
+        correctAnswer: 1,
+        explanation: "المرجع (Réducteur) هو كل فرد كيميائي قادر على فقدان إلكترون أو أكثر."
+      },
+      {
+        id: 4,
+        type: "mcq",
+        questionText: "عند نقطة التكافؤ في تفاعل معايرة، تكون كميتا مادتَي المتفاعلين في نسب:",
+        options: ["متساوية عددياً دائماً", "استوكيومترية", "عشوائية غير محددة", "معدومة كلياً"],
+        correctAnswer: 1,
+        explanation: "عند التكافؤ تختفي المتفاعلات الممزوجة بنسب استوكيومترية وتكون $\\frac{n_A}{a} = \\frac{n_B}{b}$."
+      },
+      {
+        id: 5,
+        type: "mcq",
+        questionText: "الأداة الزجاجية الأنسب لأخذ حجم دقيق ومحدد تحضيراً لمحلول ممدد هي:",
+        options: ["كأس مدرَّج", "ماصة عيارية", "بيشر عادي", "حوجلة غير عيارية"],
+        correctAnswer: 1,
+        explanation: "الماصة العيارية المزودة بإجاصة مص هي الأداة الأدق لأخذ الحجوم الكيميائية."
+      },
+      {
+        id: 6,
+        type: "boolean",
+        questionText: "قانون الغاز المثالي يُكتب على الشكل $P \\cdot V = n \\cdot R \\cdot T$.",
+        correctAnswer: true,
+        explanation: "صحيح، حيث $P$ بالباسكال و$V$ بالمتر المكعب و$T$ بالكلفن."
+      },
+      {
+        id: 7,
+        type: "boolean",
+        questionText: "معامل التمديد $F = \\frac{C_1}{C_2}$ يكون دائماً أصغر من 1.",
+        correctAnswer: false,
+        explanation: "خطأ، معامل التمديد $F = \\frac{C_0}{C} = \\frac{V}{V_0}$ وهو دائماً أكبر تماماً من 1."
+      },
+      {
+        id: 8,
+        type: "boolean",
+        questionText: "الناقلية $G$ لمحلول إلكتروليتي تتناسب طردياً مع مساحة السطح $S$ وعكسياً مع المسافة $L$ بين المسريين.",
+        correctAnswer: true,
+        explanation: "صحيح، العبارة هي $G = \\sigma \\cdot \\frac{S}{L}$."
+      },
+      {
+        id: 9,
+        type: "boolean",
+        questionText: "في تفاعل الأكسدة-الإرجاع، المؤكسِد هو الجسم الذي يكتسب إلكترونات.",
+        correctAnswer: true,
+        explanation: "صحيح، المؤكسد (Oxydant) هو كل فرد كيميائي يكتسب إلكتروناً أو أكثر."
+      },
+      {
+        id: 10,
+        type: "boolean",
+        questionText: "عند نقطة التكافؤ، تكون كميتا مادتَي المتفاعلين متساويتين عددياً دائماً بغض النظر عن المعاملات.",
+        correctAnswer: false,
+        explanation: "خطأ، تتساوى الكميات عددياً فقط إذا كانت المعاملات الاستوكيومترية متساوية (1 إلى 1)."
+      }
+    ],
+    exercise: {
+      title: "التمرين الشامل - تحضير محلول وتعيين تركيزه بالمعايرة الحجمية",
+      statement: `نحضّر في المخبر محلولاً مائياً لماء الأكسجيني $H_2O_2$ انطلاقاً من قارورة تجارية: الكثافة $d=1.1$، درجة النقاوة $P=3.4\\%$، الكتلة المولية $M=34\\ \\text{g/mol}$.
+
+1. احسب التركيز المولي $C_0$ للمحلول التجاري.
+2. نريد تحضير $V_1=100\\ \\text{mL}$ بتركيز $C_1=0.1\\ \\text{mol/L}$. احسب $V_0$ الواجب أخذه، واذكر الأدوات والخطوات.
+3. نأخذ $V_A=10\\ \\text{mL}$ من المحلول الممدد ونعايره بمحلول برمنغنات البوتاسيوم ($C_B=0.02\\ \\text{mol/L}$)، فيتحقق التكافؤ عند $V_{BE}=20\\ \\text{mL}$. اكتب الثنائيتين، والمعادلة الإجمالية، واستنتج $C_1$.`,
+      solution: `1. حساب التركيز التجاري $C_0$:
+$$C_0 = \\dfrac{10 \\times 3.4 \\times 1.1}{34} = 1.1\\ \\text{mol/L}$$
+
+2. حساب حجم الأخذ $V_0$ وخطوات التحضير:
+$$V_0 = \\dfrac{C_1 \\cdot V_1}{C_0} = \\dfrac{0.1 \\times 100}{1.1} \\approx 9.1\\ \\text{mL}$$
+الأدوات: ماصة عيارية سعتها $10\\ \\text{mL}$، حوجلة عيارية $100\\ \\text{mL}$، ماء مقطر.
+الخطوات: نأخذ الحجم $V_0$ بالماصة ونفرغه في الحوجلة المليئة جزئياً بالماء المقطر، ثم نكمل بالماء المقطر حتى خط العيار ونرج المحلول.
+
+3. المعايرة والحساب:
+الثنائيتان: $(MnO_4^- / Mn^{2+})$ و $(O_2 / H_2O_2)$.
+المعادلة الموزونة:
+$$2MnO_4^- + 5H_2O_2 + 6H^+ \\rightarrow 2Mn^{2+} + 5O_2 + 8H_2O$$
+عند نقطة التكافؤ:
+$$\\dfrac{C_B \\cdot V_{BE}}{2} = \\dfrac{C_1 \\cdot V_A}{5} \\implies C_1 = \\dfrac{5 \\cdot C_B \\cdot V_{BE}}{2 \\cdot V_A} = \\dfrac{5 \\times 0.02 \\times 20}{2 \\times 10} = 0.10\\ \\text{mol/L}$$`
+    }
+  },
+  science: {
+    subjectSlug: "science",
+    subjectName: "العلوم الطبيعية",
+    icon: "🧬",
+    color: "green",
+    questions: [
+      {
+        id: 1,
+        type: "mcq",
+        questionText: "من العضيات الغائبة كلياً عن الخلية بدائية النواة:",
+        options: ["الريبوزومات", "الغشاء الهيولي", "النواة المحاطة بغلاف نووي", "الهيولى"],
+        correctAnswer: 2,
+        explanation: "بدائيات النواة تمتاز بوجود المادة الوراثية سباحة في الهيولى دون غلاف نووي."
+      },
+      {
+        id: 2,
+        type: "mcq",
+        questionText: "القواعد الأزوتية الأربع المكوّنة لجزيئة الـ ADN هي:",
+        options: ["A, T, C, G", "A, U, C, G", "A, T, C, U", "A, G, U, T"],
+        correctAnswer: 0,
+        explanation: "يتكون الـ ADN من القواعد: الأدنين (A)، التيمين (T)، السيتوزين (C)، والغوانين (G)."
+      },
+      {
+        id: 3,
+        type: "mcq",
+        questionText: "عدد الروابط الهيدروجينية الرابطة بين القاعدتين C و G هو:",
+        options: ["رابطتان", "ثلاث روابط", "رابطة تساهمية واحدة", "لا توجد روابط"],
+        correctAnswer: 1,
+        explanation: "ترتبط القاعدة C مع G بثلاث روابط هيدروجينية، بينما A مع T برابطتين."
+      },
+      {
+        id: 4,
+        type: "mcq",
+        questionText: "طفرة الإضافة أو الحذف لنيكليوتيدة واحدة تسبب غالباً:",
+        options: ["تغيير قاعدة واحدة فقط", "إزاحة كاملة في إطار قراءة الرامزات (Frameshift)", "عدم أي تأثير", "توقف الخلية فوراً"],
+        correctAnswer: 1,
+        explanation: "تغيير إطار القراءة يغير جميع الأحماض الأمينية التالية لموقع الطفرة."
+      },
+      {
+        id: 5,
+        type: "mcq",
+        questionText: "أعراض فقر الدم المنجلي تُلاحَظ على المستوى:",
+        options: ["الجزيئي", "الخلوي", "العضوي", "لا علاقة له بالنمط الظاهري"],
+        correctAnswer: 2,
+        explanation: "الأعراض السريرية (كانسداد الأوعية وآلام المفاصل) هي المظهر العضوي للنمط الظاهري."
+      },
+      {
+        id: 6,
+        type: "boolean",
+        questionText: "تفتقر الخلية بدائية النواة إلى غلاف نووي وإلى بنية حجيرية داخلية.",
+        correctAnswer: true,
+        explanation: "صحيح، البكتيريا مثال على الخلايا بدائية النواة عديمة الحجيرات والغلاف النووي."
+      },
+      {
+        id: 7,
+        type: "boolean",
+        questionText: "الإماهة الكلية لجزيئة الـ ADN تحرر مباشرة النيوكليوتيدات الأربع.",
+        correctAnswer: false,
+        explanation: "خطأ، الإماهة الكلية تحرر المكونات الدقيقة (حمض الفسفور، سكر الديزوكسي ريبوز، والقواعد الأزوتية)، بينما الإماهة الجزئية تحرر النيوكليوتيدات."
+      },
+      {
+        id: 8,
+        type: "boolean",
+        questionText: "ترتبط القاعدتان الأزوتيتان A و T بثلاث روابط هيدروجينية.",
+        correctAnswer: false,
+        explanation: "خطأ، ترتبط القاعدتان A و T برابطتين هيدروجينيتين فقط."
+      },
+      {
+        id: 9,
+        type: "boolean",
+        questionText: "يتحدد النمط الظاهري بواسطة النمط الوراثي على المستويات الثلاثة: الجزيئي، الخلوي، والعضوي معاً.",
+        correctAnswer: true,
+        explanation: "صحيح، النمط الوراثي يحدد تتابع الأحماض الأمينية (جزيئي)، فتتأثر الخلية (خلوي)، وتظهر الصفة على الكائن (عضوي)."
+      },
+      {
+        id: 10,
+        type: "boolean",
+        questionText: "طفرة الاستبدال تُغيّر بالضرورة العدد الكلي للنيوكليوتيدات في المورثة.",
+        correctAnswer: false,
+        explanation: "خطأ، طفرة الاستبدال تبدل قاعدة بأخرى دون تغيير العدد الإجمالي للنيوكليوتيدات."
+      }
+    ],
+    exercise: {
+      title: "التمرين الشامل - الطفرات والعلاقة بين النمط الوراثي والنمط الظاهري",
+      statement: `مرض فقر الدم المنجلي (Drépanocytose) مرض وراثي ينتج عنه تشوه شكل كريات الدم الحمراء. يمثل التتابع التالي جزءاً من السلسلة الناسخة لمورثة الهيموغلوبين العادي (HbA) عند شخص سليم:
+$$\\text{3' ... TAC GCA TGG AAA ... 5'}$$
+والذي يُترجَم إلى الأحماض الأمينية: **Met – Arg – Thr – Phe**
+
+1. حدثت طفرة استبدال في النيوكليوتيدة رقم 5 (القاعدة C في الرامزة GCA استُبدلت بـ T). اكتب التتابع النيوكليوتيدي الجديد وحدد تتابع الأحماض الأمينية الناتج، علماً أن الرامزة GTA تُعبّر عن الهيستيدين (His).
+2. اشرح في نص علمي مهيكل العلاقة بين النمط الوراثي والنمط الظاهري على مستوياته الثلاثة عند المصاب بفقر الدم المنجلي.`,
+      solution: `1. التتابع النيوكليوتيدي الجديد والسلسلة المترجمة:
+السلسلة الناسخة الجديدة: **3' ... TAC GTA TGG AAA ... 5'**
+تتابع الأحماض الأمينية المترجم: **Met – His – Thr – Phe** (استبدال حمض الأرجينين Arg بالهيستيدين His).
+
+2. النص العلمي حول العلاقة بين النمط الوراثي والظاهري:
+- المقدمة: تُعتبر المورثة الدعامة الوراثية لبناء البروتينات المسؤولة عن النمط الظاهري. فكيف تؤدي طفرة الاستبدال إلى التغير الظاهري لدى المصاب؟
+- العرض:
+  * المستوى الجزيئي: تؤدي طفرة الاستبدال إلى تغيير نيوكليوتيدة في المورثة، مما يغير رمزة واحدة وتالياً حمضاً أمينياً في سلسلة الهيموغلوبين، فتتغير بنيته الجزيئية وينتج هيموغلوبين طافر (HbS) قليل الذوبان.
+  * المستوى الخلوي: عند انخفاض الأكسجين، يترسب HbS على شكل ألياف صلبة تُشوّه شكل الكرية الحمراء من شكل كروي مرن إلى شكل منجلي صلب.
+  * المستوى العضوي: تتسبب الكريات المنجلية في انسداد الشعيرات الدموية، مما يؤدي إلى آلام المفاصل ونقص تروية الأعضاء وفقر الدم الحاد.
+- الخاتمة: النمط الوراثي هو المحدد الأساسي للنمط الظاهري بمستوياته الثلاثة، وكل تغير على مستوى الـ ADN ينعكس على بنية ووظيفة البروتين.`
+    }
+  }
+};
+
+```
+
+---
+
+## 2️⃣ مكون واجهة المستخدم والتفاعل (`src/app/tools/prerequisites/quiz/page.tsx`)
+
+إليك المكون التفاعلي كاملاً المبني بـ **Next.js 16 Client Component** وتنسيقات HSL وCairo Font السلسة:
+
+```tsx
+// src/app/tools/prerequisites/quiz/page.tsx
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { AppShell } from "@/components/layout/app-shell";
+import { diagnosticData, QuizQuestion } from "@/data/prerequisites-quiz-data";
+
+export default function PrerequisitesQuizPage() {
+  const [selectedSubject, setSelectedSubject] = useState<"math" | "physics" | "science">("math");
+  const [mode, setMode] = useState<"quiz" | "exercise">("quiz");
+  
+  // حالة الاختبار التفاعلي
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState<number | boolean | null>(null);
+  const [showExplanation, setShowExplanation] = useState(false);
+  const [score, setScore] = useState(0);
+  const [isCompleted, setIsCompleted] = useState(false);
+  const [showSolution, setShowSolution] = useState(false);
+
+  const activeDiagnostic = diagnosticData[selectedSubject];
+  const currentQuestion: QuizQuestion = activeDiagnostic.questions[currentIndex];
+
+  const handleSubjectChange = (subject: "math" | "physics" | "science") => {
+    setSelectedSubject(subject);
+    resetQuiz();
+  };
+
+  const resetQuiz = () => {
+    setCurrentIndex(0);
+    setSelectedAnswer(null);
+    setShowExplanation(false);
+    setScore(0);
+    setIsCompleted(false);
+    setShowSolution(false);
+  };
+
+  const handleAnswerSelect = (answer: number | boolean) => {
+    if (selectedAnswer !== null) return; // منع التغيير بعد الاختيار
+    setSelectedAnswer(answer);
+    setShowExplanation(true);
+
+    if (answer === currentQuestion.correctAnswer) {
+      setScore((prev) => prev + 1);
+    }
+  };
+
+  const handleNextQuestion = () => {
+    if (currentIndex + 1 < activeDiagnostic.questions.length) {
+      setCurrentIndex((prev) => prev + 1);
+      setSelectedAnswer(null);
+      setShowExplanation(false);
+    } else {
+      setIsCompleted(true);
+    }
+  };
+
+  return (
+    <AppShell>
+      <div className="back-link-wrapper" style={{ margin: "1rem 0" }}>
+        <Link className="back-link" href="/tools/prerequisites">
+          ← العودة للمكتسبات القبلية
+        </Link>
+      </div>
+
+      {/* Heading Section */}
+      <section className="subject-page-heading" style={{ marginBottom: "1.5rem" }}>
+        <div>
+          <p className="eyebrow">تشخيص المكتسبات القبلية 🎯</p>
+          <h1>اختبار المكتسبات - 3 ثانوي</h1>
+          <p style={{ marginTop: "0.5rem", color: "var(--ink-700)" }}>
+            اختبر معارفك السابقة من 1 و 2 ثانوي في المواد العلمية الثلاث لتحديد نقاط قوتك وتدارك ثغراتك قبل بداية العام الدراسي[cite: 4].
+          </p>
+        </div>
+        <span className={`subject-hero-icon subject-icon-${activeDiagnostic.color}`} aria-hidden="true">
+          {activeDiagnostic.icon}
+        </span>
+      </section>
+
+      {/* Navigation Controls: Subject Selector */}
+      <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", marginBottom: "1rem" }}>
+        {(["math", "physics", "science"] as const).map((key) => {
+          const item = diagnosticData[key];
+          const isActive = selectedSubject === key;
+          return (
+            <button
+              key={key}
+              onClick={() => handleSubjectChange(key)}
+              style={{
+                minHeight: "48px",
+                padding: "0.6rem 1.2rem",
+                borderRadius: "0.65rem",
+                border: "1px solid var(--line)",
+                backgroundColor: isActive ? "var(--blue-700)" : "var(--surface)",
+                color: isActive ? "#ffffff" : "var(--ink-900)",
+                fontWeight: "800",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                transition: "all 0.2s ease"
+              }}
+            >
+              <span>{item.icon}</span>
+              <span>{item.subjectName}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Mode Switcher Tabs */}
+      <div className="subject-tabs" style={{ marginBottom: "1.5rem" }}>
+        <button
+          className={`subject-tab ${mode === "quiz" ? "is-active" : ""}`}
+          onClick={() => setMode("quiz")}
+          type="button"
+          style={{ minHeight: "48px" }}
+        >
+          ⏱ الاختبار التفاعلي (10 أسئلة)[cite: 4]
+        </button>
+        <button
+          className={`subject-tab ${mode === "exercise" ? "is-active" : ""}`}
+          onClick={() => setMode("exercise")}
+          type="button"
+          style={{ minHeight: "48px" }}
+        >
+          📝 التمرين الشامل المحلول[cite: 4]
+        </button>
+      </div>
+
+      {/* MODE 1: INTERACTIVE QUIZ */}
+      {mode === "quiz" && (
+        <section className="quiz-container" style={{ maxWidth: "62rem" }}>
+          {!isCompleted ? (
+            <div className="calculator-card" style={{ padding: "1.5rem" }}>
+              {/* Progress Bar */}
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.75rem", fontSize: "0.85rem", fontWeight: "bold" }}>
+                <span>السؤال {currentIndex + 1} من {activeDiagnostic.questions.length}</span>
+                <span className="badge">النتيجة الحالية: {score}</span>
+              </div>
+              <div style={{ width: "100%", height: "8px", backgroundColor: "var(--line)", borderRadius: "999px", overflow: "hidden", marginBottom: "1.5rem" }}>
+                <div style={{ width: `${((currentIndex + 1) / activeDiagnostic.questions.length) * 100}%`, height: "100%", backgroundColor: "var(--green-600)", transition: "width 0.3s ease" }} />
+              </div>
+
+              {/* Question Text */}
+              <h2 style={{ fontSize: "1.15rem", color: "var(--blue-900)", marginBottom: "1.25rem", lineHeight: "1.6" }}>
+                {currentQuestion.questionText}
+              </h2>
+
+              {/* MCQ Options */}
+              {currentQuestion.type === "mcq" && currentQuestion.options && (
+                <div style={{ display: "grid", gap: "0.75rem", marginBottom: "1.5rem" }}>
+                  {currentQuestion.options.map((opt, idx) => {
+                    let optionStyle = {
+                      backgroundColor: "var(--canvas)",
+                      borderColor: "var(--line)",
+                      color: "var(--ink-900)"
+                    };
+
+                    if (selectedAnswer !== null) {
+                      if (idx === currentQuestion.correctAnswer) {
+                        optionStyle = { backgroundColor: "var(--green-100)", borderColor: "var(--green-600)", color: "var(--green-800)" };
+                      } else if (selectedAnswer === idx) {
+                        optionStyle = { backgroundColor: "#fff0ef", borderColor: "#c24747", color: "#c24747" };
+                      }
+                    }
+
+                    return (
+                      <button
+                        key={idx}
+                        onClick={() => handleAnswerSelect(idx)}
+                        disabled={selectedAnswer !== null}
+                        style={{
+                          minHeight: "52px",
+                          padding: "0.85rem 1.25rem",
+                          borderRadius: "0.75rem",
+                          border: "1px solid",
+                          textAlign: "right",
+                          fontSize: "0.95rem",
+                          fontWeight: "700",
+                          cursor: selectedAnswer === null ? "pointer" : "default",
+                          ...optionStyle,
+                          transition: "all 0.15s ease"
+                        }}
+                      >
+                        {opt}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+
+              {/* Boolean Options */}
+              {currentQuestion.type === "boolean" && (
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1.5rem" }}>
+                  {[true, false].map((boolVal) => {
+                    let boolStyle = {
+                      backgroundColor: "var(--canvas)",
+                      borderColor: "var(--line)",
+                      color: "var(--ink-900)"
+                    };
+
+                    if (selectedAnswer !== null) {
+                      if (boolVal === currentQuestion.correctAnswer) {
+                        boolStyle = { backgroundColor: "var(--green-100)", borderColor: "var(--green-600)", color: "var(--green-800)" };
+                      } else if (selectedAnswer === boolVal) {
+                        boolStyle = { backgroundColor: "#fff0ef", borderColor: "#c24747", color: "#c24747" };
+                      }
+                    }
+
+                    return (
+                      <button
+                        key={String(boolVal)}
+                        onClick={() => handleAnswerSelect(boolVal)}
+                        disabled={selectedAnswer !== null}
+                        style={{
+                          minHeight: "52px",
+                          padding: "0.85rem",
+                          borderRadius: "0.75rem",
+                          border: "1px solid",
+                          fontSize: "1.1rem",
+                          fontWeight: "800",
+                          cursor: selectedAnswer === null ? "pointer" : "default",
+                          ...boolStyle,
+                          transition: "all 0.15s ease"
+                        }}
+                      >
+                        {boolVal ? "✅ صحيح" : "❌ خطأ"}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+
+              {/* Explanation & Next Step */}
+              {showExplanation && (
+                <div style={{ padding: "1rem 1.25rem", backgroundColor: "var(--blue-100)", border: "1px solid #a8d2e2", borderRadius: "0.75rem", marginBottom: "1.5rem" }}>
+                  <strong style={{ color: "var(--blue-900)", display: "block", marginBottom: "0.25rem" }}>💡 التوضيح العلمي:</strong>
+                  <p style={{ margin: 0, fontSize: "0.9rem", color: "var(--ink-700)", lineHeight: "1.6" }}>
+                    {currentQuestion.explanation}
+                  </p>
+                </div>
+              )}
+
+              {selectedAnswer !== null && (
+                <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                  <button
+                    onClick={handleNextQuestion}
+                    className="button button-primary"
+                    style={{ minHeight: "48px", padding: "0.65rem 1.5rem", fontSize: "0.95rem" }}
+                  >
+                    {currentIndex + 1 === activeDiagnostic.questions.length ? "عرض النتيجة النهائية 📊" : "السؤال التالي ←"}
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            /* Diagnostic Report View */
+            <div className="calculator-card" style={{ padding: "2rem", textAlign: "center" }}>
+              <span style={{ fontSize: "3.5rem" }}>
+                {score >= 8 ? "🏆" : score >= 5 ? "📈" : "💪"}
+              </span>
+              <h2 style={{ color: "var(--blue-900)", margin: "0.5rem 0" }}>تقرير التشخيص لـ {activeDiagnostic.subjectName}</h2>
+              <p style={{ fontSize: "1.25rem", fontWeight: "bold", color: "var(--green-600)" }}>
+                تحصلت على {score} من {activeDiagnostic.questions.length} أسئلة صحيحة!
+              </p>
+              <p style={{ color: "var(--ink-700)", maxWidth: "35rem", margin: "0.75rem auto 1.5rem", lineHeight: "1.7" }}>
+                {score >= 8
+                  ? "ممتاز جداً! لديك قاعدة صلبة ومتقنة للمكتسبات القبلية. أنت جاهز للانطلاق بثقة في البكالوريا."
+                  : score >= 5
+                  ? "نتيجة طيبة! تمتلك المفاهيم الأساسية ولكن تحتاج لإعادة تنشيط بعض الروابط والقوانين."
+                  : "فرصة ممتازة للتدارك! يُنصح بمشاهدة مقاطع المكتسبات القبلية الموصى بها قبل بداية الدروس الرسمية."}
+              </p>
+              <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+                <button onClick={resetQuiz} className="button button-secondary" style={{ minHeight: "48px" }}>
+                  إعادة الاختبار 🔄
+                </button>
+                <button onClick={() => setMode("exercise")} className="button button-primary" style={{ minHeight: "48px" }}>
+                  الانتقال للتمرين الشامل 📝
+                </button>
+              </div>
+            </div>
+          )}
+        </section>
+      )}
+
+      {/* MODE 2: COMPREHENSIVE EXERCISE */}
+      {mode === "exercise" && (
+        <section className="exercise-container" style={{ maxWidth: "62rem" }}>
+          <article className="calculator-card" style={{ padding: "1.5rem", marginBottom: "1.5rem" }}>
+            <h2 style={{ color: "var(--blue-900)", marginBottom: "1rem", fontSize: "1.25rem" }}>
+              {activeDiagnostic.exercise.title}
+            </h2>
+            <div style={{ whiteSpace: "pre-line", color: "var(--ink-900)", lineHeight: "1.8", fontSize: "0.98rem", marginBottom: "1.5rem" }}>
+              {activeDiagnostic.exercise.statement}
+            </div>
+
+            <button
+              onClick={() => setShowSolution((prev) => !prev)}
+              className="button button-secondary"
+              style={{ minHeight: "48px", width: "100%", justifyContent: "center", fontSize: "0.95rem" }}
+            >
+              {showSolution ? "إخفاء الحل النموذجي 👁️" : "عرض الحل النموذجي المفصل 🔑"}
+            </button>
+
+            {showSolution && (
+              <div style={{ marginTop: "1.5rem", padding: "1.25rem", backgroundColor: "var(--green-100)", border: "1px solid var(--green-600)", borderRadius: "0.85rem" }}>
+                <h3 style={{ color: "var(--green-800)", marginTop: 0, marginBottom: "0.75rem", fontSize: "1.1rem" }}>
+                  🔑 الحل النموذجي والتنقيط البيداغوجي:
+                </h3>
+                <div style={{ whiteSpace: "pre-line", color: "var(--green-800)", lineHeight: "1.8", fontSize: "0.95rem" }}>
+                  {activeDiagnostic.exercise.solution}
+                </div>
+              </div>
+            )}
+          </article>
+        </section>
+      )}
+    </AppShell>
+  );
+}
+
+```
+
+---
+
+## 3️⃣ تحديث روابط الأدوات (`src/app/tools/page.tsx`)
+
+أضف بطاقة الوصول المباشرة للاختبار التشخيصي داخل كود صفحة الأدوات:
+
+```tsx
+// src/app/tools/page.tsx (تعديل إضافة كارت الاختبار)
+
+<Link className="tool-card" href="/tools/prerequisites/quiz">
+  <span className="tool-card-icon" aria-hidden="true" style={{ color: "var(--green-600)" }}>🎯</span>
+  <span className="tool-card-content">
+    <strong>اختبار المكتسبات القبلية</strong>
+    <small>تشخيص تفاعلي لـ 10 أسئلة وتمرين شامل في المواد العلمية[cite: 4].</small>
+  </span>
+  <span className="tool-card-arrow" aria-hidden="true">←</span>
+</Link>
+
+```
+
+---
+
+## 🎯 النتيجة والفوائد المكتسبة
+
+1. **دقة علمية وبيداغوجية**: تم تحويل الأسئلة الـ 10 والتمرين الشامل إلى أداة تفاعلية تجعل الطالب يقيّم نفسه بحرية.
+
+
+2. **شروحات فورية**: يكتشف الطالب الخطأ مع التبرير العلمي المباشر عقب كل سؤال.
+
+
+3. **تصميم متجاوب**: أزرار ومساحات لمس سهلة ومريحة على هواتف الجوال بدون تعقيدات.
+
+
+
+**Plus Ultra! 🚀**

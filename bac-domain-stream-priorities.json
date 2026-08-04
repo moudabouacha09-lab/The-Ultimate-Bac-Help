@@ -1,0 +1,198 @@
+{
+  "sourceDocument": "circulaire-2026.pdf",
+  "sourcePage": 5,
+  "sourceSectionTitle": "التسجيل الأولي، التوجيه والتسجيل (I) — جدول: ميدان التسجيل / شعبة البكالوريا / الأولوية",
+  "extractionScope": "ترتيب أولوية شعب البكالوريا لكل ميدان تسجيل فقط. لا يشمل هذا الملف صيغ الحساب (المعدل الموزون/العام) ولا معدلات القبول الدنيا — هذه بيانات منفصلة.",
+  "streamKeyLegend": {
+    "Scientific": "علوم تجريبية",
+    "Mathematical": "رياضيات",
+    "Technical": "تقني رياضي",
+    "Literature": "آداب وفلسفة",
+    "Languages": "لغات أجنبية",
+    "Management": "تسيير واقتصاد",
+    "Arts": "فنون"
+  },
+  "domains": [
+    {
+      "id": "life-earth-health-sciences",
+      "domainNamesAr": [
+        "ميدان علوم الطبيعة والحياة",
+        "ميدان علوم الأرض والكون",
+        "ميدان علوم الصحة (علوم طبية)",
+        "ميدان علوم الصحة (علوم البيطرة)"
+      ],
+      "priorities": [
+        { "tier": "أ1", "streams": ["Scientific", "Mathematical"] },
+        { "tier": "أ2", "streams": ["Technical"] }
+      ],
+      "notes": "يضم هذا الميدان تخصصات الطب وطب الأسنان والصيدلة والبيطرة."
+    },
+    {
+      "id": "matter-science-technology",
+      "domainNamesAr": ["ميدان علوم المادة", "ميدان علوم وتكنولوجيا"],
+      "priorities": [
+        { "tier": "أ1", "streams": ["Mathematical", "Scientific", "Technical"] }
+      ],
+      "notes": "الشعب الثلاث بنفس مرتبة الأولوية (أ1) بدون تفريق بينها في هذا الميدان العام."
+    },
+    {
+      "id": "science-technology-grandes-ecoles",
+      "domainNamesAr": [
+        "ميدان علوم وتكنولوجيا في المدارس الوطنية العليا (4 مسارات تقني رياضي: هندسة الطرائق، هندسة مدنية، هندسة كهربائية، هندسة ميكانيكية)"
+      ],
+      "priorities": [
+        { "tier": "أ1", "streams": ["Technical"] }
+      ],
+      "notes": "حصري لخريجي شعبة تقني رياضي بأحد التخصصات الأربعة المذكورة فقط."
+    },
+    {
+      "id": "math-computing-general-university",
+      "domainNamesAr": ["ميدان رياضيات وإعلام آلي (الجامعات العادية)"],
+      "priorities": [
+        { "tier": "أ1", "streams": ["Mathematical"] },
+        { "tier": "أ2", "streams": ["Scientific", "Technical"] }
+      ],
+      "notes": "علوم تجريبية وتقني رياضي بنفس مرتبة الأولوية الثانية معاً."
+    },
+    {
+      "id": "math-computing-grandes-ecoles",
+      "domainNamesAr": [
+        "ميدان رياضيات وإعلام آلي — المدارس الوطنية العليا في الإعلام الآلي",
+        "ميدان رياضيات وإعلام آلي — المدارس الوطنية العليا بالقطب التكنولوجي سيدي عبدالله"
+      ],
+      "priorities": [
+        { "tier": "أ1", "streams": ["Mathematical"] },
+        { "tier": "أ2", "streams": ["Scientific"] },
+        { "tier": "أ3", "streams": ["Technical"] }
+      ],
+      "notes": "يضم ESI، ENSIA، ومدرسة الأمن السيبراني. 3 مراتب منفصلة."
+    },
+    {
+      "id": "architecture-urbanism",
+      "domainNamesAr": ["ميدان هندسة معمارية، عمران ومهن المدينة"],
+      "priorities": [
+        { "tier": "أ1", "streams": ["Mathematical", "Technical", "Scientific"] }
+      ],
+      "notes": "الشعب الثلاث بمرتبة واحدة فقط (أ1). يضم EPAU."
+    },
+    {
+      "id": "languages-french-english",
+      "domainNamesAr": ["ميدان آداب ولغات أجنبية (لغة فرنسية، لغة انجليزية)"],
+      "priorities": [
+        { "tier": "أ1", "streams": ["Languages"] },
+        { "tier": "أ2", "streams": ["Literature"] },
+        { "tier": "أ3", "streams": ["Scientific", "Management", "Arts"] }
+      ],
+      "notes": ""
+    },
+    {
+      "id": "languages-spanish-german",
+      "domainNamesAr": ["ميدان آداب ولغات أجنبية (لغة اسبانية، لغة ألمانية)"],
+      "priorities": [
+        { "tier": "أ1", "streams": ["Languages"] },
+        { "tier": "أ2", "streams": ["Literature"] },
+        { "tier": "أ3", "streams": ["Scientific", "Management", "Arts"] }
+      ],
+      "notes": ""
+    },
+    {
+      "id": "languages-italian",
+      "domainNamesAr": ["ميدان آداب ولغات أجنبية (لغة إيطالية)"],
+      "priorities": [
+        { "tier": "أ1", "streams": ["Languages"] },
+        { "tier": "أ2", "streams": ["Literature"] },
+        { "tier": "أ3", "streams": ["Scientific", "Mathematical", "Technical", "Management", "Arts"] }
+      ],
+      "notes": ""
+    },
+    {
+      "id": "languages-russian-chinese-turkish",
+      "domainNamesAr": ["ميدان آداب ولغات أجنبية (لغة روسية، لغة صينية، لغة تركية)"],
+      "priorities": [
+        { "tier": "أ1", "streams": ["Languages", "Literature"] },
+        { "tier": "أ2", "streams": ["Scientific", "Management", "Arts"] }
+      ],
+      "notes": ""
+    },
+    {
+      "id": "translation",
+      "domainNamesAr": ["ميدان آداب ولغات أجنبية (ترجمة)"],
+      "priorities": [
+        { "tier": "أ1", "streams": ["Languages", "Literature"] }
+      ],
+      "notes": ""
+    },
+    {
+      "id": "amazigh-arabic",
+      "domainNamesAr": ["ميدان لغة وثقافة أمازيغية", "ميدان لغة وأدب عربي"],
+      "priorities": [
+        { "tier": "أ1", "streams": ["Literature", "Languages", "Arts"] },
+        { "tier": "أ2", "streams": ["Scientific", "Management"] }
+      ],
+      "notes": ""
+    },
+    {
+      "id": "humanities-social-sciences",
+      "domainNamesAr": ["ميدان علوم إنسانية واجتماعية"],
+      "priorities": [
+        { "tier": "أ1", "streams": ["Literature", "Languages", "Arts"] },
+        { "tier": "أ2", "streams": ["Scientific"] }
+      ],
+      "notes": ""
+    },
+    {
+      "id": "humanities-islamic-sciences",
+      "domainNamesAr": ["ميدان علوم إنسانية واجتماعية (علوم إسلامية)"],
+      "priorities": [
+        { "tier": "أ1", "streams": ["Literature", "Languages", "Arts"] },
+        { "tier": "أ2", "streams": ["Scientific", "Mathematical", "Technical", "Management"] }
+      ],
+      "notes": ""
+    },
+    {
+      "id": "law-political-science",
+      "domainNamesAr": ["ميدان حقوق وعلوم سياسية"],
+      "priorities": [
+        { "tier": "أ1", "streams": ["Literature", "Languages", "Management", "Arts"] },
+        { "tier": "أ2", "streams": ["Scientific", "Mathematical"] },
+        { "tier": "أ3", "streams": ["Technical"] }
+      ],
+      "notes": ""
+    },
+    {
+      "id": "economics-management-commerce-general",
+      "domainNamesAr": ["ميدان علوم اقتصادية، التسيير وعلوم تجارية (الجامعات العادية)"],
+      "priorities": [
+        { "tier": "أ1", "streams": ["Management", "Literature"] },
+        { "tier": "أ2", "streams": ["Mathematical", "Scientific", "Technical"] },
+        { "tier": "أ3", "streams": ["Languages"] }
+      ],
+      "notes": ""
+    },
+    {
+      "id": "economics-management-commerce-grandes-ecoles",
+      "domainNamesAr": ["ميدان علوم اقتصادية — المدارس الوطنية العليا للتسيير وعلوم تجارية"],
+      "priorities": [
+        { "tier": "أ1", "streams": ["Management", "Mathematical", "Scientific", "Technical"] }
+      ],
+      "notes": "مرتبة واحدة فقط تضم 4 شعب معاً."
+    },
+    {
+      "id": "arts",
+      "domainNamesAr": ["ميدان فنون"],
+      "priorities": [
+        { "tier": "أ1", "streams": ["Arts"] },
+        { "tier": "أ2", "streams": ["Scientific", "Mathematical", "Technical", "Literature", "Languages", "Management"] }
+      ],
+      "notes": ""
+    },
+    {
+      "id": "physical-sports-sciences",
+      "domainNamesAr": ["ميدان علوم وتقنيات النشاطات البدنية والرياضية"],
+      "priorities": [
+        { "tier": "بدون تفريق", "streams": ["Scientific", "Mathematical", "Technical", "Literature", "Languages", "Management", "Arts"] }
+      ],
+      "notes": "الميدان الوحيد بدون تراتبية أولوية بين الشعب."
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Legend of 3rd Class</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.18/dist/lenis.css" />
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- CDN: Three.js + GSAP + ScrollTrigger + Lenis -->
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+</head>
+<body>
+
+  <!-- Particle background -->
+  <canvas id="particles"></canvas>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-logo">✦ The Legend of 3rd Class</div>
+    <div class="nav-links">
+      <a href="#gallery-3as3">3 AS 3</a>
+      <a href="#gallery-adn">ملتقى ADN</a>
+      <a href="#gallery-party">حفلة 2025</a>
+      <button id="slideshowBtn" class="btn-slideshow">▶ Slideshow</button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero" id="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">The Legend<br /><span>of 3rd Class</span></h1>
+      <p class="hero-sub">Memories that never fade ✦ Photos & videos of an unforgettable year</p>
+      <a href="#carousel3d" class="hero-cta">Explore the Album ↓</a>
+    </div>
+    <div class="hero-glow"></div>
+  </header>
+
+  <!-- ==================== 3D RING CAROUSEL ==================== -->
+  <section id="carousel3d" class="carousel-section">
+    <div class="ring-watermark" id="ring-watermark">3 AS 3</div>
+    <canvas id="ring-canvas"></canvas>
+
+    <!-- Editorial overlay -->
+    <div class="carousel-overlay">
+      <div class="carousel-header">
+        <h2 class="carousel-album-title" id="carousel-title">3 AS 3</h2>
+        <span class="carousel-index" id="carousel-index">01 — 16</span>
+      </div>
+      <div class="carousel-header-line"></div>
+    </div>
+
+    <!-- Floating bottom dock -->
+    <div class="carousel-dock">
+      <button class="dock-btn dock-prev" aria-label="Previous">←</button>
+      <div class="dock-tabs">
+        <button class="dock-tab active" data-album="3as3">3 AS 3</button>
+        <button class="dock-tab" data-album="adn">ADN</button>
+        <button class="dock-tab" data-album="party">PARTY</button>
+        <div class="dock-tab-indicator"></div>
+      </div>
+      <button class="dock-btn dock-next" aria-label="Next">→</button>
+      <div class="dock-divider"></div>
+      <button class="dock-btn dock-view">VIEW</button>
+    </div>
+  </section>
+
+  <!-- Filmstrip -->
+  <section class="filmstrip-wrap">
+    <div class="filmstrip" id="filmstrip"></div>
+  </section>
+
+  <!-- Galleries (injected by JS) -->
+  <main id="galleries"></main>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lb-close" id="lbClose">✕</button>
+    <button class="lb-nav lb-prev" id="lbPrev">‹</button>
+    <div class="lb-stage" id="lbStage"></div>
+    <button class="lb-nav lb-next" id="lbNext">›</button>
+    <div class="lb-counter" id="lbCounter"></div>
+  </div>
+
+  <footer class="footer">Made with ❤ — The Legend of 3rd Class</footer>
+
+  <!-- Scripts: order matters -->
+  <script src="script.js"></script>
+  <script src="cursor-aurora.js"></script>
+  <script src="reactive-glass.js"></script>
+  <script src="carousel3d.js"></script>
+  <script src="cursor.js"></script>
+</body>
+</html>

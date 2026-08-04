@@ -13,37 +13,33 @@ export default function ProgressPage() {
 
   return (
     <AppShell>
-      {/* Heading Header */}
-      <section className="subject-page-heading" style={{ marginBottom: "1.5rem" }}>
-        <div>
-          <p className="eyebrow">شعبة العلوم التجريبية</p>
-          <h1>تقدمي في الدروس</h1>
-          <p>تابع مدى جاهزيتك لكل مادة وللامتحان الشامل خطوة بخطوة.</p>
-          <p style={{ marginTop: '0.8rem', fontSize: '0.85rem', lineHeight: '1.6', opacity: 0.9 }}>
+      <div className="progress-fluid-layout-container">
+        {/* Unified Right-Aligned Page Header Section */}
+        <div className="progress-page-header">
+          <span className="progress-context-tag">شعبة العلوم التجريبية</span>
+          <h1 className="progress-main-title">تقدمي في الدروس</h1>
+          <h2 className="progress-sub-headline">تابع مدى جاهزيتك لكل مادة وللامتحان الشامل خطوة بخطوة.</h2>
+          <p className="progress-paragraph-text">
             تم بناء محرك التتبع ليعكس الواقع الفعلي للبكالوريا؛ فالدروس ليست متساوية في التأثير على معدلك النهائي. يُحسب مؤشر الجاهزية باستخدام المعدل المرجّح للمعاملات، مما يعني أن المواد ذات المعاملات العالية (كالعلوم والرياضيات والفيزياء) تدفع بشريط تقدمك للأعلى بنسبة أسرع وأكبر، لتساعدك على ترتيب أولوياتك وإدارة وقتك بذكاء.
           </p>
         </div>
-        <span className="subject-hero-icon subject-icon-green" aria-hidden="true">
-          📈
-        </span>
-      </section>
 
       {/* Global Progress Dashboard Widget */}
       <section className="progress-dashboard-card">
         <div className="progress-dashboard-main">
           <div>
             <span className="eyebrow-badge">مؤشر الجاهزية المرجّح</span>
-            <h2 className="progress-score">{isHydrated ? `${bacReadinessIndex}%` : "0%"}</h2>
-            <p className="progress-subtext">حُسب بناءً على معاملات شعبتك (مجموع المعاملات: 29)</p>
+            <h2 className="progress-score">{isHydrated ? <bdi className="rtl-num">{bacReadinessIndex}%</bdi> : <bdi className="rtl-num">0%</bdi>}</h2>
+            <p className="progress-subtext">حُسب بناءً على معاملات شعبتك (مجموع المعاملات: <bdi className="rtl-num">29</bdi>)</p>
           </div>
           <div className="progress-flat-stats">
             <div className="stat-pill">
               <span>الدروس المكتملة</span>
-              <strong>{isHydrated ? `${totalCompletedLessons} / ${totalLessonsCount}` : "0/0"}</strong>
+              <strong className="rtl-num">{isHydrated ? <bdi>{totalCompletedLessons} / {totalLessonsCount}</bdi> : <bdi>0 / 0</bdi>}</strong>
             </div>
             <div className="stat-pill">
               <span>النسبة العامة الخام</span>
-              <strong>{isHydrated ? `${overallFlatPercentage}%` : "0%"}</strong>
+              <strong className="rtl-num">{isHydrated ? <bdi>{overallFlatPercentage}%</bdi> : <bdi>0%</bdi>}</strong>
             </div>
           </div>
         </div>
@@ -65,7 +61,7 @@ export default function ProgressPage() {
             onClick={() => setSelectedSubjectId(subj.id)}
           >
             <span>{subj.icon} {subj.name}</span>
-            <small style={{ marginInlineStart: "0.4rem", opacity: 0.8 }}>({subj.percentage}%)</small>
+            <small style={{ marginInlineStart: "0.4rem", opacity: 0.8 }}>(<bdi className="rtl-num">{subj.percentage}%</bdi>)</small>
           </button>
         ))}
       </nav>
@@ -76,11 +72,11 @@ export default function ProgressPage() {
           <div className="checklist-header">
             <div>
               <h2>{activeSubject.icon} {activeSubject.name}</h2>
-              <p>المعامل: <strong>{activeSubject.coefficient}</strong> • إجمالي الدروس: {activeSubject.totalCount}</p>
+              <p>المعامل: <strong><bdi className="rtl-num">{activeSubject.coefficient}</bdi></strong> • إجمالي الدروس: <bdi className="rtl-num">{activeSubject.totalCount}</bdi></p>
             </div>
             <div className="subject-progress-badge">
               <span>نسبة المادة</span>
-              <strong>{activeSubject.percentage}%</strong>
+              <strong className="rtl-num"><bdi>{activeSubject.percentage}%</bdi></strong>
             </div>
           </div>
 
@@ -132,6 +128,7 @@ export default function ProgressPage() {
           </div>
         </section>
       )}
+      </div>
     </AppShell>
   );
 }

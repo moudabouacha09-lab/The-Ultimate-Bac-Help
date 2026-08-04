@@ -1,98 +1,105 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { AppShell } from "@/components/layout/app-shell";
-import { useLocalStorage } from "@/hooks/use-local-storage";
 
 type SubjectField = { id: string; name: string; coefficient: number };
-type Stream = "Scientific" | "Mathematical" | "Literature" | "Technical" | "Languages" | "Management";
+type Stream = 
+  | "Scientific" 
+  | "Mathematical" 
+  | "Engineering" 
+  | "Literature" 
+  | "Languages" 
+  | "Management" 
+  | "Artistic";
 
 const streamLabels: Record<Stream, string> = {
   Scientific: "علوم تجريبية",
   Mathematical: "رياضيات",
-  Technical: "تقني رياضي",
+  Engineering: "هندسة (تقني رياضي)",
   Literature: "آداب وفلسفة",
   Languages: "لغات أجنبية",
-  Management: "تسيير واقتصاد"
+  Management: "تسيير واقتصاد",
+  Artistic: "فنون"
 };
 
+// البيانات الدقيقة المستخرجة مباشرةً من الجداول الرسمية الصادرة عن وزارة التربية الوطنية (السنة الثالثة ثانوي - البكالوريا)
 const streamSubjects: Record<Stream, SubjectField[]> = {
   Scientific: [
+    { id: "science", name: "علوم الطبيعة والحياة", coefficient: 6 },
     { id: "math", name: "الرياضيات", coefficient: 5 },
-    { id: "science", name: "العلوم الطبيعية", coefficient: 6 },
-    { id: "physics", name: "الفيزياء", coefficient: 5 },
-    { id: "arabic", name: "اللغة العربية", coefficient: 3 },
-    { id: "french", name: "اللغة الفرنسية", coefficient: 2 },
-    { id: "english", name: "اللغة الإنجليزية", coefficient: 2 },
-    { id: "philosophy", name: "الفلسفة", coefficient: 2 },
-    { id: "history", name: "التاريخ والجغرافيا", coefficient: 2 },
+    { id: "physics", name: "العلوم الفيزيائية", coefficient: 4 },
+    { id: "english", name: "اللغة الإنجليزية", coefficient: 3 },
+    { id: "arabic", name: "اللغة العربية", coefficient: 2 },
+    { id: "history", name: "تاريخ وجغرافيا (تاريخ)", coefficient: 2 },
     { id: "islamic", name: "العلوم الإسلامية", coefficient: 2 },
-    { id: "sports", name: "التربية البدنية والرياضية", coefficient: 1 }
+    { id: "sports", name: "تربية بدنية", coefficient: 1 }
   ],
   Mathematical: [
-    { id: "math", name: "الرياضيات", coefficient: 7 },
-    { id: "physics", name: "الفيزياء", coefficient: 6 },
-    { id: "science", name: "العلوم الطبيعية", coefficient: 2 },
-    { id: "arabic", name: "اللغة العربية", coefficient: 3 },
-    { id: "french", name: "اللغة الفرنسية", coefficient: 2 },
-    { id: "english", name: "اللغة الإنجليزية", coefficient: 2 },
-    { id: "philosophy", name: "الفلسفة", coefficient: 2 },
-    { id: "history", name: "التاريخ والجغرافيا", coefficient: 2 },
-    { id: "islamic", name: "العلوم الإسلامية", coefficient: 2 },
-    { id: "sports", name: "التربية البدنية والرياضية", coefficient: 1 }
-  ],
-  Technical: [
-    { id: "technology", name: "التكنولوجيا", coefficient: 7 },
-    { id: "math", name: "الرياضيات", coefficient: 6 },
+    { id: "math", name: "الرياضيات", coefficient: 8 },
     { id: "physics", name: "العلوم الفيزيائية", coefficient: 6 },
-    { id: "arabic", name: "اللغة العربية", coefficient: 3 },
+    { id: "computer_science", name: "إعلام آلي", coefficient: 3 },
+    { id: "english", name: "اللغة الإنجليزية", coefficient: 3 },
+    { id: "science", name: "علوم الطبيعة والحياة", coefficient: 2 },
+    { id: "history", name: "تاريخ وجغرافيا (تاريخ)", coefficient: 2 },
     { id: "islamic", name: "العلوم الإسلامية", coefficient: 2 },
-    { id: "history", name: "التاريخ والجغرافيا", coefficient: 2 },
-    { id: "philosophy", name: "الفلسفة", coefficient: 2 },
-    { id: "french", name: "اللغة الفرنسية", coefficient: 2 },
-    { id: "english", name: "اللغة الإنجليزية", coefficient: 2 },
-    { id: "sports", name: "التربية البدنية والرياضية", coefficient: 1 }
+    { id: "sports", name: "تربية بدنية", coefficient: 1 }
+  ],
+  Engineering: [
+    { id: "technology", name: "تكنولوجيا", coefficient: 7 },
+    { id: "math", name: "الرياضيات", coefficient: 5 },
+    { id: "physics", name: "علوم فيزيائية", coefficient: 4 },
+    { id: "computer_science", name: "إعلام آلي", coefficient: 3 },
+    { id: "english", name: "لغة إنجليزية", coefficient: 3 },
+    { id: "history", name: "تاريخ وجغرافيا (تاريخ)", coefficient: 2 },
+    { id: "islamic", name: "علوم إسلامية", coefficient: 2 },
+    { id: "sports", name: "تربية بدنية", coefficient: 1 }
   ],
   Literature: [
-    { id: "arabic", name: "اللغة العربية", coefficient: 6 },
-    { id: "philosophy", name: "الفلسفة", coefficient: 6 },
-    { id: "history", name: "التاريخ والجغرافيا", coefficient: 4 },
-    { id: "french", name: "اللغة الفرنسية", coefficient: 3 },
-    { id: "english", name: "اللغة الإنجليزية", coefficient: 3 },
-    { id: "math", name: "الرياضيات", coefficient: 2 },
-    { id: "islamic", name: "العلوم الإسلامية", coefficient: 2 },
-    { id: "sports", name: "التربية البدنية والرياضية", coefficient: 1 }
+    { id: "arabic", name: "لغة عربية", coefficient: 7 },
+    { id: "philosophy", name: "فلسفة", coefficient: 6 },
+    { id: "history_geo", name: "تاريخ وجغرافيا", coefficient: 4 },
+    { id: "english", name: "لغة إنجليزية", coefficient: 3 },
+    { id: "french", name: "لغة فرنسية", coefficient: 2 },
+    { id: "islamic", name: "علوم إسلامية", coefficient: 2 },
+    { id: "sports", name: "تربية بدنية", coefficient: 1 }
   ],
   Languages: [
-    { id: "arabic", name: "اللغة العربية", coefficient: 5 },
-    { id: "french", name: "اللغة الفرنسية", coefficient: 5 },
-    { id: "english", name: "اللغة الإنجليزية", coefficient: 5 },
-    { id: "third_language", name: "لغة أجنبية ثالثة", coefficient: 4 },
-    { id: "islamic", name: "العلوم الإسلامية", coefficient: 2 },
-    { id: "history", name: "التاريخ والجغرافيا", coefficient: 2 },
-    { id: "philosophy", name: "الفلسفة", coefficient: 2 },
-    { id: "math", name: "الرياضيات", coefficient: 2 },
-    { id: "sports", name: "التربية البدنية والرياضية", coefficient: 1 }
+    { id: "third_language", name: "لغة أجنبية ثالثة (إسبانية/ألمانية/إيطالية)", coefficient: 6 },
+    { id: "english", name: "لغة إنجليزية", coefficient: 4 },
+    { id: "french", name: "لغة فرنسية", coefficient: 4 },
+    { id: "arabic", name: "لغة عربية", coefficient: 2 },
+    { id: "history_geo", name: "تاريخ وجغرافيا", coefficient: 2 },
+    { id: "islamic", name: "علوم إسلامية", coefficient: 2 },
+    { id: "sports", name: "تربية بدنية", coefficient: 1 }
   ],
   Management: [
-    { id: "accounting", name: "تسيير محاسبي", coefficient: 6 },
-    { id: "math", name: "الرياضيات", coefficient: 5 },
-    { id: "economics", name: "إقتصاد ومناجمنت", coefficient: 5 },
-    { id: "history", name: "التاريخ والجغرافيا", coefficient: 4 },
-    { id: "arabic", name: "اللغة العربية", coefficient: 3 },
+    { id: "accounting", name: "تسيير محاسبي ومالي", coefficient: 6 },
+    { id: "economics", name: "اقتصاد ومناجمنت", coefficient: 4 },
+    { id: "math", name: "رياضيات", coefficient: 3 },
+    { id: "history_geo", name: "تاريخ وجغرافيا", coefficient: 3 },
+    { id: "english", name: "لغة إنجليزية", coefficient: 3 },
+    { id: "arabic", name: "لغة عربية", coefficient: 2 },
     { id: "law", name: "قانون", coefficient: 2 },
-    { id: "islamic", name: "العلوم الإسلامية", coefficient: 2 },
-    { id: "philosophy", name: "الفلسفة", coefficient: 2 },
-    { id: "french", name: "اللغة الفرنسية", coefficient: 2 },
-    { id: "english", name: "اللغة الإنجليزية", coefficient: 2 },
-    { id: "sports", name: "التربية البدنية والرياضية", coefficient: 1 }
+    { id: "islamic", name: "علوم إسلامية", coefficient: 2 },
+    { id: "sports", name: "تربية بدنية", coefficient: 1 }
+  ],
+  Artistic: [
+    { id: "art_1", name: "فنون 1 (التخصص الرئيسي)", coefficient: 6 },
+    { id: "art_2", name: "فنون 2 (التخصص الفرعي)", coefficient: 5 },
+    { id: "arabic", name: "لغة عربية", coefficient: 4 },
+    { id: "english", name: "لغة إنجليزية", coefficient: 2 },
+    { id: "french", name: "لغة فرنسية", coefficient: 2 },
+    { id: "history_geo", name: "تاريخ وجغرافيا", coefficient: 2 },
+    { id: "islamic", name: "علوم إسلامية", coefficient: 2 },
+    { id: "sports", name: "تربية بدنية", coefficient: 1 }
   ]
 };
 
 export default function CalculatorPage() {
-  const [stream, setStream] = useLocalStorage<Stream>("bac_user_stream", "Scientific");
-  const [grades, setGrades] = useLocalStorage<Record<string, string>>("bac_user_grades", {});
-  const subjects = streamSubjects[stream];
+  const [stream, setStream] = useState<Stream>("Scientific");
+  const [grades, setGrades] = useState<Record<string, string>>({});
+  const subjects = streamSubjects[stream] ?? streamSubjects.Scientific;
 
   const totalStreamCoefficients = useMemo(() => {
     return subjects.reduce((sum, subject) => sum + subject.coefficient, 0);
@@ -103,7 +110,7 @@ export default function CalculatorPage() {
     let coefficients = 0;
 
     subjects.forEach((subject) => {
-      const val = grades[subject.id];
+      const val = grades[subject.id]?.replace(",", ".");
       if (val !== undefined && val !== "" && !Number.isNaN(Number(val))) {
         const grade = Math.min(20, Math.max(0, Number(val)));
         points += grade * subject.coefficient;
@@ -129,21 +136,21 @@ export default function CalculatorPage() {
     <AppShell>
       <section className="calculator-heading">
         <div>
-          <p className="eyebrow">خطّط لهدفك</p>
-          <h1>حاسبة معدل البكالوريا</h1>
-          <p>أدخل نقاطك لتحصل على معدل تقريبي في الوقت الحقيقي. تُحفظ النقاط والشعبة تلقائياً على جهازك!</p>
+          <p className="eyebrow">مُحيّن ووفق التنظيم الوزاري الصادر في 29 جويلية 2026 🎯</p>
+          <h1>حاسبة معدل البكالوريا الرسمية</h1>
+          <p>أدخل نقاطك لتحصل على معدلك الدقيق والمُحيّن وفق المعاملات والشعب الجديدة.</p>
         </div>
         <div className="calculator-result" aria-live="polite">
           <span>المعدل الحالي</span>
           <strong>{average.toFixed(2)}</strong>
-          <small>مجموع معامل الشعبة: {totalStreamCoefficients}</small>
+          <small>مجموع المعاملات: {totalStreamCoefficients}</small>
         </div>
       </section>
 
       <section className="calculator-card">
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem", marginBottom: "1rem" }}>
           <label className="stream-select" style={{ flex: 1, minWidth: "200px" }}>
-            <span>اختر الشعبة ({streamLabels[stream]})</span>
+            <span>اختر الشعبة الرسمية</span>
             <select value={stream} onChange={(event) => changeStream(event.target.value as Stream)}>
               {(Object.keys(streamLabels) as Stream[]).map((option) => (
                 <option value={option} key={option}>{streamLabels[option]}</option>
@@ -154,8 +161,17 @@ export default function CalculatorPage() {
           <button
             type="button"
             onClick={clearGrades}
-            className="file-action file-action-preview"
-            style={{ padding: "0.5rem 1rem", fontSize: "0.85rem", cursor: "pointer", background: "var(--red-100, #fee2e2)", color: "var(--red-800, #991b1b)" }}
+            style={{ 
+              padding: "0.6rem 1.25rem", 
+              fontSize: "0.85rem", 
+              fontWeight: "700",
+              cursor: "pointer", 
+              background: "var(--danger-bg)", 
+              border: "1px solid var(--danger)", 
+              color: "var(--danger)",
+              borderRadius: "0.6rem",
+              transition: "all 0.2s ease"
+            }}
           >
             🗑️ مسح النقاط
           </button>
@@ -163,27 +179,28 @@ export default function CalculatorPage() {
 
         <div className="calculator-form-heading">
           <div>
-            <h2>نقاط المواد لشعبة: {streamLabels[stream]}</h2>
-            <p>المعاملات المعروضة أدناه مخصصة لشعبة {streamLabels[stream]} (إجمالي المعاملات: {totalStreamCoefficients}).</p>
+            <h2>مواد شعبة: {streamLabels[stream]}</h2>
+            <p style={{ color: "var(--text-secondary)" }}>المعاملات أدناه مطابقة للجريدة الرسمية والمناشير الوزارية لشعبة {streamLabels[stream]} (مجموع المعاملات: {totalStreamCoefficients}).</p>
           </div>
           <span>النقطة / 20</span>
         </div>
 
         <div className="grade-grid">
           {subjects.map((subject) => (
-            <label className="grade-field subject-input-card" key={subject.id}>
-              <span><strong>{subject.name}</strong><small>المعامل {subject.coefficient}</small></span>
+            <label className="subject-input-card" key={subject.id}>
+              <div className="subject-input-info">
+                <strong>{subject.name}</strong>
+                <small>(معامل {subject.coefficient})</small>
+              </div>
               <input
-                type="number"
-                min="0"
-                max="20"
-                step="0.25"
+                className="grade-input"
+                type="text"
                 inputMode="decimal"
                 placeholder="—"
                 value={grades[subject.id] ?? ""}
                 onChange={(event) => {
-                  const val = event.target.value;
-                  setGrades((prev) => ({ ...prev, [subject.id]: val }));
+                  const normalized = event.target.value.replace(",", ".");
+                  setGrades((current) => ({ ...current, [subject.id]: normalized }));
                 }}
                 aria-label={`نقطة ${subject.name}`}
               />
@@ -191,7 +208,9 @@ export default function CalculatorPage() {
           ))}
         </div>
 
-        <p className="calculator-note">تنبيه: النقاط والحسابات محفوظة محلياً في متصفحك لسهولة المتابعة أثناء المراجعة.</p>
+        <p className="calculator-note">
+          ✨ البيانات مُحدثة رسمياً بناءً على الجداول الخاصة بالسنة الثالثة ثانوي (البكالوريا) الصادرة عن وزارة التربية الوطنية يوم 29 جويلية 2026.
+        </p>
       </section>
     </AppShell>
   );

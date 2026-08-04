@@ -1,100 +1,78 @@
-"use client";
-
+// src/app/page.tsx
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { AppShell } from "@/components/layout/app-shell";
+import { GraduationCap, Calculator, Target, Dna } from "lucide-react";
+import { FadeInSection } from "@/components/effects/fade-in-section";
+import { getNewsFeed } from "@/lib/news-service";
+import { MinisterialCard } from "@/components/news/ministerial-card";
+import { NewsFeed } from "@/components/news/news-feed";
+import { CountdownCard } from "@/components/news/countdown-card";
 
-// تاريخ البكالوريا المتوقع
-const nextExamDate = new Date("2027-06-07T08:00:00+01:00");
-
-type Countdown = { days: number; hours: number; minutes: number };
-
-function getCountdown(): Countdown {
-  const remaining = Math.max(0, nextExamDate.getTime() - Date.now());
-  const totalMinutes = Math.floor(remaining / 60000);
-  return {
-    days: Math.floor(totalMinutes / (60 * 24)),
-    hours: Math.floor((totalMinutes % (60 * 24)) / 60),
-    minutes: totalMinutes % 60
-  };
-}
-
-function CountdownCard() {
-  const [countdown, setCountdown] = useState<Countdown | null>(null);
-
-  useEffect(() => {
-    setCountdown(getCountdown());
-    const timer = window.setInterval(() => setCountdown(getCountdown()), 60000);
-    return () => window.clearInterval(timer);
-  }, []);
-
-  const values = countdown ?? { days: 0, hours: 0, minutes: 0 };
-
-  return (
-    <section className="countdown-card" aria-label="العد التنازلي للبكالوريا">
-      <div>
-        <p className="eyebrow countdown-eyebrow">🚀 Plus Ultra · الاستعداد يصنع الفرق</p>
-        <h2>الوقت المتبقي للبكالوريا</h2>
-        <p className="countdown-date">الدورة القادمة المتوقعة · جوان 2027</p>
-      </div>
-      <div className="countdown-values" aria-live="polite">
-        <div><strong>{values.days}</strong><span>يوم</span></div>
-        <b>:</b>
-        <div><strong>{String(values.hours).padStart(2, "0")}</strong><span>ساعة</span></div>
-        <b>:</b>
-        <div><strong>{String(values.minutes).padStart(2, "0")}</strong><span>دقيقة</span></div>
-      </div>
-    </section>
-  );
-}
-
-const quickLinks = [
-  { href: "/subject/science", icon: "🧬", title: "العلوم الطبيعية", text: "دروس وتمارين وملخصات مجالات البروتين والجيولوجيا", tone: "blue" },
-  { href: "/subject/math", icon: "∑", title: "الرياضيات", text: "سلاسل الأستاذ نور الدين والاحتمالات والدوال", tone: "green" },
-  { href: "/subject/physics", icon: "⚛", title: "الفيزياء", text: "تأشيرة النجاح، الأسئلة النظرية والمواضيع", tone: "violet" }
-] as const;
-
-const updates = [
-  "تم تحديث تجميعة بكالوريات العلوم التجريبية 2026 (أكثر من 35 ثانوية)",
-  "إضافة مذكرات الذكاء الاصطناعي التفاعلية Google NotebookLM لجميع المواد",
-  "تعديل وتحديث حاسبة المعدل وفق المعاملات الرسمية لجميع الشعب"
+const quickShortcuts = [
+  { href: "/tools/orientation", icon: <GraduationCap size={22} />, title: "مستشار التوجيه 🎓", text: "احسب معدلك الموزون واكتشف المدارس المتاحة", tone: "blue" },
+  { href: "/calculator", icon: <Calculator size={22} />, title: "حاسبة المعدل ⚖️", text: "حاسبة البكالوريا الرسمية وفق معاملات 2026", tone: "green" },
+  { href: "/tools/prerequisites/quiz", icon: <Target size={22} />, title: "اختبار المكتسبات 🎯", text: "تشخيص 10 أسئلة وتمرين شامل في المواد العلمية", tone: "violet" },
+  { href: "/subject/science", icon: <Dna size={22} />, title: "مكتبة العلوم 🧬", text: "ملخصات وتمارين وحدات البروتين والجيولوجيا", tone: "blue" }
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const newsFeed = await getNewsFeed();
+  const latestOfficialNews = newsFeed.find((item) => item.category === "official") || newsFeed[0];
+
   return (
     <AppShell>
-      <section className="home-intro">
-        <p className="eyebrow">مرحباً بك في منصة البكالوريا الجزائرية</p>
-        <h1>خطوتك التالية نحو المرتبة الأولى.</h1>
-        <p>نظّم مراجعتك، احسب معدلك، واستعن بأفضل المراجع المصممة خصيصاً لتفوقك.</p>
+      {/* Hero Header */}
+      <section className="home-intro" style={{ marginBottom: "1.5rem" }}>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", padding: "0.35rem 0.85rem", backgroundColor: "rgba(34, 197, 94, 0.15)", borderRadius: "999px", color: "#22c55e", fontSize: "0.82rem", fontWeight: "800", marginBottom: "0.75rem" }}>
+          <span>● مباشر</span>
+          <span style={{ color: "var(--text-secondary)" }}>| آخر الأخبار والمستجدات الرسمية 🇩🇿</span>
+        </div>
+        <h1>تغطية حية ومستجدات البكالوريا 2026/2027</h1>
+        <p style={{ color: "var(--text-secondary)", fontSize: "1.05rem", marginTop: "0.5rem" }}>
+          متابعة فورية ومبسطة لقرارات وزارة التربية الوطنية، المنشور الوزاري، والتحديثات الدراسية المباشرة.
+        </p>
       </section>
 
+      {/* Countdown Card */}
       <CountdownCard />
 
-      <section className="dashboard-section" aria-labelledby="quick-links-title">
+      {/* Ministerial Hero Agent Card */}
+      {latestOfficialNews && (
+        <FadeInSection delay={50}>
+          <MinisterialCard news={latestOfficialNews} />
+        </FadeInSection>
+      )}
+
+      {/* Categorized News Feed */}
+      <FadeInSection delay={120}>
+        <div style={{ marginBottom: "1rem" }}>
+          <h2 style={{ fontSize: "1.35rem", fontWeight: "800", color: "var(--text-primary)", marginBottom: "0.25rem" }}>
+            📰 التغذية الإخبارية والتحديثات اليومية
+          </h2>
+          <p style={{ color: "var(--text-secondary)", fontSize: "0.88rem" }}>
+            اختر التبويب لمتابعة القرارات الوزارية، تحديثات المحتوى، والنصائح المنهجية.
+          </p>
+        </div>
+        <NewsFeed items={newsFeed} />
+      </FadeInSection>
+
+      {/* Quick Access Shortcuts */}
+      <section className="dashboard-section" aria-labelledby="quick-shortcuts-title" style={{ marginTop: "2.5rem" }}>
         <div className="dashboard-section-heading">
-          <h2 id="quick-links-title">انطلاقة سريعة</h2>
-          <span>المواد الأكثر مراجعة</span>
+          <h2 id="quick-shortcuts-title">🚀 اختصارات فورية للخدمات</h2>
+          <span>الأدوات الأكثر استخداماً</span>
         </div>
         <div className="quick-links-grid">
-          {quickLinks.map((link) => (
-            <Link className="quick-link-card" href={link.href} key={link.href}>
-              <span className={`quick-link-icon quick-link-${link.tone}`} aria-hidden="true">{link.icon}</span>
-              <span><strong>{link.title}</strong><small>{link.text}</small></span>
-              <span className="quick-link-arrow" aria-hidden="true">←</span>
-            </Link>
+          {quickShortcuts.map((link, i) => (
+            <FadeInSection key={link.href} delay={i * 60}>
+              <Link className="quick-link-card" href={link.href}>
+                <span className={`quick-link-icon quick-link-${link.tone}`} aria-hidden="true">{link.icon}</span>
+                <span><strong>{link.title}</strong><small>{link.text}</small></span>
+                <span className="quick-link-arrow" aria-hidden="true">←</span>
+              </Link>
+            </FadeInSection>
           ))}
         </div>
-      </section>
-
-      <section className="updates-widget" aria-labelledby="updates-title">
-        <div className="dashboard-section-heading">
-          <h2 id="updates-title">آخر الإضافات والتحديثات</h2>
-          <span className="updates-live">تحديث مستمر</span>
-        </div>
-        <ul>
-          {updates.map((update) => <li key={update}><span aria-hidden="true">✦</span>{update}</li>)}
-        </ul>
       </section>
     </AppShell>
   );

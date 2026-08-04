@@ -1,6 +1,8 @@
 import { AppShell } from "@/components/layout/app-shell";
 import Link from "next/link";
 import Image from "next/image";
+import { Library, Zap, Dna, Landmark, Globe, Brain, AlertTriangle } from "lucide-react";
+import { FadeInSection } from "@/components/effects/fade-in-section";
 
 export default function BooksPage() {
   const subjects = [
@@ -18,7 +20,7 @@ export default function BooksPage() {
     },
     {
       title: "الفيزياء",
-      icon: "⚡",
+      icon: <Zap size={20} />,
       color: "cyan",
       books: [
         { title: "تأشيرة النجاح - الجزء الأول", author: "الأستاذ شنايط", image: "/books/physics-visa-1.webp", desc: "كتاب غني بالتمارين والأفكار للوحدات الأولى." },
@@ -28,7 +30,7 @@ export default function BooksPage() {
     },
     {
       title: "العلوم الطبيعية",
-      icon: "🧬",
+      icon: <Dna size={20} />,
       color: "green",
       books: [
         { title: "الجوهرة - الجزء الأول", author: "الأستاذة خيرة فليتي", image: "/books/science-jawhara-1.webp", desc: "مرجع متكامل للوحدات الأولى في العلوم الطبيعية." },
@@ -46,7 +48,7 @@ export default function BooksPage() {
     },
     {
       title: "العلوم الإسلامية",
-      icon: "🕋",
+      icon: <Landmark size={20} />,
       color: "green",
       books: [
         { title: "السلسلة الأرجوانية", author: "الأستاذة بوسعادي", image: "/books/islamic-purple.jpg", desc: "ملخصات دقيقة وحفظ سهل لجميع الدروس المقررة." },
@@ -55,7 +57,7 @@ export default function BooksPage() {
     },
     {
       title: "التاريخ والجغرافيا",
-      icon: "🌍",
+      icon: <Globe size={20} />,
       color: "violet",
       books: [
         { title: "السلسلة الأرجوانية", author: "الأستاذ بورنان", image: "/books/history-bournan.jpg", desc: "من أفضل المراجع لحفظ وفهم الاجتماعيات ببساطة." },
@@ -63,7 +65,7 @@ export default function BooksPage() {
     },
     {
       title: "الفلسفة",
-      icon: "🤔",
+      icon: <Brain size={20} />,
       color: "blue",
       books: [
         { title: "كتاب المتفوقة", author: "خولة", image: "/books/philosophy-motafawiqa.jpg", desc: "مقالات جاهزة ومنهجية واضحة للتفوق في مادة الفلسفة." },
@@ -86,16 +88,16 @@ export default function BooksPage() {
           </p>
         </div>
         <span className="subject-hero-icon subject-icon-violet" aria-hidden="true">
-          📚
+          <Library size={32} />
         </span>
       </section>
 
       {/* Disclaimer Alert */}
-      <div style={{ backgroundColor: '#fff3e0', border: '1px solid #ffe0b2', borderRight: '4px solid #ff9800', padding: '1.5rem', borderRadius: '12px', marginBottom: '3rem' }}>
-        <h3 style={{ margin: '0 0 0.5rem', color: '#e65100', fontSize: '1.1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <span>⚠️</span> ملاحظة هامة جداً
+      <div style={{ backgroundColor: 'var(--warning-bg)', border: '1px solid var(--warning)', borderRight: '4px solid var(--warning)', padding: '1.5rem', borderRadius: '12px', marginBottom: '3rem' }}>
+        <h3 style={{ margin: '0 0 0.5rem', color: 'var(--warning)', fontSize: '1.1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <span><AlertTriangle size={20} /></span> ملاحظة هامة جداً
         </h3>
-        <p style={{ margin: 0, color: '#e65100', lineHeight: '1.8', fontSize: '0.95rem' }}>
+        <p style={{ margin: 0, color: 'var(--warning)', lineHeight: '1.8', fontSize: '0.95rem' }}>
           نجاح التلميذ لا يقتصر على هذه الكتب أو على غيرها... حضورها مفيد ومهم لكنه ليس بقدر أهمية حرص التلميذ على المثابرة في تنظيم وقته ومعلوماته وعدم إهمال مواظبته على الذهاب للثانوية لأخذ العلم الصحيح من معلميه. لأن هذه الكتب تعتبر أدوات <strong>مكملة وليست أساسية</strong>.
           <br /><br />
           الاستغلال الأمثل لهذه الكتب هو الذي سيسهل للتلميذ الطريق للإحاطة بجميع المعلومات الضرورية حتى يتحصل على العلامة الكاملة أو على الأقل علامة ممتازة. 
@@ -117,22 +119,24 @@ export default function BooksPage() {
             
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem' }}>
               {subject.books.map((book, index) => (
-                <div key={index} style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--line)', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', transition: 'transform 0.2s, box-shadow 0.2s' }} className="book-card">
-                  <div style={{ position: 'relative', width: '100%', height: '350px', backgroundColor: '#f8f9fa' }}>
-                    <Image 
-                      src={book.image} 
-                      alt={book.title} 
-                      fill 
-                      style={{ objectFit: 'cover', objectPosition: 'center top' }}
-                      sizes="(max-width: 768px) 100vw, 300px"
-                    />
+                <FadeInSection key={index} delay={index * 80}>
+                  <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--line)', borderRadius: '12px', overflow: 'hidden', boxShadow: 'var(--shadow-sm)', transition: 'transform 0.2s, box-shadow 0.2s', height: '100%' }} className="book-card">
+                    <div style={{ position: 'relative', width: '100%', height: '350px', backgroundColor: 'var(--surface-solid)' }}>
+                      <Image 
+                        src={book.image} 
+                        alt={book.title} 
+                        fill 
+                        style={{ objectFit: 'cover', objectPosition: 'center top' }}
+                        sizes="(max-width: 768px) 100vw, 300px"
+                      />
+                    </div>
+                    <div style={{ padding: '1.25rem' }}>
+                      <h3 style={{ margin: '0 0 0.25rem', color: 'var(--blue-900)', fontSize: '1.1rem' }}>{book.title}</h3>
+                      <p style={{ margin: '0 0 0.75rem', color: 'var(--ink-500)', fontSize: '0.85rem', fontWeight: 'bold' }}>{book.author}</p>
+                      <p style={{ margin: 0, color: 'var(--ink-700)', fontSize: '0.9rem', lineHeight: '1.6' }}>{book.desc}</p>
+                    </div>
                   </div>
-                  <div style={{ padding: '1.25rem' }}>
-                    <h3 style={{ margin: '0 0 0.25rem', color: 'var(--blue-900)', fontSize: '1.1rem' }}>{book.title}</h3>
-                    <p style={{ margin: '0 0 0.75rem', color: 'var(--ink-500)', fontSize: '0.85rem', fontWeight: 'bold' }}>{book.author}</p>
-                    <p style={{ margin: 0, color: 'var(--ink-700)', fontSize: '0.9rem', lineHeight: '1.6' }}>{book.desc}</p>
-                  </div>
-                </div>
+                </FadeInSection>
               ))}
             </div>
           </section>
