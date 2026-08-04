@@ -22,9 +22,18 @@ function FileCard({ file }: { file: FileItem }) {
   const info = formatIcons[file.format] ?? { icon: "PDF", label: file.format };
   const isPreview = file.type === "preview";
 
-  const getFileUrl = (path: string) => {
+  const getFileUrl = (path: string, isDownload: boolean = false) => {
     if (path.startsWith('http')) return path;
-    return `https://moudabouacha09-lab.github.io/The-Ultimate-Bac-Help/${path.replace('/materials/', '')}`;
+
+    if (typeof window !== "undefined" && window.location && window.location.hostname.includes("github.io")) {
+      const relativePath = path.replace(/^\/materials\//, "");
+      const encodedRelativePath = relativePath.split("/").map(encodeURIComponent).join("/");
+      return `https://raw.githubusercontent.com/moudabouacha09-lab/The-Ultimate-Bac-Help/main/${encodedRelativePath}`;
+    }
+
+    const cleanPath = path.startsWith("/") ? path : `/${path}`;
+    const query = isDownload ? "?download=1" : "";
+    return `${cleanPath}${query}`;
   };
 
   return (
@@ -41,12 +50,12 @@ function FileCard({ file }: { file: FileItem }) {
       {/* Left Side: Actions Block (Always stays locked on the left) */}
       <div className="card-actions-wrapper">
         {!isPreview && (
-          <a className="btn btn-download" href={getFileUrl(file.path)} download>
+          <a className="btn btn-download" href={getFileUrl(file.path, true)} download>
             <Download size={20} className="btn-icon" />
             <span>تحميل</span>
           </a>
         )}
-        <a className="btn btn-preview" href={getFileUrl(file.path)} target="_blank" rel="noopener noreferrer">
+        <a className="btn btn-preview" href={getFileUrl(file.path, false)} target="_blank" rel="noopener noreferrer">
           <Eye size={20} className="btn-icon" />
           <span>معاينة</span>
         </a>
