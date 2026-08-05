@@ -11,19 +11,24 @@ export default function PrerequisitesQuizPage() {
   const [selectedSubject, setSelectedSubject] = useState<"math" | "physics" | "science">("math");
   const [mode, setMode] = useState<"quiz" | "exercise">("quiz");
   
-  // Quiz state
+  // Quiz & Exercise state
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | boolean | null>(null);
   const [showExplanation, setShowExplanation] = useState(false);
   const [score, setScore] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
   const [showSolution, setShowSolution] = useState(false);
+  const [selectedExerciseIndex, setSelectedExerciseIndex] = useState(0);
 
   const activeDiagnostic = diagnosticData[selectedSubject];
   const currentQuestion: QuizQuestion = activeDiagnostic.questions[currentIndex];
+  
+  const currentExercises = activeDiagnostic.exercises || [activeDiagnostic.exercise];
+  const activeExercise = currentExercises[selectedExerciseIndex] || currentExercises[0] || activeDiagnostic.exercise;
 
   const handleSubjectChange = (subject: "math" | "physics" | "science") => {
     setSelectedSubject(subject);
+    setSelectedExerciseIndex(0);
     resetQuiz();
   };
 
@@ -321,18 +326,46 @@ export default function PrerequisitesQuizPage() {
       {/* MODE 2: COMPREHENSIVE EXERCISE */}
       {mode === "exercise" && (
         <section className="exercise-container" style={{ maxWidth: "62rem" }}>
+          {currentExercises.length > 1 && (
+            <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", marginBottom: "1rem" }}>
+              {currentExercises.map((ex, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => {
+                    setSelectedExerciseIndex(idx);
+                    setShowSolution(false);
+                  }}
+                  style={{
+                    minHeight: "44px",
+                    padding: "0.5rem 1rem",
+                    borderRadius: "0.6rem",
+                    border: "1px solid var(--border-color)",
+                    backgroundColor: selectedExerciseIndex === idx ? "var(--accent-color, #2563eb)" : "var(--card-bg)",
+                    color: selectedExerciseIndex === idx ? "#ffffff" : "var(--text-primary)",
+                    fontWeight: "700",
+                    fontSize: "0.88rem",
+                    cursor: "pointer",
+                    transition: "all 0.15s ease"
+                  }}
+                >
+                  📝 التمرين {idx + 1}: {ex.title.split(" - ")[0]}
+                </button>
+              ))}
+            </div>
+          )}
+
           <article className="calculator-card" style={{ padding: "1.5rem", marginBottom: "1.5rem" }}>
             <h2 style={{ color: "var(--text-primary)", marginBottom: "1rem", fontSize: "1.25rem" }}>
-              {activeDiagnostic.exercise.title}
+              {activeExercise.title}
             </h2>
             <div style={{ whiteSpace: "pre-line", color: "var(--text-primary)", lineHeight: "1.8", fontSize: "0.98rem", marginBottom: "1.5rem" }}>
-              <MathText text={activeDiagnostic.exercise.statement} />
+              <MathText text={activeExercise.statement} />
             </div>
 
             {/* Statement Images */}
-            {activeDiagnostic.exercise.statementImages && activeDiagnostic.exercise.statementImages.length > 0 && (
+            {activeExercise.statementImages && activeExercise.statementImages.length > 0 && (
               <div style={{ display: "flex", flexDirection: "column", gap: "1rem", marginBottom: "1.5rem" }}>
-                {activeDiagnostic.exercise.statementImages.map((imgSrc, idx) => (
+                {activeExercise.statementImages.map((imgSrc, idx) => (
                   <img
                     key={idx}
                     src={imgSrc}
@@ -375,14 +408,14 @@ export default function PrerequisitesQuizPage() {
                 <h3 style={{ color: "#15803d", marginTop: 0, marginBottom: "0.75rem", fontSize: "1.1rem" }}>
                   🔑 الحل النموذجي والتنقيط البيداغوجي:
                 </h3>
-                <div style={{ whiteSpace: "pre-line", color: "var(--text-primary)", lineHeight: "1.8", fontSize: "0.95rem", marginBottom: activeDiagnostic.exercise.solutionImages ? "1rem" : 0 }}>
-                  <MathText text={activeDiagnostic.exercise.solution} />
+                <div style={{ whiteSpace: "pre-line", color: "var(--text-primary)", lineHeight: "1.8", fontSize: "0.95rem", marginBottom: activeExercise.solutionImages ? "1rem" : 0 }}>
+                  <MathText text={activeExercise.solution} />
                 </div>
 
                 {/* Solution Images */}
-                {activeDiagnostic.exercise.solutionImages && activeDiagnostic.exercise.solutionImages.length > 0 && (
+                {activeExercise.solutionImages && activeExercise.solutionImages.length > 0 && (
                   <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                    {activeDiagnostic.exercise.solutionImages.map((imgSrc, idx) => (
+                    {activeExercise.solutionImages.map((imgSrc, idx) => (
                       <img
                         key={idx}
                         src={imgSrc}
