@@ -12,14 +12,29 @@ const BRANCHES = [
   "لغات أجنبية"
 ] as const;
 
+/** مولّد أرقام معرّف عشوائي فريد */
+function generateRandomUsername(): string {
+  const randomDigits = Math.floor(1000 + Math.random() * 9000);
+  return `User-${randomDigits}`;
+}
+
 export function SurveyModal() {
   const [isOpen, setIsOpen] = useState(false);
+  const [username, setUsername] = useState("");
   const [branch, setBranch] = useState("");
   const [targetGrade, setTargetGrade] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    // التحقق مما إذا كان الطالب قد أتم الاستطلاع سابقاً
+    // 1. التحقق أو إنشاء معرّف زائر فريد ورقمي
+    let storedUsername = localStorage.getItem("bac_user_id");
+    if (!storedUsername) {
+      storedUsername = generateRandomUsername();
+      localStorage.setItem("bac_user_id", storedUsername);
+    }
+    setUsername(storedUsername);
+
+    // 2. فحص حالة إتمام الاستطلاع سابقاً
     const isSurveyCompleted = localStorage.getItem("survey_completed");
     if (!isSurveyCompleted) {
       setIsOpen(true);
@@ -33,7 +48,7 @@ export function SurveyModal() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!branch) return;
+    if (!branch || !username) return;
 
     setIsSubmitting(true);
 
@@ -42,12 +57,13 @@ export function SurveyModal() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          username,
           branch,
           targetGrade: targetGrade ? parseFloat(targetGrade) : null
         })
       });
     } catch (error) {
-      console.error("خطأ في إرسال الاستطلاع:", error);
+      console.error("خطأ في إرسال بيانات الاستطلاع:", error);
     } finally {
       setIsSubmitting(false);
       handleClose();
@@ -69,9 +85,14 @@ export function SurveyModal() {
         </button>
 
         <div className="survey-modal-header">
-          <span className="survey-badge">BAC 2026 🇩🇿</span>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.4rem" }}>
+            <span className="survey-badge">BAC 2027 🇩🇿</span>
+            <span style={{ fontSize: "0.75rem", color: "var(--ink-500)", fontWeight: "bold" }}>
+              معرّفك: <code style={{ color: "var(--blue-700)" }}>{username}</code>
+            </span>
+          </div>
           <h2>مرحباً بك في زيارتك الأولى! 👋</h2>
-          <p>ساعدنا في تخصيص المحتوى المناسب لك باختيار شعبتك ومعدل طموحك.</p>
+          <p>يرجى اختيار شعبتك الدراسية لمساعدتنا في تخصيص الموارد والتحديثات المناسبة لك.</p>
         </div>
 
         <form onSubmit={handleSubmit} className="survey-form">

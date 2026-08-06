@@ -4,25 +4,34 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { branch, targetGrade } = body;
+    const { username, branch, targetGrade } = body;
 
-    if (!branch) {
+    // التحقق الصارم من الحقول الإجبارية
+    if (!username || !branch) {
       return NextResponse.json(
-        { success: false, error: "الشعبة الدراسية إجبارية" },
+        { success: false, error: "اسم المستخدم والشعبة حقلان إجباريان" },
         { status: 400 }
       );
     }
 
-    // هنا يمكنك إضافة منطق الحفظ في قاعدة البيانات
-    console.log("استطلاع جديد:", { branch, targetGrade, timestamp: new Date() });
+    const voteRecord = {
+      username,
+      branch,
+      targetGrade: targetGrade ? parseFloat(targetGrade) : null,
+      timestamp: new Date().toISOString()
+    };
+
+    console.log("تسجيل تصويت جديد في المنظومة:", voteRecord);
 
     return NextResponse.json({
       success: true,
-      message: "تم تسجيل إجابتك بنجاح! شكر لك 🚀"
+      message: "تم تسجيل إجابتك بنجاح! شكراً لك 🚀",
+      data: voteRecord
     });
-  } catch {
+  } catch (error) {
+    console.error("Survey Submission Error:", error);
     return NextResponse.json(
-      { success: false, error: "حدث خطأ أثناء حفظ الإجابة" },
+      { success: false, error: "حدث خطأ أثناء تسجيل التصويت" },
       { status: 500 }
     );
   }
