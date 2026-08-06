@@ -122,7 +122,7 @@ export default function PrerequisitesQuizPage() {
           type="button"
           style={{ minHeight: "48px" }}
         >
-          ⏱ الاختبار التفاعلي (10 أسئلة)
+          ⏱ الاختبار التفاعلي ({activeDiagnostic.questions.length} سؤالاً)
         </button>
         <button
           className={`subject-tab ${mode === "exercise" ? "is-active" : ""}`}
