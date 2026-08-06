@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 const BRANCHES = [
   "علوم تجريبية",
   "رياضيات",
-  "تقني رياضي",
+  "هندسات",
   "تسيير وإقتصاد",
   "آداب وفلسفة",
   "لغات أجنبية"
