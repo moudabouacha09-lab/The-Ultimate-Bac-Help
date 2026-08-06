@@ -2975,6 +2975,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-cyan); o
   font-size: 0.88rem;
 }
 
+.survey-form-group select option {
+  background: var(--surface);
+  color: var(--ink-900);
+}
+
 .survey-form-group select:focus,
 .survey-form-group input:focus {
   outline: 2px solid var(--blue-500);
