@@ -6,6 +6,7 @@ import { MobileSubjectBar } from "@/components/layout/mobile-subject-bar";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { Sparkles } from "lucide-react";
 import { FloatingAssistant } from "@/components/assistant/floating-assistant";
+import { SurveyModal } from "@/components/survey/survey-modal";
 
 type AppShellProps = {
   children: ReactNode;
@@ -89,6 +90,9 @@ export function AppShell({ children, activeSubject }: AppShellProps) {
 
       {/* 🤖 Floating AI Assistant (Disabled temporarily until further notice) */}
       {/* <FloatingAssistant /> */}
+
+      {/* 🚀 Survey Modal for first-time visitors */}
+      <SurveyModal />
     </div>
   );
 }

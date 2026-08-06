@@ -2866,3 +2866,125 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-cyan); o
     inset-inline-end: 1rem;
   }
 }
+
+/* Survey Modal Overlay & Dialog */
+.survey-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(18, 50, 74, 0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.survey-modal-box {
+  position: relative;
+  inline-size: 100%;
+  max-inline-size: 26.5rem;
+  padding: 1.75rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  box-shadow: 0 20px 45px rgba(18, 50, 74, 0.2);
+}
+
+.survey-modal-close {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  display: grid;
+  place-items: center;
+  inline-size: 2rem;
+  block-size: 2rem;
+  border: 0;
+  background: var(--canvas);
+  color: var(--ink-500);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.survey-modal-close:hover {
+  background: var(--blue-100);
+  color: var(--blue-900);
+}
+
+.survey-modal-header {
+  margin-block-end: 1.25rem;
+}
+
+.survey-badge {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  color: var(--green-800);
+  background: var(--green-100);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  margin-block-end: 0.5rem;
+}
+
+.survey-modal-header h2 {
+  margin: 0 0 0.35rem;
+  color: var(--blue-900);
+  font-size: 1.25rem;
+  line-height: 1.35;
+}
+
+.survey-modal-header p {
+  margin: 0;
+  color: var(--ink-700);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.survey-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.survey-form-group {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.survey-form-group label {
+  color: var(--ink-900);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.survey-form-group select,
+.survey-form-group input {
+  min-block-size: 2.85rem;
+  padding: 0.5rem 0.75rem;
+  color: var(--ink-900);
+  background: var(--canvas);
+  border: 1px solid var(--line);
+  border-radius: 0.6rem;
+  font-family: inherit;
+  font-size: 0.88rem;
+}
+
+.survey-form-group select:focus,
+.survey-form-group input:focus {
+  outline: 2px solid var(--blue-500);
+  border-color: transparent;
+}
+
+.survey-submit-btn {
+  inline-size: 100%;
+  min-block-size: 2.85rem;
+  margin-block-start: 0.5rem;
+  font-size: 0.9rem;
+  justify-content: center;
+}
