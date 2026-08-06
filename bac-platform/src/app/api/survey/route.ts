@@ -12,34 +12,28 @@ export async function POST(request: Request) {
       );
     }
 
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    const webhookUrl =
+      process.env.GOOGLE_SHEET_WEBHOOK_URL ||
+      "https://script.google.com/macros/s/AKfycbwDx_MU4haGyQ7QEv5tQbU6LOgsm2mnEvKhQIKKIKfDqaWv8bG4dQEgLPf6RPMazokP/exec";
 
-    if (!supabaseUrl || !supabaseKey) {
-      return NextResponse.json(
-        { success: false, error: "المفاتيح غير مضافة في إعدادات البيئة" },
-        { status: 500 }
-      );
-    }
+    const payload = {
+      username,
+      branch,
+      targetGrade: targetGrade ? parseFloat(targetGrade) : "غير محدد",
+      timestamp: new Date().toLocaleString("ar-DZ", { timeZone: "Africa/Algiers" })
+    };
 
-    const response = await fetch(`${supabaseUrl}/rest/v1/votes`, {
+    // Forward to Google Apps Script Webhook
+    const response = await fetch(webhookUrl, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        apikey: supabaseKey,
-        Authorization: `Bearer ${supabaseKey}`,
-        Prefer: "return=minimal"
+        "Content-Type": "text/plain;charset=utf-8" // Apps Script accepts text/plain to avoid CORS preflight issues
       },
-      body: JSON.stringify({
-        username,
-        branch,
-        target_grade: targetGrade ? parseFloat(targetGrade) : null
-      })
+      body: JSON.stringify(payload),
+      redirect: "follow"
     });
 
-    if (!response.ok) {
-      throw new Error(`Supabase Error: ${response.statusText}`);
-    }
+    console.log("Survey synced to Google Sheet:", payload);
 
     return NextResponse.json({ success: true, message: "تم تسجيل إجابتك بنجاح 🚀" });
   } catch (error) {
