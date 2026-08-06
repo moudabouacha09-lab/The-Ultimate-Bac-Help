@@ -75,14 +75,6 @@ export function SurveyModal() {
   return (
     <div className="survey-modal-overlay" role="dialog" aria-modal="true">
       <div className="survey-modal-box">
-        <button
-          className="survey-modal-close"
-          onClick={handleClose}
-          aria-label="إغلاق النافذة"
-          type="button"
-        >
-          ✕
-        </button>
 
         <div className="survey-modal-header">
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.4rem" }}>
