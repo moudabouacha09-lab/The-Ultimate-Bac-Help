@@ -1,5 +1,7 @@
+"use client";
+
 import Link from "next/link";
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { subjects } from "@/lib/subjects";
 import { BottomNav } from "@/components/layout/bottom-nav";
 import { MobileSubjectBar } from "@/components/layout/mobile-subject-bar";
@@ -14,6 +16,23 @@ type AppShellProps = {
 };
 
 export function AppShell({ children, activeSubject }: AppShellProps) {
+  const headerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const height = entry.borderBoxSize?.[0]?.blockSize ?? entry.contentRect.height;
+        document.documentElement.style.setProperty("--header-height", `${height}px`);
+      }
+    });
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="app-shell">
       <a className="skip-link" href="#main-content">تخطي إلى المحتوى</a>
@@ -38,7 +57,7 @@ export function AppShell({ children, activeSubject }: AppShellProps) {
       </header>
 
       {/* Mobile-only smart header with horizontal subjects navigation bar */}
-      <div className="mobile-header-wrapper">
+      <div className="mobile-header-wrapper" ref={headerRef}>
         <div className="mobile-brand-bar">
           <Link className="brand" href="/">
             <span className="brand-mark">ب</span>

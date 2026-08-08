@@ -3,6 +3,7 @@ import {
   type StreamKey, 
   type StudentGrades, 
   type CareerGoal,
+  type MinimumScores,
   calculateWeightedAverage 
 } from "@/data/bac-orientation-database";
 
@@ -86,22 +87,23 @@ export function getStudentPriorityInfo(
   branch: UniversityBranch,
   studentStream: StreamKey
 ): { priorityRank: number; targetScoreValue: number | "NC" | "--" } {
-  if (branch.priorityOrder && branch.priorityOrder.length > 0) {
-    if (branch.priorityOrder[0] && branch.priorityOrder[0].includes(studentStream)) {
-      return { priorityRank: 1, targetScoreValue: branch.minimumScores?.Min1 ?? "--" };
-    }
-    if (branch.priorityOrder[1] && branch.priorityOrder[1].includes(studentStream)) {
-      return { priorityRank: 2, targetScoreValue: branch.minimumScores?.Min2 ?? branch.minimumScores?.Min1 ?? "--" };
-    }
-    if (branch.priorityOrder[2] && branch.priorityOrder[2].includes(studentStream)) {
-      return { priorityRank: 3, targetScoreValue: branch.minimumScores?.Min3 ?? branch.minimumScores?.Min2 ?? branch.minimumScores?.Min1 ?? "--" };
-    }
-  }
-
+  // 1. Prioritize explicit stream-specific rules in priorities array first
   if (branch.priorities && branch.priorities.length > 0) {
     const rule = branch.priorities.find((p) => p.stream === studentStream);
     if (rule) {
       return { priorityRank: rule.priorityRank, targetScoreValue: rule.cutoff };
+    }
+  }
+
+  // 2. Check priorityOrder & minimumScores safely without incorrect fallback
+  if (branch.priorityOrder && branch.priorityOrder.length > 0) {
+    for (let i = 0; i < branch.priorityOrder.length; i++) {
+      if (branch.priorityOrder[i].includes(studentStream)) {
+        const rank = i + 1;
+        const key = `Min${rank}` as keyof MinimumScores;
+        const score = branch.minimumScores?.[key];
+        return { priorityRank: rank, targetScoreValue: score ?? "--" };
+      }
     }
   }
 
@@ -177,20 +179,7 @@ export function searchAndEvaluateBranches(
     })
     .map((branch) => {
       const { priorityRank, targetScoreValue } = getStudentPriorityInfo(branch, filters.stream);
-      let userCutoff: number | "NC" | "--" = targetScoreValue;
-
-      // If no explicit stream cutoff exists, compute estimate from base priority rank
-      if (userCutoff === "--" && priorityRank !== 99) {
-        const mathRule = branch.priorities?.find((p) => p.stream === "Mathematical");
-        const sciRule = branch.priorities?.find((p) => p.stream === "Scientific");
-        const baseCutoff = typeof mathRule?.cutoff === "number" 
-          ? mathRule.cutoff 
-          : (typeof sciRule?.cutoff === "number" ? sciRule.cutoff : 10);
-
-        if (priorityRank === 2) userCutoff = Number((baseCutoff + 0.30).toFixed(2));
-        else if (priorityRank === 3) userCutoff = Number((baseCutoff + 0.80).toFixed(2));
-        else userCutoff = baseCutoff;
-      }
+      const userCutoff: number | "NC" | "--" = targetScoreValue;
 
       const calculatedScore = calculateWeightedAverage(branch.formulaType, grades, filters.stream);
 

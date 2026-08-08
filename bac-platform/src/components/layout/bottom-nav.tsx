@@ -2,9 +2,26 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useRef } from "react";
 
 export function BottomNav() {
   const pathname = usePathname();
+  const navRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = navRef.current;
+    if (!el) return;
+
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const height = entry.borderBoxSize?.[0]?.blockSize ?? entry.contentRect.height;
+        document.documentElement.style.setProperty("--bottom-nav-height", `${height}px`);
+      }
+    });
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const navItems = [
     {
@@ -75,7 +92,7 @@ export function BottomNav() {
   ];
 
   return (
-    <nav className="bottom-nav" aria-label="التنقل عبر الجوال">
+    <nav className="bottom-nav" ref={navRef} aria-label="التنقل عبر الجوال">
       {navItems.map((item) => (
         <Link
           key={item.href}

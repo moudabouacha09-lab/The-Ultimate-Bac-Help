@@ -457,7 +457,78 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-cyan); o
 .live-indicator { display: inline-block; width: 8px; height: 8px; background: var(--success); border-radius: 50%; box-shadow: 0 0 10px var(--success); animation: pulse 2s infinite; }
 .updates-list { margin: 0; padding-inline-start: 0; list-style: none; display: grid; gap: 0.75rem; }
 .updates-list li { position: relative; padding-inline-start: 1.5rem; color: var(--text-secondary); font-size: 0.9rem; font-weight: 600; }
-.updates-list-icon { position: absolute; inset-inline-start: 0; top: 0.1rem; color: var(--blue-600); }
+/* ==========================================================================
+   SUBJECTS GRID & SUBJECT CARD ITEM
+   ========================================================================== */
+.subjects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 1.25rem;
+}
+
+.subject-card-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.subject-card-item:hover {
+  border-color: var(--blue-400);
+  box-shadow: 0 8px 24px rgba(12, 68, 124, 0.1);
+  transform: translateY(-3px);
+}
+
+.subject-card-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 1rem;
+  font-size: 1.4rem;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+}
+
+.subject-card-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.subject-card-info h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.subject-card-info p {
+  margin: 0.25rem 0 0;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.subject-card-arrow {
+  margin-inline-start: auto;
+  color: var(--text-muted);
+  font-size: 1.3rem;
+  transition: transform 0.25s ease;
+}
+
+.subject-card-item:hover .subject-card-arrow {
+  transform: translateX(-4px);
+  color: var(--blue-600);
+}
 
 /* ==========================================================================
    TOOLS & CALCULATOR PAGES
@@ -1609,6 +1680,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-cyan); o
     overflow-x: auto;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    touch-action: pan-x;
     padding-block: 0.1rem;
   }
 
@@ -1635,6 +1708,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-cyan); o
     touch-action: manipulation;
     min-height: 48px; /* Required touch target size */
     box-shadow: var(--shadow-sm);
+    scroll-snap-align: start;
+    flex: 0 0 auto;
   }
 
   .mobile-subject-pill:active {
@@ -1655,14 +1730,36 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-cyan); o
     color: #ffffff !important;
   }
 
+  .mobile-subject-progress-track {
+    height: 3px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    margin-top: 0.35rem;
+    overflow: hidden;
+  }
+
+  .mobile-subject-progress-fill {
+    height: 100%;
+    background: var(--blue-600);
+    border-radius: 999px;
+    transition: width 0.1s linear;
+  }
+
   /* Hide desktop sidebar */
   .sidebar { display: none !important; }
 
-  /* Adjust main content for mobile header + bottom nav */
+  /* Mobile subjects grid override (1 column) */
+  .subjects-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  /* Single Consolidated Main Content Padding Rule Driven by CSS Variables */
   .main-content {
     margin-inline-start: 0;
-    padding-block-start: calc(6.75rem + var(--sat, 0px)) !important;
-    padding-block-end: calc(5.5rem + var(--sab, 0px)) !important;
+    padding-block-start: calc(var(--header-height, 120px) + var(--sat, 0px) + 16px) !important;
+    padding-block-end: calc(var(--bottom-nav-height, 70px) + var(--sab, 0px) + 24px) !important;
     padding-inline: 1rem;
   }
 

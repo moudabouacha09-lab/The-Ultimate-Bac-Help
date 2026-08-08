@@ -19,6 +19,12 @@ export function MinisterialCard({ news }: MinisterialCardProps) {
     !news.pdfUrl.includes("null") &&
     news.pdfUrl.endsWith(".pdf");
 
+  // TODO: Replace domain blocklist with imageVerified flag from news-sync layer
+  const hasValidImage =
+    news.headerImage &&
+    !news.headerImage.includes("unsplash.com") &&
+    !news.headerImage.includes("placeholder");
+
   return (
     <article
       style={{
@@ -32,10 +38,10 @@ export function MinisterialCard({ news }: MinisterialCardProps) {
       }}
     >
       {/* Header Image with Live Tag Overlay */}
-      {news.headerImage && (
-        <div style={{ position: "relative", width: "100%", height: "220px", backgroundColor: "#0f2537" }}>
+      {hasValidImage && (
+        <div style={{ position: "relative", width: "100%", height: "220px", backgroundColor: "#0f2537", overflow: "hidden" }}>
           <Image
-            src={news.headerImage}
+            src={news.headerImage!}
             alt={news.title}
             fill
             unoptimized
