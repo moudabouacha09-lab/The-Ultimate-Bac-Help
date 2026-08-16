@@ -22,18 +22,21 @@ function FileCard({ file }: { file: FileItem }) {
   const info = formatIcons[file.format] ?? { icon: "PDF", label: file.format };
   const isPreview = file.type === "preview";
 
-  const getFileUrl = (path: string, isDownload: boolean = false) => {
-    if (path.startsWith('http')) return path;
+  const getFileUrl = (filePath: string, isDownload: boolean = false) => {
+    if (!filePath) return "#";
+    if (filePath.startsWith('http://') || filePath.startsWith('https://')) return filePath;
 
     if (typeof window !== "undefined" && window.location && window.location.hostname.includes("github.io")) {
-      const relativePath = path.replace(/^\/materials\//, "");
+      const relativePath = filePath.replace(/^\/materials\//, "");
       const encodedRelativePath = relativePath.split("/").map(encodeURIComponent).join("/");
       return `https://raw.githubusercontent.com/moudabouacha09-lab/The-Ultimate-Bac-Help/main/${encodedRelativePath}`;
     }
 
-    const cleanPath = path.startsWith("/") ? path : `/${path}`;
+    const cleanPath = filePath.startsWith("/") ? filePath : `/${filePath}`;
+    const segments = cleanPath.split("/").map((seg) => encodeURIComponent(seg));
+    const encodedPath = segments.join("/");
     const query = isDownload ? "?download=1" : "";
-    return `${cleanPath}${query}`;
+    return `${encodedPath}${query}`;
   };
 
   return (

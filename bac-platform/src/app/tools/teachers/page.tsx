@@ -97,7 +97,7 @@ const categories: Category[] = [
 export default function TeachersPage() {
   return (
     <AppShell>
-      <div className="back-link-wrapper" style={{ margin: "1rem 0" }}>
+      <div className="back-link-wrapper">
         <Link className="back-link" href="/tools">← العودة للأدوات</Link>
       </div>
 
@@ -105,7 +105,7 @@ export default function TeachersPage() {
         <div>
           <p className="eyebrow">أدوات المراجعة</p>
           <h1>قائمة اليوتيوب الذهبية</h1>
-          <p style={{ marginTop: "1rem", lineHeight: "1.8", color: "var(--text-muted)", fontSize: "1.05rem" }}>
+          <p style={{ marginTop: "1rem", lineHeight: "1.8", color: "var(--text-secondary)", fontSize: "1.05rem" }}>
             لا تضيّع وقتك في البحث! هذه القائمة تضم أفضل أساتذة اليوتيوب الذين تابعتهم شخصياً طوال العام. 
             أساتذة متمكنون، شروحاتهم وافية، ومنهجيتهم دقيقة لضمان تفوقك في البكالوريا.
           </p>
@@ -158,7 +158,7 @@ export default function TeachersPage() {
                       </a>
                     </div>
                   </div>
-                  <p style={{ margin: 0, fontSize: '0.95rem', lineHeight: '1.6', color: 'var(--text-muted)' }}>
+                  <p style={{ margin: 0, fontSize: '0.95rem', lineHeight: '1.6', color: 'var(--text-secondary)' }}>
                     {teacher.description}
                   </p>
                 </article>

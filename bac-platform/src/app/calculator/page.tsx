@@ -148,7 +148,7 @@ export default function CalculatorPage() {
       </section>
 
       <section className="calculator-card">
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem", marginBottom: "1rem" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem", marginBottom: "1.25rem" }}>
           <label className="stream-select" style={{ flex: 1, minWidth: "200px" }}>
             <span>اختر الشعبة الرسمية</span>
             <select value={stream} onChange={(event) => changeStream(event.target.value as Stream)}>
@@ -161,26 +161,17 @@ export default function CalculatorPage() {
           <button
             type="button"
             onClick={clearGrades}
-            style={{ 
-              padding: "0.6rem 1.25rem", 
-              fontSize: "0.85rem", 
-              fontWeight: "700",
-              cursor: "pointer", 
-              background: "var(--danger-bg)", 
-              border: "1px solid var(--danger)", 
-              color: "var(--danger)",
-              borderRadius: "0.6rem",
-              transition: "all 0.2s ease"
-            }}
+            className="btn-clear-grades"
+            title="إعادة ضبط ومسح جميع النقاط"
           >
-            🗑️ مسح النقاط
+            <span>🗑️ مسح النقاط</span>
           </button>
         </div>
 
         <div className="calculator-form-heading">
           <div>
             <h2>مواد شعبة: {streamLabels[stream]}</h2>
-            <p style={{ color: "var(--text-secondary)" }}>المعاملات أدناه مطابقة للجريدة الرسمية والمناشير الوزارية لشعبة {streamLabels[stream]} (مجموع المعاملات: {totalStreamCoefficients}).</p>
+            <p style={{ color: "var(--text-secondary)" }}>المعاملات مطابقة للجريدة الرسمية (مجموع المعاملات: {totalStreamCoefficients}).</p>
           </div>
           <span>النقطة / 20</span>
         </div>
@@ -190,13 +181,13 @@ export default function CalculatorPage() {
             <label className="subject-input-card" key={subject.id}>
               <div className="subject-input-info">
                 <strong>{subject.name}</strong>
-                <small>(معامل {subject.coefficient})</small>
+                <span className="coefficient-badge">معامل {subject.coefficient}</span>
               </div>
               <input
                 className="grade-input"
                 type="text"
                 inputMode="decimal"
-                placeholder="—"
+                placeholder="0.00"
                 value={grades[subject.id] ?? ""}
                 onChange={(event) => {
                   const normalized = event.target.value.replace(",", ".");

@@ -63,7 +63,7 @@ export default function PrerequisitesQuizPage() {
 
   return (
     <AppShell>
-      <div className="back-link-wrapper" style={{ margin: "1rem 0" }}>
+      <div className="back-link-wrapper">
         <Link className="back-link" href="/tools/prerequisites">
           ← العودة للمكتسبات القبلية
         </Link>
@@ -358,7 +358,7 @@ export default function PrerequisitesQuizPage() {
             <h2 style={{ color: "var(--text-primary)", marginBottom: "1rem", fontSize: "1.25rem" }}>
               {activeExercise.title}
             </h2>
-            <div style={{ whiteSpace: "pre-line", color: "var(--text-primary)", lineHeight: "1.8", fontSize: "0.98rem", marginBottom: "1.5rem" }}>
+            <div style={{ color: "var(--text-primary)", lineHeight: "1.8", fontSize: "0.98rem", marginBottom: "1.5rem" }}>
               <MathText text={activeExercise.statement} />
             </div>
 
@@ -374,7 +374,7 @@ export default function PrerequisitesQuizPage() {
                       width: "100%",
                       height: "auto",
                       borderRadius: "0.75rem",
-                      border: "1px solid var(--border-color)",
+                      border: "1px solid var(--border)",
                       boxShadow: "var(--shadow-sm)"
                     }}
                   />
@@ -389,26 +389,27 @@ export default function PrerequisitesQuizPage() {
                 width: "100%",
                 padding: "0.75rem",
                 borderRadius: "0.65rem",
-                border: "1px solid var(--border-color)",
-                backgroundColor: "var(--card-bg)",
+                border: "1px solid var(--border)",
+                backgroundColor: "var(--surface-1)",
                 color: "var(--text-primary)",
                 fontWeight: "700",
                 fontSize: "0.95rem",
                 cursor: "pointer",
                 display: "flex",
                 justifyContent: "center",
-                alignItems: "center"
+                alignItems: "center",
+                transition: "all 0.2s ease"
               }}
             >
               {showSolution ? "إخفاء الحل النموذجي 👁️" : "عرض الحل النموذجي المفصل 🔑"}
             </button>
 
             {showSolution && (
-              <div style={{ marginTop: "1.5rem", padding: "1.25rem", backgroundColor: "rgba(34, 197, 94, 0.1)", border: "1px solid #22c55e", borderRadius: "0.85rem" }}>
-                <h3 style={{ color: "#15803d", marginTop: 0, marginBottom: "0.75rem", fontSize: "1.1rem" }}>
+              <div className="prerequisite-solution-box">
+                <h3 className="prerequisite-solution-heading">
                   🔑 الحل النموذجي والتنقيط البيداغوجي:
                 </h3>
-                <div style={{ whiteSpace: "pre-line", color: "var(--text-primary)", lineHeight: "1.8", fontSize: "0.95rem", marginBottom: activeExercise.solutionImages ? "1rem" : 0 }}>
+                <div className="prerequisite-solution-content" style={{ marginBottom: activeExercise.solutionImages ? "1rem" : 0 }}>
                   <MathText text={activeExercise.solution} />
                 </div>
 

@@ -47,8 +47,8 @@ export default function ToolsPage() {
           <Link className="tool-card" href="/tools/notebooks">
             <span className="tool-card-icon" aria-hidden="true" style={{ color: "var(--blue-600)" }}><Bot size={24} /></span>
             <span className="tool-card-content">
-              <strong>My Notebooks</strong>
-              <small>مذكرات الذكاء الاصطناعي (NotebookLM) ومراجع دقيقة.</small>
+              <strong>مذكرات الذكاء الاصطناعي (NotebookLM)</strong>
+              <small>مذكرات تفاعلية ذكية مدعومة بمصادر البكالوريا الدقيقة.</small>
             </span>
             <span className="tool-card-arrow" aria-hidden="true">←</span>
           </Link>

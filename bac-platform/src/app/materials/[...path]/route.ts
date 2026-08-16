@@ -1,8 +1,8 @@
 import { stat } from "node:fs/promises";
-import { createReadStream } from "node:fs";
+import { createReadStream, existsSync } from "node:fs";
+import { Readable } from "node:stream";
 import path from "node:path";
 import { NextResponse } from "next/server";
-import { subjects } from "@/lib/subjects";
 
 const contentTypes: Record<string, string> = {
   ".pdf": "application/pdf",
@@ -20,47 +20,69 @@ const contentTypes: Record<string, string> = {
 
 type MaterialsRouteProps = { params: Promise<{ path: string[] }> };
 
-/** Serves files from the sibling subject folders during local/self-hosted deployment. */
-export async function GET(_request: Request, { params }: MaterialsRouteProps) {
+/** Serves files from the project folders during local/self-hosted deployment. */
+export async function GET(request: Request, { params }: MaterialsRouteProps) {
   const segments = (await params).path ?? [];
-  const folderName = decodeURIComponent(segments[0] ?? "");
-  const subject = subjects.find((item) => item.folderName === folderName);
-
-  if (!subject || segments.length < 2) {
-    return NextResponse.json({ error: "المادة أو الملف غير موجود" }, { status: 404 });
+  if (segments.length === 0) {
+    return NextResponse.json({ error: "مسار غير صالح" }, { status: 400 });
   }
 
-  const fileName = segments.slice(1).map(decodeURIComponent).join(path.sep);
-  const materialsRoot = process.env.MATERIALS_ROOT ?? path.resolve(process.cwd(), "..");
-  const subjectRoot = path.resolve(materialsRoot, subject.folderName);
-  const filePath = path.resolve(subjectRoot, fileName);
+  // Safe decoding of all path segments
+  const decodedSegments = segments.map((seg) => {
+    try {
+      return decodeURIComponent(seg);
+    } catch {
+      return seg;
+    }
+  });
 
-  if (filePath !== subjectRoot && !filePath.startsWith(`${subjectRoot}${path.sep}`)) {
-    return NextResponse.json({ error: "مسار غير مسموح" }, { status: 400 });
+  // Try possible roots (handles running from bac-platform or repo root)
+  const candidateRoots = [
+    process.env.MATERIALS_ROOT,
+    path.resolve(process.cwd(), ".."),
+    process.cwd(),
+  ].filter(Boolean) as string[];
+
+  let resolvedFilePath: string | null = null;
+  const relativeJoined = decodedSegments.join(path.sep);
+
+  for (const root of candidateRoots) {
+    const candidate = path.resolve(root, relativeJoined);
+    if (candidate.startsWith(root) && existsSync(candidate)) {
+      resolvedFilePath = candidate;
+      break;
+    }
+  }
+
+  if (!resolvedFilePath) {
+    return NextResponse.json({ error: "الملف غير موجود على الخادم" }, { status: 404 });
   }
 
   try {
-    const fileStats = await stat(filePath);
-    const extension = path.extname(filePath).toLowerCase();
+    const fileStats = await stat(resolvedFilePath);
+    const extension = path.extname(resolvedFilePath).toLowerCase();
     
     // Fallback ASCII filename to prevent browser crashes when only filename* is provided
     const asciiFilename = "document" + extension;
-    const encodedFilename = encodeURIComponent(path.basename(filePath));
-    const isDownload = _request.url.includes("download=1");
+    const rawFilename = path.basename(resolvedFilePath);
+    const encodedFilename = encodeURIComponent(rawFilename);
+    const isDownload = request.url.includes("download=1");
     const disposition = isDownload ? "attachment" : "inline";
 
-    const stream = createReadStream(filePath);
+    const nodeStream = createReadStream(resolvedFilePath);
+    // Convert Node ReadStream to Web ReadableStream for 100% Next.js / Web Response standards
+    const webStream = Readable.toWeb(nodeStream);
 
-    // @ts-ignore - Next.js safely handles Node.js Readable streams as body payloads
-    return new NextResponse(stream, {
+    return new NextResponse(webStream as ReadableStream, {
       headers: {
         "Content-Type": contentTypes[extension] ?? "application/octet-stream",
         "Content-Length": fileStats.size.toString(),
         "Content-Disposition": `${disposition}; filename="${asciiFilename}"; filename*=UTF-8''${encodedFilename}`,
-        "Cache-Control": "no-store, max-age=0"
+        "Cache-Control": "public, max-age=3600",
+        "Access-Control-Allow-Origin": "*"
       }
     });
   } catch (err) {
-    return NextResponse.json({ error: "الملف غير موجود" }, { status: 404 });
+    return NextResponse.json({ error: "فشل تحميل الملف" }, { status: 500 });
   }
 }

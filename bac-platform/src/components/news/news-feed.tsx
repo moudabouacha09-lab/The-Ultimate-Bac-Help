@@ -105,9 +105,9 @@ export function NewsFeed({ items }: NewsFeedProps) {
                 <MathText text={item.title} />
               </h3>
 
-              <p style={{ color: "var(--text-secondary)", fontSize: "0.92rem", lineHeight: "1.6", margin: "0 0 0.75rem" }}>
-                <MathText text={item.summary} />
-              </p>
+              <div style={{ color: "var(--text-secondary)", fontSize: "0.92rem", lineHeight: "1.6", margin: "0 0 0.75rem" }}>
+                <MathText text={item.summary} inline />
+              </div>
 
               {/* Expandable Details */}
               {isExpanded && item.contentDetails && (

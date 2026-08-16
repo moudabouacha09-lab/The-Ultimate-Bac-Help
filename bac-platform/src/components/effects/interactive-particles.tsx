@@ -22,6 +22,8 @@ export function InteractiveParticles() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     let animId: number;
     let particles: Particle[] = [];
     let mouseX = -1000;
@@ -35,8 +37,9 @@ export function InteractiveParticles() {
     window.addEventListener("resize", resize, { passive: true });
     resize();
 
-    // Initialize 60 particles
-    const particleCount = 60;
+    // Scale particles: 18 on mobile (<768px), 60 on desktop
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+    const particleCount = isMobile ? 18 : 60;
     particles = Array.from({ length: particleCount }, () => {
       const baseVx = (Math.random() - 0.5) * 0.4;
       const baseVy = (Math.random() - 0.5) * 0.4;

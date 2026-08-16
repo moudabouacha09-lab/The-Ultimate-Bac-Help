@@ -30,20 +30,32 @@ export function CountdownCard() {
   const values = countdown ?? { days: 0, hours: 0, minutes: 0 };
 
   return (
-    <section className="countdown-card" aria-label="العد التنازلي للبكالوريا" style={{ marginBottom: "2rem" }}>
-      <div>
-        <p className="eyebrow countdown-eyebrow" style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
-          <Rocket size={16} /> الاستعداد يصنع الفرق
-        </p>
-        <h2>الوقت المتبقي للبكالوريا</h2>
-        <p className="countdown-date">الدورة القادمة المتوقعة · جوان 2027</p>
+    <section className="countdown-card" aria-label="العد التنازلي للبكالوريا">
+      <div className="countdown-info">
+        <span className="badge-pulse">
+          <span className="pulse-dot" aria-hidden="true" />
+          <Rocket size={14} />
+          دورة جوان 2027
+        </span>
+        <h2>الاستعداد اليومي يصنع الفارق</h2>
+        <p className="countdown-date">الوقت المتبقي لانطلاق الامتحان الوطني</p>
       </div>
+
       <div className="countdown-values" aria-live="polite">
-        <div><strong>{values.days}</strong><span>يوم</span></div>
-        <b>:</b>
-        <div><strong>{String(values.hours).padStart(2, "0")}</strong><span>ساعة</span></div>
-        <b>:</b>
-        <div><strong>{String(values.minutes).padStart(2, "0")}</strong><span>دقيقة</span></div>
+        <div className="countdown-unit">
+          <strong>{values.days}</strong>
+          <span>يوم</span>
+        </div>
+        <b className="countdown-separator">:</b>
+        <div className="countdown-unit">
+          <strong>{String(values.hours).padStart(2, "0")}</strong>
+          <span>ساعة</span>
+        </div>
+        <b className="countdown-separator">:</b>
+        <div className="countdown-unit">
+          <strong>{String(values.minutes).padStart(2, "0")}</strong>
+          <span>دقيقة</span>
+        </div>
       </div>
     </section>
   );

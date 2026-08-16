@@ -7,7 +7,7 @@ type Theme = "light" | "dark";
 const STORAGE_KEY = "bac-theme";
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>("dark");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export function ThemeToggle() {
     setTheme(next);
   }
 
-  const currentTheme = mounted ? theme : "light";
+  const currentTheme = mounted ? theme : "dark";
 
   return (
     <button

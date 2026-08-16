@@ -75,7 +75,7 @@ export default function BooksPage() {
 
   return (
     <AppShell>
-      <div className="back-link-wrapper" style={{ margin: "1rem 0" }}>
+      <div className="back-link-wrapper">
         <Link className="back-link" href="/tools">← العودة للأدوات</Link>
       </div>
 
@@ -83,7 +83,7 @@ export default function BooksPage() {
         <div>
           <p className="eyebrow">أدوات المراجعة</p>
           <h1>أفضل الكتب الخارجية</h1>
-          <p style={{ marginTop: "1rem", lineHeight: "1.8", color: "var(--text-muted)", fontSize: "1.05rem", maxWidth: "60rem" }}>
+          <p style={{ marginTop: "1rem", lineHeight: "1.8", color: "var(--text-secondary)", fontSize: "1.05rem", maxWidth: "60rem" }}>
             مجموعة من أفضل وأشهر الكتب والمراجع الخارجية التي اعتمدتُ عليها شخصياً للمراجعة في مختلف المواد.
           </p>
         </div>
@@ -131,9 +131,9 @@ export default function BooksPage() {
                       />
                     </div>
                     <div style={{ padding: '1.25rem' }}>
-                      <h3 style={{ margin: '0 0 0.25rem', color: 'var(--blue-900)', fontSize: '1.1rem' }}>{book.title}</h3>
-                      <p style={{ margin: '0 0 0.75rem', color: 'var(--ink-500)', fontSize: '0.85rem', fontWeight: 'bold' }}>{book.author}</p>
-                      <p style={{ margin: 0, color: 'var(--ink-700)', fontSize: '0.9rem', lineHeight: '1.6' }}>{book.desc}</p>
+                      <h3 style={{ margin: '0 0 0.25rem', color: 'var(--text-primary)', fontSize: '1.1rem', fontWeight: 800 }}>{book.title}</h3>
+                      <p style={{ margin: '0 0 0.75rem', color: 'var(--text-muted)', fontSize: '0.85rem', fontWeight: 700 }}>{book.author}</p>
+                      <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.6' }}>{book.desc}</p>
                     </div>
                   </div>
                 </FadeInSection>

@@ -1,63 +1,41 @@
 # 🇩🇿 THE ULTIMATE BAC HELP (باك الجزائر | رفيقك في التحضير)
+
 # MASTER PROJECT RESUME & FULL TECHNICAL SPECIFICATIONS
+
 > **For AI Assistants (Gemini, Claude, Antigravity) & Lead Developers**
-> **Last Updated:** August 2026 (Reflecting Official MESRS 2026 Orientation Decree & July 29, 2026 Education Ministry Decree)
+> **Last Updated:** August 14, 2026
+> **Reflecting:** Official MESRS 2026 Orientation Decree, July 29, 2026 Education Ministry Decree, Phase-1 Cutoffs
 
 ---
 
 ## 📌 1. EXECUTIVE SUMMARY & MISSION
 
-**The Ultimate BAC Help** is a state-of-the-art, high-performance web application tailored specifically for Algerian Baccalaureate students (3AS - السنة الثالثة ثانوي) preparing for their national exams and university orientation.
+**The Ultimate BAC Help** is a state-of-the-art, high-performance web application tailored specifically for Algerian Baccalaureate students (3AS — السنة الثالثة ثانوي) preparing for their national exams and university orientation.
 
-### Core Pillars of the Platform:
-1. **Interactive News & Official Updates Feed (`/` - Homepage)**:
-   - **Hero Live Status & Countdown Card**: Real-time countdown timer to BAC 2026/2027 and live ministerial news tag (`● مباشر | آخر الأخبار والمستجدات`).
-   - **Ministerial Agent Hero Card (`MinisterialCard`)**: Displays official ministerial announcements, hero images, badges (`🚨 عاجل`), AI agent simplified explanations (`💡 الشرح المبسط للطالب`), and direct links to official sources (`education.gov.dz` / `mesrs.dz`).
-   - **Categorized News Feed (`NewsFeed`)**: Interactive category tabs (`🌐 الكل`, `🏛️ قرارات وزارية`, `📚 تحديثات المحتوى`, `💡 نصائح ومنهجية`, `🎯 اختبارات وأدوات`) with expandable news cards and direct tool shortcuts.
-   - **Local JSON Data Layer (`src/data/news-feed.json` & `src/lib/news-service.ts`)**: Fast, zero-latency server-side file IO (`fs/promises`) with clean separation between client-safe types (`src/data/news-data.ts`) and server-only data persistence.
-   - **Verified Href LLM Scraper Agent (`/api/news/sync`)**: Context-aware LLM Scraper with strict anti-hallucination rules. Pre-extracts actual `href` tags from HTML and constrains `gemini-2.5-flash` to select links exclusively from verified HTML attributes, eliminating 404 links.
-   - **Safe PDF Link Guard (`hasValidPdf`)**: Client-side verification rule ensuring PDF download buttons are rendered only when a valid, non-null `.pdf` document URL exists.
-   - **Verified Href LLM Scraper Agent (`/api/news/sync`)**: Context-aware LLM Scraper with strict anti-hallucination rules. Pre-extracts actual `href` tags from HTML and constrains `gemini-2.5-flash` to select links exclusively from verified HTML attributes, eliminating 404 links.
-   - **Safe PDF Link Guard (`hasValidPdf`)**: Client-side verification rule ensuring PDF download buttons are rendered only when a valid, non-null `.pdf` document URL exists.
-   - **Comprehensive Subject Manifest Expansion (`src/data/bac-content.ts`)**: Integrated all newly added files & subfolders across **اللغة العربية** (End-of-year summaries, common language construction questions, patterns, poetry characteristics) and **التاريخ والجغرافيا** (Indirect exam questions, scientific stream revolution lessons, liberation movements intro/dates/definitions, maps, and economic poles common traits).
+### Platform Identity
 
-2. **University Orientation & Threshold Predictor Engine (`/tools/orientation`)**:
-   - Complete, exhaustive dataset of **2,346 university branches** across all **58 Wilayas** in Algeria, extracted directly from official MESRS Circulaire 01 and Phase-1 Cutoffs.
-   - **Official 3-Tier Cutoff System (`Min1`, `Min2`, `Min3`)**:
-     - Linked directly to `BAC-2026-Fichier-des-moyennes-minimales-apres-phase-1.pdf` across all 2,346 university branches.
-     - ESI Algiers (`C00CAN01`), ESI Sidi Bel Abbes (`C00CAN02`), ESTIN Bejaia (`C00CAN03`), ENSIA AI (`C00CAN04`), Cybersecurity (`C00CAN07`), ENSM Math (`C00CAN05`):
-       - Formula `MI`: $\mathfrak{g^i} = \frac{2 \times \text{BAC} + \text{Math}}{3}$
-       - ESI Algiers (`C00CAN01`): `Min1` (Math) = **18.13**, `Min2` (Sci) = **18.48**, `Min3` (Tech) = **18.91**
-       - ENSIA AI (`C00CAN04`): `Min1` (Math) = **18.44**, `Min2` (Sci) = **18.81**, `Min3` (Tech) = **19.21**
-       - Cybersecurity (`C00CAN07`): `Min1` (Math) = **18.10**, `Min2` (Sci) = **18.46**, `Min3` (Tech) = **18.85**
-       - ENSM Math (`C00CAN05`): `Min1` (Math) = **17.43**, `Min2` (Sci) = **17.77**, `Min3` (Tech) = **18.13**
-     - Autonomous Systems (`A00CAN13`), Nanotechnology (`A00CAN14`):
-       - Formula `ST`: $\mathfrak{g^i} = \frac{2 \times \text{BAC} + \frac{\text{Physique} + \text{Math}}{2}}{3}$
-       - ENSSA Autonomous Systems (`A00CAN13`): `Min1` = **18.06**
-       - ENSNN Nanotechnology (`A00CAN14`): `Min1` = **17.69**
-     - Interactive priority badges (`🥇 أولوية أولى`, `🥈 أولوية ثانية`, `🥉 أولوية ثالثة`) and stream-specific target cutoffs rendered on every result card.
-   - **Official Domain Stream Priorities (`bac-domain-stream-priorities.json` / `.md`)**:
-     - Aligned all 19 official MESRS registration domains from Page 5 of Circulaire 2026.
-     - Added official **Arts stream (`Arts` / فنون)** support across `StreamKey`, `streamLabels`, data schemas, and search engines.
-   - Dual-Mode Interface:
-     - **Mode 1: Predictor Explorer (📊 مستكشف التوجيه بمعدلي)**: Instant real-time evaluation with 5 color-coded status badges (`🟢 مضمونة`, `🟡 منافسة قوية`, `🔴 تتطلب رفع النقاط`, `⚪ خاضع للمرحلة الثانية NC`, `⛔ غير متاح لشعبتك`).
-     - **Mode 2: Dream University Calculator (🎯 حاسبة جامعة أحلامي)**: Smart target search box with mobile-optimized interactive autocomplete cards.
-   - 8 Structural Categories (`Medical`, `HigherSchool`, `Engineering`, `ENS`, `DoubleDegree`, `Professional`, `DistanceLearning`, `University`).
-   - 7 Career Goal Classifications (Doctor 🩺, Software/AI 💻, Teacher 👨‍🏫, Architect 🏛️, Engineer ⚙️, Business/Finance 📊, General 🌐).
-   - Multilingual Fuzzy Search Engine (`src/lib/orientation-search-engine.ts`) supporting Arabic, French, official codes, and regional aliases.
-   - Exact Weighted Average Formulas ($\mathfrak{g^i}$) for Health, ST, MI, AUM, Languages, Translation, and General fields.
-2. **Curated Academic Library (`/subject/[id]`)**: High-quality summaries, past exam archives, unit checklists, and textbook resources categorized by subject.
-3. **Official BAC Grade Calculator (`/calculator`)**: Real-time BAC grade calculation supporting 7 official streams according to the July 29, 2026 decree.
-4. **Coefficient-Weighted Progress Tracking Engine (`/progress`)**: Calculates a weighted readiness index (`bacReadinessIndex`) based on stream coefficients rather than flat lesson counts.
-5. **Prerequisites Diagnostic & Comprehensive Exercises (`/tools/prerequisites/quiz`)**:
-   - Complete 3-subject diagnostic engine (Mathematics ∑, Physical Sciences ⚛, Natural Sciences 🧬).
-   - Dual-Mode Architecture:
-     - **Mode 1: Interactive Diagnostic Quiz (⏱ 10 Questions per subject)**: Real-time progress bar, MCQ & True/False inputs, instant scientific explanations, and comprehensive diagnostic reporting with score badges.
-     - **Mode 2: Comprehensive Solved Exercise (📝 التمرين الشامل المحلول)**: Complete problem statements with step-by-step model solution toggles. Natural Sciences features high-resolution original document images (`exercise-1.jpg`, `exercise-2.jpg`, `solution-1.jpg`, `solution-2.jpg`).
-   - Built with Next.js 16 Client Component, pure Vanilla CSS design system, and full Mobile-First touch compliance ($\ge 48\text{px}$).
-   - **KaTeX Dynamic LaTeX Engine (`<MathText/>`)**: Automatically parses and renders inline ($...$) and block ($$...$$) mathematical expressions into high-resolution rendered equations across questions, MCQ options, explanations, and exercises.
-6. **External Tools & Resource Directory (`/tools`)**: Curated study applications (YPT, Quizlet, NotebookLM), top YouTube educators, prerequisite guides, and external textbooks.
-7. **RTL & Accessibility Precision**: Native Right-to-Left (RTL) Arabic interface with full W3C BiDirectional (BiDi) isolation (`<bdi>`) to prevent text/number scrambling.
+| Attribute            | Value                                              |
+| :------------------- | :------------------------------------------------- |
+| **Arabic Name**      | باك الجزائر \| رفيقك في التحضير                    |
+| **Framework**        | Next.js 16 (App Router / React 19 / Turbopack)     |
+| **Deployment**       | Vercel (Production)                                |
+| **Database Backend** | Google Sheets (via Apps Script) + Supabase (Surveys)|
+| **AI Engine**        | Google Gemini API (2.5-flash, 2.0-flash-lite)      |
+| **Design System**    | Pure Vanilla CSS 3.0 — Glassmorphism + HSL Tokens  |
+| **Direction**        | Native RTL (`dir="rtl"`, `lang="ar"`)              |
+| **Total Source**     | **51 files — 10,501 lines of code**                |
+| **Total Project**    | **330+ files — ~930 MB (0.93 GB)**                 |
+
+### Core Pillars (8 Feature Modules)
+
+1. 🏠 **Interactive News & Official Updates Feed** (`/`)
+2. 🎓 **University Orientation & Threshold Predictor Engine** (`/tools/orientation`)
+3. 📚 **Curated Academic Library** (`/subject/[id]`)
+4. 🧮 **Official BAC Grade Calculator** (`/calculator`)
+5. 📊 **Coefficient-Weighted Progress Tracker** (`/progress`)
+6. 🧪 **Prerequisites Diagnostic & Exercise Engine** (`/tools/prerequisites/quiz`)
+7. 🛠️ **External Tools & Resource Directory** (`/tools`)
+8. 🤖 **AI Study Assistant** (Floating Chat Widget)
 
 ---
 
@@ -65,181 +43,577 @@
 
 ```mermaid
 graph TD
-    A["Next.js 16 App Router (React 19 / RSC / Turbopack)"] --> B["AppShell Layout System"]
-    B --> C["Floating Island Navbar & Dock Sidebar"]
-    B --> D["Client State & Persistence Hooks"]
-    D --> E["useProgress Hook"]
-    D --> F["useLocalStorage Hook"]
-    B --> G["Design System (Pure Vanilla CSS)"]
-    G --> H["Fluid Glassmorphism & HSL Tokens"]
-    B --> I["Orientation Engine (bac-branches.json & DB)"]
-    I --> J["orientation-search-engine.ts"]
+    A["Next.js 16 App Router<br/>(React 19 / RSC / Turbopack)"] --> B["AppShell Layout System"]
+    B --> C["Desktop: Floating Navbar + Sidebar Dock"]
+    B --> D["Mobile: Subject Bar + Bottom Nav Pill"]
+    B --> E["Visual Effects Layer"]
+    E --> E1["SpacetimeGridBackground"]
+    E --> E2["InteractiveParticles"]
+    E --> E3["CursorAurora"]
+    E --> E4["ReactiveMotion"]
+    B --> F["Client State & Persistence"]
+    F --> F1["useProgress Hook"]
+    F --> F2["useLocalStorage Hook"]
+    B --> G["Design System 3.0<br/>(Vanilla CSS + HSL Tokens)"]
+    B --> H["Data Engine"]
+    H --> H1["bac-branches.json<br/>(2,346 branches × 58 wilayas)"]
+    H --> H2["orientation-search-engine.ts"]
+    H --> H3["bac-content.ts + bac-progress-data.ts"]
+    B --> I["AI Layer"]
+    I --> I1["Gemini 2.5 Flash<br/>(News Sync Agent)"]
+    I --> I2["Gemini 2.0 Flash<br/>(Student Chat Assistant)"]
+    B --> J["Backend APIs"]
+    J --> J1["POST /api/news/sync"]
+    J --> J2["POST /api/assistant/chat"]
+    J --> J3["POST /api/survey"]
+    J --> J4["GET /materials/[...path]"]
 ```
 
-- **Framework**: **Next.js 16** (App Router architecture, Turbopack engine).
-- **Mobile Subject Navigation Bar (`MobileSubjectBar`)**: Replaced the upper mobile streams bar with a horizontal scrolling navigation bar displaying available subjects (Math, Science, Physics, Arabic, History/Geo, Philosophy, Islamic, French, English) with icons, direct links, and Touch-friendly `min-height: 48px` buttons.
-- **Language**: **TypeScript** (Strict Mode, JSON module imports).
-- **Data Engine**: `src/data/bac-branches.json` (2,346 pre-indexed branches across 58 Wilayas).
-- **Search Engine**: `src/lib/orientation-search-engine.ts` (Zero-latency Multilingual Fuzzy Search).
-- **Styling**: Pure **Vanilla CSS** (`src/app/styles.css`) using custom properties, glassmorphism layers (`backdrop-filter: blur()`), and HSL color design tokens.
-- **Directionality & Typography**: Native RTL (`dir="rtl"`, `lang="ar"`) powered by Google Fonts (`Cairo`, `Inter`, `Outfit`, `Manrope`).
+### Dependencies (`package.json`)
+
+```json
+{
+  "dependencies": {
+    "katex": "^0.18.1",
+    "lucide-react": "^1.28.0",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@types/katex": "^0.16.8",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "typescript": "~5.8.0"
+  }
+}
+```
 
 ---
 
-## 📂 3. PROJECT FOLDER & FILE STRUCTURE (`bac-platform/`)
+## 📂 3. COMPLETE PROJECT STRUCTURE
+
+### A. Source Code Tree (`bac-platform/src/`)
 
 ```
-bac-platform/
-├── src/
-│   ├── app/
-│   │   ├── layout.tsx                # Root HTML layout with RTL metadata & Cairo font
-│   │   ├── page.tsx                  # Home Dashboard (Hero, Countdown, Quick Links, Live Ticker)
-│   │   ├── styles.css                # Master Global Design System & Utility Tokens
-│   │   ├── subject/[id]/             # Dynamic Subject Library Route
-│   │   │   ├── page.tsx              # Subject server page resolver
-│   │   │   └── subject-view.tsx      # Master Subject View component & File Cards
-│   │   ├── calculator/               # Official BAC Grade Calculator Route
-│   │   │   └── page.tsx              # 7-Stream Weighted Grade Calculator
-│   │   ├── progress/                 # Coefficient-Weighted Progress Tracker Route
-│   │   │   └── page.tsx              # Readiness Dashboard & Subject Checklists
-│   │   └── tools/                    # Tools Hub Route
-│   │       ├── page.tsx              # Tools index grid
-│   │       ├── orientation/page.tsx  # University Orientation & Threshold Predictor (Dual-Engine)
-│   │       ├── apps/page.tsx         # Recommended Study Apps (YPT, Quizlet, etc.)
-│   │       ├── notebooks/page.tsx    # AI Notebooks (NotebookLM)
-│   │       ├── teachers/page.tsx     # Golden YouTube Teachers List
-│   │       ├── prerequisites/page.tsx# Prerequisite Videos & Guides
-│   │       └── books/page.tsx        # External Textbooks
-│   ├── components/
-│   │   ├── layout/
-│   │   │   ├── app-shell.tsx         # Main layout wrapper
-│   │   │   ├── navbar.tsx            # Floating Island Navbar
-│   │   │   ├── sidebar.tsx           # Navigation Sidebar Dock
-│   │   │   └── bottom-nav.tsx        # Mobile Floating Pill Bottom Dock
-│   │   └── effects/
-│   │       └── fade-in-section.tsx   # Smooth section entrance animations
-│   ├── data/                         # Data Layer
-│   │   ├── bac-branches.json         # 2,346 Official MESRS 2026 University Branches Dataset
-│   │   └── bac-orientation-database.ts # Type Definitions, Stream Labels & Weighted Average Formulas
-│   ├── lib/
-│   │   └── orientation-search-engine.ts # Zero-latency Multilingual Search & Score Evaluator
-│   └── hooks/                        # Custom React Hooks (useProgress, useLocalStorage)
-├── package.json
-├── tsconfig.json
-└── next.config.ts
+src/
+├── app/
+│   ├── layout.tsx                          # Root HTML: RTL, Cairo font, KaTeX, anti-FOUC
+│   ├── page.tsx                            # Homepage: Countdown, Ministerial, News Feed
+│   ├── styles.css                          # Design System 3.0 (3,093 lines)
+│   │
+│   ├── calculator/page.tsx                 # 7-Stream BAC Grade Calculator
+│   ├── progress/page.tsx                   # Weighted Progress Tracker
+│   │
+│   ├── subject/
+│   │   ├── page.tsx                        # Subject Library Index (9 subjects)
+│   │   └── [id]/
+│   │       ├── page.tsx                    # Dynamic route resolver
+│   │       └── subject-view.tsx            # Unit tabs, file cards, preview/download
+│   │
+│   ├── tools/
+│   │   ├── page.tsx                        # Tools Hub Index
+│   │   ├── orientation/page.tsx            # University Orientation Dual-Engine
+│   │   ├── apps/page.tsx                   # Recommended Study Apps
+│   │   ├── books/page.tsx                  # External Textbooks Directory
+│   │   ├── notebooks/page.tsx              # NotebookLM AI Notebooks
+│   │   ├── teachers/page.tsx               # YouTube Educators Directory
+│   │   └── prerequisites/
+│   │       ├── page.tsx                    # Prerequisite Videos Hub
+│   │       └── quiz/page.tsx               # Diagnostic Quiz Engine (KaTeX)
+│   │
+│   ├── admin/survey/page.tsx               # Admin Survey Dashboard
+│   │
+│   ├── api/
+│   │   ├── news/sync/route.ts              # Ministerial Scraper + Gemini Agent
+│   │   ├── assistant/chat/route.ts         # AI Chat (Gemini, 8 queries/day)
+│   │   ├── survey/route.ts                 # Onboarding → Google Sheets Webhook
+│   │   └── admin/survey/route.ts           # Auth'd Supabase Survey Results
+│   │
+│   └── materials/[...path]/route.ts        # Static File Streaming Server
+│
+├── components/
+│   ├── layout/
+│   │   ├── app-shell.tsx                   # Main layout wrapper + ResizeObserver
+│   │   ├── bottom-nav.tsx                  # Mobile bottom navigation pill
+│   │   ├── mobile-subject-bar.tsx          # Horizontal subject scroller (RTL)
+│   │   └── stream-bar.tsx                  # BAC stream filter pills
+│   │
+│   ├── effects/
+│   │   ├── spacetime-grid-background.tsx   # Canvas gravity-well grid distortion
+│   │   ├── interactive-particles.tsx       # 60-node constellation particles
+│   │   ├── cursor-aurora.tsx               # Mouse-tracking radial glow
+│   │   ├── reactive-motion.tsx             # 3D tilt, ripples, magnetic buttons
+│   │   ├── fade-in-section.tsx             # IntersectionObserver entrance anim
+│   │   └── water-ripple-background.tsx     # 2D wave equation water sim
+│   │
+│   ├── news/
+│   │   ├── countdown-card.tsx              # Live BAC countdown timer
+│   │   ├── ministerial-card.tsx            # Official decree hero card
+│   │   └── news-feed.tsx                   # Categorized news stream + tabs
+│   │
+│   ├── assistant/
+│   │   └── floating-assistant.tsx          # AI chat widget (Gemini backend)
+│   │
+│   ├── survey/
+│   │   └── survey-modal.tsx                # First-time onboarding modal
+│   │
+│   ├── theme/
+│   │   └── theme-toggle.tsx                # Light/Dark mode switch
+│   │
+│   └── ui/
+│       ├── math-text.tsx                   # KaTeX LaTeX renderer ($...$, $$...$$)
+│       └── support-card.tsx                # BaridiMob donation card
+│
+├── data/
+│   ├── bac-branches.json                   # 2,346 MESRS branches (3.37 MB)
+│   ├── bac-orientation-database.ts         # Types, formulas, career goals
+│   ├── bac-content.ts                      # Subject file manifest (9 subjects)
+│   ├── bac-progress-data.ts                # Curriculum units & lessons
+│   ├── bac-exams.ts                        # Official/mock exam index
+│   ├── prerequisites-quiz-data.ts          # Diagnostic question bank (959 lines)
+│   ├── news-data.ts                        # News TypeScript interfaces
+│   └── news-feed.json                      # Active news database
+│
+├── hooks/
+│   ├── use-local-storage.ts                # SSR-safe persistent state hook
+│   └── use-progress.ts                     # Weighted readiness computation
+│
+└── lib/
+    ├── orientation-search-engine.ts        # Multilingual fuzzy search + scoring
+    ├── news-service.ts                     # News feed read/write (fs/promises)
+    └── subjects.ts                         # 9-subject master definitions
+```
+
+### B. Root Project Assets Tree
+
+```
+The Ultimate BAC Help/
+├── bac-platform/                           # ← Next.js Application (see above)
+│
+├── Resumé of the Project/                  # Project documentation
+│   ├── MASTER_PROJECT_RESUME.md            # This file
+│   ├── README.md                           # Quick-start guide
+│   └── codebase_bundle.txt                 # Consolidated code snapshot
+│
+├── رياضيات/                                # Mathematics (8 files, ~19.5 MB)
+│   ├── PDFs/ملخص الاحتمالات.pdf
+│   ├── Pictures/الاعداد المركبة.png
+│   └── Pictures/المكتسبات القبلية/         # 4 prerequisite photos
+│
+├── فيزياء/                                 # Physics (6 files, ~69.2 MB)
+│   ├── أهم الأسئلة النظرية.pdf
+│   ├── باكلوريات تجريبية 2026.pdf
+│   └── كتاب تمارين الفيزياء.pdf (×2)
+│
+├── علوم/                                   # Natural Sciences (91 files, ~325.8 MB)
+│   ├── تجميعة بكالوريا تجريبية 2026/      # 67 regional mock exams
+│   └── دروس مرقمة/                         # 24 numbered lessons (3 domains)
+│
+├── عربية/                                  # Arabic (5 files, ~20.2 MB)
+│   ├── PDFs/ملخص حيقون الشعب العلمية.pdf
+│   └── ملخصات اخر العام/                   # End-of-year summaries
+│
+├── فرنسية/                                 # French (4 files, ~188 KB)
+│   └── 3 interactive HTML exam tools
+│
+├── english/                                # English (4 files, ~84.1 MB)
+│   └── 3 comprehensive review PDFs
+│
+├── فلسفة/                                  # Philosophy (21 files, ~197.6 MB)
+│   ├── الاشكالية الاولى/                   # 5 files (audio + infographics)
+│   ├── الاشكالية الثانية/                  # 9 files (audio + PDF + essays)
+│   └── الاشكالية الثالثة/                  # 7 files (audio + PDF + essays)
+│
+├── اسلامية/                                # Islamic Studies (5 files, ~15.7 MB)
+│   ├── PDFs/ (3 comprehensive summaries)
+│   └── Pictures/ (2 infographic PNGs)
+│
+├── تاريخ و جغرافيا/                        # History & Geography (50 files, ~149.3 MB)
+│   ├── تاريخ/ (28 files: Cold War, Revolution, Liberation)
+│   └── جغرافيا/ (22 files: World Economy, 3 Poles, Dev. Countries)
+│
+├── صور الكتب الخارجية/                     # 16 book cover images
+├── ملف المكتسبات القبلية/                  # 10 prerequisite diagnostic files
+├── Background Pictures/                    # 1 background asset (Hall.jpg)
+├── Design and Js examples/                 # 10 UI prototype & effect files
+│
+├── README APPS.txt                         # 7 curated study apps
+├── README BEST YOUTUBE TEACHERS.txt        # 18 YouTube channels × 9 subjects
+├── README NOTEBOOKS.txt                    # 9 NotebookLM workspace URLs
+├── README برامج.txt                        # Progress tracker specifications
+├── README مكتسبات قبلية.txt                # Prerequisite revision guide
+│
+├── bac-domain-stream-priorities.json       # MESRS domain priorities
+├── bac-domain-stream-priorities.md         # Priority documentation
+├── BAC-2026-Fichier-des-moyennes-minimales-apres-phase-1.pdf  # Official cutoffs
+├── circulaire-2026.pdf                     # Official MESRS circular (9 MB)
+├── معدلات_القبول_المدارس_العليا_للأساتذة.txt  # ENS cutoffs report (254 KB)
+└── antigravity-final-audit-prompt.md       # AI audit prompt
 ```
 
 ---
 
 ## 🎓 4. DETAILED FEATURE SPECIFICATIONS
 
-### A. 🏛️ University Orientation Engine (`/tools/orientation`)
+### A. 🏠 Homepage & Live News Engine (`/`)
 
-#### 1. Dataset & Wilaya Resolution (`bac-branches.json` + `bac-orientation-database.ts`):
-- **2,346 University Branches**: Extracted from MESRS Circulaire 01 and Phase-1 Cutoffs.
-- **Accurate Wilaya Resolution**: Mapped all 277 institution codes directly to their true Wilaya codes (01 to 58).
-  - Algiers (16): 271 true Algiers branches
-  - Oran (31): 101 branches
-  - Constantine (25): 112 branches
-  - Setif (19): 95 branches
-  - Ouargla (30): 87 branches
-  - Laghouat (03): 86 branches
-  - Batna (05): 78 branches
-  - Saida (20): 76 branches
-  - Tlemcen (13): 70 branches
-  - Msila (28): 64 branches
-  - Annaba (23): 58 branches
-  - Biskra (07): 53 branches
-  - Blida (09): 52 branches
-  - Chlef (02): 50 branches
-  - Tebessa (12): 49 branches
-  - Bejaia (06): 48 branches
-  - Tizi Ouzou (15): 48 branches
-  - Skikda (21): 47 branches
-  - Jijel (18): 46 branches
-  - Tiaret (14): 46 branches
-  - Oum El Bouaghi (04): 44 branches
-  - Guelma (24): 42 branches
-  - Sidi Bel Abbes (22): 39 branches
-  - ... across all 58 Wilayas in Algeria!
+| Component          | File                          | Lines | Purpose                                                |
+| :----------------- | :---------------------------- | :---: | :----------------------------------------------------- |
+| Homepage           | `app/page.tsx`                | 80    | Server Component: fetches news, renders hero + feed    |
+| Countdown Card     | `components/news/countdown-card.tsx` | 51 | Live timer to BAC 2027 (days/hours/minutes)            |
+| Ministerial Card   | `components/news/ministerial-card.tsx` | 186 | Official decree card with PDF, badges, AI explanation |
+| News Feed          | `components/news/news-feed.tsx` | 182 | Tabbed category stream with expandable cards           |
+| News Service       | `lib/news-service.ts`         | 35    | `fs/promises` read/write to `news-feed.json`           |
+| News Sync API      | `api/news/sync/route.ts`      | 176   | LLM scraper: `education.gov.dz` → Gemini → JSON       |
 
-#### 2. Dual-Engine User Modes:
-- **Mode 1: Predictor Explorer (📊 مستكشف التوجيه بمعدلي)**:
-  - Takes student's general average & core subject grades (Math, Physics, Science, Arabic, French, English).
-  - Calculates weighted averages in real-time.
-  - Displays color-coded status badges:
-    - 🟢 `safe` (مضمونة بإذن الله - Difference $\ge +0.50$)
-    - 🟡 `competitive` (منافسة قوية - Difference between $-0.50$ and $+0.50$)
-    - 🔴 `stretch` (تتطلب رفع النقاط - Difference $< -0.50$)
-    - ⚪ `nc` (خاضع للمرحلة الثانية - Pending Phase 2)
-    - ⛔ `unavailable` (غير متاح لشعبتك)
-- **Mode 2: Dream University Calculator (🎯 حاسبة جامعة أحلامي)**:
-  - Replaces heavy dropdowns with a **Smart Target Autocomplete Combobox**.
-  - Shows instant suggestion cards as student types in Arabic or French.
-  - Displays selected target score requirement, score gap, weighted formula, and key subjects to focus on.
+**News Sync Pipeline:**
+1. Fetches raw HTML from `education.gov.dz`
+2. Pre-extracts verified `href` attributes (anti-hallucination)
+3. Invokes `gemini-2.5-flash` with structured JSON schema
+4. Generates student-friendly `💡 الشرح المبسط` summaries
+5. Persists to `src/data/news-feed.json`
 
-#### 3. 7 Career Goal Categorizations (`CareerGoal`):
-1. 🩺 `doctor`: طبيب / صيدلي / علوم الصحة
-2. 💻 `software_ai`: مهندس برمجيات وذكاء اصطناعي
-3. 👨‍🏫 `teacher`: أستاذ تعليم (مدارس عليا للأساتذة)
-4. 🏛️ `architect`: مهندس معماري وعمران
-5. ⚙️ `engineer`: مهندس دولة وتكنولوجيا
-6. 📊 `business_finance`: إدارة واقتصاد ومالية
-7. 🌐 `general`: علوم عامة وأكاديمية
+---
 
-#### 4. 8 Structural Sectors (`category`):
-- `Medical`: العلوم الطبية (طب، صيدلة، طب أسنان)
-- `HigherSchool`: المدارس العليا الوطنية والأقطاب التكنولوجية (سيدي عبد الله، ESI، ESTIN)
-- `Engineering`: المدارس المتعددة التقنيات (ENP، ENPO، ENPC)
-- `ENS`: المدارس العليا للأساتذة (القبة، بوزريعة، سطيف، قسنطينة، إلخ)
-- `DoubleDegree`: الشهادات والمسارات المزدوجة (طب + إعلام آلي، إلخ)
-- `Professional`: معاهد ISTA المهنية
-- `DistanceLearning`: جامعة التكوين المتواصل UFC
-- `University`: كليات الجامعات (LMD)
+### B. 🎓 University Orientation Engine (`/tools/orientation`)
 
-#### 5. Official Weighted Average Formulas ($\mathfrak{g^i}$):
+**524 lines** — The flagship feature of the platform.
+
+#### Dataset
+- **2,346 university branches** across all **58 Wilayas** in Algeria
+- Extracted from official MESRS Circulaire 01 and Phase-1 cutoffs PDF
+- **277 institution codes** resolved to accurate Wilayas & city names
+
+#### Official 3-Tier Cutoff System (`Min1`, `Min2`, `Min3`)
+
+| Institution                    | Code      | Formula | Min1 (Math) | Min2 (Sci) | Min3 (Tech) |
+| :----------------------------- | :-------- | :-----: | :---------: | :--------: | :---------: |
+| ESI Algiers                    | C00CAN01  | MI      | 18.13       | 18.48      | 18.91       |
+| ESI Sidi Bel Abbes             | C00CAN02  | MI      | —           | —          | —           |
+| ESTIN Bejaia                   | C00CAN03  | MI      | —           | —          | —           |
+| ENSIA AI                       | C00CAN04  | MI      | 18.44       | 18.81      | 19.21       |
+| ENSM Math                      | C00CAN05  | MI      | 17.43       | 17.77      | 18.13       |
+| Cybersecurity                  | C00CAN07  | MI      | 18.10       | 18.46      | 18.85       |
+| ENSSA Autonomous Systems       | A00CAN13  | ST      | 18.06       | —          | —           |
+| ENSNN Nanotechnology           | A00CAN14  | ST      | 17.69       | —          | —           |
+
+#### Official Weighted Average Formulas ($\mathfrak{g^i}$)
+
 $$\text{Health: } \mathfrak{g^i} = \frac{2 \times \text{BAC} + \text{SVT}}{3}$$
+
 $$\text{ST: } \mathfrak{g^i} = \frac{2 \times \text{BAC} + \frac{\text{Physique} + \text{Math}}{2}}{3}$$
+
 $$\text{MI: } \mathfrak{g^i} = \frac{2 \times \text{BAC} + \text{Math}}{3}$$
+
 $$\text{AUM: } \mathfrak{g^i} = \frac{2 \times \text{BAC} + \frac{\text{Physique} + \text{Math}}{2}}{3}$$
+
 $$\text{Languages: } \mathfrak{g^i} = \frac{2 \times \text{BAC} + \text{Langue}}{3}$$
+
 $$\text{Translation: } \mathfrak{g^i} = \frac{2 \times \text{BAC} + \frac{\text{Arabe} + \text{Français} + \text{Anglais}}{3}}{3}$$
 
----
+#### Dual-Mode Interface
 
-### B. ⚖️ Official BAC Grade Calculator (`/calculator`)
-Supports 7 BAC streams updated to the July 29, 2026 decree:
-1. **Scientific (`علوم تجريبية`)** — Coeff sum: 25
-2. **Mathematical (`رياضيات`)** — Coeff sum: 29
-3. **Engineering (`تقني رياضي`)** — Coeff sum: 30
-4. **Literature (`آداب وفلسفة`)** — Coeff sum: 25
-5. **Languages (`لغات أجنبية`)** — Coeff sum: 21
-6. **Management (`تسيير واقتصاد`)** — Coeff sum: 26
-7. **Artistic (`فنون`)** — Coeff sum: 24
+| Mode | Name | Description |
+| :--: | :--- | :---------- |
+| 1 | **📊 مستكشف التوجيه بمعدلي** (Predictor Explorer) | Takes student average + core subject grades → real-time weighted scores → 5 color-coded status badges |
+| 2 | **🎯 حاسبة جامعة أحلامي** (Dream University) | Smart autocomplete → cutoff comparison → key subject recommendations |
 
----
+#### 5 Status Badges
 
-### C. 📈 Weighted Progress Tracker (`/progress`)
-Calculates a coefficient-weighted readiness index (`bacReadinessIndex`) using subject coefficients to give students a realistic readiness score rather than counting completed lessons equally.
+| Badge | Arabic | Condition |
+| :---- | :----- | :-------- |
+| 🟢 `safe` | مضمونة بإذن الله | Difference ≥ +0.50 |
+| 🟡 `competitive` | منافسة قوية | Difference between −0.50 and +0.50 |
+| 🔴 `stretch` | تتطلب رفع النقاط | Difference < −0.50 |
+| ⚪ `nc` | خاضع للمرحلة الثانية | Pending Phase 2 |
+| ⛔ `unavailable` | غير متاح لشعبتك | Stream not eligible |
 
----
+#### 8 Structural Sectors
 
-## 🎨 5. DESIGN SYSTEM & UI/UX RULES
+`Medical` · `HigherSchool` · `Engineering` · `ENS` · `DoubleDegree` · `Professional` · `DistanceLearning` · `University`
 
-- **Vanilla CSS Tokens**: Managed via HSL custom properties (`--bg-page`, `--surface-1`, `--border`, `--blue-800`, `--blue-600`, `--blue-50`, `--text-primary`, `--text-secondary`, `--text-muted`).
-- **Touch Accessibility**: Touch targets $\ge 48\text{px}$ for comfortable tap interactions on mobile devices.
-- **Micro-interactions**: Subtle active scaling (`transform: scale(0.97)`), smooth pill transitions, and fade-in section entrances.
-- **Clean Performance**: Removed heavy external images for ultra-fast, zero-lag rendering.
+#### 7 Career Goal Categories
 
----
-
-## ⚡ 6. BUILD & COMMAND VERIFICATION
-
-- **Development Server**: `npm run dev` (Runs locally on `http://localhost:3000`)
-- **Production Build**: `npm run build` (Next.js 16 Turbopack build engine)
-- **TypeScript Status**: `0 errors` (TypeScript check finishes in ~6s)
-- **Static Pages**: `22/22 static pages generated`
+🩺 `doctor` · 💻 `software_ai` · 👨‍🏫 `teacher` · 🏛️ `architect` · ⚙️ `engineer` · 📊 `business_finance` · 🌐 `general`
 
 ---
 
-> **Note for Gemini & Claude:** This document serves as the authoritative sitemap and technical specification for *The Ultimate BAC Help* platform. When modifying or suggesting updates, always ensure compatibility with Next.js 16 App Router, Pure Vanilla CSS tokens, and the 2,346 branch dataset in `bac-branches.json`.
+### C. 📚 Subject Library (`/subject/[id]`)
+
+- **9 subjects** with dynamic routing, unit tabs, and file cards
+- Preview/download for PDFs, interactive HTMLs, images, and audio
+- GitHub Pages raw URL fallback for self-hosted deployments
+- Experimental mock exam collections integrated per subject
+
+---
+
+### D. 🧮 BAC Grade Calculator (`/calculator`)
+
+**218 lines** — Supports all **7 official streams** with 2026 decree coefficients:
+
+| Stream | Arabic | Coefficient Total |
+| :----- | :----- | :---------------: |
+| Scientific | علوم تجريبية | 29 |
+| Mathematical | رياضيات | 29 |
+| Technical Engineering | تقني رياضي | 29 |
+| Literature & Philosophy | آداب و فلسفة | 29 |
+| Foreign Languages | لغات أجنبية | 29 |
+| Management & Economics | تسيير و اقتصاد | 29 |
+| Arts | فنون | 29 |
+
+Features: Real-time computation, comma-to-dot normalization, reset controls.
+
+---
+
+### E. 📊 Progress Tracker (`/progress`)
+
+**135 lines** — Computes the weighted BAC Readiness Index:
+
+$$\text{BAC Readiness Index} = \frac{\sum_{s=1}^{n}(P_s \times C_s)}{\sum_{s=1}^{n} C_s}$$
+
+Where $P_s$ = progress percentage of subject $s$, $C_s$ = official coefficient.
+
+- 3-state lesson tracking: `NOT_STARTED` → `IN_PROGRESS` → `COMPLETED`
+- Categorized unit checklists per subject
+- Persistent via `useProgress` hook + localStorage
+
+---
+
+### F. 🧪 Prerequisites Diagnostic Engine (`/tools/prerequisites/quiz`)
+
+**442 lines** — Interactive quiz + comprehensive solved exercises.
+
+- **3 subjects**: Mathematics ∑, Physical Sciences ⚛, Natural Sciences 🧬
+- **10 diagnostic questions** per subject (MCQ + True/False)
+- **KaTeX rendering** via `<MathText/>` component for all math expressions
+- **Step-by-step solved exercises** with illustrated solutions
+- **Scoring system** with diagnostic badges and instant explanations
+- **Question bank**: 959 lines in `prerequisites-quiz-data.ts`
+
+---
+
+### G. 🤖 AI Study Assistant
+
+**228 lines** (`floating-assistant.tsx`) + **141 lines** (`api/assistant/chat/route.ts`)
+
+- Floating chat widget accessible from every page
+- Powered by Google Gemini API (`gemini-2.5-flash-lite` / `gemini-2.0-flash`)
+- **8 queries/day** rate limit per IP address
+- Specialized system prompt covering BAC branches, tools, and platform URLs
+- Quick suggestion chips for common questions
+- localStorage conversation history persistence
+- Graceful API error handling
+
+---
+
+### H. 📋 Survey & Onboarding System
+
+| Component | File | Lines | Purpose |
+| :-------- | :--- | :---: | :------ |
+| Survey Modal | `components/survey/survey-modal.tsx` | 140 | First-time visitor onboarding (name, stream, target) |
+| Survey API | `api/survey/route.ts` | 47 | Forwards to Google Sheets webhook |
+| Admin Dashboard | `app/admin/survey/page.tsx` | 131 | Password-protected analytics view |
+| Admin API | `api/admin/survey/route.ts` | 28 | Supabase survey results retrieval |
+
+---
+
+## 🎨 5. DESIGN SYSTEM & VISUAL EFFECTS
+
+### CSS Design System 3.0 (`styles.css` — 3,093 lines)
+
+| Token Category | Examples |
+| :------------- | :------- |
+| **Surface Colors** | `--bg-page`, `--surface-1`, `--surface-2`, `--glass-bg` |
+| **Text Colors** | `--text-primary`, `--text-secondary`, `--text-muted` |
+| **Brand Colors** | `--blue-800`, `--blue-600`, `--blue-50`, `--accent-*` |
+| **Layout Vars** | `--header-height` (ResizeObserver), `--bottom-nav-height` |
+| **Effects** | `backdrop-filter: blur()`, glassmorphism layers |
+| **Typography** | Cairo (Arabic), Inter, Outfit, Manrope (Latin) |
+
+### 6 Visual Effects Engines
+
+| Effect | File | Lines | Technology |
+| :----- | :--- | :---: | :--------- |
+| **Spacetime Grid** | `spacetime-grid-background.tsx` | 222 | Canvas: gravity-well cursor distortion |
+| **Interactive Particles** | `interactive-particles.tsx` | 132 | Canvas: 60-node constellation + cursor repulsion |
+| **Cursor Aurora** | `cursor-aurora.tsx` | 39 | CSS: mouse-tracking radial gradient glow |
+| **Reactive Motion** | `reactive-motion.tsx` | 129 | DOM: 3D tilt, magnetic buttons, click ripples |
+| **Fade-In Sections** | `fade-in-section.tsx` | 56 | IntersectionObserver entrance animations |
+| **Water Ripple** | `water-ripple-background.tsx` | 187 | Canvas: 2D wave equation refraction sim |
+
+### Design Principles
+
+- **Touch Accessibility**: All touch targets ≥ 48px
+- **RTL-First**: Native `dir="rtl"` with `Math.abs()` scroll normalization
+- **Theme Support**: Light/Dark mode via `theme-toggle.tsx` + localStorage
+- **Micro-animations**: Active scaling (`transform: scale(0.97)`), smooth transitions
+- **Responsive Breakpoints**: Mobile-first with `@media (max-width: 768px)` overrides
+- **Dynamic Layout**: `--header-height` and `--bottom-nav-height` measured via `ResizeObserver`
+
+---
+
+## 📊 6. LINES OF CODE METRICS
+
+| Category | Extensions | Files | Lines |
+| :------- | :--------: | :---: | ----: |
+| Page & View Components (`app/**`) | `.tsx` | 17 | 2,679 |
+| Feature & UI Components (`components/**`) | `.tsx` | 17 | 2,091 |
+| API Route Handlers (`api/**`, `materials/`) | `.ts` | 5 | 459 |
+| Business Logic & Libraries (`lib/**`) | `.ts` | 3 | 287 |
+| Custom React Hooks (`hooks/**`) | `.ts` | 2 | 127 |
+| Data Manifests & Models (`data/**`) | `.ts` | 6 | 1,765 |
+| Design System (`styles.css`) | `.css` | 1 | 3,093 |
+| **Total Source Code** | — | **51** | **10,501** |
+
+> **Note:** In addition to 10,501 lines of source code, `bac-branches.json` provides **3.37 MB** of structured JSON orientation data.
+
+---
+
+## 📁 7. CONTENT ASSETS INVENTORY
+
+| Subject Folder | Files | Size | Primary Formats |
+| :------------- | :---: | :--- | :-------------- |
+| رياضيات (Mathematics) | 8 | ~19.5 MB | PDF, PNG, JPG |
+| فيزياء (Physics) | 6 | ~69.2 MB | PDF |
+| علوم (Natural Sciences) | 91 | ~325.8 MB | PDF, RAR, DOCX, PNG, HTML |
+| عربية (Arabic) | 5 | ~20.2 MB | PDF, JPG |
+| فرنسية (French) | 4 | ~188 KB | HTML (interactive tools) |
+| english (English) | 4 | ~84.1 MB | PDF |
+| فلسفة (Philosophy) | 21 | ~197.6 MB | M4A (audio), PDF, PNG, DOCX |
+| اسلامية (Islamic Studies) | 5 | ~15.7 MB | PDF, PNG |
+| تاريخ و جغرافيا (History & Geo) | 50 | ~149.3 MB | PDF, PNG, JPG, HTML, RAR |
+| صور الكتب الخارجية (Book Covers) | 16 | ~0.65 MB | WEBP, JPG |
+| ملف المكتسبات القبلية (Prerequisites) | 10 | ~15.0 MB | PDF, JPG |
+| **Content Subtotal** | **~220** | **~897 MB** | Multi-format |
+
+### Content Highlights
+
+- **91 Natural Sciences files** including 67 regional mock exams from BAC Expérimental 2026 across 20+ wilayas
+- **21 Philosophy files** with original audio recordings (M4A podcasts on ethics, determinism, freedom)
+- **50 History & Geography files** organized by 3 thematic units per subject with interactive HTML tools
+- **3 French interactive HTML tools** for guided BAC writing practice
+- **16 book cover images** for the external textbooks recommendation module
+
+---
+
+## 🌐 8. API ROUTES REFERENCE
+
+| Method | Endpoint | Auth | Purpose |
+| :----: | :------- | :--: | :------ |
+| `POST` | `/api/news/sync` | None | Scrape `education.gov.dz` → Gemini summarization → save |
+| `GET` | `/api/news/sync` | None | Retrieve current cached news |
+| `POST` | `/api/assistant/chat` | IP rate-limit (8/day) | Gemini-powered student Q&A |
+| `POST` | `/api/survey` | None | Submit onboarding data → Google Sheets |
+| `POST` | `/api/admin/survey` | Password | Retrieve Supabase survey results |
+| `GET` | `/materials/[...path]` | None | Stream files (PDF, M4A, PNG, RAR) |
+
+---
+
+## 🔗 9. EXTERNAL INTEGRATIONS
+
+| Integration | Purpose | Access Method |
+| :---------- | :------ | :------------ |
+| **Google Gemini API** | News summarization + Student AI chat | `GEMINI_API_KEY` env var |
+| **Google Apps Script** | Survey data → Google Sheets sync | Webhook URL in env |
+| **Supabase** | Survey storage & admin retrieval | Supabase client |
+| **Google NotebookLM** | 9 subject-specific AI notebooks | Direct URLs per subject |
+| **education.gov.dz** | Official ministerial news scraping | HTML fetch + href extraction |
+| **GitHub Pages** | Fallback file hosting | Raw content URLs |
+| **Vercel** | Production hosting & deployment | Git push to `main` |
+
+---
+
+## ⚡ 10. BUILD & DEPLOYMENT
+
+```bash
+# Development
+npm run dev                    # Turbopack dev server → http://localhost:3000
+
+# Production
+npm run build                  # Full static build (22 routes)
+npm start                      # Serve production build
+
+# Verification
+# ✅ TypeScript: 0 errors (~6s check)
+# ✅ Static Pages: 22/22 generated
+# ✅ Deployment: Vercel auto-deploy on push to main
+```
+
+### Environment Variables (`.env.local`)
+
+```
+GEMINI_API_KEY=...              # Google Gemini API key
+GOOGLE_SCRIPT_URL=...          # Google Apps Script webhook
+ADMIN_PASSWORD=...             # Admin survey dashboard password
+```
+
+---
+
+## 📝 11. CURATED RESOURCES SUMMARY
+
+### Best Study Apps (Ranked)
+
+1. **YPT (Yeolpumta)** — Time tracking with daily/weekly/monthly analytics per subject
+2. **Quizlet** — Spaced repetition flashcards with ready-made Algerian decks
+3. **BAC DZ App** — Previous BAC topics with model solutions
+4. **Desmos** — Graphing calculator (offline-capable)
+5. **NotebookLM** — AI tutor answering strictly from uploaded sources
+6. **CamScanner** — Document scanning for archiving
+7. **Tarteel** — Quran recitation and memorization
+
+### Top YouTube Educators (18 channels × 9 subjects)
+
+| Subject | Educators |
+| :------ | :-------- |
+| رياضيات | الأستاذ نور الدين, الأستاذ عبد الباسط |
+| فيزياء | الأستاذ عبد الله, الأستاذ عبد اللطيف |
+| علوم | الأستاذة خيرة فليتي, الأستاذ شاوش |
+| عربية | الأستاذ بوبكر مبروك, الأستاذ حيقون أسامة, الأستاذ شريفي |
+| فلسفة | الأستاذ خليل سعيداني, الأستاذ عادل مقرود |
+| تاريخ/جغرافيا | الأستاذ بورنان, الأستاذ عبد النور خليفي |
+| اسلامية | الأستاذة بوسعادي, الأستاذ شمس الدين |
+| فرنسية | الأستاذ منصوري, Prof Elnadjah |
+| انجليزية | الأستاذ أمين إنجليش, الأستاذ منصوري |
+
+---
+
+## 🔧 12. CONFIGURATION FILES
+
+### `next.config.ts`
+
+```typescript
+import type { NextConfig } from "next";
+const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [{ protocol: "https", hostname: "**" }],
+  },
+};
+export default nextConfig;
+```
+
+### `tsconfig.json`
+
+- **Target:** ES2022
+- **Module:** ESNext (Bundler resolution)
+- **Strict Mode:** Enabled
+- **Path Aliases:** `@/*` → `./src/*`
+- **JSON Module Resolution:** Enabled
+
+### `.gitignore`
+
+```
+node_modules/
+.next/
+out/
+.env*.local
+.vercel/
+.DS_Store
+*.rar
+*.zip
+```
+
+---
+
+> **Note for AI Assistants:** This document serves as the authoritative sitemap and technical specification for *The Ultimate BAC Help* platform. When modifying or suggesting updates, always ensure compatibility with Next.js 16 App Router, Pure Vanilla CSS tokens, the 2,346 branch dataset in `bac-branches.json`, and the RTL-first Arabic interface architecture.

@@ -26,14 +26,14 @@ const notebooks: NotebookInfo[] = [
 export default function NotebooksPage() {
   return (
     <AppShell>
-      <div className="back-link-wrapper" style={{ margin: "1rem 0" }}>
+      <div className="back-link-wrapper">
         <Link className="back-link" href="/tools">← العودة للأدوات</Link>
       </div>
 
       <section className="subject-page-heading" style={{ marginBottom: "2rem" }}>
         <div>
           <p className="eyebrow">أدوات المراجعة</p>
-          <h1 style={{ fontFamily: "var(--font-cairo), sans-serif" }}>My Notebooks</h1>
+          <h1>مذكرات الذكاء الاصطناعي (NotebookLM)</h1>
           <p style={{ marginTop: "1rem", lineHeight: "1.8", color: "var(--text-secondary)", fontSize: "1.05rem" }}>
             هذه المذكرات مبنية عبر تطبيق <strong>Google NotebookLM</strong> (أحد أفضل تطبيقات المراجعة). 
             ليست مجرد روبوتات محادثة (Chatbots)، بل هي قواعد بيانات تم بناؤها طوال العام بمصادر موثوقة دقيقة جمعها تلميذ البكالوريا، لتجيب عن أسئلتك حصرياً من تلك المصادر.

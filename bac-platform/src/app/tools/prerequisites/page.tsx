@@ -6,7 +6,7 @@ import { FadeInSection } from "@/components/effects/fade-in-section";
 export default function PrerequisitesPage() {
   return (
     <AppShell>
-      <div className="back-link-wrapper" style={{ margin: "1rem 0" }}>
+      <div className="back-link-wrapper">
         <Link className="back-link" href="/tools">← العودة للأدوات</Link>
       </div>
 
@@ -14,7 +14,7 @@ export default function PrerequisitesPage() {
         <div>
           <p className="eyebrow">أدوات المراجعة والتشخيص 🎯</p>
           <h1>المكتسبات القبلية</h1>
-          <p style={{ marginTop: "0.5rem", lineHeight: "1.8", color: "var(--text-muted)", fontSize: "1.05rem" }}>
+          <p style={{ marginTop: "0.5rem", lineHeight: "1.8", color: "var(--text-secondary)", fontSize: "1.05rem" }}>
             فيديوهات واختبارات تفاعلية للإحاطة بكل المعارف السابقة من السنوات الأولى والثانية ثانوي لبداية قوية في البكالوريا. 
           </p>
         </div>

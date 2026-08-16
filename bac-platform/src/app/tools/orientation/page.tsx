@@ -153,10 +153,8 @@ export default function OrientationHubPage() {
 
   return (
     <AppShell>
-      <div className="back-link-wrapper" style={{ margin: "1rem 0" }}>
-        <Link className="back-link" href="/tools">
-          <ArrowRight size={16} style={{ transform: "rotate(180deg)" }} /> العودة للأدوات
-        </Link>
+      <div className="back-link-wrapper">
+        <Link className="back-link" href="/tools">← العودة للأدوات</Link>
       </div>
 
       <section className="subject-page-heading" style={{ marginBottom: "1.5rem" }}>

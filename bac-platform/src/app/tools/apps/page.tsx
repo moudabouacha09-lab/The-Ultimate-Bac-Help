@@ -71,11 +71,13 @@ export default function AppsPage() {
       <div style={{ width: "100%", maxWidth: "1100px", margin: "0 auto", padding: "24px", boxSizing: "border-box", direction: "rtl" }}>
 
         {/* Page Header Layout */}
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "8px", marginBottom: "40px", borderBottom: "1px solid var(--border)", paddingBottom: "24px" }}>
-          <Link href="/tools" style={{ color: "var(--text-secondary)", textDecoration: "none", fontSize: "0.85rem" }}>← العودة للأدوات</Link>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "8px", marginBottom: "32px", borderBottom: "1px solid var(--border)", paddingBottom: "24px" }}>
+          <div className="back-link-wrapper">
+            <Link className="back-link" href="/tools">← العودة للأدوات</Link>
+          </div>
           <span style={{ color: "var(--accent-cyan-dark)", background: "var(--blue-50)", padding: "4px 12px", borderRadius: "999px", fontSize: "0.85rem", fontWeight: 700 }}>أدوات المراجعة</span>
-          <h1 style={{ color: "var(--text-primary)", fontSize: "2.25rem", fontWeight: 800, margin: "4px 0" }}>أفضل التطبيقات للدراسة</h1>
-          <p style={{ color: "var(--text-secondary)", fontSize: "0.95rem", margin: 0 }}>مجموعة من التطبيقات المجربة شخصياً والتي ستصنع الفارق في تحضيرك للبكالوريا.</p>
+          <h1 style={{ color: "var(--text-primary)", fontSize: "2.25rem", fontWeight: 800, margin: "4px 0", lineHeight: 1.45 }}>أفضل التطبيقات للدراسة</h1>
+          <p style={{ color: "var(--text-secondary)", fontSize: "0.95rem", margin: 0, lineHeight: 1.6 }}>مجموعة من التطبيقات المجربة شخصياً والتي ستصنع الفارق في تحضيرك للبكالوريا.</p>
         </div>
 
         {/* APP ENTRIES CONTAINER BLOCK */}
