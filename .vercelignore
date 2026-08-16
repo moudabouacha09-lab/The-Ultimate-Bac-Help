@@ -1,0 +1,25 @@
+﻿/رياضيات/
+/فيزياء/
+/علوم/
+/فلسفة/
+/عربية/
+/فرنسية/
+/english/
+/اسلامية/
+/تاريخ و جغرافيا/
+/Bac help/
+/Background Pictures/
+/Design and Js examples/
+/صور الكتب الخارجية/
+/ملف المكتسبات القبلية/
+/Resumé of the Project/
+*.pdf
+*.jpg
+*.jpeg
+*.png
+*.zip
+*.rar
+*.mp3
+*.wav
+node_modules/
+.next/
