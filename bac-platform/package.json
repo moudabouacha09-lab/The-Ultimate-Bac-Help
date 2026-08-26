@@ -8,6 +8,8 @@
     "start": "next start -H 0.0.0.0"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.12.5",
+    "@supabase/supabase-js": "^2.112.4",
     "katex": "^0.18.1",
     "lucide-react": "^1.28.0",
     "next": "latest",

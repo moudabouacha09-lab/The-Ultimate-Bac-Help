@@ -3,6 +3,7 @@
 
 import React, { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 import { UserProfile, AcademicBranch, AcademicLevel } from "@/lib/auth-types";
+import { createClient } from "@/lib/supabase/client";
 
 type AuthContextType = {
   user: UserProfile | null;
@@ -18,15 +19,12 @@ type AuthContextType = {
     password?: string;
     branch?: AcademicBranch;
     level?: AcademicLevel;
-    isGoogle?: boolean;
-  }) => Promise<{ success: boolean; error?: string }>;
-  logout: () => void;
+  }) => Promise<{ success: boolean; error?: string; needsEmailConfirmation?: boolean }>;
+  logout: () => Promise<void>;
   updateProfile: (updates: Partial<Pick<UserProfile, "branch" | "level" | "username" | "targetGrade">>) => Promise<boolean>;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-const AUTH_STORAGE_KEY = "bac_user_session_v1";
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<UserProfile | null>(null);
@@ -34,45 +32,98 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [authMode, setAuthMode] = useState<"login" | "register">("register");
 
-  // Restore session from localStorage on mount
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(AUTH_STORAGE_KEY);
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (parsed && parsed.email) {
-          setUser(parsed);
-          // Refresh profile in background
-          fetch("/api/auth/me", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email: parsed.email })
-          })
-            .then((r) => r.json())
-            .then((data) => {
-              if (data.success && data.profile) {
-                setUser(data.profile);
-                localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(data.profile));
-              }
-            })
-            .catch(() => {});
-        }
-      }
-    } catch (e) {
-      console.error("Session restore error:", e);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  const supabase = createClient();
 
-  const saveSession = (profile: UserProfile | null) => {
-    setUser(profile);
-    if (profile) {
-      localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(profile));
-    } else {
-      localStorage.removeItem(AUTH_STORAGE_KEY);
+  const fetchUserProfile = async (userId: string, userEmail?: string, userMetadata?: any, createdAt?: string) => {
+    try {
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", userId)
+        .maybeSingle();
+
+      if (profile) {
+        return {
+          id: profile.id,
+          username: profile.full_name || userMetadata?.full_name || userEmail?.split("@")[0] || "طالب",
+          email: profile.email || userEmail || "",
+          branch: (profile.branch as AcademicBranch) || userMetadata?.branch || "experimental-science",
+          level: (profile.level as AcademicLevel) || userMetadata?.level || "mid",
+          targetGrade: profile.target_grade,
+          createdAt: profile.created_at || createdAt || new Date().toISOString()
+        };
+      }
+
+      return {
+        id: userId,
+        username: userMetadata?.full_name || userEmail?.split("@")[0] || "طالب",
+        email: userEmail || "",
+        branch: (userMetadata?.branch as AcademicBranch) || "experimental-science",
+        level: (userMetadata?.level as AcademicLevel) || "mid",
+        targetGrade: userMetadata?.target_grade,
+        createdAt: createdAt || new Date().toISOString()
+      };
+    } catch (err) {
+      console.error("Error fetching user profile:", err);
+      return {
+        id: userId,
+        username: userMetadata?.full_name || userEmail?.split("@")[0] || "طالب",
+        email: userEmail || "",
+        branch: (userMetadata?.branch as AcademicBranch) || "experimental-science",
+        level: (userMetadata?.level as AcademicLevel) || "mid",
+        createdAt: createdAt || new Date().toISOString()
+      };
     }
   };
+
+  // Sync Supabase Auth Session
+  useEffect(() => {
+    let isMounted = true;
+
+    const initializeAuth = async () => {
+      try {
+        const { data: { user: authUser } } = await supabase.auth.getUser();
+
+        if (authUser && isMounted) {
+          const profile = await fetchUserProfile(
+            authUser.id,
+            authUser.email,
+            authUser.user_metadata,
+            authUser.created_at
+          );
+          if (isMounted) setUser(profile);
+        } else if (isMounted) {
+          setUser(null);
+        }
+      } catch (err) {
+        console.error("Supabase auth initialization error:", err);
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    };
+
+    initializeAuth();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (session?.user) {
+        const profile = await fetchUserProfile(
+          session.user.id,
+          session.user.email,
+          session.user.user_metadata,
+          session.user.created_at
+        );
+        if (isMounted) setUser(profile);
+      } else {
+        if (isMounted) setUser(null);
+      }
+      if (isMounted) setLoading(false);
+    });
+
+    return () => {
+      isMounted = false;
+      subscription.unsubscribe();
+    };
+  }, []);
 
   const openAuthModal = (mode: "login" | "register" = "register") => {
     setAuthMode(mode);
@@ -85,20 +136,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = async (email: string, password: string) => {
     try {
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password })
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email.trim(),
+        password
       });
-      const data = await res.json();
-      if (data.success && data.profile) {
-        saveSession(data.profile);
-        setIsModalOpen(false);
-        return { success: true };
+
+      if (error) {
+        return { success: false, error: error.message };
       }
-      return { success: false, error: data.error || "فشل تسجيل الدخول" };
-    } catch (err) {
-      return { success: false, error: "حدث خطأ في الاتصال بالخادم" };
+
+      if (data.user) {
+        const profile = await fetchUserProfile(
+          data.user.id,
+          data.user.email,
+          data.user.user_metadata,
+          data.user.created_at
+        );
+        setUser(profile);
+      }
+
+      setIsModalOpen(false);
+      return { success: true };
+    } catch (err: any) {
+      return { success: false, error: err?.message || "حدث خطأ أثناء تسجيل الدخول" };
     }
   };
 
@@ -108,47 +168,99 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     password?: string;
     branch?: AcademicBranch;
     level?: AcademicLevel;
-    isGoogle?: boolean;
   }) => {
     try {
-      const res = await fetch("/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      });
-      const resData = await res.json();
-      if (resData.success && resData.profile) {
-        saveSession(resData.profile);
-        setIsModalOpen(false);
-        return { success: true };
+      if (!data.password) {
+        return { success: false, error: "كلمة المرور مطلوبة" };
       }
-      return { success: false, error: resData.error || "فشل إنشاء الحساب" };
-    } catch (err) {
-      return { success: false, error: "حدث خطأ في الاتصال بالخادم" };
+
+      const { data: signUpData, error } = await supabase.auth.signUp({
+        email: data.email.trim(),
+        password: data.password,
+        options: {
+          data: {
+            full_name: data.username.trim(),
+            branch: data.branch || "experimental-science",
+            level: data.level || "mid"
+          }
+        }
+      });
+
+      if (error) {
+        return { success: false, error: error.message };
+      }
+
+      // Check if session was returned or email confirmation is required
+      const needsEmailConfirmation = !signUpData.session;
+
+      if (signUpData.user && signUpData.session) {
+        const profile = await fetchUserProfile(
+          signUpData.user.id,
+          signUpData.user.email,
+          signUpData.user.user_metadata,
+          signUpData.user.created_at
+        );
+        setUser(profile);
+        setIsModalOpen(false);
+      }
+
+      return { success: true, needsEmailConfirmation };
+    } catch (err: any) {
+      return { success: false, error: err?.message || "حدث خطأ أثناء إنشاء الحساب" };
     }
   };
 
-  const logout = () => {
-    saveSession(null);
+  const logout = async () => {
+    try {
+      await supabase.auth.signOut();
+      setUser(null);
+    } catch (err) {
+      console.error("Error signing out:", err);
+    }
   };
 
   const updateProfile = async (updates: Partial<Pick<UserProfile, "branch" | "level" | "username" | "targetGrade">>) => {
     if (!user) return false;
     try {
-      const res = await fetch("/api/auth/me", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: user.email, updates })
+      // 1. Update Supabase auth user metadata
+      await supabase.auth.updateUser({
+        data: {
+          full_name: updates.username ?? user.username,
+          branch: updates.branch ?? user.branch,
+          level: updates.level ?? user.level,
+          target_grade: updates.targetGrade ?? user.targetGrade
+        }
       });
-      const data = await res.json();
-      if (data.success && data.profile) {
-        saveSession(data.profile);
-        return true;
-      }
+
+      // 2. Update profiles table if it exists
+      await supabase
+        .from("profiles")
+        .update({
+          full_name: updates.username ?? user.username,
+          branch: updates.branch ?? user.branch,
+          level: updates.level ?? user.level,
+          target_grade: updates.targetGrade ?? user.targetGrade,
+          updated_at: new Date().toISOString()
+        })
+        .eq("id", user.id);
+
+      setUser((prev) =>
+        prev
+          ? {
+              ...prev,
+              username: updates.username ?? prev.username,
+              branch: updates.branch ?? prev.branch,
+              level: updates.level ?? prev.level,
+              targetGrade: updates.targetGrade ?? prev.targetGrade
+            }
+          : null
+      );
+
+      return true;
     } catch (err) {
       console.error("Update profile error:", err);
+      return false;
     }
-    return false;
   };
 
   return (
@@ -178,3 +290,4 @@ export function useAuth() {
   }
   return context;
 }
+
