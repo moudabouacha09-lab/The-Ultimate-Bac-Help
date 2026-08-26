@@ -6,6 +6,8 @@ import { subjects } from "@/lib/subjects";
 import { BottomNav } from "@/components/layout/bottom-nav";
 import { MobileSubjectBar } from "@/components/layout/mobile-subject-bar";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
+import { UserMenu } from "@/components/auth/user-menu";
+import { AuthModal } from "@/components/auth/auth-modal";
 import { Sparkles } from "lucide-react";
 import { FloatingAssistant } from "@/components/assistant/floating-assistant";
 import { SurveyModal } from "@/components/survey/survey-modal";
@@ -37,6 +39,9 @@ export function AppShell({ children, activeSubject }: AppShellProps) {
     <div className="app-shell">
       <a className="skip-link" href="#main-content">تخطي إلى المحتوى</a>
 
+      {/* Auth Modal overlay */}
+      <AuthModal />
+
       {/* Desktop transparent header */}
       <header className="navbar">
         <Link className="brand" href="/" aria-label="باك الجزائر - الصفحة الرئيسية">
@@ -53,7 +58,10 @@ export function AppShell({ children, activeSubject }: AppShellProps) {
           <Link href="/calculator">حاسبة المعدل</Link>
         </nav>
 
-        <ThemeToggle />
+        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+          <UserMenu />
+          <ThemeToggle />
+        </div>
       </header>
 
       {/* Mobile-only smart header with horizontal subjects navigation bar */}
@@ -63,8 +71,8 @@ export function AppShell({ children, activeSubject }: AppShellProps) {
             <span className="brand-mark">ب</span>
             <strong>باك الجزائر</strong>
           </Link>
-          <div className="mobile-brand-actions">
-            <span className="mobile-motivation-badge">🎯 دفعة 2026/2027</span>
+          <div className="mobile-brand-actions" style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            <UserMenu />
             <ThemeToggle />
           </div>
         </div>

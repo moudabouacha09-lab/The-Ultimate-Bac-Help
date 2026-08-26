@@ -5,6 +5,7 @@ import { SpacetimeGridBackground } from "@/components/effects/spacetime-grid-bac
 import { CursorAurora } from "@/components/effects/cursor-aurora";
 import { InteractiveParticles } from "@/components/effects/interactive-particles";
 import { ReactiveMotion } from "@/components/effects/reactive-motion";
+import { AuthProvider } from "@/context/auth-context";
 
 export const metadata: Metadata = {
   title: "باك الجزائر | رفيقك في التحضير",
@@ -37,11 +38,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <script id="theme-script" dangerouslySetInnerHTML={{ __html: themeScript }} suppressHydrationWarning />
       </head>
       <body>
-        <SpacetimeGridBackground />
-        <CursorAurora />
-        <InteractiveParticles />
-        <ReactiveMotion />
-        {children}
+        <AuthProvider>
+          <SpacetimeGridBackground />
+          <CursorAurora />
+          <InteractiveParticles />
+          <ReactiveMotion />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );
