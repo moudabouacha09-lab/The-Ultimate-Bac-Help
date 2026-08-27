@@ -26,12 +26,6 @@ function FileCard({ file }: { file: FileItem }) {
     if (!filePath) return "#";
     if (filePath.startsWith('http://') || filePath.startsWith('https://')) return filePath;
 
-    if (typeof window !== "undefined" && window.location && window.location.hostname.includes("github.io")) {
-      const relativePath = filePath.replace(/^\/materials\//, "");
-      const encodedRelativePath = relativePath.split("/").map(encodeURIComponent).join("/");
-      return `https://raw.githubusercontent.com/moudabouacha09-lab/The-Ultimate-Bac-Help/main/${encodedRelativePath}`;
-    }
-
     const cleanPath = filePath.startsWith("/") ? filePath : `/${filePath}`;
     const segments = cleanPath.split("/").map((seg) => encodeURIComponent(seg));
     const encodedPath = segments.join("/");
