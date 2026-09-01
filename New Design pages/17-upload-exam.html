@@ -1,0 +1,346 @@
+<!DOCTYPE html><!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>رفع محتوى تعليمي - منصة البكالوريا</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-bright": "#fbf9f5",
+                      "inverse-primary": "#94d3c1",
+                      "surface-variant": "#e4e2de",
+                      "primary": "#00342b",
+                      "primary-fixed-dim": "#94d3c1",
+                      "surface-container": "#efeeea",
+                      "on-primary-container": "#7ebdac",
+                      "on-secondary-fixed": "#360f00",
+                      "secondary-fixed-dim": "#ffb596",
+                      "on-secondary": "#ffffff",
+                      "surface-tint": "#29695b",
+                      "on-tertiary-fixed": "#241a00",
+                      "secondary-fixed": "#ffdbcd",
+                      "inverse-surface": "#30312e",
+                      "secondary": "#a14009",
+                      "on-tertiary-fixed-variant": "#574500",
+                      "on-tertiary-container": "#4f3e00",
+                      "on-surface": "#1b1c1a",
+                      "inverse-on-surface": "#f2f0ed",
+                      "on-secondary-fixed-variant": "#7d2d00",
+                      "on-primary-fixed-variant": "#065043",
+                      "error": "#ba1a1a",
+                      "primary-container": "#004d40",
+                      "secondary-container": "#fd844c",
+                      "on-error-container": "#93000a",
+                      "primary-fixed": "#afefdd",
+                      "on-error": "#ffffff",
+                      "on-primary-fixed": "#00201a",
+                      "outline": "#707975",
+                      "background": "#fbf9f5",
+                      "surface-dim": "#dbdad6",
+                      "on-surface-variant": "#3f4945",
+                      "surface": "#fbf9f5",
+                      "error-container": "#ffdad6",
+                      "on-secondary-container": "#6a2500",
+                      "outline-variant": "#bfc9c4",
+                      "tertiary": "#735c00",
+                      "surface-container-highest": "#e4e2de",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-high": "#eae8e4",
+                      "on-primary": "#ffffff",
+                      "tertiary-fixed-dim": "#e9c349",
+                      "on-background": "#1b1c1a",
+                      "tertiary-container": "#cca730",
+                      "surface-container-low": "#f5f3ef",
+                      "tertiary-fixed": "#ffe088"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "sm": "8px",
+                      "gutter": "20px",
+                      "base": "4px",
+                      "xl": "48px",
+                      "lg": "24px",
+                      "xs": "4px",
+                      "md": "16px",
+                      "sidebar-width": "280px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": [
+                              "\"Source Serif 4\""
+                      ],
+                      "body-md": [
+                              "IBM Plex Sans Arabic"
+                      ],
+                      "caption": [
+                              "IBM Plex Sans Arabic"
+                      ],
+                      "display-lg": [
+                              "\"Source Serif 4\""
+                      ],
+                      "label-md": [
+                              "IBM Plex Sans Arabic"
+                      ],
+                      "headline-md": [
+                              "\"Source Serif 4\""
+                      ],
+                      "headline-lg": [
+                              "\"Source Serif 4\""
+                      ],
+                      "body-lg": [
+                              "IBM Plex Sans Arabic"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "caption": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      }
+              }
+            }
+          }
+    </script>
+<style>
+        body { background-color: #fbf9f5; }
+        .ghost-border { border: 1px solid rgba(0, 52, 43, 0.1); }
+        .focus-border:focus-within { border-color: #00342b; border-width: 2px; outline: none; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col md:flex-row">
+<!-- TopNavBar -->
+<nav class="flex flex-row-reverse justify-between items-center w-full px-gutter h-16 z-50 bg-surface-bright dark:bg-surface-dim border-b border-primary/10 docked full-width top-0 md:hidden">
+<div class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary dark:text-primary-fixed-dim">
+            منصة البكالوريا
+        </div>
+<div class="flex items-center gap-md">
+<button class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="font-label-md text-label-md bg-primary text-on-primary rounded-lg px-4 py-2">
+                تسجيل الدخول
+            </button>
+</div>
+</nav>
+<!-- SideNavBar (Desktop) -->
+<aside class="hidden md:flex flex-col fixed right-0 top-0 h-full w-[280px] pt-20 z-40 bg-surface-container dark:bg-surface-container-highest border-l border-primary/10">
+<div class="px-4 pb-6 border-b border-primary/10">
+<h2 class="font-headline-md text-headline-md text-primary">المواد الدراسية</h2>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1">تحضير البكالوريا 2024</p>
+</div>
+<nav class="flex-1 overflow-y-auto py-4">
+<a class="flex flex-row-reverse items-center gap-md text-on-surface-variant px-4 py-3 hover:bg-primary/5 dark:hover:bg-primary-container/20 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="functions">functions</span>
+<span class="font-label-md text-label-md">الرياضيات</span>
+</a>
+<a class="flex flex-row-reverse items-center gap-md text-on-surface-variant px-4 py-3 hover:bg-primary/5 dark:hover:bg-primary-container/20 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="biotech">biotech</span>
+<span class="font-label-md text-label-md">الفيزياء</span>
+</a>
+<!-- Active State (Example for Teacher Dashboard context if it mapped here, though this is a form. We'll leave them inactive for the form view unless there's a specific 'Tools' active state) -->
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 w-full md:mr-[280px] pb-24 md:pb-8">
+<div class="max-w-4xl mx-auto px-4 md:px-lg mt-8">
+<header class="mb-8">
+<h1 class="font-headline-lg text-headline-lg text-primary mb-2">إضافة محتوى جديد</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">قم برفع الدروس، الامتحانات، أو السلاسل التعليمية لمساعدة الطلاب.</p>
+</header>
+<form class="space-y-6 bg-surface-container-lowest p-6 md:p-8 rounded-xl ghost-border shadow-sm">
+<!-- Bento Grid Layout for Fields -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Subject Selection -->
+<div class="col-span-1">
+<label class="block font-label-md text-label-md text-on-surface mb-2 text-right">المادة</label>
+<div class="relative focus-border rounded-lg bg-white">
+<select class="w-full bg-transparent border-none py-3 px-4 font-body-md text-body-md text-on-surface appearance-none focus:ring-0">
+<option>اختر المادة</option>
+<option>الرياضيات</option>
+<option>الفيزياء</option>
+<option>علوم الطبيعة</option>
+</select>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<!-- Type Selection -->
+<div class="col-span-1">
+<label class="block font-label-md text-label-md text-on-surface mb-2 text-right">نوع المحتوى</label>
+<div class="relative focus-border rounded-lg bg-white">
+<select class="w-full bg-transparent border-none py-3 px-4 font-body-md text-body-md text-on-surface appearance-none focus:ring-0">
+<option>درس</option>
+<option>امتحان (تريماستر)</option>
+<option>سلسلة تمارين</option>
+</select>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<!-- Unit Tags (Full Width in Grid) -->
+<div class="col-span-1 md:col-span-2">
+<label class="block font-label-md text-label-md text-on-surface mb-2 text-right">الوحدة / المحور (Tags)</label>
+<div class="focus-border rounded-lg bg-white p-3 min-h-[48px] flex flex-wrap gap-2 items-center">
+<span class="bg-primary/10 text-primary font-label-md text-label-md px-3 py-1 rounded-full flex items-center gap-1">
+                                الدوال العددية
+                                <button class="material-symbols-outlined text-[16px]" data-icon="close" type="button">close</button>
+</span>
+<span class="bg-primary/10 text-primary font-label-md text-label-md px-3 py-1 rounded-full flex items-center gap-1">
+                                النهايات
+                                <button class="material-symbols-outlined text-[16px]" data-icon="close" type="button">close</button>
+</span>
+<input class="flex-1 bg-transparent border-none p-0 focus:ring-0 font-body-md text-body-md min-w-[120px]" placeholder="أضف وحدة..." type="text"/>
+</div>
+</div>
+</div>
+<!-- Corrigé Option -->
+<div class="border-t border-primary/10 pt-6">
+<h3 class="font-headline-md text-headline-md text-primary mb-4">التصحيح (Corrigé)</h3>
+<div class="flex flex-col sm:flex-row gap-4 mb-4">
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="text-primary focus:ring-primary h-5 w-5 border-outline-variant" name="corrige" type="radio" value="upload"/>
+<span class="font-body-md text-body-md">رفع ملف منفصل</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="text-primary focus:ring-primary h-5 w-5 border-outline-variant" name="corrige" type="radio" value="included"/>
+<span class="font-body-md text-body-md">مدمج في الملف الرئيسي</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer" id="no-corrige-radio">
+<input checked="" class="text-primary focus:ring-primary h-5 w-5 border-outline-variant" name="corrige" type="radio" value="unavailable"/>
+<span class="font-body-md text-body-md">غير متوفر</span>
+</label>
+</div>
+<!-- Warning Banner for missing corrigé -->
+<div class="bg-secondary/10 border-r-4 border-secondary p-4 flex items-start gap-3 rounded-l-lg mt-2" id="corrige-warning">
+<span class="material-symbols-outlined text-secondary" data-icon="warning">warning</span>
+<p class="font-body-md text-body-md text-on-surface">
+                            المحتوى بدون تصحيح قد يكون أقل فائدة للطلاب للمراجعة الذاتية. نوصي بتوفير الحل إن أمكن.
+                        </p>
+</div>
+</div>
+<!-- File Upload Area -->
+<div class="border-t border-primary/10 pt-6">
+<label class="block font-label-md text-label-md text-on-surface mb-2 text-right">الملف الرئيسي (PDF)</label>
+<div class="mt-2 flex justify-center rounded-xl border border-dashed border-primary/30 px-6 py-10 bg-surface hover:bg-primary/5 transition-colors cursor-pointer group">
+<div class="text-center">
+<span class="material-symbols-outlined text-4xl text-primary/50 group-hover:text-primary mb-2 transition-colors" data-icon="upload_file">upload_file</span>
+<div class="mt-4 flex text-sm leading-6 text-gray-600 justify-center">
+<span class="relative cursor-pointer rounded-md bg-transparent font-label-md text-label-md text-primary focus-within:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 hover:text-surface-tint">
+<span>اختر ملفاً للرفع</span>
+<input accept=".pdf" class="sr-only" id="file-upload" name="file-upload" type="file"/>
+</span>
+<p class="pl-1 font-body-md text-body-md text-on-surface-variant">أو اسحب وأفلت هنا</p>
+</div>
+<p class="font-caption text-caption text-on-surface-variant mt-2">PDF حتى 10 ميغابايت</p>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex justify-end gap-4 pt-6">
+<button class="font-label-md text-label-md px-6 py-2 rounded-lg border border-primary text-primary hover:bg-primary/5 transition-colors" type="button">
+                        إلغاء
+                    </button>
+<button class="font-label-md text-label-md px-6 py-2 rounded-lg bg-primary text-on-primary hover:bg-surface-tint transition-colors shadow-sm" type="submit">
+                        نشر المحتوى
+                    </button>
+</div>
+</form>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center py-2 px-4 pb-safe bg-surface-bright dark:bg-surface-dim border-t border-primary/10 rounded-t-xl z-50 shadow-sm">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant active:bg-primary/5" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-md-mobile text-label-md-mobile">الرئيسية</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant active:bg-primary/5" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md-mobile text-label-md-mobile">لوحة التحكم</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim font-bold active:bg-primary/5" href="#">
+<span class="material-symbols-outlined" data-icon="construction">construction</span>
+<span class="font-label-md-mobile text-label-md-mobile">الأدوات</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant active:bg-primary/5" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md-mobile text-label-md-mobile">حسابي</span>
+</a>
+</nav>
+<script>
+        // Simple script to toggle the warning banner based on radio selection
+        document.querySelectorAll('input[name="corrige"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const warningBanner = document.getElementById('corrige-warning');
+                if (this.value === 'unavailable') {
+                    warningBanner.style.display = 'flex';
+                } else {
+                    warningBanner.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body></html>

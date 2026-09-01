@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>بيئة إجراء الاختبار - منصة البكالوريا</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#fbf9f5",
+                        "inverse-primary": "#94d3c1",
+                        "surface-variant": "#e4e2de",
+                        "primary": "#00342b",
+                        "primary-fixed-dim": "#94d3c1",
+                        "surface-container": "#efeeea",
+                        "on-primary-container": "#7ebdac",
+                        "on-secondary-fixed": "#360f00",
+                        "secondary-fixed-dim": "#ffb596",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#29695b",
+                        "on-tertiary-fixed": "#241a00",
+                        "secondary-fixed": "#ffdbcd",
+                        "inverse-surface": "#30312e",
+                        "secondary": "#a14009",
+                        "on-tertiary-fixed-variant": "#574500",
+                        "on-tertiary-container": "#4f3e00",
+                        "on-surface": "#1b1c1a",
+                        "inverse-on-surface": "#f2f0ed",
+                        "on-secondary-fixed-variant": "#7d2d00",
+                        "on-primary-fixed-variant": "#065043",
+                        "error": "#ba1a1a",
+                        "primary-container": "#004d40",
+                        "secondary-container": "#fd844c",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#afefdd",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#00201a",
+                        "outline": "#707975",
+                        "background": "#fbf9f5",
+                        "surface-dim": "#dbdad6",
+                        "on-surface-variant": "#3f4945",
+                        "surface": "#fbf9f5",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#6a2500",
+                        "outline-variant": "#bfc9c4",
+                        "tertiary": "#735c00",
+                        "surface-container-highest": "#e4e2de",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#eae8e4",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#e9c349",
+                        "on-background": "#1b1c1a",
+                        "tertiary-container": "#cca730",
+                        "surface-container-low": "#f5f3ef",
+                        "tertiary-fixed": "#ffe088"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "gutter": "20px",
+                        "base": "4px",
+                        "xl": "48px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "sidebar-width": "280px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["\"Source Serif 4\""],
+                        "body-md": ["IBM Plex Sans Arabic"],
+                        "caption": ["IBM Plex Sans Arabic"],
+                        "display-lg": ["\"Source Serif 4\""],
+                        "label-md": ["IBM Plex Sans Arabic"],
+                        "headline-md": ["\"Source Serif 4\""],
+                        "headline-lg": ["\"Source Serif 4\""],
+                        "body-lg": ["IBM Plex Sans Arabic"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .ghost-border {
+            border: 1px solid rgba(0, 52, 43, 0.1);
+        }
+        .ambient-shadow {
+            box-shadow: 0 4px 20px rgba(0, 52, 43, 0.05);
+        }
+        
+        /* Custom Toggle Switch Styles */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #00342b;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #00342b;
+        }
+        .toggle-checkbox:checked + .toggle-label:after {
+            transform: translateX(100%);
+            border-color: white;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col md:flex-row">
+<!-- Top Navigation (Mobile & Desktop Header) -->
+<!-- Note: TopNavBar is not fully standard for a transactional exam screen, but keeping a minimal version for context if user needs to exit -->
+<header class="w-full flex flex-row-reverse justify-between items-center px-gutter h-16 z-50 border-b border-primary/10 bg-surface-bright md:hidden sticky top-0">
+<div class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary dark:text-primary-fixed-dim">
+            منصة البكالوريا
+        </div>
+<button class="text-primary" onclick="window.history.back()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</header>
+<!-- Main Layout -->
+<div class="flex-1 flex flex-col w-full h-full md:h-screen md:overflow-hidden relative">
+<!-- Desktop Header for Exam Context -->
+<div class="hidden md:flex justify-between items-center px-lg py-sm border-b border-primary/10 bg-surface-bright sticky top-0 z-40">
+<div class="flex items-center gap-md">
+<button class="p-sm hover:bg-primary/5 rounded-full transition-colors text-primary" title="إنهاء ومغادرة">
+<span class="material-symbols-outlined">close</span>
+</button>
+<div>
+<h1 class="font-headline-md text-headline-md text-primary m-0">امتحان الرياضيات - الموضوع الأول</h1>
+<p class="font-caption text-caption text-on-surface-variant">بكالوريا 2023 - شعبة العلوم التجريبية</p>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="font-headline-lg text-headline-lg font-bold text-primary dark:text-primary-fixed-dim">
+                    منصة البكالوريا
+                </div>
+</div>
+</div>
+<!-- Mobile Title Context -->
+<div class="md:hidden px-md py-sm border-b border-primary/10 bg-surface-bright">
+<h1 class="font-label-md text-label-md font-bold text-primary m-0">امتحان الرياضيات - الموضوع الأول</h1>
+</div>
+<main class="flex-1 flex flex-col md:flex-row overflow-hidden w-full max-w-[1600px] mx-auto relative">
+<!-- Left Side: Controls & Assessment (Sticky/Fixed on Mobile, Side Panel on Desktop) -->
+<aside class="w-full md:w-[350px] lg:w-[400px] bg-surface-bright border-l border-primary/10 flex flex-col order-2 md:order-1 h-full shadow-[0_-4px_10px_rgba(0,0,0,0.05)] md:shadow-none z-20 md:z-auto">
+<div class="p-md flex-1 overflow-y-auto space-y-lg">
+<!-- Toggle Solution -->
+<div class="bg-surface-container-low rounded-lg p-md ghost-border flex justify-between items-center">
+<span class="font-label-md text-label-md text-primary font-bold">إظهار الحل النموذجي</span>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer border-surface-variant top-0 right-0 z-10 opacity-0" id="solution-toggle" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-variant cursor-pointer relative before:content-[''] before:absolute before:top-0.5 before:right-0.5 before:w-5 before:h-5 before:bg-white before:rounded-full before:shadow-sm before:transition-transform before:duration-300 peer-checked:bg-primary peer-checked:before:-translate-x-6" for="solution-toggle"></label>
+</div>
+</div>
+<!-- Self Grading Section -->
+<div class="bg-white rounded-lg p-md ghost-border space-y-md">
+<h3 class="font-label-md text-label-md font-bold text-primary border-b border-primary/10 pb-sm">التقييم الذاتي</h3>
+<p class="font-caption text-caption text-on-surface-variant">بعد مقارنة إجابتك بالحل النموذجي، قيم مستواك في هذا التمرين.</p>
+<div class="flex items-center gap-md">
+<div class="flex-1 relative">
+<input class="w-full bg-surface-bright border border-primary/20 rounded-md py-2 px-3 text-center font-body-lg text-body-lg text-primary focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors dir-ltr" max="20" min="0" placeholder="00.00" step="0.5" type="number"/>
+<label class="absolute -top-2.5 right-3 bg-white px-1 font-caption text-caption text-primary">العلامة</label>
+</div>
+<span class="font-headline-md text-headline-md text-outline-variant">/</span>
+<div class="flex-1 bg-surface-container-low border border-primary/10 rounded-md py-2 px-3 text-center font-body-lg text-body-lg text-on-surface-variant cursor-not-allowed">
+                                20
+                            </div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="space-y-sm pt-sm">
+<button class="w-full bg-primary text-white rounded-lg py-3 px-4 font-label-md text-label-md hover:bg-primary-container transition-colors flex justify-center items-center gap-sm">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+                            تم، حفظ النتيجة
+                        </button>
+<button class="w-full bg-transparent border border-primary text-primary rounded-lg py-3 px-4 font-label-md text-label-md hover:bg-primary/5 transition-colors flex justify-center items-center gap-sm" id="help-btn">
+<span class="material-symbols-outlined text-[20px]">help_center</span>
+                            أحتاج مساعدة في هذا التمرين
+                        </button>
+</div>
+<!-- Post-Help State (Initially Hidden, toggled by JS) -->
+<div class="hidden bg-surface-container-low rounded-lg p-md ghost-border space-y-md mt-lg border-l-4 border-l-secondary" id="help-state">
+<h4 class="font-label-md text-label-md font-bold text-secondary flex items-center gap-sm">
+<span class="material-symbols-outlined">psychology_alt</span>
+                            حدد موضع الصعوبة
+                        </h4>
+<p class="font-caption text-caption text-on-surface-variant">لمساعدتك بشكل أفضل، يرجى تحديد الوحدة أو المفهوم الذي واجهت فيه صعوبة.</p>
+<div class="space-y-2">
+<label class="flex items-center gap-3 p-2 rounded hover:bg-white transition-colors cursor-pointer border border-transparent hover:border-primary/10">
+<input class="text-secondary focus:ring-secondary form-radio" name="difficulty" type="radio"/>
+<span class="font-body-md text-body-md">الدوال الأسية</span>
+</label>
+<label class="flex items-center gap-3 p-2 rounded hover:bg-white transition-colors cursor-pointer border border-transparent hover:border-primary/10">
+<input class="text-secondary focus:ring-secondary form-radio" name="difficulty" type="radio"/>
+<span class="font-body-md text-body-md">النهايات والاستمرارية</span>
+</label>
+<label class="flex items-center gap-3 p-2 rounded hover:bg-white transition-colors cursor-pointer border border-transparent hover:border-primary/10">
+<input class="text-secondary focus:ring-secondary form-radio" name="difficulty" type="radio"/>
+<span class="font-body-md text-body-md">حساب المشتقة</span>
+</label>
+</div>
+<button class="w-full bg-secondary text-white rounded-lg py-2 px-4 font-label-md text-label-md hover:bg-secondary-container transition-colors mt-2">
+                            تأكيد وإرسال
+                        </button>
+</div>
+</div>
+</aside>
+<!-- Right Side (Center content): Document Viewer -->
+<section class="flex-1 bg-surface-container flex flex-col order-1 md:order-2 overflow-hidden h-[60vh] md:h-full relative">
+<!-- Viewer Toolbar -->
+<div class="bg-surface-bright border-b border-primary/10 p-2 flex justify-between items-center shrink-0">
+<div class="flex gap-1">
+<button class="p-1 rounded hover:bg-primary/10 text-primary transition-colors" title="تكبير">
+<span class="material-symbols-outlined">zoom_in</span>
+</button>
+<button class="p-1 rounded hover:bg-primary/10 text-primary transition-colors" title="تصغير">
+<span class="material-symbols-outlined">zoom_out</span>
+</button>
+</div>
+<div class="font-caption text-caption text-on-surface-variant flex items-center gap-2">
+<span>صفحة 1 من 4</span>
+<div class="w-px h-4 bg-outline-variant mx-1"></div>
+<span class="bg-primary/10 text-primary px-2 py-0.5 rounded text-[10px] font-bold">التمرين الأول</span>
+</div>
+<div class="flex gap-1">
+<button class="p-1 rounded hover:bg-primary/10 text-primary transition-colors" title="الصفحة السابقة">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+<button class="p-1 rounded hover:bg-primary/10 text-primary transition-colors" title="الصفحة التالية">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+</div>
+</div>
+<!-- PDF/Document Canvas Area -->
+<div class="flex-1 overflow-auto p-md md:p-lg lg:p-xl flex justify-center items-start scroll-smooth">
+<!-- Simulated PDF Page -->
+<div class="bg-white w-full max-w-[850px] min-h-[1100px] shadow-sm ghost-border p-8 md:p-12 relative flex flex-col group">
+<!-- Watermark/Background texture for realism -->
+<div class="absolute inset-0 w-full h-full opacity-[0.03] pointer-events-none mix-blend-multiply" data-alt="A subtle, high-key texture of premium thick white paper with faint, barely visible grain, typical of an official examination booklet, illuminated by soft natural light creating a clean, professional, and slightly academic aesthetic without distracting from text overlaid on top." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCk5msGnn0bL_412KDlDcw-uB9XGf99YYvxVdz7e25Jzh0FFJbJRQnunNH6o3X7K6EQRbk7fietgSH-qF7upLFgffHpkscNx9-IMjfaBiDAbS8gHGoQt7DwWDQOcjdSnKl1l1gR_rmh-d4U-V6BksqBZjS8d1X8AIT0Vm_oJ-vwTUkrUrlEFs3tdIULJS5ijN-SgwuerLdlnYXL0bWCVDbcHinJbmccvw3m7l7n6lhEJvclTLjmcVM')"></div>
+<!-- Document Header -->
+<div class="text-center border-b-2 border-black/80 pb-4 mb-8">
+<h2 class="font-headline-md text-headline-md font-bold mb-2">امتحان بكالوريا التعليم الثانوي</h2>
+<div class="flex justify-between font-label-md text-label-md mt-4">
+<span>الشعبة: علوم تجريبية</span>
+<span>المدة: 3 ساعات و 30 دقيقة</span>
+</div>
+</div>
+<!-- Content Body -->
+<div class="space-y-6 text-right font-body-md text-body-md text-black/90">
+<div class="relative">
+<!-- Chapter tag -->
+<span class="absolute -top-3 left-0 bg-surface-tint text-white px-2 py-1 rounded text-xs font-bold opacity-80 pointer-events-none transform -rotate-2">الدوال</span>
+<h3 class="font-bold text-lg mb-2 flex items-center gap-2">
+<span class="bg-black text-white w-6 h-6 flex items-center justify-center rounded-sm text-sm">I</span>
+                                    التمرين الأول (07 نقاط):
+                                </h3>
+<p class="leading-relaxed text-justify mb-4">
+                                    نعتبر الدالة العددية \( f \) المعرفة على \( \mathbb{R} \) بـ: \( f(x) = (x-1)e^x - x \)
+                                    <br/>
+                                    و \( (C_f) \) تمثيلها البياني في مستو منسوب إلى معلم متعامد ومتجانس \( (O; \vec{i}, \vec{j}) \).
+                                </p>
+<ol class="list-decimal list-inside space-y-4 pr-4">
+<li class="mr-4">
+<div class="inline-block align-top">
+                                            احسب \( \lim_{x \to -\infty} f(x) \) و \( \lim_{x \to +\infty} f(x) \).
+                                        </div>
+</li>
+<li class="mr-4">
+<div class="inline-block align-top">
+                                            بين أنه من أجل كل عدد حقيقي \( x \)، \( f'(x) = x e^x - 1 \).
+                                        </div>
+</li>
+<li class="mr-4">
+<div class="inline-block align-top">
+                                            ادرس اتجاه تغير الدالة \( f \) وشكل جدول تغيراتها.
+                                        </div>
+</li>
+</ol>
+</div>
+<!-- Placeholder for equations image if needed to make it look realistic -->
+<div class="w-full flex justify-center py-4 opacity-80">
+<img class="max-w-full h-auto mix-blend-darken grayscale" data-alt="A clean, high-contrast, black-and-white image of complex mathematical equations involving integrals and limits, written clearly on a white background, resembling high-quality educational material typical of advanced calculus exams, evenly lit without harsh shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuACsgtpRHQCXDRuJuogcXRZOHLtI0ggCkz5LsLekKPKT1Z9K9jXA6SrMfidkfrbEee3zg7tfQhWhALSkSVlV4TQPgIUTY5Xoxr0yI1MksffaLr3lTrhtKAB1stG-0drBeUiYCCLOhZ0xtYx_2lcwJMSaZx_dkV7O8_DS8xPHCt_uDYHHB-iWEtEenrHZ4ix-K3fp2djtz-K7nhk-Pq0zCnOtiBm3RrEA10emUgb-90SNaw5gWP8mWY"/>
+</div>
+</div>
+<!-- Simulated Overlay for Solution (Hidden by default, triggered by toggle) -->
+<div class="absolute inset-0 bg-primary/95 text-white p-8 md:p-12 opacity-0 pointer-events-none transition-opacity duration-300 z-10 flex flex-col backdrop-blur-sm" id="solution-overlay">
+<div class="flex items-center gap-4 border-b border-white/20 pb-4 mb-6">
+<span class="material-symbols-outlined text-4xl text-inverse-primary">verified</span>
+<div>
+<h2 class="font-headline-md text-headline-md font-bold text-white">الحل النموذجي المعتمد</h2>
+<p class="font-caption text-caption text-inverse-primary">سلم التنقيط الوزاري</p>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto pr-2 space-y-6 font-body-md text-body-md custom-scrollbar">
+<div class="bg-white/10 p-4 rounded-lg border border-white/20 relative">
+<span class="absolute top-2 left-2 bg-inverse-primary text-primary font-bold px-2 py-1 rounded text-sm">1.5 ن</span>
+<h4 class="font-bold mb-2">1. حساب النهايات:</h4>
+<p class="mb-1 text-white/90">عند \( -\infty \): \( \lim_{x \to -\infty} f(x) = +\infty \)</p>
+<p class="text-sm text-inverse-primary/80 mb-2">(التبرير مطلوب: 0.5ن للنهاية و 0.25ن للتبرير)</p>
+<p class="mb-1 text-white/90">عند \( +\infty \): \( \lim_{x \to +\infty} f(x) = +\infty \)</p>
+</div>
+<div class="bg-white/10 p-4 rounded-lg border border-white/20 relative">
+<span class="absolute top-2 left-2 bg-inverse-primary text-primary font-bold px-2 py-1 rounded text-sm">2.0 ن</span>
+<h4 class="font-bold mb-2">2. المشتقة:</h4>
+<p class="mb-1 text-white/90">\( f'(x) = (1)e^x + (x-1)e^x - 1 \)</p>
+<p class="mb-1 text-white/90">\( f'(x) = e^x + x e^x - e^x - 1 \)</p>
+<p class="mb-1 font-bold text-inverse-primary">\( f'(x) = x e^x - 1 \)</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- Script for interactions -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Help toggle functionality
+            const helpBtn = document.getElementById('help-btn');
+            const helpState = document.getElementById('help-state');
+            
+            helpBtn.addEventListener('click', () => {
+                helpState.classList.toggle('hidden');
+                // Optional smooth scroll to help state
+                if(!helpState.classList.contains('hidden')) {
+                    helpState.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                }
+            });
+
+            // Solution toggle functionality
+            const solutionToggle = document.getElementById('solution-toggle');
+            const solutionOverlay = document.getElementById('solution-overlay');
+            
+            // The label click handles the checkbox state due to 'for' attribute,
+            // we listen to the change event on the checkbox itself.
+            // Using a parent listener to catch changes on dynamically styled toggles if needed
+            document.querySelector('.relative.inline-block').addEventListener('click', (e) => {
+                if(e.target.tagName !== 'INPUT' && e.target.tagName !== 'LABEL') {
+                   const checkbox = document.getElementById('solution-toggle');
+                   checkbox.checked = !checkbox.checked;
+                   // dispatch change event manually if changed via div click
+                   const event = new Event('change');
+                   checkbox.dispatchEvent(event);
+                }
+            });
+
+            solutionToggle.addEventListener('change', (e) => {
+                if (e.target.checked) {
+                    solutionOverlay.classList.remove('opacity-0', 'pointer-events-none');
+                    solutionOverlay.classList.add('opacity-100');
+                } else {
+                    solutionOverlay.classList.add('opacity-0', 'pointer-events-none');
+                    solutionOverlay.classList.remove('opacity-100');
+                }
+            });
+        });
+    </script>
+<style>
+        /* Custom scrollbar for the solution overlay to match the design */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</body></html>
+
+<!-- فريق العمل والمساهمون -->

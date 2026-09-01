@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>الانضمام كمعلم/مفتش - منصة البكالوريا</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&amp;family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#fbf9f5",
+                    "inverse-primary": "#94d3c1",
+                    "surface-variant": "#e4e2de",
+                    "primary": "#00342b",
+                    "primary-fixed-dim": "#94d3c1",
+                    "surface-container": "#efeeea",
+                    "on-primary-container": "#7ebdac",
+                    "on-secondary-fixed": "#360f00",
+                    "secondary-fixed-dim": "#ffb596",
+                    "on-secondary": "#ffffff",
+                    "surface-tint": "#29695b",
+                    "on-tertiary-fixed": "#241a00",
+                    "secondary-fixed": "#ffdbcd",
+                    "inverse-surface": "#30312e",
+                    "secondary": "#a14009",
+                    "on-tertiary-fixed-variant": "#574500",
+                    "on-tertiary-container": "#4f3e00",
+                    "on-surface": "#1b1c1a",
+                    "inverse-on-surface": "#f2f0ed",
+                    "on-secondary-fixed-variant": "#7d2d00",
+                    "on-primary-fixed-variant": "#065043",
+                    "error": "#ba1a1a",
+                    "primary-container": "#004d40",
+                    "secondary-container": "#fd844c",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#afefdd",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed": "#00201a",
+                    "outline": "#707975",
+                    "background": "#fbf9f5",
+                    "surface-dim": "#dbdad6",
+                    "on-surface-variant": "#3f4945",
+                    "surface": "#fbf9f5",
+                    "error-container": "#ffdad6",
+                    "on-secondary-container": "#6a2500",
+                    "outline-variant": "#bfc9c4",
+                    "tertiary": "#735c00",
+                    "surface-container-highest": "#e4e2de",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-high": "#eae8e4",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#e9c349",
+                    "on-background": "#1b1c1a",
+                    "tertiary-container": "#cca730",
+                    "surface-container-low": "#f5f3ef",
+                    "tertiary-fixed": "#ffe088"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "8px",
+                    "gutter": "20px",
+                    "base": "4px",
+                    "xl": "48px",
+                    "lg": "24px",
+                    "xs": "4px",
+                    "md": "16px",
+                    "sidebar-width": "280px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": [
+                            "\"Source Serif 4\""
+                    ],
+                    "body-md": [
+                            "IBM Plex Sans Arabic"
+                    ],
+                    "caption": [
+                            "IBM Plex Sans Arabic"
+                    ],
+                    "display-lg": [
+                            "\"Source Serif 4\""
+                    ],
+                    "label-md": [
+                            "IBM Plex Sans Arabic"
+                    ],
+                    "headline-md": [
+                            "\"Source Serif 4\""
+                    ],
+                    "headline-lg": [
+                            "\"Source Serif 4\""
+                    ],
+                    "body-lg": [
+                            "IBM Plex Sans Arabic"
+                    ]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "caption": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "display-lg": [
+                            "48px",
+                            {
+                                    "lineHeight": "56px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "label-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "400"
+                            }
+                    }
+            }
+          }
+        }
+    </script>
+<style>
+        /* Hide scrollbar for clean look in sidebars/containers */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md">
+<!-- TopNavBar (Rendered, but contextually this is a transactional page so we might suppress standard nav, but keeping header for branding) -->
+<header class="docked full-width top-0 border-b border-primary/10 bg-surface-bright flat no shadows flex flex-row-reverse justify-between items-center w-full px-gutter h-16 z-50">
+<div class="font-headline-lg text-headline-lg font-bold text-primary dark:text-primary-fixed-dim">
+            منصة البكالوريا
+        </div>
+<div class="flex items-center gap-4">
+<a class="text-on-surface-variant flex items-center gap-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+<span class="font-label-md text-label-md">إلغاء</span>
+</a>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex items-center justify-center p-md md:p-xl">
+<!-- Application Form Container -->
+<div class="bg-surface-container-lowest border border-primary/10 rounded-xl w-full max-w-3xl p-lg md:p-xl shadow-sm relative overflow-hidden transition-all duration-500" id="application-form">
+<!-- Header -->
+<div class="mb-8 text-center">
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">طلب الانضمام للهيئة التدريسية</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">شارك في بناء مستقبل التعليم في الجزائر. نرحب بالأساتذة والمفتشين ذوي الخبرة.</p>
+</div>
+<!-- Form -->
+<form class="space-y-6" onsubmit="submitForm(event)">
+<!-- Role Selection (Bento-style radio buttons) -->
+<div class="space-y-2">
+<label class="block font-label-md text-label-md text-on-surface mb-2">الدور المطلوب</label>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<label class="relative flex cursor-pointer rounded-lg border border-primary/10 bg-surface-bright p-4 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary hover:bg-surface-container-low transition-colors">
+<input checked="" class="peer sr-only" name="role" type="radio" value="teacher"/>
+<div class="flex flex-col gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="school">school</span>
+<span class="font-headline-md text-headline-md text-primary">أستاذ</span>
+<span class="font-caption text-caption text-on-surface-variant">تقديم دروس ومحتوى تعليمي للطلاب.</span>
+</div>
+<div class="absolute inset-0 rounded-lg border-2 border-transparent peer-checked:border-primary pointer-events-none"></div>
+</label>
+<label class="relative flex cursor-pointer rounded-lg border border-primary/10 bg-surface-bright p-4 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary hover:bg-surface-container-low transition-colors">
+<input class="peer sr-only" name="role" type="radio" value="inspector"/>
+<div class="flex flex-col gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="verified_user">verified_user</span>
+<span class="font-headline-md text-headline-md text-primary">مفتش</span>
+<span class="font-caption text-caption text-on-surface-variant">مراجعة واعتماد المحتوى التعليمي.</span>
+</div>
+<div class="absolute inset-0 rounded-lg border-2 border-transparent peer-checked:border-primary pointer-events-none"></div>
+</label>
+</div>
+</div>
+<!-- Personal Info -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="block font-label-md text-label-md text-on-surface text-right" for="firstName">الاسم الأول</label>
+<input class="w-full bg-surface-container-lowest border border-primary/10 rounded-lg px-4 py-3 font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" id="firstName" required="" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="block font-label-md text-label-md text-on-surface text-right" for="lastName">اللقب</label>
+<input class="w-full bg-surface-container-lowest border border-primary/10 rounded-lg px-4 py-3 font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" id="lastName" required="" type="text"/>
+</div>
+</div>
+<!-- Institution -->
+<div class="space-y-2">
+<label class="block font-label-md text-label-md text-on-surface text-right" for="institution">المؤسسة التعليمية الحالية</label>
+<input class="w-full bg-surface-container-lowest border border-primary/10 rounded-lg px-4 py-3 font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" id="institution" placeholder="اسم الثانوية أو المديرية" required="" type="text"/>
+</div>
+<!-- Subjects (Chips) -->
+<div class="space-y-2">
+<label class="block font-label-md text-label-md text-on-surface text-right mb-2">المواد التي تدرسها/تشرف عليها</label>
+<div class="flex flex-wrap gap-2" id="subject-chips">
+<!-- Chips will be toggleable via JS -->
+<button class="subject-chip px-4 py-2 rounded-full border border-primary/10 bg-inverse-primary/10 text-on-surface font-label-md text-label-md hover:bg-inverse-primary/20 transition-colors" data-active="false" type="button">الرياضيات</button>
+<button class="subject-chip px-4 py-2 rounded-full border border-primary/10 bg-inverse-primary/10 text-on-surface font-label-md text-label-md hover:bg-inverse-primary/20 transition-colors" data-active="false" type="button">الفيزياء</button>
+<button class="subject-chip px-4 py-2 rounded-full border border-primary/10 bg-inverse-primary/10 text-on-surface font-label-md text-label-md hover:bg-inverse-primary/20 transition-colors" data-active="false" type="button">علوم الطبيعة</button>
+<button class="subject-chip px-4 py-2 rounded-full border border-primary/10 bg-inverse-primary/10 text-on-surface font-label-md text-label-md hover:bg-inverse-primary/20 transition-colors" data-active="false" type="button">اللغة العربية</button>
+<button class="subject-chip px-4 py-2 rounded-full border border-primary/10 bg-inverse-primary/10 text-on-surface font-label-md text-label-md hover:bg-inverse-primary/20 transition-colors" data-active="false" type="button">الفلسفة</button>
+</div>
+</div>
+<!-- File Upload -->
+<div class="space-y-2">
+<label class="block font-label-md text-label-md text-on-surface text-right">وثائق الإثبات (شهادة عمل، قرار تعيين)</label>
+<div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-primary/10 border-dashed rounded-lg bg-surface-bright hover:bg-surface-container-low transition-colors cursor-pointer" id="drop-zone">
+<div class="space-y-1 text-center">
+<span class="material-symbols-outlined text-4xl text-outline-variant mb-2" data-icon="upload_file">upload_file</span>
+<div class="flex text-sm text-on-surface-variant justify-center">
+<label class="relative cursor-pointer rounded-md bg-transparent font-medium text-primary hover:text-primary-container focus-within:outline-none" for="file-upload">
+<span class="font-label-md text-label-md">اختر ملفاً</span>
+<input class="sr-only" id="file-upload" name="file-upload" type="file"/>
+</label>
+<p class="pl-1 font-body-md text-body-md pr-2">أو اسحب وأفلت هنا</p>
+</div>
+<p class="font-caption text-caption text-outline">PDF, JPG, PNG حتى 10MB</p>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="pt-4 flex justify-end gap-4">
+<button class="px-6 py-2 rounded-lg border border-primary text-primary font-label-md text-label-md hover:bg-primary/5 transition-colors" type="button">إلغاء</button>
+<button class="px-6 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container transition-colors shadow-sm" type="submit">تقديم الطلب</button>
+</div>
+</form>
+</div>
+<!-- Success State (Hidden initially) -->
+<div class="hidden bg-surface-container-lowest border border-primary/10 rounded-xl w-full max-w-lg p-xl shadow-sm text-center flex-col items-center justify-center opacity-0 transition-opacity duration-500" id="success-state">
+<div class="w-20 h-20 bg-inverse-primary/20 rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-4xl text-primary" data-icon="check_circle">check_circle</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-4">تم استلام طلبك بنجاح</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8">
+                شكراً لاهتمامك بالانضمام إلى منصة البكالوريا. سيتم مراجعة طلبك من قبل فريقنا وسنتواصل معك قريباً عبر البريد الإلكتروني.
+            </p>
+<button class="px-8 py-3 rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container transition-colors" onclick="window.location.reload()">
+                العودة للرئيسية
+            </button>
+</div>
+</main>
+<script>
+        // Toggle Subject Chips
+        const chips = document.querySelectorAll('.subject-chip');
+        chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                const isActive = chip.getAttribute('data-active') === 'true';
+                if (isActive) {
+                    chip.setAttribute('data-active', 'false');
+                    chip.classList.remove('bg-primary', 'text-on-primary');
+                    chip.classList.add('bg-inverse-primary/10', 'text-on-surface');
+                } else {
+                    chip.setAttribute('data-active', 'true');
+                    chip.classList.remove('bg-inverse-primary/10', 'text-on-surface');
+                    chip.classList.add('bg-primary', 'text-on-primary');
+                }
+            });
+        });
+
+        // Form Submission Logic
+        function submitForm(event) {
+            event.preventDefault();
+            
+            const formContainer = document.getElementById('application-form');
+            const successState = document.getElementById('success-state');
+            
+            // Simple fade out/in animation
+            formContainer.style.opacity = '0';
+            setTimeout(() => {
+                formContainer.classList.add('hidden');
+                successState.classList.remove('hidden');
+                successState.classList.add('flex');
+                
+                // Trigger reflow
+                void successState.offsetWidth;
+                
+                successState.style.opacity = '1';
+            }, 500);
+        }
+    </script>
+</body></html>
+
+<!-- لوحة تحكم الإدارة -->

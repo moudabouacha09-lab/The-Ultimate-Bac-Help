@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>فريق العمل والمساهمون | منصة البكالوريا</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-bright": "#fbf9f5",
+                        "inverse-primary": "#94d3c1",
+                        "surface-variant": "#e4e2de",
+                        "primary": "#00342b",
+                        "primary-fixed-dim": "#94d3c1",
+                        "surface-container": "#efeeea",
+                        "on-primary-container": "#7ebdac",
+                        "on-secondary-fixed": "#360f00",
+                        "secondary-fixed-dim": "#ffb596",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#29695b",
+                        "on-tertiary-fixed": "#241a00",
+                        "secondary-fixed": "#ffdbcd",
+                        "inverse-surface": "#30312e",
+                        "secondary": "#a14009",
+                        "on-tertiary-fixed-variant": "#574500",
+                        "on-tertiary-container": "#4f3e00",
+                        "on-surface": "#1b1c1a",
+                        "inverse-on-surface": "#f2f0ed",
+                        "on-secondary-fixed-variant": "#7d2d00",
+                        "on-primary-fixed-variant": "#065043",
+                        "error": "#ba1a1a",
+                        "primary-container": "#004d40",
+                        "secondary-container": "#fd844c",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#afefdd",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#00201a",
+                        "outline": "#707975",
+                        "background": "#fbf9f5",
+                        "surface-dim": "#dbdad6",
+                        "on-surface-variant": "#3f4945",
+                        "surface": "#fbf9f5",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#6a2500",
+                        "outline-variant": "#bfc9c4",
+                        "tertiary": "#735c00",
+                        "surface-container-highest": "#e4e2de",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#eae8e4",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#e9c349",
+                        "on-background": "#1b1c1a",
+                        "tertiary-container": "#cca730",
+                        "surface-container-low": "#f5f3ef",
+                        "tertiary-fixed": "#ffe088"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "sm": "8px",
+                        "gutter": "20px",
+                        "base": "4px",
+                        "xl": "48px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "sidebar-width": "280px"
+                    },
+                    fontFamily: {
+                        "headline-lg-mobile": ["\"Source Serif 4\""],
+                        "body-md": ["IBM Plex Sans Arabic"],
+                        "caption": ["IBM Plex Sans Arabic"],
+                        "display-lg": ["\"Source Serif 4\""],
+                        "label-md": ["IBM Plex Sans Arabic"],
+                        "headline-md": ["\"Source Serif 4\""],
+                        "headline-lg": ["\"Source Serif 4\""],
+                        "body-lg": ["IBM Plex Sans Arabic"]
+                    },
+                    fontSize: {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 52, 43, 0.1);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col md:flex-row relative">
+<!-- TopNavBar -->
+<nav class="flex flex-row-reverse justify-between items-center w-full px-gutter h-16 z-50 bg-surface-bright border-b border-primary/10 top-0 docked full-width md:hidden sticky">
+<div class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">منصة البكالوريا</div>
+<div class="hidden md:flex flex-row-reverse gap-4">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">الرئيسية</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">المواد</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">الأدوات</a>
+<a class="font-label-md text-label-md text-primary font-bold border-b-2 border-primary pb-1" href="#">فريق العمل</a>
+</div>
+<button class="font-label-md text-label-md bg-primary text-on-primary px-4 py-2 rounded-lg hover:bg-primary-container transition-colors">
+            تسجيل الدخول
+        </button>
+</nav>
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col fixed right-0 top-0 h-full w-[280px] pt-20 z-40 bg-surface-container border-l border-primary/10">
+<div class="px-6 mb-6">
+<h2 class="font-headline-md text-headline-md text-primary">المواد الدراسية</h2>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1">تحضير البكالوريا 2024</p>
+</div>
+<nav class="flex-1 overflow-y-auto flex flex-col gap-1 px-2">
+<!-- Navigation Links from TopNav adapted for Sidebar Context -->
+<a class="flex flex-row-reverse items-center gap-md text-on-surface-variant px-4 py-3 hover:bg-primary/5 transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span>الرئيسية</span>
+</a>
+<a class="flex flex-row-reverse items-center gap-md text-on-surface-variant px-4 py-3 hover:bg-primary/5 transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span>المواد</span>
+</a>
+<a class="flex flex-row-reverse items-center gap-md text-on-surface-variant px-4 py-3 hover:bg-primary/5 transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="construction">construction</span>
+<span>الأدوات</span>
+</a>
+<a class="flex flex-row-reverse items-center gap-md bg-primary/5 text-primary border-r-4 border-primary px-4 py-3 rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span>فريق العمل</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 w-full md:mr-[280px] p-4 md:p-8 lg:p-12 pb-24 md:pb-12">
+<header class="mb-12 max-w-4xl mx-auto text-center">
+<h1 class="font-display-lg text-display-lg text-primary mb-4">فريق العمل والمساهمون</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                نخبة من خيرة الأساتذة والمفتشين على المستوى الوطني، اجتمعوا لتقديم أفضل محتوى تعليمي لضمان نجاحكم في امتحان شهادة البكالوريا.
+            </p>
+</header>
+<!-- Filter/Subjects Chips -->
+<div class="flex gap-3 overflow-x-auto pb-4 mb-8 max-w-5xl mx-auto hide-scrollbar" style="-ms-overflow-style: none; scrollbar-width: none;">
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-primary text-on-primary font-label-md text-label-md shadow-sm">الكل</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-surface-container text-on-surface hover:bg-primary/10 transition-colors font-label-md text-label-md border border-primary/10">الرياضيات</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-surface-container text-on-surface hover:bg-primary/10 transition-colors font-label-md text-label-md border border-primary/10">الفيزياء</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-surface-container text-on-surface hover:bg-primary/10 transition-colors font-label-md text-label-md border border-primary/10">علوم الطبيعة</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-surface-container text-on-surface hover:bg-primary/10 transition-colors font-label-md text-label-md border border-primary/10">اللغة العربية</button>
+</div>
+<div class="max-w-6xl mx-auto space-y-16">
+<!-- Mathematics Section -->
+<section>
+<div class="flex items-center gap-4 mb-8">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="functions">functions</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">الرياضيات</h2>
+<div class="flex-1 h-px bg-primary/10 ml-4"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Inspector Profile -->
+<div class="glass-card rounded-xl p-6 relative overflow-hidden group hover:border-primary/30 transition-all duration-300">
+<div class="absolute top-0 right-0 w-full h-1 bg-gradient-to-l from-secondary to-secondary-container"></div>
+<div class="flex items-start gap-4">
+<div class="relative">
+<img class="w-20 h-20 rounded-full object-cover border-2 border-secondary/20 p-1" data-alt="Professional portrait of an Algerian male education inspector in his 50s, wearing a formal suit, set against a bright, modern academic library background with soft natural lighting and a calm, authoritative expression. High quality, clear, realistic style matching modern academic design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXJ-3nPLpjcd5_VdMYewp_Ndu25lPSi5Ab_YAzZ_9tkl0n7btlIR8JAtpChnHaeqyOwlva_owy9li31sGVGhxaF1mUnnat93lYlrh_SmYkXbb3wucPG-01KUUz6LMOZ7teIII-JhW2mRpNPYgiqYtDqfXNNBOf-oDUeWS2HFUswLHc8Xo4qqeSj9cLJH3kk8kGw4gnrkb9Jn8ZyHgzikdPVlovJXIGQ946iVQI8SHCCPuIj4Ib7CQ"/>
+<div class="absolute -bottom-2 right-1/2 translate-x-1/2 bg-secondary text-on-secondary px-2 py-0.5 rounded text-[10px] font-bold tracking-wider">مفتش</div>
+</div>
+<div class="flex-1 pt-2">
+<h3 class="font-headline-md text-[20px] leading-[28px] font-semibold text-primary mb-1">أ.د. محمد بن علي</h3>
+<p class="font-caption text-caption text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="location_on">location_on</span>
+                                    ولاية الجزائر
+                                </p>
+</div>
+</div>
+<p class="mt-4 font-body-md text-body-md text-on-surface line-clamp-3">
+                            مفتش تربية وطنية لمادة الرياضيات بخبرة تفوق 25 سنة. مساهم رئيسي في بناء مواضيع البكالوريا السابقة ومؤلف لعدة كتب مدرسية.
+                        </p>
+</div>
+<!-- Teacher Profile 1 -->
+<div class="glass-card rounded-xl p-6 hover:border-primary/30 transition-all duration-300 bg-white">
+<div class="flex items-start gap-4">
+<img class="w-16 h-16 rounded-full object-cover border border-primary/10 p-0.5" data-alt="Portrait of an approachable Algerian female high school mathematics teacher in her 30s, wearing modest professional attire, smiling warmly in a bright classroom setting with soft daylight. High-key lighting, modern educational aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwHBCNdZ7F6Fji79uq_GJ1C238pZeNq8Hr3Sbn1yFWbDnUC3qs5jkfW-W-m96LByM7FZjsyE4dClFQwjxrBaK-gPIZ3TgqF1iolxs97eFwpuMXpS-wt5O60ZkQ8Dk-kxk1xojLKC1BJrxbGhf0-Gqt-sP-Dj__Gi3R9dTH88PWFpf0c-LZZwZJamg6eYX_5tTw4cKuxds40aHgBV4bONqn2i1Nb8RQpAsxbdSLCtlmQRGWjdvFlp8"/>
+<div class="flex-1 pt-1">
+<div class="inline-block bg-primary/10 text-primary px-2 py-0.5 rounded text-[10px] font-bold mb-1">أستاذة رئيسية</div>
+<h3 class="font-headline-md text-[18px] leading-[24px] font-semibold text-on-surface">أ. سميرة بوعلام</h3>
+</div>
+</div>
+<p class="mt-3 font-body-md text-body-md text-on-surface-variant text-sm line-clamp-2">
+                            أستاذة تعليم ثانوي متخصصة في الشعب العلمية والتقنية. صانعة محتوى تعليمي رقمي.
+                        </p>
+</div>
+<!-- Teacher Profile 2 -->
+<div class="glass-card rounded-xl p-6 hover:border-primary/30 transition-all duration-300 bg-white">
+<div class="flex items-start gap-4">
+<img class="w-16 h-16 rounded-full object-cover border border-primary/10 p-0.5" data-alt="Portrait of a young, enthusiastic Algerian male mathematics teacher in his late 20s, wearing a casual blazer, standing in front of a smart board. Bright, clean lighting, optimistic and academic mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6d5GReo-CDKSlHeYfKBh2tT6cRaAo1vHT8lb_n9dh36lb4D2Ti1ijYRJ6WbI-FdsCJ3Jhdkf3IAnMcmY2sRYnjjrWeY3C9MTQ112A6Iz7dnwrL1PQCvo_NtDW5pkgPrIE6khduMqZ2RDRZiO1AIGymsPN1OJZwW_WyoQmLiEFOLZTqYBUQa48iHxIAbJzsgwdiFKxIbueBA7uc-wtfRU-Cdqh0ikfJ2a3XmLsIvOJNgz68OtbKxE"/>
+<div class="flex-1 pt-1">
+<div class="inline-block bg-primary/10 text-primary px-2 py-0.5 rounded text-[10px] font-bold mb-1">أستاذ</div>
+<h3 class="font-headline-md text-[18px] leading-[24px] font-semibold text-on-surface">أ. ياسين قادري</h3>
+</div>
+</div>
+<p class="mt-3 font-body-md text-body-md text-on-surface-variant text-sm line-clamp-2">
+                            متخصص في تبسيط المفاهيم المعقدة في الدوال والهندسة الفضائية.
+                        </p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center py-2 px-4 pb-safe bg-surface-bright border-t border-primary/10 shadow-sm rounded-t-xl z-50">
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-md-mobile text-[10px] mt-1">الرئيسية</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md-mobile text-[10px] mt-1">لوحة التحكم</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="construction">construction</span>
+<span class="font-label-md-mobile text-[10px] mt-1">الأدوات</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary font-bold" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-label-md-mobile text-[10px] mt-1">فريق العمل</span>
+</a>
+</nav>
+</body></html>
+
+<!-- الانضمام كأستاذ أو مفتش -->

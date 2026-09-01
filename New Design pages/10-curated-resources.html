@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>المصادر الخارجية المختارة - منصة البكالوريا</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#fbf9f5",
+                        "inverse-primary": "#94d3c1",
+                        "surface-variant": "#e4e2de",
+                        "primary": "#00342b",
+                        "primary-fixed-dim": "#94d3c1",
+                        "surface-container": "#efeeea",
+                        "on-primary-container": "#7ebdac",
+                        "on-secondary-fixed": "#360f00",
+                        "secondary-fixed-dim": "#ffb596",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#29695b",
+                        "on-tertiary-fixed": "#241a00",
+                        "secondary-fixed": "#ffdbcd",
+                        "inverse-surface": "#30312e",
+                        "secondary": "#a14009",
+                        "on-tertiary-fixed-variant": "#574500",
+                        "on-tertiary-container": "#4f3e00",
+                        "on-surface": "#1b1c1a",
+                        "inverse-on-surface": "#f2f0ed",
+                        "on-secondary-fixed-variant": "#7d2d00",
+                        "on-primary-fixed-variant": "#065043",
+                        "error": "#ba1a1a",
+                        "primary-container": "#004d40",
+                        "secondary-container": "#fd844c",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#afefdd",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#00201a",
+                        "outline": "#707975",
+                        "background": "#fbf9f5",
+                        "surface-dim": "#dbdad6",
+                        "on-surface-variant": "#3f4945",
+                        "surface": "#fbf9f5",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#6a2500",
+                        "outline-variant": "#bfc9c4",
+                        "tertiary": "#735c00",
+                        "surface-container-highest": "#e4e2de",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#eae8e4",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#e9c349",
+                        "on-background": "#1b1c1a",
+                        "tertiary-container": "#cca730",
+                        "surface-container-low": "#f5f3ef",
+                        "tertiary-fixed": "#ffe088"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "gutter": "20px",
+                        "base": "4px",
+                        "xl": "48px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "sidebar-width": "280px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["\"Source Serif 4\""],
+                        "body-md": ["IBM Plex Sans Arabic"],
+                        "caption": ["IBM Plex Sans Arabic"],
+                        "display-lg": ["\"Source Serif 4\""],
+                        "label-md": ["IBM Plex Sans Arabic"],
+                        "headline-md": ["\"Source Serif 4\""],
+                        "headline-lg": ["\"Source Serif 4\""],
+                        "body-lg": ["IBM Plex Sans Arabic"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&amp;family=Source+Serif+4:opsz,wght@8..60,400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        /* Ambient shadow utility */
+        .ambient-shadow { box-shadow: 0 4px 20px -2px rgba(0, 52, 43, 0.05); }
+    </style>
+</head>
+<body class="font-body-md text-body-md bg-background min-h-screen pb-20 md:pb-0 md:pr-sidebar-width flex flex-col">
+<!-- TopNavBar -->
+<nav class="flex flex-row-reverse justify-between items-center w-full px-gutter h-16 z-50 bg-surface-bright dark:bg-surface-dim border-b border-primary/10 docked full-width top-0 sticky">
+<div class="flex items-center gap-4">
+<span class="font-headline-lg text-headline-lg font-bold text-primary dark:text-primary-fixed-dim">منصة البكالوريا</span>
+</div>
+<div class="hidden md:flex gap-6 items-center flex-row-reverse">
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors font-label-md text-label-md" href="#">الرئيسية</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors font-label-md text-label-md" href="#">المواد</a>
+<a class="text-primary dark:text-primary-fixed-dim font-bold border-b-2 border-primary pb-1 opacity-80 transition-opacity font-label-md text-label-md" href="#">الأدوات</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors font-label-md text-label-md" href="#">تقدمي</a>
+</div>
+<div class="flex items-center gap-4 flex-row-reverse">
+<button class="bg-primary text-on-primary rounded-lg px-4 py-2 font-label-md text-label-md">تسجيل الدخول</button>
+<div class="relative rounded-full overflow-hidden w-8 h-8 bg-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">person</span>
+<!-- Using raw span for icon as fallback, no img needed if logged out in UI view -->
+</div>
+</div>
+</nav>
+<!-- SideNavBar (Desktop) -->
+<aside class="hidden md:flex flex-col fixed right-0 top-0 h-full w-[280px] pt-20 z-40 bg-surface-container dark:bg-surface-container-highest border-l border-primary/10">
+<div class="px-4 mb-6 text-right">
+<h2 class="font-headline-md text-headline-md text-primary font-headline-md text-headline-md">المواد الدراسية</h2>
+<p class="text-on-surface-variant text-caption font-caption mt-1">تحضير البكالوريا 2024</p>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex flex-row-reverse items-center gap-md text-on-surface-variant px-4 py-3 hover:bg-primary/5 dark:hover:bg-primary-container/20 transition-all font-label-md text-label-md" href="#"><span class="material-symbols-outlined">functions</span>الرياضيات</a>
+<a class="flex flex-row-reverse items-center gap-md text-on-surface-variant px-4 py-3 hover:bg-primary/5 dark:hover:bg-primary-container/20 transition-all font-label-md text-label-md" href="#"><span class="material-symbols-outlined">biotech</span>الفيزياء</a>
+<a class="flex flex-row-reverse items-center gap-md text-on-surface-variant px-4 py-3 hover:bg-primary/5 dark:hover:bg-primary-container/20 transition-all font-label-md text-label-md" href="#"><span class="material-symbols-outlined">maps</span>علوم الطبيعة</a>
+<a class="flex flex-row-reverse items-center gap-md text-on-surface-variant px-4 py-3 hover:bg-primary/5 dark:hover:bg-primary-container/20 transition-all font-label-md text-label-md" href="#"><span class="material-symbols-outlined">menu_book</span>اللغة العربية</a>
+<a class="flex flex-row-reverse items-center gap-md text-on-surface-variant px-4 py-3 hover:bg-primary/5 dark:hover:bg-primary-container/20 transition-all font-label-md text-label-md" href="#"><span class="material-symbols-outlined">psychology</span>الفلسفة</a>
+<a class="flex flex-row-reverse items-center gap-md text-on-surface-variant px-4 py-3 hover:bg-primary/5 dark:hover:bg-primary-container/20 transition-all font-label-md text-label-md" href="#"><span class="material-symbols-outlined">public</span>التاريخ والجغرافيا</a>
+<a class="flex flex-row-reverse items-center gap-md text-on-surface-variant px-4 py-3 hover:bg-primary/5 dark:hover:bg-primary-container/20 transition-all font-label-md text-label-md" href="#"><span class="material-symbols-outlined">mosque</span>العلوم الإسلامية</a>
+<a class="flex flex-row-reverse items-center gap-md text-on-surface-variant px-4 py-3 hover:bg-primary/5 dark:hover:bg-primary-container/20 transition-all font-label-md text-label-md" href="#"><span class="material-symbols-outlined">language</span>الإنجليزية</a>
+<a class="flex flex-row-reverse items-center gap-md text-on-surface-variant px-4 py-3 hover:bg-primary/5 dark:hover:bg-primary-container/20 transition-all font-label-md text-label-md" href="#"><span class="material-symbols-outlined">translate</span>الفرنسية</a>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full max-w-7xl mx-auto px-4 md:px-lg py-8 flex flex-col gap-8">
+<!-- Header Section -->
+<header class="text-right">
+<h1 class="font-display-lg text-display-lg text-primary mb-2 hidden md:block">الأدوات والمراجع</h1>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-2 md:hidden">الأدوات والمراجع</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl ml-auto">مكتبة شاملة لأفضل المصادر التعليمية المختارة بعناية لمساعدتك في رحلة التحضير للبكالوريا.</p>
+</header>
+<!-- Tools Navigation Tabs -->
+<div class="flex flex-row-reverse gap-4 border-b border-primary/10 pb-1 overflow-x-auto no-scrollbar">
+<button class="px-4 py-2 font-label-md text-label-md text-primary border-b-2 border-primary font-bold whitespace-nowrap">أساتذة</button>
+<button class="px-4 py-2 font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap">كتب</button>
+<button class="px-4 py-2 font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap">تطبيقات</button>
+<button class="px-4 py-2 font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap flex items-center gap-2 flex-row-reverse">
+<span class="material-symbols-outlined text-[18px]">smart_toy</span>
+                NotebookLM
+            </button>
+</div>
+<!-- Filters (Chips) -->
+<div class="flex flex-row-reverse gap-2 overflow-x-auto no-scrollbar py-2">
+<button class="rounded-full bg-primary text-white px-4 py-1.5 font-label-md text-label-md whitespace-nowrap">الكل</button>
+<button class="rounded-full bg-inverse-primary/20 text-primary hover:bg-inverse-primary/40 transition-colors px-4 py-1.5 font-label-md text-label-md whitespace-nowrap">الرياضيات</button>
+<button class="rounded-full bg-inverse-primary/20 text-primary hover:bg-inverse-primary/40 transition-colors px-4 py-1.5 font-label-md text-label-md whitespace-nowrap">الفيزياء</button>
+<button class="rounded-full bg-inverse-primary/20 text-primary hover:bg-inverse-primary/40 transition-colors px-4 py-1.5 font-label-md text-label-md whitespace-nowrap">علوم الطبيعة</button>
+<button class="rounded-full bg-inverse-primary/20 text-primary hover:bg-inverse-primary/40 transition-colors px-4 py-1.5 font-label-md text-label-md whitespace-nowrap">لغات</button>
+</div>
+<!-- Resource Grid (Bento style / Asymmetric) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 dir-rtl">
+<!-- Featured Card (Takes up 2 columns on large screens) -->
+<article class="col-span-1 lg:col-span-2 bg-surface-container-lowest border border-primary/10 rounded-xl overflow-hidden flex flex-col md:flex-row-reverse group ambient-shadow hover:border-primary/30 transition-colors">
+<div class="w-full md:w-2/5 h-48 md:h-auto relative bg-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A professional portrait of an academic teacher in a modern, well-lit classroom setting. The aesthetic is clean and modern, leaning towards a light-mode academic feel. Warm lighting highlights the subject, with deep greens (primary color) subtly incorporated in the background details like a chalkboard or a plant. The overall mood is authoritative yet approachable, suitable for an educational platform in Algeria." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzCz3c0tas0mNWN9G7fW0vyQQgDvrOxXHqgDODIPEFEzH4Ecgjmi3zspUmDrr6IjGs97ki_34VpFPDTD2vobXNJNvA0EtzY0C5zJdGPSJtfByTw4D9cdayVS44nide6tByjGqs1xyr2kUJoui-fOLkJv6A0kuVBW4GtBf_6ZYglFnZzN2vSd_Eq5b5o11z8-CPmSfHAxo64GUIl55S6osFCuz9DUadOAxt8mzwDrYTvSQgclOS60U"/>
+<div class="absolute top-4 right-4 bg-surface-bright/90 backdrop-blur-sm px-3 py-1 rounded text-primary font-caption text-caption border border-primary/10">أستاذ مميز</div>
+</div>
+<div class="p-6 flex flex-col justify-between flex-1 text-right">
+<div>
+<div class="flex justify-between items-start flex-row-reverse mb-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">الأستاذ نور الدين</h3>
+<span class="bg-inverse-primary/20 text-primary px-2 py-0.5 rounded-full font-caption text-caption">رياضيات</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-3">قناة الأستاذ نور الدين للرياضيات، تعتبر من أفضل المراجع لطلاب البكالوريا الشعب العلمية. شروحات مفصلة وحل لجميع بكالوريات السنوات السابقة.</p>
+</div>
+<div class="flex justify-start gap-3 flex-row-reverse mt-4">
+<button class="bg-primary text-on-primary rounded-lg px-4 py-2 font-label-md text-label-md flex items-center gap-2 flex-row-reverse">
+<span class="material-symbols-outlined text-[18px]">play_circle</span>
+                            زيارة القناة
+                        </button>
+<button class="border border-primary text-primary rounded-lg px-4 py-2 font-label-md text-label-md hover:bg-primary/5 transition-colors">
+                            حفظ
+                        </button>
+</div>
+</div>
+</article>
+<!-- Standard Card -->
+<article class="bg-surface-container-lowest border border-primary/10 rounded-xl overflow-hidden flex flex-col group ambient-shadow hover:border-primary/30 transition-colors">
+<div class="h-40 relative bg-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A high-quality close-up of a modern physics textbook on a clean wooden desk. The scene is illuminated by soft, natural daylight emphasizing a modern academic style. The book cover features subtle teal and earthy tones, aligning with the platform's color scheme. The mood is calm, studious, and reliable." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgwNQPdvJW7WQR-_i7HD_Jpj5ED_3cyFlYQOubHwfZ2YguytzqqhnXub_K1YBnhJzuuTPX55bxQl0NGhtWlX7o09Fb1xzqOM4Ac9M-C594K0K7nRAC8U34Q3bA_18AvJf_TqCx-feGxKREeZGey8DT6pc9mAUYBdT17e2HvPl4-njed6EgbtnLIt6EmIGOcbRBLZZWI-8W4vcU_WJYXYL80fYK3Nk3uKWw8kvBvc3hxapTA_pcxqI"/>
+</div>
+<div class="p-5 flex flex-col justify-between flex-1 text-right">
+<div>
+<div class="flex justify-between items-start flex-row-reverse mb-2">
+<h3 class="font-headline-md text-headline-md text-on-surface text-[20px]">المغني في الفيزياء</h3>
+<span class="bg-inverse-primary/20 text-primary px-2 py-0.5 rounded-full font-caption text-caption">فيزياء</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-2">سلسلة المغني للأستاذ شريفي، ملخصات مركزة وتمارين متدرجة الصعوبة.</p>
+</div>
+<button class="w-full border border-primary text-primary rounded-lg px-4 py-2 font-label-md text-label-md hover:bg-primary/5 transition-colors flex items-center justify-center gap-2 flex-row-reverse mt-auto">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                        تحميل الملخص
+                    </button>
+</div>
+</article>
+<!-- Standard Card -->
+<article class="bg-surface-container-lowest border border-primary/10 rounded-xl overflow-hidden flex flex-col group ambient-shadow hover:border-primary/30 transition-colors">
+<div class="h-40 relative bg-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A beautifully organized study desk seen from a slightly high angle. The desk contains a sleek tablet displaying educational diagrams, next to neat handwritten notes and a cup of tea. The lighting is soft and bright, creating a calm, focused atmosphere. The color palette incorporates soft creams, whites, and deep forest teals to match the brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3bVfLJ3J2Nbc3G-YH4K7EWGES41-1wbVVgo9i9Mgf00a1vk_4BSJJe4SdNVXio3U8vBd-qiwrSblgnRzmzlG58MowyqaJbYrvHQrQXfM67CDxthyHhV9_LXYDFB1sTT4BdZENJtkvKBlsX6muLZrkRJuIg2v2xNNpbEtzt6dIX6Xjb27H9mJss5jvW3jZYfbF5tscEbz3aBRXOLSsQEoWPW3FHT1o8jxsJGq5HntsjUbN9VxjtNc"/>
+</div>
+<div class="p-5 flex flex-col justify-between flex-1 text-right">
+<div>
+<div class="flex justify-between items-start flex-row-reverse mb-2">
+<h3 class="font-headline-md text-headline-md text-on-surface text-[20px]">عقبة بن نافع</h3>
+<span class="bg-inverse-primary/20 text-primary px-2 py-0.5 rounded-full font-caption text-caption">علوم الطبيعة</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-2">منصة متكاملة لمراجعة وحدة المناعة والاتصال العصبي بالرسومات التخطيطية.</p>
+</div>
+<button class="w-full border border-primary text-primary rounded-lg px-4 py-2 font-label-md text-label-md hover:bg-primary/5 transition-colors flex items-center justify-center gap-2 flex-row-reverse mt-auto">
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+                        تصفح الموقع
+                    </button>
+</div>
+</article>
+<!-- Standard Card -->
+<article class="bg-surface-container-lowest border border-primary/10 rounded-xl overflow-hidden flex flex-col group ambient-shadow hover:border-primary/30 transition-colors">
+<div class="h-40 relative bg-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A portrait of a male teacher pointing at a whiteboard with complex historical maps and timelines. The setting is a bright, modern educational facility. The lighting is crisp and professional, emphasizing clarity and authority. The aesthetic is clean and academic, utilizing subtle earthy tones and deep teals to ground the image in the platform's visual identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzvIkdLtzNXwLI05NyoLK74of5720OSjTRoygRXeUToZxDnu26B9_ECC5jhfKaGs9wvJzmzVieCQIiuOMxOUbd7n_YB2wBAy35yf_c9pLFmX4g25nlh8SAFUPY37oncb3eLu4yn_LlOD2wjc6VNMTJ3NGHQrHATjUPAyMKqo9hNqZjhWh8CIPTEPIdRvAyTMhtFaPCvFxfGot4VeWPWDi-onyh9OCDTqAVvlaZo29DQIurTOoDLdA"/>
+</div>
+<div class="p-5 flex flex-col justify-between flex-1 text-right">
+<div>
+<div class="flex justify-between items-start flex-row-reverse mb-2">
+<h3 class="font-headline-md text-headline-md text-on-surface text-[20px]">الأستاذ بورنان</h3>
+<span class="bg-inverse-primary/20 text-primary px-2 py-0.5 rounded-full font-caption text-caption">تاريخ وجغرافيا</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-2">شرح مبسط ومفصل لمصطلحات وشخصيات التاريخ، مع طرق مبتكرة للحفظ.</p>
+</div>
+<button class="w-full border border-primary text-primary rounded-lg px-4 py-2 font-label-md text-label-md hover:bg-primary/5 transition-colors flex items-center justify-center gap-2 flex-row-reverse mt-auto">
+<span class="material-symbols-outlined text-[18px]">play_circle</span>
+                        زيارة القناة
+                    </button>
+</div>
+</article>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center py-2 px-4 pb-safe bg-surface-bright dark:bg-surface-dim border-t border-primary/10 shadow-sm z-50 rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant font-label-md-mobile text-label-md-mobile" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+            الرئيسية
+        </a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant font-label-md-mobile text-label-md-mobile" href="#">
+<span class="material-symbols-outlined mb-1">dashboard</span>
+            لوحة التحكم
+        </a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim font-bold font-label-md-mobile text-label-md-mobile scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">construction</span>
+            الأدوات
+        </a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant font-label-md-mobile text-label-md-mobile" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+            حسابي
+        </a>
+</nav>
+</body></html>
+
+<!-- تسجيل الدخول وإنشاء حساب -->

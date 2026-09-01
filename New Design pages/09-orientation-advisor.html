@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>مستشار التوجيه الجامعي</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#fbf9f5",
+                    "inverse-primary": "#94d3c1",
+                    "surface-variant": "#e4e2de",
+                    "primary": "#00342b",
+                    "primary-fixed-dim": "#94d3c1",
+                    "surface-container": "#efeeea",
+                    "on-primary-container": "#7ebdac",
+                    "on-secondary-fixed": "#360f00",
+                    "secondary-fixed-dim": "#ffb596",
+                    "on-secondary": "#ffffff",
+                    "surface-tint": "#29695b",
+                    "on-tertiary-fixed": "#241a00",
+                    "secondary-fixed": "#ffdbcd",
+                    "inverse-surface": "#30312e",
+                    "secondary": "#a14009",
+                    "on-tertiary-fixed-variant": "#574500",
+                    "on-tertiary-container": "#4f3e00",
+                    "on-surface": "#1b1c1a",
+                    "inverse-on-surface": "#f2f0ed",
+                    "on-secondary-fixed-variant": "#7d2d00",
+                    "on-primary-fixed-variant": "#065043",
+                    "error": "#ba1a1a",
+                    "primary-container": "#004d40",
+                    "secondary-container": "#fd844c",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#afefdd",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed": "#00201a",
+                    "outline": "#707975",
+                    "background": "#fbf9f5",
+                    "surface-dim": "#dbdad6",
+                    "on-surface-variant": "#3f4945",
+                    "surface": "#fbf9f5",
+                    "error-container": "#ffdad6",
+                    "on-secondary-container": "#6a2500",
+                    "outline-variant": "#bfc9c4",
+                    "tertiary": "#735c00",
+                    "surface-container-highest": "#e4e2de",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-high": "#eae8e4",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#e9c349",
+                    "on-background": "#1b1c1a",
+                    "tertiary-container": "#cca730",
+                    "surface-container-low": "#f5f3ef",
+                    "tertiary-fixed": "#ffe088"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "8px",
+                    "gutter": "20px",
+                    "base": "4px",
+                    "xl": "48px",
+                    "lg": "24px",
+                    "xs": "4px",
+                    "md": "16px",
+                    "sidebar-width": "280px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": [
+                            "\"Source Serif 4\""
+                    ],
+                    "body-md": [
+                            "IBM Plex Sans Arabic"
+                    ],
+                    "caption": [
+                            "IBM Plex Sans Arabic"
+                    ],
+                    "display-lg": [
+                            "\"Source Serif 4\""
+                    ],
+                    "label-md": [
+                            "IBM Plex Sans Arabic"
+                    ],
+                    "headline-md": [
+                            "\"Source Serif 4\""
+                    ],
+                    "headline-lg": [
+                            "\"Source Serif 4\""
+                    ],
+                    "body-lg": [
+                            "IBM Plex Sans Arabic"
+                    ]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "caption": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "display-lg": [
+                            "48px",
+                            {
+                                    "lineHeight": "56px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "label-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..900;1,8..60,400..900&display=swap');
+        
+        body {
+            background-color: #fbf9f5;
+            color: #1b1c1a;
+        }
+
+        .step-transition {
+            transition: all 0.3s ease-in-out;
+        }
+
+        .hide-step {
+            opacity: 0;
+            pointer-events: none;
+            position: absolute;
+            transform: translateY(20px);
+        }
+
+        .show-step {
+            opacity: 1;
+            pointer-events: auto;
+            position: relative;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="font-body-md antialiased min-h-screen flex flex-col">
+<!-- Top Navigation (Suppressed for focused flow, but kept for context if needed, usually linear flows suppress nav. Suppressing as per mandate: "Automatic Suppression: You MUST exclude the navigation shell if the page intent is: Linear/Transactional") -->
+<header class="w-full px-gutter py-md border-b border-primary/10 bg-surface-bright sticky top-0 z-50 flex items-center justify-between">
+<a class="font-headline-md text-headline-md font-bold text-primary flex items-center gap-2" href="#">
+<span class="material-symbols-outlined" data-weight="fill" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+            منصة البكالوريا
+        </a>
+<a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1 font-label-md text-label-md" href="#">
+<span>خروج</span>
+<span class="material-symbols-outlined text-sm">close</span>
+</a>
+</header>
+<main class="flex-grow flex flex-col items-center justify-center px-4 md:px-gutter py-xl">
+<div class="w-full max-w-3xl">
+<!-- Header Section -->
+<div class="text-center mb-12">
+<h1 class="font-headline-lg text-headline-lg text-primary mb-2 hidden md:block">مستشار التوجيه الجامعي</h1>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-2 md:hidden">مستشار التوجيه الجامعي</h1>
+<p class="text-on-surface-variant font-body-lg text-body-lg">حدد مسارك الجامعي الأمثل بناءً على نتائجك وتطلعاتك</p>
+</div>
+<!-- Progress Bar -->
+<div class="mb-12">
+<div class="flex justify-between items-center mb-4 relative z-10 px-2">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm mb-2 shadow-sm transition-colors duration-300" id="indicator-1">1</div>
+<span class="font-label-md text-label-md text-primary">الشعبة</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant border border-primary/10 flex items-center justify-center font-bold text-sm mb-2 transition-colors duration-300" id="indicator-2">2</div>
+<span class="font-label-md text-label-md text-on-surface-variant" id="label-2">المعدلات</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant border border-primary/10 flex items-center justify-center font-bold text-sm mb-2 transition-colors duration-300" id="indicator-3">3</div>
+<span class="font-label-md text-label-md text-on-surface-variant" id="label-3">الهدف</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant border border-primary/10 flex items-center justify-center font-bold text-sm mb-2 transition-colors duration-300" id="indicator-4">4</div>
+<span class="font-label-md text-label-md text-on-surface-variant" id="label-4">توصيات</span>
+</div>
+</div>
+<!-- Progress Line -->
+<div class="relative w-full h-2 bg-primary/10 rounded-full mt-[-40px] mb-8 z-0">
+<div class="absolute top-0 right-0 h-full bg-secondary rounded-full transition-all duration-500 ease-in-out w-[25%]" id="progress-fill"></div>
+</div>
+</div>
+<!-- Form Container -->
+<div class="bg-white rounded-xl border border-primary/10 p-6 md:p-8 relative min-h-[400px]">
+<!-- Step 1: Stream -->
+<div class="step-transition show-step w-full" id="step-1">
+<h2 class="font-headline-md text-headline-md text-primary mb-6 text-center">ما هي شعبتك في البكالوريا؟</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+<button class="stream-btn flex flex-col items-center justify-center p-6 border border-primary/10 rounded-lg hover:border-primary hover:bg-primary/5 transition-all text-on-surface-variant hover:text-primary group" type="button">
+<span class="material-symbols-outlined text-4xl mb-3 group-hover:scale-110 transition-transform">functions</span>
+<span class="font-label-md text-label-md font-bold">الرياضيات</span>
+</button>
+<button class="stream-btn flex flex-col items-center justify-center p-6 border border-primary/10 rounded-lg hover:border-primary hover:bg-primary/5 transition-all text-on-surface-variant hover:text-primary group" type="button">
+<span class="material-symbols-outlined text-4xl mb-3 group-hover:scale-110 transition-transform">biotech</span>
+<span class="font-label-md text-label-md font-bold">علوم تجريبية</span>
+</button>
+<button class="stream-btn flex flex-col items-center justify-center p-6 border border-primary/10 rounded-lg hover:border-primary hover:bg-primary/5 transition-all text-on-surface-variant hover:text-primary group" type="button">
+<span class="material-symbols-outlined text-4xl mb-3 group-hover:scale-110 transition-transform">architecture</span>
+<span class="font-label-md text-label-md font-bold">تقني رياضي</span>
+</button>
+<button class="stream-btn flex flex-col items-center justify-center p-6 border border-primary/10 rounded-lg hover:border-primary hover:bg-primary/5 transition-all text-on-surface-variant hover:text-primary group" type="button">
+<span class="material-symbols-outlined text-4xl mb-3 group-hover:scale-110 transition-transform">account_balance_wallet</span>
+<span class="font-label-md text-label-md font-bold">تسيير واقتصاد</span>
+</button>
+<button class="stream-btn flex flex-col items-center justify-center p-6 border border-primary/10 rounded-lg hover:border-primary hover:bg-primary/5 transition-all text-on-surface-variant hover:text-primary group" type="button">
+<span class="material-symbols-outlined text-4xl mb-3 group-hover:scale-110 transition-transform">menu_book</span>
+<span class="font-label-md text-label-md font-bold">آداب وفلسفة</span>
+</button>
+<button class="stream-btn flex flex-col items-center justify-center p-6 border border-primary/10 rounded-lg hover:border-primary hover:bg-primary/5 transition-all text-on-surface-variant hover:text-primary group" type="button">
+<span class="material-symbols-outlined text-4xl mb-3 group-hover:scale-110 transition-transform">language</span>
+<span class="font-label-md text-label-md font-bold">لغات أجنبية</span>
+</button>
+</div>
+<div class="mt-8 flex justify-end">
+<button class="bg-primary text-white font-label-md text-label-md py-3 px-8 rounded-lg hover:bg-primary/90 transition-colors flex items-center gap-2 disabled:opacity-50" disabled="" id="btn-next-1" onclick="nextStep(1)">
+                            التالي
+                            <span class="material-symbols-outlined">arrow_back</span>
+</button>
+</div>
+</div>
+<!-- Step 2: Grades -->
+<div class="step-transition hide-step w-full" id="step-2">
+<h2 class="font-headline-md text-headline-md text-primary mb-6 text-center">أدخل معدلاتك المتوقعة أو الحقيقية</h2>
+<div class="space-y-6 max-w-md mx-auto">
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2 text-right">المعدل العام للبكالوريا</label>
+<div class="relative">
+<input class="w-full bg-surface-bright border border-primary/20 rounded-lg p-3 text-left focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors outline-none" id="input-general-grade" max="20" min="10" placeholder="مثال: 14.50" step="0.01" type="number"/>
+<span class="absolute right-3 top-3 text-on-surface-variant/50">/ 20</span>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2 text-right">معدل المادة الأساسية (حسب الشعبة)</label>
+<div class="relative">
+<input class="w-full bg-surface-bright border border-primary/20 rounded-lg p-3 text-left focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors outline-none" id="input-major-grade" max="20" min="0" placeholder="مثال: 16.00" step="0.5" type="number"/>
+<span class="absolute right-3 top-3 text-on-surface-variant/50">/ 20</span>
+</div>
+</div>
+</div>
+<div class="mt-12 flex justify-between">
+<button class="border border-primary text-primary font-label-md text-label-md py-3 px-6 rounded-lg hover:bg-primary/5 transition-colors flex items-center gap-2" onclick="prevStep(2)">
+<span class="material-symbols-outlined">arrow_forward</span>
+                            رجوع
+                        </button>
+<button class="bg-primary text-white font-label-md text-label-md py-3 px-8 rounded-lg hover:bg-primary/90 transition-colors flex items-center gap-2" id="btn-next-2" onclick="nextStep(2)">
+                            التالي
+                            <span class="material-symbols-outlined">arrow_back</span>
+</button>
+</div>
+</div>
+<!-- Step 3: Goal/Location -->
+<div class="step-transition hide-step w-full" id="step-3">
+<h2 class="font-headline-md text-headline-md text-primary mb-6 text-center">ما هي تفضيلاتك؟</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Preferred Field -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-4 text-right">المجال المفضل (اختياري)</label>
+<div class="flex flex-wrap gap-2" id="field-chips">
+<button class="field-chip bg-primary/5 border border-primary/10 text-on-surface-variant rounded-full py-2 px-4 hover:bg-primary hover:text-white transition-colors font-body-md" type="button">الطب والصحة</button>
+<button class="field-chip bg-primary/5 border border-primary/10 text-on-surface-variant rounded-full py-2 px-4 hover:bg-primary hover:text-white transition-colors font-body-md" type="button">الهندسة والتكنولوجيا</button>
+<button class="field-chip bg-primary/5 border border-primary/10 text-on-surface-variant rounded-full py-2 px-4 hover:bg-primary hover:text-white transition-colors font-body-md" type="button">العلوم الدقيقة</button>
+<button class="field-chip bg-primary/5 border border-primary/10 text-on-surface-variant rounded-full py-2 px-4 hover:bg-primary hover:text-white transition-colors font-body-md" type="button">الاقتصاد والأعمال</button>
+<button class="field-chip bg-primary/5 border border-primary/10 text-on-surface-variant rounded-full py-2 px-4 hover:bg-primary hover:text-white transition-colors font-body-md" type="button">الآداب واللغات</button>
+</div>
+</div>
+<!-- Location Preference -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-4 text-right">الموقع الجغرافي المفضل</label>
+<div class="space-y-3">
+<label class="flex items-center gap-3 p-3 border border-primary/10 rounded-lg hover:bg-primary/5 cursor-pointer transition-colors">
+<input checked="" class="form-radio text-primary focus:ring-primary w-5 h-5 border-primary/30" name="location" type="radio"/>
+<span class="font-body-md text-on-surface-variant">الجامعات الأقرب لمقر السكن (أولوية ولائية)</span>
+</label>
+<label class="flex items-center gap-3 p-3 border border-primary/10 rounded-lg hover:bg-primary/5 cursor-pointer transition-colors">
+<input class="form-radio text-primary focus:ring-primary w-5 h-5 border-primary/30" name="location" type="radio"/>
+<span class="font-body-md text-on-surface-variant">المدارس العليا والمعاهد الوطنية (على المستوى الوطني)</span>
+</label>
+<label class="flex items-center gap-3 p-3 border border-primary/10 rounded-lg hover:bg-primary/5 cursor-pointer transition-colors">
+<input class="form-radio text-primary focus:ring-primary w-5 h-5 border-primary/30" name="location" type="radio"/>
+<span class="font-body-md text-on-surface-variant">لا يهم الموقع، المهم التخصص</span>
+</label>
+</div>
+</div>
+</div>
+<div class="mt-12 flex justify-between">
+<button class="border border-primary text-primary font-label-md text-label-md py-3 px-6 rounded-lg hover:bg-primary/5 transition-colors flex items-center gap-2" onclick="prevStep(3)">
+<span class="material-symbols-outlined">arrow_forward</span>
+                            رجوع
+                        </button>
+<button class="bg-primary text-white font-label-md text-label-md py-3 px-8 rounded-lg hover:bg-primary/90 transition-colors flex items-center gap-2" onclick="nextStep(3)">
+                            تحليل النتائج
+                            <span class="material-symbols-outlined">analytics</span>
+</button>
+</div>
+</div>
+<!-- Step 4: Recommendations -->
+<div class="step-transition hide-step w-full" id="step-4">
+<div class="text-center mb-8">
+<div class="inline-flex items-center justify-center w-16 h-16 bg-primary/10 text-primary rounded-full mb-4">
+<span class="material-symbols-outlined text-3xl">task_alt</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-primary mb-2">التخصصات المقترحة لك</h2>
+<p class="text-on-surface-variant font-body-md text-sm max-w-lg mx-auto">بناءً على شعبة <strong class="text-primary">الرياضيات</strong> ومعدل <strong class="text-primary">15.50</strong>، إليك أفضل الخيارات المتاحة حسب المنشور الوزاري الأخير.</p>
+</div>
+<div class="space-y-4">
+<!-- Recommendation Card 1 -->
+<div class="border border-primary/10 rounded-xl p-4 flex flex-col md:flex-row gap-4 items-start md:items-center bg-surface-bright hover:border-primary/30 transition-colors">
+<div class="w-12 h-12 bg-primary/5 rounded-lg flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined">computer</span>
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-md text-headline-md text-base text-primary mb-1">المدرسة العليا للإعلام الآلي</h3>
+<p class="text-on-surface-variant font-caption text-caption flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span> الجزائر العاصمة
+                                    <span class="mx-2">•</span>
+<span class="material-symbols-outlined text-[14px]">trending_up</span> معدل القبول المتوقع: 15.20+
+                                </p>
+</div>
+<div class="w-full md:w-auto mt-2 md:mt-0">
+<span class="bg-secondary/10 text-secondary font-label-md text-xs py-1 px-3 rounded-full border border-secondary/20">تطابق عالي</span>
+</div>
+</div>
+<!-- Recommendation Card 2 -->
+<div class="border border-primary/10 rounded-xl p-4 flex flex-col md:flex-row gap-4 items-start md:items-center bg-surface-bright hover:border-primary/30 transition-colors">
+<div class="w-12 h-12 bg-primary/5 rounded-lg flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined">architecture</span>
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-md text-headline-md text-base text-primary mb-1">الهندسة المعمارية والعمران</h3>
+<p class="text-on-surface-variant font-caption text-caption flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span> أقطاب جامعية متعددة
+                                    <span class="mx-2">•</span>
+<span class="material-symbols-outlined text-[14px]">trending_up</span> معدل القبول المتوقع: 14.50+
+                                </p>
+</div>
+<div class="w-full md:w-auto mt-2 md:mt-0">
+<span class="bg-primary/10 text-primary font-label-md text-xs py-1 px-3 rounded-full border border-primary/20">تطابق جيد</span>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-primary/10 flex flex-col sm:flex-row gap-4 justify-between items-center">
+<button class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md flex items-center gap-1" onclick="prevStep(4)">
+<span class="material-symbols-outlined text-sm">refresh</span>
+                            إعادة الحساب
+                        </button>
+<button class="bg-primary text-white font-label-md text-label-md py-3 px-6 rounded-lg hover:bg-primary/90 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined">print</span>
+                            حفظ النتيجة
+                        </button>
+</div>
+</div>
+</div>
+<!-- Official Disclaimer -->
+<div class="mt-6 p-4 bg-surface-variant/50 border border-outline-variant/30 rounded-lg flex gap-3 items-start">
+<span class="material-symbols-outlined text-outline mt-0.5">info</span>
+<p class="font-caption text-caption text-on-surface-variant leading-relaxed">
+<strong class="font-bold">تنويه هام:</strong> هذه التوصيات هي تقديرية بناءً على معدلات القبول للسنوات السابقة ومعدلاتك المدخلة. لا تعتبر هذه النتائج توجيهاً نهائياً أو رسمياً. التوجيه النهائي يعتمد حصرياً على المعالجة الآلية لبطاقة الرغبات عبر المنصة الرسمية لوزارة التعليم العالي والبحث العلمي وتوفر المقاعد البيداغوجية.
+                </p>
+</div>
+</div>
+</main>
+<script>
+        // Form Logic
+        let currentStep = 1;
+
+        // Step 1: Stream Selection Logic
+        const streamBtns = document.querySelectorAll('.stream-btn');
+        const nextBtn1 = document.getElementById('btn-next-1');
+        let selectedStream = null;
+
+        streamBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all
+                streamBtns.forEach(b => {
+                    b.classList.remove('border-primary', 'bg-primary/5');
+                    b.classList.add('border-primary/10');
+                });
+                
+                // Add active class to clicked
+                this.classList.remove('border-primary/10');
+                this.classList.add('border-primary', 'bg-primary/5');
+                
+                selectedStream = this.querySelector('span:last-child').innerText;
+                nextBtn1.disabled = false;
+            });
+        });
+
+        // Step 3: Field Chips Logic
+        const fieldChips = document.querySelectorAll('.field-chip');
+        fieldChips.forEach(chip => {
+            chip.addEventListener('click', function() {
+                this.classList.toggle('bg-primary');
+                this.classList.toggle('text-white');
+                this.classList.toggle('bg-primary/5');
+                this.classList.toggle('text-on-surface-variant');
+            });
+        });
+
+        // Navigation Logic
+        function updateProgress(step) {
+            const fill = document.getElementById('progress-fill');
+            fill.style.width = `${(step / 4) * 100}%`;
+
+            for(let i=1; i<=4; i++) {
+                const indicator = document.getElementById(`indicator-${i}`);
+                const label = document.getElementById(`label-${i}`);
+                
+                if(indicator) {
+                    if(i < step) {
+                        // Completed
+                        indicator.className = 'w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm mb-2 shadow-sm transition-colors duration-300';
+                        indicator.innerHTML = '<span class="material-symbols-outlined text-[16px]">check</span>';
+                        if(label) label.className = 'font-label-md text-label-md text-primary';
+                    } else if (i === step) {
+                        // Current
+                        indicator.className = 'w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm mb-2 shadow-sm transition-colors duration-300';
+                        indicator.innerHTML = i;
+                        if(label) label.className = 'font-label-md text-label-md text-primary';
+                    } else {
+                        // Upcoming
+                        indicator.className = 'w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant border border-primary/10 flex items-center justify-center font-bold text-sm mb-2 transition-colors duration-300';
+                        indicator.innerHTML = i;
+                        if(label) label.className = 'font-label-md text-label-md text-on-surface-variant';
+                    }
+                }
+            }
+        }
+
+        function nextStep(current) {
+            if (current < 4) {
+                document.getElementById(`step-${current}`).classList.remove('show-step');
+                document.getElementById(`step-${current}`).classList.add('hide-step');
+                
+                setTimeout(() => {
+                    document.getElementById(`step-${current + 1}`).classList.remove('hide-step');
+                    document.getElementById(`step-${current + 1}`).classList.add('show-step');
+                }, 300); // Wait for transition
+                
+                currentStep = current + 1;
+                updateProgress(currentStep);
+            }
+        }
+
+        function prevStep(current) {
+            if (current > 1) {
+                document.getElementById(`step-${current}`).classList.remove('show-step');
+                document.getElementById(`step-${current}`).classList.add('hide-step');
+                
+                setTimeout(() => {
+                    document.getElementById(`step-${current - 1}`).classList.remove('hide-step');
+                    document.getElementById(`step-${current - 1}`).classList.add('show-step');
+                }, 300);
+                
+                currentStep = current - 1;
+                updateProgress(currentStep);
+            }
+        }
+    </script>
+</body></html>
+
+<!-- المصادر الخارجية المختارة -->

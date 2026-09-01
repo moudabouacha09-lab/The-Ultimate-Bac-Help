@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>منصة البكالوريا - اختبار تشخيصي</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&amp;family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#fbf9f5",
+                        "inverse-primary": "#94d3c1",
+                        "surface-variant": "#e4e2de",
+                        "primary": "#00342b",
+                        "primary-fixed-dim": "#94d3c1",
+                        "surface-container": "#efeeea",
+                        "on-primary-container": "#7ebdac",
+                        "on-secondary-fixed": "#360f00",
+                        "secondary-fixed-dim": "#ffb596",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#29695b",
+                        "on-tertiary-fixed": "#241a00",
+                        "secondary-fixed": "#ffdbcd",
+                        "inverse-surface": "#30312e",
+                        "secondary": "#a14009",
+                        "on-tertiary-fixed-variant": "#574500",
+                        "on-tertiary-container": "#4f3e00",
+                        "on-surface": "#1b1c1a",
+                        "inverse-on-surface": "#f2f0ed",
+                        "on-secondary-fixed-variant": "#7d2d00",
+                        "on-primary-fixed-variant": "#065043",
+                        "error": "#ba1a1a",
+                        "primary-container": "#004d40",
+                        "secondary-container": "#fd844c",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#afefdd",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#00201a",
+                        "outline": "#707975",
+                        "background": "#fbf9f5",
+                        "surface-dim": "#dbdad6",
+                        "on-surface-variant": "#3f4945",
+                        "surface": "#fbf9f5",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#6a2500",
+                        "outline-variant": "#bfc9c4",
+                        "tertiary": "#735c00",
+                        "surface-container-highest": "#e4e2de",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#eae8e4",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#e9c349",
+                        "on-background": "#1b1c1a",
+                        "tertiary-container": "#cca730",
+                        "surface-container-low": "#f5f3ef",
+                        "tertiary-fixed": "#ffe088"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "gutter": "20px",
+                        "base": "4px",
+                        "xl": "48px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "sidebar-width": "280px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["\"Source Serif 4\""],
+                        "body-md": ["IBM Plex Sans Arabic"],
+                        "caption": ["IBM Plex Sans Arabic"],
+                        "display-lg": ["\"Source Serif 4\""],
+                        "label-md": ["IBM Plex Sans Arabic"],
+                        "headline-md": ["\"Source Serif 4\""],
+                        "headline-lg": ["\"Source Serif 4\""],
+                        "body-lg": ["IBM Plex Sans Arabic"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'IBM Plex Sans Arabic', sans-serif; }
+        h1, h2, h3, h4, h5, h6, .font-headline-lg, .font-headline-md, .font-display-lg { font-family: 'Source Serif 4', serif; }
+        
+        .ghost-border { border: 1px solid rgba(0, 52, 43, 0.1); }
+        .focus-border { border: 2px solid #00342b; }
+        .ambient-shadow { box-shadow: 0 10px 25px -5px rgba(0, 77, 64, 0.08), 0 8px 10px -6px rgba(0, 77, 64, 0.05); }
+        
+        .option-card { transition: all 0.2s ease-in-out; }
+        .option-card:hover:not(.selected) { background-color: rgba(0, 52, 43, 0.02); }
+        .option-card.selected { background-color: rgba(0, 52, 43, 0.05); border-color: #00342b; }
+        
+        .progress-track { height: 8px; background-color: rgba(0, 52, 43, 0.1); border-radius: 9999px; overflow: hidden; }
+        .progress-fill { height: 100%; background-color: #a14009; transition: width 0.3s ease-in-out; }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col items-center justify-center p-md md:p-xl">
+<div class="w-full max-w-3xl bg-surface-container-lowest rounded-xl ghost-border ambient-shadow overflow-hidden flex flex-col relative z-10">
+<!-- Header / Progress -->
+<div class="p-lg border-b border-primary/10 bg-surface-bright flex flex-col gap-md">
+<div class="flex justify-between items-center">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface-variant">اختبار تشخيصي</span>
+<h1 class="font-headline-md text-headline-md text-primary mt-1">الفيزياء - وحدة الميكانيك</h1>
+</div>
+<div class="font-label-md text-label-md bg-primary/10 text-primary px-3 py-1 rounded-full">
+                    السؤال 4 من 10
+                </div>
+</div>
+<div class="progress-track w-full">
+<div class="progress-fill w-[40%]"></div>
+</div>
+</div>
+<!-- Question Body -->
+<div class="p-lg flex flex-col gap-lg flex-grow">
+<div class="flex flex-col gap-sm">
+<div class="flex gap-2 items-start">
+<span class="material-symbols-outlined text-secondary mt-1">help</span>
+<h2 class="font-body-lg text-body-lg text-on-surface">في حركة السقوط الشاقولي الحقيقي لجسم صلب في الهواء، متى يبلغ الجسم سرعته الحدية؟</h2>
+</div>
+</div>
+<!-- Options -->
+<div class="flex flex-col gap-md">
+<button class="option-card w-full text-right p-4 rounded-lg ghost-border bg-surface-container-lowest flex items-center justify-between group">
+<span class="font-body-md text-body-md text-on-surface">عندما تنعدم قوة الاحتكاك مع الهواء.</span>
+<div class="w-5 h-5 rounded-full border border-primary/20 group-hover:border-primary/50 flex items-center justify-center"></div>
+</button>
+<button class="option-card selected w-full text-right p-4 rounded-lg border-2 border-primary bg-primary/5 flex items-center justify-between group">
+<span class="font-body-md text-body-md text-primary font-bold">عندما تتساوى محصلة القوى المطبقة عليه مع الصفر (انعدام التسارع).</span>
+<div class="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center bg-primary">
+<span class="w-2 h-2 rounded-full bg-white"></span>
+</div>
+</button>
+<button class="option-card w-full text-right p-4 rounded-lg ghost-border bg-surface-container-lowest flex items-center justify-between group">
+<span class="font-body-md text-body-md text-on-surface">بمجرد تركه يسقط دون سرعة ابتدائية.</span>
+<div class="w-5 h-5 rounded-full border border-primary/20 group-hover:border-primary/50 flex items-center justify-center"></div>
+</button>
+<button class="option-card w-full text-right p-4 rounded-lg ghost-border bg-surface-container-lowest flex items-center justify-between group">
+<span class="font-body-md text-body-md text-on-surface">عندما تنعدم قوة دافعة أرخميدس.</span>
+<div class="w-5 h-5 rounded-full border border-primary/20 group-hover:border-primary/50 flex items-center justify-center"></div>
+</button>
+</div>
+<!-- Explanation Panel (Visible after selection) -->
+<div class="mt-4 p-4 rounded-lg bg-surface-container border-l-4 border-secondary flex flex-col gap-2">
+<div class="flex items-center gap-2 text-secondary font-bold">
+<span class="material-symbols-outlined">lightbulb</span>
+<span class="font-label-md text-label-md">توضيح</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    حسب القانون الثاني لنيوتن، عندما تصبح سرعة الجسم ثابتة (السرعة الحدية)، فإن تسارعه ينعدم (a=0). وبالتالي فإن المجموع الشعاعي للقوى الخارجية المؤثرة عليه (الثقل، الاحتكاك، ودافعة أرخميدس) يساوي الشعاع المعدوم.
+                </p>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="p-lg border-t border-primary/10 bg-surface-bright flex justify-between items-center">
+<button class="font-label-md text-label-md px-6 py-2 rounded-lg border border-primary/20 text-on-surface-variant hover:bg-surface-container transition-colors">
+                تخطي
+            </button>
+<button class="font-label-md text-label-md px-6 py-2 rounded-lg bg-primary text-on-primary hover:bg-primary-container transition-colors flex items-center gap-2">
+                السؤال التالي
+                <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+</button>
+</div>
+</div>
+</body></html>
+
+<!-- مستشار التوجيه الجامعي -->

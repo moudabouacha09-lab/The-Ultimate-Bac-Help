@@ -1,48 +1,26 @@
 import type { Metadata } from "next";
 import "katex/dist/katex.min.css";
 import "./styles.css";
-import { SpacetimeGridBackground } from "@/components/effects/spacetime-grid-background";
-import { CursorAurora } from "@/components/effects/cursor-aurora";
-import { InteractiveParticles } from "@/components/effects/interactive-particles";
-import { ReactiveMotion } from "@/components/effects/reactive-motion";
 import { AuthProvider } from "@/context/auth-context";
 
 export const metadata: Metadata = {
-  title: "باك الجزائر | رفيقك في التحضير",
+  title: "منصة البكالوريا | رفيقك في التحضير",
   description: "منصة مراجعة لطلبة البكالوريا الجزائرية"
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  // Inline script to prevent FOUC (Flash of Unstyled Content) by setting the theme synchronously before React hydrates.
-  const themeScript = `
-    (function() {
-      try {
-        var stored = localStorage.getItem('bac-theme');
-        if (stored === 'light') {
-          document.documentElement.setAttribute('data-theme', 'light');
-        } else if (stored === 'dark') {
-          document.documentElement.setAttribute('data-theme', 'dark');
-        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-          document.documentElement.setAttribute('data-theme', 'light');
-        }
-      } catch (e) {}
-    })();
-  `;
-
   return (
     <html lang="ar" dir="rtl" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-        <script id="theme-script" dangerouslySetInnerHTML={{ __html: themeScript }} suppressHydrationWarning />
+        {/* Design System Fonts: IBM Plex Sans Arabic (body) + Source Serif 4 (headings) */}
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet" />
+        {/* Material Symbols Outlined icons */}
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
       </head>
-      <body>
+      <body className="bg-background text-on-background font-body min-h-screen">
         <AuthProvider>
-          <SpacetimeGridBackground />
-          <CursorAurora />
-          <InteractiveParticles />
-          <ReactiveMotion />
           {children}
         </AuthProvider>
       </body>

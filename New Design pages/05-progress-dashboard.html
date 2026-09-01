@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Progress Dashboard - منصة البكالوريا</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#fbf9f5",
+                        "inverse-primary": "#94d3c1",
+                        "surface-variant": "#e4e2de",
+                        "primary": "#00342b",
+                        "primary-fixed-dim": "#94d3c1",
+                        "surface-container": "#efeeea",
+                        "on-primary-container": "#7ebdac",
+                        "on-secondary-fixed": "#360f00",
+                        "secondary-fixed-dim": "#ffb596",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#29695b",
+                        "on-tertiary-fixed": "#241a00",
+                        "secondary-fixed": "#ffdbcd",
+                        "inverse-surface": "#30312e",
+                        "secondary": "#a14009",
+                        "on-tertiary-fixed-variant": "#574500",
+                        "on-tertiary-container": "#4f3e00",
+                        "on-surface": "#1b1c1a",
+                        "inverse-on-surface": "#f2f0ed",
+                        "on-secondary-fixed-variant": "#7d2d00",
+                        "on-primary-fixed-variant": "#065043",
+                        "error": "#ba1a1a",
+                        "primary-container": "#004d40",
+                        "secondary-container": "#fd844c",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#afefdd",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#00201a",
+                        "outline": "#707975",
+                        "background": "#fbf9f5",
+                        "surface-dim": "#dbdad6",
+                        "on-surface-variant": "#3f4945",
+                        "surface": "#fbf9f5",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#6a2500",
+                        "outline-variant": "#bfc9c4",
+                        "tertiary": "#735c00",
+                        "surface-container-highest": "#e4e2de",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#eae8e4",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#e9c349",
+                        "on-background": "#1b1c1a",
+                        "tertiary-container": "#cca730",
+                        "surface-container-low": "#f5f3ef",
+                        "tertiary-fixed": "#ffe088"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "gutter": "20px",
+                        "base": "4px",
+                        "xl": "48px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "sidebar-width": "280px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["\"Source Serif 4\""],
+                        "body-md": ["IBM Plex Sans Arabic"],
+                        "caption": ["IBM Plex Sans Arabic"],
+                        "display-lg": ["\"Source Serif 4\""],
+                        "label-md": ["IBM Plex Sans Arabic"],
+                        "headline-md": ["\"Source Serif 4\""],
+                        "headline-lg": ["\"Source Serif 4\""],
+                        "body-lg": ["IBM Plex Sans Arabic"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .circular-chart {
+            display: block;
+            margin: 0 auto;
+            max-width: 80%;
+            max-height: 250px;
+        }
+        .circle-bg {
+            fill: none;
+            stroke: #efeeea;
+            stroke-width: 3.8;
+        }
+        .circle {
+            fill: none;
+            stroke-width: 3.8;
+            stroke-linecap: round;
+            animation: progress 1s ease-out forwards;
+        }
+        @keyframes progress {
+            0% { stroke-dasharray: 0 100; }
+        }
+        .percentage {
+            fill: #00342b;
+            font-family: "Source Serif 4", serif;
+            font-size: 0.5em;
+            text-anchor: middle;
+            font-weight: 700;
+        }
+        .label {
+            fill: #707975;
+            font-family: "IBM Plex Sans Arabic", sans-serif;
+            font-size: 0.15em;
+            text-anchor: middle;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col md:flex-row">
+<!-- TopNavBar -->
+<nav class="docked full-width top-0 border-b border-primary/10 bg-surface-bright flex flex-row-reverse justify-between items-center w-full px-gutter h-16 z-50 md:hidden sticky">
+<div class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">
+            منصة البكالوريا
+        </div>
+<button class="text-primary p-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</nav>
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col fixed right-0 top-0 h-full w-[280px] pt-20 z-40 border-l border-primary/10 bg-surface-container">
+<div class="px-6 mb-8">
+<h2 class="font-headline-md text-headline-md text-primary mb-2">المواد الدراسية</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">تحضير البكالوريا 2024</p>
+</div>
+<nav class="flex-1 overflow-y-auto">
+<ul class="space-y-1">
+<li>
+<a class="flex flex-row-reverse items-center gap-md text-on-surface-variant px-4 py-3 hover:bg-primary/5 transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="functions">functions</span>
+                        الرياضيات
+                    </a>
+</li>
+<li>
+<a class="flex flex-row-reverse items-center gap-md bg-primary/5 text-primary border-r-4 border-primary px-4 py-3 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="biotech">biotech</span>
+                        الفيزياء
+                    </a>
+</li>
+<li>
+<a class="flex flex-row-reverse items-center gap-md text-on-surface-variant px-4 py-3 hover:bg-primary/5 transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="biocontrol">maps</span>
+                        علوم الطبيعة
+                    </a>
+</li>
+</ul>
+</nav>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 md:mr-[280px] p-md md:p-xl pb-24 md:pb-xl flex flex-col gap-lg max-w-[1200px] mx-auto w-full">
+<header class="mb-4">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">لوحة التحكم الأكاديمية</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">متابعة دقيقة لمستوى الجاهزية لامتحانات البكالوريا.</p>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Readiness Score (Bento Cell 1) -->
+<section class="lg:col-span-1 bg-surface-container-lowest rounded-xl border border-primary/10 p-6 flex flex-col items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 bg-primary/5 opacity-50 z-0"></div>
+<h3 class="font-headline-md text-headline-md text-primary mb-6 z-10 w-full text-right">نسبة الجاهزية</h3>
+<div class="w-full relative z-10 flex justify-center">
+<svg class="circular-chart text-secondary" viewbox="0 0 36 36">
+<path class="circle-bg" d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+<path class="circle" d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831" stroke="currentColor" stroke-dasharray="68, 100"></path>
+<text class="percentage" x="18" y="20.35">68%</text>
+<text class="label" x="18" y="25">جاهزية عامة</text>
+</svg>
+</div>
+<div class="mt-6 z-10 w-full">
+<div class="flex justify-between items-center mb-2 font-label-md text-label-md text-on-surface-variant">
+<span>الهدف: 85%</span>
+<span>معدل التقدم</span>
+</div>
+</div>
+</section>
+<!-- Subject Tabs & Checklist (Bento Cell 2) -->
+<section class="lg:col-span-2 bg-surface-container-lowest rounded-xl border border-primary/10 p-6 flex flex-col">
+<div class="flex flex-wrap gap-2 mb-8 pb-4 border-b border-primary/10">
+<button class="bg-primary text-on-primary px-4 py-2 rounded-full font-label-md text-label-md flex items-center gap-2">
+<span>الفيزياء</span>
+<span class="bg-primary-container text-on-primary-container text-xs px-2 py-0.5 rounded-full">معامل 5</span>
+</button>
+<button class="bg-primary/10 text-primary px-4 py-2 rounded-full font-label-md text-label-md flex items-center gap-2 hover:bg-primary/20 transition-colors">
+<span>الرياضيات</span>
+<span class="bg-surface-variant text-on-surface-variant text-xs px-2 py-0.5 rounded-full">معامل 5</span>
+</button>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-6">الوحدة 1: الميكانيك</h3>
+<div class="space-y-4 flex-1">
+<!-- Completed -->
+<div class="flex items-center gap-4 p-4 rounded-lg bg-surface-container border border-primary/5 hover:border-primary/20 transition-all">
+<div class="w-10 h-10 rounded-full bg-primary-fixed-dim/20 flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex-1">
+<h4 class="font-label-md text-label-md text-on-surface font-bold">الحركة المستقيمة</h4>
+<p class="font-caption text-caption text-on-surface-variant mt-1">مكتمل</p>
+</div>
+<div class="text-primary">
+<span class="material-symbols-outlined">more_vert</span>
+</div>
+</div>
+<!-- In Progress -->
+<div class="flex items-center gap-4 p-4 rounded-lg bg-surface-container-lowest border-l-2 border-secondary shadow-sm">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed-dim/20 flex items-center justify-center text-secondary flex-shrink-0">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">pending</span>
+</div>
+<div class="flex-1">
+<h4 class="font-label-md text-label-md text-on-surface font-bold">السقوط الشاقولي</h4>
+<p class="font-caption text-caption text-secondary mt-1">قيد الدراسة - 50%</p>
+</div>
+<div class="w-24 h-2 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-1/2 rounded-full"></div>
+</div>
+</div>
+<!-- Not Started -->
+<div class="flex items-center gap-4 p-4 rounded-lg bg-surface-container-low border border-outline-variant/30 opacity-70">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-outline flex-shrink-0">
+<span class="material-symbols-outlined">radio_button_unchecked</span>
+</div>
+<div class="flex-1">
+<h4 class="font-label-md text-label-md text-on-surface font-bold">حركة القذائف</h4>
+<p class="font-caption text-caption text-outline mt-1">لم يبدأ</p>
+</div>
+<button class="text-primary font-label-md text-label-md px-3 py-1 border border-primary/20 rounded-md hover:bg-primary/5">
+                            ابدأ
+                        </button>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center py-2 px-4 pb-safe bg-surface-bright border-t border-primary/10 shadow-sm z-50 rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant font-label-md-mobile text-label-md-mobile active:bg-primary/5 p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+            الرئيسية
+        </a>
+<a class="flex flex-col items-center justify-center text-secondary font-bold font-label-md-mobile text-label-md-mobile active:bg-primary/5 p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+            لوحة التحكم
+        </a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant font-label-md-mobile text-label-md-mobile active:bg-primary/5 p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1">construction</span>
+            الأدوات
+        </a>
+</nav>
+</body></html>
+
+<!-- مركز الأدوات التعليمية -->

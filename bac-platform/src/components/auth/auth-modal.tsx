@@ -1,10 +1,10 @@
 // src/components/auth/auth-modal.tsx
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "@/context/auth-context";
 import { AcademicBranch, AcademicLevel, branchLabels, levelLabels } from "@/lib/auth-types";
-import { X, Mail, Lock, User, LogIn, UserPlus, CheckCircle2, GraduationCap, ArrowRight } from "lucide-react";
+import { X, Mail, Lock, User, LogIn, UserPlus, CheckCircle2, GraduationCap, ArrowRight, Eye, EyeOff } from "lucide-react";
 
 export function AuthModal() {
   const { isModalOpen, closeAuthModal, authMode, login, register } = useAuth();
@@ -13,12 +13,22 @@ export function AuthModal() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [branch, setBranch] = useState<AcademicBranch>("experimental-science");
   const [level, setLevel] = useState<AcademicLevel>("mid");
 
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [needsConfirmation, setNeedsConfirmation] = useState(false);
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
+
+  useEffect(() => {
+    if (!isModalOpen) {
+      setRegistrationSuccess(false);
+      setNeedsConfirmation(false);
+      setError(null);
+    }
+  }, [isModalOpen]);
 
   if (!isModalOpen) return null;
 
@@ -44,8 +54,9 @@ export function AuthModal() {
 
         if (!res.success) {
           setError(res.error || "فشل إنشاء الحساب");
-        } else if (res.needsEmailConfirmation) {
-          setNeedsConfirmation(true);
+        } else {
+          setRegistrationSuccess(true);
+          if (res.needsEmailConfirmation) setNeedsConfirmation(true);
         }
       }
     } finally {
@@ -132,10 +143,15 @@ export function AuthModal() {
               <br />
               يرجى فتح صندوق البريد والنقر على رابط التأكيد لتفعيل حسابك، ثم تسجيل الدخول.
             </p>
+            <div className="developer-message developer-message-modal">
+              <strong>رسالة من المطور</strong>
+              <span>شكراً لتسجيلكم، سنضيف قريباً ميزات فريدة تناسب مستواكم وتحسن تجربتكم. بالتوفيق!</span>
+            </div>
             <button
               type="button"
               onClick={() => {
                 setNeedsConfirmation(false);
+                setRegistrationSuccess(false);
                 setTab("login");
                 setError(null);
               }}
@@ -157,6 +173,20 @@ export function AuthModal() {
             >
               <LogIn size={18} />
               <span>الانتقال لتسجيل الدخول</span>
+            </button>
+          </div>
+        ) : registrationSuccess ? (
+          <div style={{ textAlign: "center", padding: "1rem 0" }}>
+            <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: "60px", height: "60px", borderRadius: "50%", backgroundColor: "rgba(52, 211, 153, 0.15)", color: "#34d399", marginBottom: "1rem" }}>
+              <CheckCircle2 size={32} />
+            </div>
+            <h2 style={{ fontSize: "1.35rem", fontWeight: "900", margin: "0 0 0.5rem" }}>تم إنشاء حسابك بنجاح 🎉</h2>
+            <div className="developer-message developer-message-modal">
+              <strong>رسالة من المطور</strong>
+              <span>شكراً لتسجيلكم، سنضيف قريباً ميزات فريدة تناسب مستواكم وتحسن تجربتكم. بالتوفيق!</span>
+            </div>
+            <button type="button" onClick={closeAuthModal} style={{ width: "100%", padding: "0.85rem", marginTop: "1rem", borderRadius: "var(--radius-md, 0.75rem)", border: "none", backgroundColor: "var(--blue-600)", color: "#ffffff", fontWeight: "900", fontSize: "0.95rem", cursor: "pointer" }}>
+              متابعة المراجعة
             </button>
           </div>
         ) : (
@@ -205,6 +235,8 @@ export function AuthModal() {
                 onClick={() => {
                   setTab("register");
                   setError(null);
+                  setRegistrationSuccess(false);
+                  setNeedsConfirmation(false);
                 }}
                 style={{
                   padding: "0.6rem",
@@ -225,6 +257,8 @@ export function AuthModal() {
                 onClick={() => {
                   setTab("login");
                   setError(null);
+                  setRegistrationSuccess(false);
+                  setNeedsConfirmation(false);
                 }}
                 style={{
                   padding: "0.6rem",
@@ -320,7 +354,7 @@ export function AuthModal() {
                 </label>
                 <div style={{ position: "relative" }}>
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     required
                     placeholder="••••••••"
                     value={password}
@@ -337,7 +371,17 @@ export function AuthModal() {
                     }}
                   />
                   <Lock size={18} style={{ position: "absolute", left: "0.75rem", top: "50%", transform: "translateY(-50%)", color: "var(--text-muted)" }} />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((visible) => !visible)}
+                    aria-label={showPassword ? "إخفاء كلمة المرور" : "إظهار كلمة المرور"}
+                    title={showPassword ? "إخفاء كلمة المرور" : "إظهار كلمة المرور"}
+                    style={{ position: "absolute", right: "0.65rem", top: "50%", transform: "translateY(-50%)", display: "grid", placeItems: "center", padding: "0.25rem", color: "var(--text-muted)", background: "transparent", border: "none", cursor: "pointer" }}
+                  >
+                    {showPassword ? <EyeOff size={17} /> : <Eye size={17} />}
+                  </button>
                 </div>
+                {tab === "register" && <p className="password-reminder">تذكّر جيداً كلمة المرور التي اخترتها.</p>}
               </div>
 
               {tab === "register" && (
@@ -444,5 +488,3 @@ export function AuthModal() {
     </div>
   );
 }
-
-

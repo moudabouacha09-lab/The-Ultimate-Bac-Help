@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>منصة البكالوريا - المساعد النهائي</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#fbf9f5",
+                        "inverse-primary": "#94d3c1",
+                        "surface-variant": "#e4e2de",
+                        "primary": "#00342b",
+                        "primary-fixed-dim": "#94d3c1",
+                        "surface-container": "#efeeea",
+                        "on-primary-container": "#7ebdac",
+                        "on-secondary-fixed": "#360f00",
+                        "secondary-fixed-dim": "#ffb596",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#29695b",
+                        "on-tertiary-fixed": "#241a00",
+                        "secondary-fixed": "#ffdbcd",
+                        "inverse-surface": "#30312e",
+                        "secondary": "#a14009",
+                        "on-tertiary-fixed-variant": "#574500",
+                        "on-tertiary-container": "#4f3e00",
+                        "on-surface": "#1b1c1a",
+                        "inverse-on-surface": "#f2f0ed",
+                        "on-secondary-fixed-variant": "#7d2d00",
+                        "on-primary-fixed-variant": "#065043",
+                        "error": "#ba1a1a",
+                        "primary-container": "#004d40",
+                        "secondary-container": "#fd844c",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#afefdd",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#00201a",
+                        "outline": "#707975",
+                        "background": "#fbf9f5",
+                        "surface-dim": "#dbdad6",
+                        "on-surface-variant": "#3f4945",
+                        "surface": "#fbf9f5",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#6a2500",
+                        "outline-variant": "#bfc9c4",
+                        "tertiary": "#735c00",
+                        "surface-container-highest": "#e4e2de",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#eae8e4",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#e9c349",
+                        "on-background": "#1b1c1a",
+                        "tertiary-container": "#cca730",
+                        "surface-container-low": "#f5f3ef",
+                        "tertiary-fixed": "#ffe088"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "gutter": "20px",
+                        "base": "4px",
+                        "xl": "48px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "sidebar-width": "280px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["\"Source Serif 4\""],
+                        "body-md": ["IBM Plex Sans Arabic"],
+                        "caption": ["IBM Plex Sans Arabic"],
+                        "display-lg": ["\"Source Serif 4\""],
+                        "label-md": ["IBM Plex Sans Arabic"],
+                        "headline-md": ["\"Source Serif 4\""],
+                        "headline-lg": ["\"Source Serif 4\""],
+                        "body-lg": ["IBM Plex Sans Arabic"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen">
+<!-- TopNavBar (Mobile Header & Desktop Top Nav) -->
+<header class="docked full-width top-0 border-b border-primary/10 bg-surface-bright flex flex-row-reverse justify-between items-center w-full px-gutter h-16 z-50">
+<div class="flex items-center gap-md">
+<a class="font-headline-lg text-headline-lg font-bold text-primary dark:text-primary-fixed-dim" href="#">
+                منصة البكالوريا
+            </a>
+<img alt="BAC Ultimate Help Logo" class="h-10 w-10 object-contain rounded-full border border-primary/10 hidden md:block" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQET10jWMRPohslMXcYIWepm3C2BrZTflrJ5NHg7OxPMZnIqGAzhi1iQA0WRDX2YHt053C96sdqTVw5UeBn9yRstmWknHAGsvPBG0UwHksmvaLJiGG15bCBAonpZa5o3poME34-EOofbheaE_S2A1EQ5Nlkj89mju-0y9VEunx-RpUKA__qigQ6QF_ijajJdearRtqh-tYyLdy-nYbiMB9z0NDH7A-kg3-GZQ3UJLFoI3dODBg5Sc"/>
+</div>
+<nav class="hidden md:flex gap-lg">
+<!-- Active item logic applied here (الرئيسية) -->
+<a class="text-primary dark:text-primary-fixed-dim font-bold border-b-2 border-primary pb-1 font-label-md text-label-md" href="#">الرئيسية</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors font-label-md text-label-md" href="#">المواد</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors font-label-md text-label-md" href="#">الأدوات</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors font-label-md text-label-md" href="#">تقدمي</a>
+</nav>
+<div class="flex items-center gap-md">
+<!-- Search Icon (Mobile) / Search Bar (Desktop) -->
+<div class="relative hidden md:block">
+<input class="w-64 bg-surface-container border border-outline-variant rounded-full py-2 px-4 text-on-surface placeholder:text-on-surface-variant text-label-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary pl-10 pr-4 rtl:pl-4 rtl:pr-10" placeholder="ابحث عن مادة، درس، أو تمرين..." type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-on-surface-variant">search</span>
+</div>
+<button class="md:hidden text-on-surface-variant">
+<span class="material-symbols-outlined">search</span>
+</button>
+<!-- User Profile / Login -->
+<button class="hidden md:flex items-center gap-2 bg-primary text-on-primary font-label-md text-label-md px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
+                تسجيل الدخول
+            </button>
+<button class="md:hidden w-8 h-8 rounded-full overflow-hidden border border-primary/20">
+<span class="material-symbols-outlined text-primary/50 text-[32px] leading-none">account_circle</span>
+</button>
+</div>
+</header>
+<div class="flex w-full">
+<!-- Main Content Area -->
+<main class="flex-1 pb-20 md:pb-0 md:pl-0 md:pr-sidebar-width w-full">
+<!-- Hero Section -->
+<section class="relative bg-surface-container-low px-gutter py-12 md:py-xl border-b border-primary/5 overflow-hidden">
+<!-- Decorative elements -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4"></div>
+<div class="absolute bottom-0 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl translate-y-1/4 -translate-x-1/4"></div>
+<div class="max-w-4xl mx-auto text-center relative z-10 flex flex-col items-center">
+<img alt="BAC Ultimate Help Logo" class="h-24 w-24 object-contain rounded-full mb-6 border border-primary/20 shadow-sm md:hidden" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQET10jWMRPohslMXcYIWepm3C2BrZTflrJ5NHg7OxPMZnIqGAzhi1iQA0WRDX2YHt053C96sdqTVw5UeBn9yRstmWknHAGsvPBG0UwHksmvaLJiGG15bCBAonpZa5o3poME34-EOofbheaE_S2A1EQ5Nlkj89mju-0y9VEunx-RpUKA__qigQ6QF_ijajJdearRtqh-tYyLdy-nYbiMB9z0NDH7A-kg3-GZQ3UJLFoI3dODBg5Sc"/>
+<h1 class="font-display-lg text-display-lg text-primary mb-4 md:mb-6">
+                        استعد للبكالوريا بثقة
+                    </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8 max-w-2xl mx-auto">
+                        منصتك الشاملة للمراجعة، امتحانات سابقة، وأدوات تنظيم الوقت لضمان نجاحك.
+                    </p>
+<!-- Search Bar Mobile -->
+<div class="relative w-full max-w-md mx-auto mb-10 md:hidden">
+<input class="w-full bg-surface-container border border-outline-variant rounded-full py-3 px-6 text-on-surface placeholder:text-on-surface-variant text-label-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary pl-12 rtl:pr-12 rtl:pl-4 shadow-sm" placeholder="ابحث في الدروس والتمارين..." type="text"/>
+<span class="material-symbols-outlined absolute right-4 top-3 text-on-surface-variant">search</span>
+</div>
+<!-- Countdown Timer -->
+<div class="bg-surface-container-highest/50 backdrop-blur-sm border border-primary/10 rounded-xl p-6 md:p-8 inline-block shadow-sm">
+<p class="font-label-md text-label-md text-primary mb-4">الوقت المتبقي لامتحان البكالوريا</p>
+<div class="flex gap-4 md:gap-8 justify-center text-center rtl:flex-row-reverse" id="countdown">
+<div class="flex flex-col">
+<span class="font-headline-lg text-headline-lg text-primary font-bold bg-surface-bright border border-primary/10 rounded-lg w-16 h-16 md:w-20 md:h-20 flex items-center justify-center shadow-sm">42</span>
+<span class="font-caption text-caption text-on-surface-variant mt-2">يوم</span>
+</div>
+<div class="text-headline-lg text-primary/50 font-bold self-center -mt-6">:</div>
+<div class="flex flex-col">
+<span class="font-headline-lg text-headline-lg text-primary font-bold bg-surface-bright border border-primary/10 rounded-lg w-16 h-16 md:w-20 md:h-20 flex items-center justify-center shadow-sm">14</span>
+<span class="font-caption text-caption text-on-surface-variant mt-2">ساعة</span>
+</div>
+<div class="text-headline-lg text-primary/50 font-bold self-center -mt-6">:</div>
+<div class="flex flex-col">
+<span class="font-headline-lg text-headline-lg text-primary font-bold bg-surface-bright border border-primary/10 rounded-lg w-16 h-16 md:w-20 md:h-20 flex items-center justify-center shadow-sm">59</span>
+<span class="font-caption text-caption text-on-surface-variant mt-2">دقيقة</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div class="max-w-7xl mx-auto px-gutter py-xl flex flex-col gap-xl">
+<!-- Stats Row -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<div class="bg-surface-bright border border-primary/10 rounded-xl p-6 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined icon-filled text-[28px]">group</span>
+</div>
+<div>
+<p class="font-headline-md text-headline-md text-primary font-bold">120,000+</p>
+<p class="font-label-md text-label-md text-on-surface-variant">طالب مستفيد</p>
+</div>
+</div>
+<div class="bg-surface-bright border border-primary/10 rounded-xl p-6 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary/10 text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined icon-filled text-[28px]">library_books</span>
+</div>
+<div>
+<p class="font-headline-md text-headline-md text-secondary font-bold">5,000+</p>
+<p class="font-label-md text-label-md text-on-surface-variant">ملخص وتمرين</p>
+</div>
+</div>
+<div class="bg-surface-bright border border-primary/10 rounded-xl p-6 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-tertiary/10 text-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined icon-filled text-[28px]">history_edu</span>
+</div>
+<div>
+<p class="font-headline-md text-headline-md text-tertiary font-bold">200+</p>
+<p class="font-label-md text-label-md text-on-surface-variant">موضوع بكالوريا</p>
+</div>
+</div>
+</section>
+<!-- Subjects Grid -->
+<section>
+<div class="flex justify-between items-end mb-6">
+<div>
+<h2 class="font-headline-md text-headline-md text-primary mb-1">المواد الدراسية</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">اختر المادة للبدء في المراجعة</p>
+</div>
+<a class="hidden md:flex items-center gap-1 font-label-md text-label-md text-primary hover:underline" href="#">
+                            عرض الكل
+                            <span class="material-symbols-outlined text-sm">arrow_back</span>
+</a>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+<!-- Generative Subject Cards based on SideNav labels -->
+<a class="group bg-surface-bright border border-primary/10 rounded-xl p-4 flex flex-col items-center text-center hover:border-primary focus:border-primary focus:ring-1 focus:ring-primary transition-all" href="#">
+<div class="w-14 h-14 rounded-full bg-primary/5 text-primary flex items-center justify-center mb-3 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[28px]">functions</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors">الرياضيات</span>
+</a>
+<a class="group bg-surface-bright border border-primary/10 rounded-xl p-4 flex flex-col items-center text-center hover:border-primary focus:border-primary focus:ring-1 focus:ring-primary transition-all" href="#">
+<div class="w-14 h-14 rounded-full bg-primary/5 text-primary flex items-center justify-center mb-3 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[28px]">biotech</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors">الفيزياء</span>
+</a>
+<a class="group bg-surface-bright border border-primary/10 rounded-xl p-4 flex flex-col items-center text-center hover:border-primary focus:border-primary focus:ring-1 focus:ring-primary transition-all" href="#">
+<div class="w-14 h-14 rounded-full bg-primary/5 text-primary flex items-center justify-center mb-3 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[28px]">maps</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors">علوم الطبيعة</span>
+</a>
+<a class="group bg-surface-bright border border-primary/10 rounded-xl p-4 flex flex-col items-center text-center hover:border-primary focus:border-primary focus:ring-1 focus:ring-primary transition-all" href="#">
+<div class="w-14 h-14 rounded-full bg-primary/5 text-primary flex items-center justify-center mb-3 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[28px]">menu_book</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors">اللغة العربية</span>
+</a>
+<a class="group bg-surface-bright border border-primary/10 rounded-xl p-4 flex flex-col items-center text-center hover:border-primary focus:border-primary focus:ring-1 focus:ring-primary transition-all" href="#">
+<div class="w-14 h-14 rounded-full bg-primary/5 text-primary flex items-center justify-center mb-3 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[28px]">psychology</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors">الفلسفة</span>
+</a>
+<a class="group bg-surface-bright border border-primary/10 rounded-xl p-4 flex flex-col items-center text-center hover:border-primary focus:border-primary focus:ring-1 focus:ring-primary transition-all" href="#">
+<div class="w-14 h-14 rounded-full bg-primary/5 text-primary flex items-center justify-center mb-3 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[28px]">public</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors">التاريخ والجغرافيا</span>
+</a>
+<a class="group bg-surface-bright border border-primary/10 rounded-xl p-4 flex flex-col items-center text-center hover:border-primary focus:border-primary focus:ring-1 focus:ring-primary transition-all" href="#">
+<div class="w-14 h-14 rounded-full bg-primary/5 text-primary flex items-center justify-center mb-3 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[28px]">mosque</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors">العلوم الإسلامية</span>
+</a>
+<a class="group bg-surface-bright border border-primary/10 rounded-xl p-4 flex flex-col items-center text-center hover:border-primary focus:border-primary focus:ring-1 focus:ring-primary transition-all" href="#">
+<div class="w-14 h-14 rounded-full bg-primary/5 text-primary flex items-center justify-center mb-3 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[28px]">language</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors">الإنجليزية</span>
+</a>
+<a class="group bg-surface-bright border border-primary/10 rounded-xl p-4 flex flex-col items-center text-center hover:border-primary focus:border-primary focus:ring-1 focus:ring-primary transition-all sm:col-span-1 lg:hidden xl:flex" href="#">
+<div class="w-14 h-14 rounded-full bg-primary/5 text-primary flex items-center justify-center mb-3 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[28px]">translate</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors">الفرنسية</span>
+</a>
+</div>
+</section>
+<!-- Tools & Roadmap Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Preparation Roadmap -->
+<section class="lg:col-span-2 bg-surface-container-low border border-primary/10 rounded-xl p-6 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full"></div>
+<h2 class="font-headline-md text-headline-md text-primary mb-6 relative z-10">خريطة طريق التحضير</h2>
+<div class="relative z-10 pr-6 border-r-2 border-primary/20 space-y-8">
+<div class="relative">
+<div class="absolute w-4 h-4 rounded-full bg-primary border-4 border-surface-container-low -right-[31px] top-1"></div>
+<h3 class="font-label-md text-label-md font-bold text-on-surface mb-1">الفصل الأول: بناء الأساسيات</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">فهم الدروس الأساسية وحل التمارين البسيطة لترسيخ المفاهيم.</p>
+</div>
+<div class="relative">
+<div class="absolute w-4 h-4 rounded-full bg-secondary border-4 border-surface-container-low -right-[31px] top-1"></div>
+<h3 class="font-label-md text-label-md font-bold text-on-surface mb-1">الفصل الثاني: التمرس والتعمق</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">حل مواضيع مركبة والتدرب على منهجية الإجابة النموذجية.</p>
+</div>
+<div class="relative">
+<div class="absolute w-4 h-4 rounded-full bg-surface-variant border-2 border-primary/20 -right-[31px] top-1"></div>
+<h3 class="font-label-md text-label-md font-bold text-on-surface-variant mb-1">الفصل الثالث: المراجعة النهائية</h3>
+<p class="font-body-md text-body-md text-on-surface-variant/70">حل حوليات البكالوريا السابقة والتدرب على إدارة الوقت.</p>
+</div>
+</div>
+</section>
+<!-- Tools Section -->
+<section class="bg-surface-bright border border-primary/10 rounded-xl p-6 flex flex-col">
+<h2 class="font-headline-md text-headline-md text-primary mb-4">أدوات مساعدة</h2>
+<div class="flex-1 flex flex-col gap-3">
+<a class="flex items-center gap-4 p-3 rounded-lg hover:bg-surface-container-low border border-transparent hover:border-primary/10 transition-colors" href="#">
+<div class="w-10 h-10 rounded-md bg-secondary/10 text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">calculate</span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md font-bold text-on-surface">حساب المعدل</h3>
+<p class="font-caption text-caption text-on-surface-variant">احسب معدلك المتوقع بسهولة</p>
+</div>
+</a>
+<a class="flex items-center gap-4 p-3 rounded-lg hover:bg-surface-container-low border border-transparent hover:border-primary/10 transition-colors" href="#">
+<div class="w-10 h-10 rounded-md bg-primary/10 text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md font-bold text-on-surface">منظم الوقت</h3>
+<p class="font-caption text-caption text-on-surface-variant">جداول مراجعة جاهزة</p>
+</div>
+</a>
+<a class="flex items-center gap-4 p-3 rounded-lg hover:bg-surface-container-low border border-transparent hover:border-primary/10 transition-colors" href="#">
+<div class="w-10 h-10 rounded-md bg-tertiary/10 text-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">quiz</span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md font-bold text-on-surface">اختبر نفسك</h3>
+<p class="font-caption text-caption text-on-surface-variant">اختبارات قصيرة لتقييم مستواك</p>
+</div>
+</a>
+</div>
+<button class="mt-4 w-full py-2 bg-surface-container border border-primary/20 rounded-lg text-primary font-label-md text-label-md hover:bg-primary/5 transition-colors">
+                            تصفح كل الأدوات
+                        </button>
+</section>
+</div>
+</div>
+</main>
+<!-- SideNavBar (Desktop) -->
+<aside class="hidden md:flex flex-col fixed right-0 top-0 h-full w-[280px] pt-16 z-40 border-l border-primary/10 bg-surface-container overflow-y-auto">
+<div class="p-6 pb-2 border-b border-primary/5">
+<h2 class="font-headline-md text-headline-md text-primary">المواد الدراسية</h2>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1">تحضير البكالوريا 2024</p>
+</div>
+<nav class="flex-1 py-4 flex flex-col gap-1">
+<!-- Navigation Items -->
+<a class="flex flex-row-reverse items-center gap-md text-on-surface-variant px-4 py-3 hover:bg-primary/5 dark:hover:bg-primary-container/20 transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">functions</span>
+<span class="flex-1 text-right">الرياضيات</span>
+</a>
+<a class="flex flex-row-reverse items-center gap-md text-on-surface-variant px-4 py-3 hover:bg-primary/5 dark:hover:bg-primary-container/20 transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">biotech</span>
+<span class="flex-1 text-right">الفيزياء</span>
+</a>
+<a class="flex flex-row-reverse items-center gap-md text-on-surface-variant px-4 py-3 hover:bg-primary/5 dark:hover:bg-primary-container/20 transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">maps</span>
+<span class="flex-1 text-right">علوم الطبيعة</span>
+</a>
+<a class="flex flex-row-reverse items-center gap-md text-on-surface-variant px-4 py-3 hover:bg-primary/5 dark:hover:bg-primary-container/20 transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="flex-1 text-right">اللغة العربية</span>
+</a>
+<a class="flex flex-row-reverse items-center gap-md text-on-surface-variant px-4 py-3 hover:bg-primary/5 dark:hover:bg-primary-container/20 transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="flex-1 text-right">الفلسفة</span>
+</a>
+<a class="flex flex-row-reverse items-center gap-md text-on-surface-variant px-4 py-3 hover:bg-primary/5 dark:hover:bg-primary-container/20 transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">public</span>
+<span class="flex-1 text-right">التاريخ والجغرافيا</span>
+</a>
+<a class="flex flex-row-reverse items-center gap-md text-on-surface-variant px-4 py-3 hover:bg-primary/5 dark:hover:bg-primary-container/20 transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">mosque</span>
+<span class="flex-1 text-right">العلوم الإسلامية</span>
+</a>
+<a class="flex flex-row-reverse items-center gap-md text-on-surface-variant px-4 py-3 hover:bg-primary/5 dark:hover:bg-primary-container/20 transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">language</span>
+<span class="flex-1 text-right">الإنجليزية</span>
+</a>
+<a class="flex flex-row-reverse items-center gap-md text-on-surface-variant px-4 py-3 hover:bg-primary/5 dark:hover:bg-primary-container/20 transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">translate</span>
+<span class="flex-1 text-right">الفرنسية</span>
+</a>
+</nav>
+</aside>
+</div>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center py-2 px-4 pb-safe bg-surface-bright z-50 rounded-t-xl border-t border-primary/10 shadow-sm">
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim font-bold active:bg-primary/5 active:scale-90 duration-200 p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined icon-filled mb-1">home</span>
+<span class="font-label-md-mobile text-label-md-mobile text-[10px]">الرئيسية</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant active:bg-primary/5 p-2 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">dashboard</span>
+<span class="font-label-md-mobile text-label-md-mobile text-[10px]">لوحة التحكم</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant active:bg-primary/5 p-2 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">construction</span>
+<span class="font-label-md-mobile text-label-md-mobile text-[10px]">الأدوات</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant active:bg-primary/5 p-2 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-label-md-mobile text-label-md-mobile text-[10px]">حسابي</span>
+</a>
+</nav>
+</body></html>
+
+<!-- دليل المواد الدراسية -->

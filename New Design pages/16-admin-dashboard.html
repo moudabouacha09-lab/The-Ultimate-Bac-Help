@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>لوحة تحكم المشرف</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#fbf9f5",
+                        "inverse-primary": "#94d3c1",
+                        "surface-variant": "#e4e2de",
+                        "primary": "#00342b",
+                        "primary-fixed-dim": "#94d3c1",
+                        "surface-container": "#efeeea",
+                        "on-primary-container": "#7ebdac",
+                        "on-secondary-fixed": "#360f00",
+                        "secondary-fixed-dim": "#ffb596",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#29695b",
+                        "on-tertiary-fixed": "#241a00",
+                        "secondary-fixed": "#ffdbcd",
+                        "inverse-surface": "#30312e",
+                        "secondary": "#a14009",
+                        "on-tertiary-fixed-variant": "#574500",
+                        "on-tertiary-container": "#4f3e00",
+                        "on-surface": "#1b1c1a",
+                        "inverse-on-surface": "#f2f0ed",
+                        "on-secondary-fixed-variant": "#7d2d00",
+                        "on-primary-fixed-variant": "#065043",
+                        "error": "#ba1a1a",
+                        "primary-container": "#004d40",
+                        "secondary-container": "#fd844c",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#afefdd",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#00201a",
+                        "outline": "#707975",
+                        "background": "#fbf9f5",
+                        "surface-dim": "#dbdad6",
+                        "on-surface-variant": "#3f4945",
+                        "surface": "#fbf9f5",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#6a2500",
+                        "outline-variant": "#bfc9c4",
+                        "tertiary": "#735c00",
+                        "surface-container-highest": "#e4e2de",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#eae8e4",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#e9c349",
+                        "on-background": "#1b1c1a",
+                        "tertiary-container": "#cca730",
+                        "surface-container-low": "#f5f3ef",
+                        "tertiary-fixed": "#ffe088",
+                        // Neutral overrides for Admin Dashboard
+                        "admin-surface": "#f3f4f6",
+                        "admin-surface-variant": "#e5e7eb",
+                        "admin-primary": "#1f2937",
+                        "admin-secondary": "#4b5563",
+                        "admin-accent": "#2563eb",
+                        "admin-border": "#d1d5db"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "gutter": "20px",
+                        "base": "4px",
+                        "xl": "48px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "sidebar-width": "280px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["\"Source Serif 4\""],
+                        "body-md": ["IBM Plex Sans Arabic"],
+                        "caption": ["IBM Plex Sans Arabic"],
+                        "display-lg": ["\"Source Serif 4\""],
+                        "label-md": ["IBM Plex Sans Arabic"],
+                        "headline-md": ["\"Source Serif 4\""],
+                        "headline-lg": ["\"Source Serif 4\""],
+                        "body-lg": ["IBM Plex Sans Arabic"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1;
+        }
+        /* Custom Neutral Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f3f4f6;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;
+        }
+    </style>
+</head>
+<body class="bg-admin-surface text-admin-primary font-body-md min-h-screen flex flex-col md:flex-row">
+<!-- TopNavBar (Mobile Only) -->
+<header class="md:hidden flex flex-row-reverse justify-between items-center w-full px-gutter h-16 z-50 bg-white border-b border-admin-border shadow-sm">
+<div class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-admin-primary">الإدارة</div>
+<button class="p-2 text-admin-secondary hover:text-admin-primary" id="mobile-menu-btn">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<!-- SideNavBar (Desktop & Mobile Drawer) -->
+<nav class="hidden md:flex flex-col fixed md:relative right-0 top-0 h-full w-sidebar-width bg-white border-l border-admin-border z-40 shadow-sm transition-transform duration-300 transform translate-x-full md:translate-x-0" id="sidebar">
+<div class="p-6 border-b border-admin-border hidden md:block">
+<h1 class="font-headline-md text-headline-md font-bold text-admin-primary">لوحة التحكم</h1>
+<p class="font-caption text-caption text-admin-secondary mt-1">نظام الإدارة المركزية</p>
+</div>
+<div class="flex-1 overflow-y-auto py-4">
+<ul class="space-y-2 px-3">
+<li>
+<a class="flex flex-row-reverse items-center gap-md bg-admin-surface text-admin-accent border-r-4 border-admin-accent px-4 py-3 rounded-l-lg transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">التحليلات</span>
+</a>
+</li>
+<li>
+<a class="flex flex-row-reverse items-center gap-md text-admin-secondary hover:bg-admin-surface px-4 py-3 border-r-4 border-transparent hover:border-admin-secondary rounded-l-lg transition-colors" href="#">
+<span class="material-symbols-outlined">pending_actions</span>
+<span class="font-label-md text-label-md">الطلبات المعلقة</span>
+</a>
+</li>
+<li>
+<a class="flex flex-row-reverse items-center gap-md text-admin-secondary hover:bg-admin-surface px-4 py-3 border-r-4 border-transparent hover:border-admin-secondary rounded-l-lg transition-colors" href="#">
+<span class="material-symbols-outlined">gavel</span>
+<span class="font-label-md text-label-md">إشراف المحتوى</span>
+</a>
+</li>
+<li>
+<a class="flex flex-row-reverse items-center gap-md text-admin-secondary hover:bg-admin-surface px-4 py-3 border-r-4 border-transparent hover:border-admin-secondary rounded-l-lg transition-colors" href="#">
+<span class="material-symbols-outlined">people</span>
+<span class="font-label-md text-label-md">المستخدمين</span>
+</a>
+</li>
+<li>
+<a class="flex flex-row-reverse items-center gap-md text-admin-secondary hover:bg-admin-surface px-4 py-3 border-r-4 border-transparent hover:border-admin-secondary rounded-l-lg transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">الإعدادات</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="p-4 border-t border-admin-border">
+<div class="flex items-center gap-3 rtl:flex-row-reverse">
+<img class="w-10 h-10 rounded-full object-cover border border-admin-border" data-alt="A small, professional headshot of an administrator in a neutral studio setting. Crisp lighting, clean background, conveying trust and authority. Corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuApyF4pQX5TsY-nxrSPhzB_Bt0nm3mQJnTXo0WkPhLUob21sfiWBNHRvBHlaQhzd-xl1XHQcnA4Rsr9kQuk8CFUPwXD4zzBXz7FFfH5CBvz-qgl8h7Q_fum2DX2lM2QmJ54jCcRKWPTIkc05QVpVbW-zmVRoQOIRXXPobLUyUnBVxMGm_G5WVfqbNhanKN-wR3M8cUEx-dwAoYdaukiAmwO47QVrY0eS86VDpvZ8-gPwrEGW0fYR7M"/>
+<div class="text-right">
+<p class="font-label-md text-label-md font-bold text-admin-primary">المشرف الرئيسي</p>
+<p class="font-caption text-caption text-admin-secondary">admin@system.com</p>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 p-gutter md:p-lg overflow-y-auto">
+<!-- Header -->
+<div class="mb-lg">
+<h2 class="font-headline-lg text-headline-lg font-bold text-admin-primary">نظرة عامة على التحليلات</h2>
+<p class="font-body-md text-body-md text-admin-secondary mt-2">ملخص أداء النظام والنشاط الأخير.</p>
+</div>
+<!-- KPI Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md mb-lg">
+<div class="bg-white p-6 rounded-xl border border-admin-border shadow-sm flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-blue-50 text-admin-accent rounded-lg">
+<span class="material-symbols-outlined">group</span>
+</div>
+<span class="font-caption text-caption text-green-600 flex items-center bg-green-50 px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +12%
+                    </span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-admin-secondary">إجمالي المستخدمين</p>
+<h3 class="font-headline-md text-headline-md font-bold text-admin-primary mt-1">24,592</h3>
+</div>
+</div>
+<div class="bg-white p-6 rounded-xl border border-admin-border shadow-sm flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-orange-50 text-orange-600 rounded-lg">
+<span class="material-symbols-outlined">post_add</span>
+</div>
+<span class="font-caption text-caption text-green-600 flex items-center bg-green-50 px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +5.2%
+                    </span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-admin-secondary">المحتوى الجديد (أسبوعياً)</p>
+<h3 class="font-headline-md text-headline-md font-bold text-admin-primary mt-1">1,204</h3>
+</div>
+</div>
+<div class="bg-white p-6 rounded-xl border border-admin-border shadow-sm flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-red-50 text-red-600 rounded-lg">
+<span class="material-symbols-outlined">report</span>
+</div>
+<span class="font-caption text-caption text-red-600 flex items-center bg-red-50 px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +2.1%
+                    </span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-admin-secondary">البلاغات المعلقة</p>
+<h3 class="font-headline-md text-headline-md font-bold text-admin-primary mt-1">84</h3>
+</div>
+</div>
+<div class="bg-white p-6 rounded-xl border border-admin-border shadow-sm flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-green-50 text-green-600 rounded-lg">
+<span class="material-symbols-outlined">verified</span>
+</div>
+<span class="font-caption text-caption text-admin-secondary flex items-center bg-gray-50 px-2 py-1 rounded-full">
+                        مستقر
+                    </span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-admin-secondary">حالة النظام</p>
+<h3 class="font-headline-md text-headline-md font-bold text-green-600 mt-1">ممتاز</h3>
+</div>
+</div>
+</div>
+<!-- Main Chart Area & Activity Log (Asymmetric Layout) -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-md">
+<!-- Chart Container -->
+<div class="lg:col-span-2 bg-white p-6 rounded-xl border border-admin-border shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-headline-md font-bold text-admin-primary">نشاط النظام (آخر 30 يوم)</h3>
+<select class="form-select border-admin-border rounded-lg text-admin-secondary text-sm focus:ring-admin-accent focus:border-admin-accent">
+<option>كل النشاطات</option>
+<option>تسجيلات الدخول</option>
+<option>رفع المحتوى</option>
+</select>
+</div>
+<!-- Abstract Representation of a Chart using CSS patterns -->
+<div class="w-full h-64 rounded-lg bg-admin-surface border border-admin-border relative overflow-hidden flex items-end px-4 gap-2">
+<div class="w-1/12 bg-admin-accent/20 rounded-t-sm h-[30%]"></div>
+<div class="w-1/12 bg-admin-accent/40 rounded-t-sm h-[50%]"></div>
+<div class="w-1/12 bg-admin-accent/30 rounded-t-sm h-[40%]"></div>
+<div class="w-1/12 bg-admin-accent/60 rounded-t-sm h-[70%]"></div>
+<div class="w-1/12 bg-admin-accent/50 rounded-t-sm h-[60%]"></div>
+<div class="w-1/12 bg-admin-accent/80 rounded-t-sm h-[90%]"></div>
+<div class="w-1/12 bg-admin-accent/70 rounded-t-sm h-[80%]"></div>
+<div class="w-1/12 bg-admin-accent/90 rounded-t-sm h-[100%]"></div>
+<div class="w-1/12 bg-admin-accent rounded-t-sm h-[85%]"></div>
+<div class="w-1/12 bg-admin-accent/70 rounded-t-sm h-[75%]"></div>
+<div class="w-1/12 bg-admin-accent/50 rounded-t-sm h-[65%]"></div>
+<div class="w-1/12 bg-admin-accent/30 rounded-t-sm h-[45%]"></div>
+<!-- Grid Lines Overlay -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-20">
+<div class="w-full border-t border-admin-secondary h-1"></div>
+<div class="w-full border-t border-admin-secondary h-1"></div>
+<div class="w-full border-t border-admin-secondary h-1"></div>
+<div class="w-full border-t border-admin-secondary h-1"></div>
+</div>
+</div>
+</div>
+<!-- Recent Activity Log -->
+<div class="bg-white p-6 rounded-xl border border-admin-border shadow-sm flex flex-col h-full">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-headline-md font-bold text-admin-primary">سجل النشاطات</h3>
+<button class="text-admin-accent hover:underline text-sm font-medium">عرض الكل</button>
+</div>
+<div class="flex-1 overflow-y-auto pr-2 -mr-2 space-y-4">
+<div class="flex gap-3">
+<div class="mt-1 p-1.5 bg-blue-50 text-admin-accent rounded-full h-fit">
+<span class="material-symbols-outlined text-[16px]">person_add</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-admin-primary"><span class="font-bold">أحمد محمود</span> سجل حساباً جديداً.</p>
+<span class="font-caption text-caption text-admin-secondary">منذ 10 دقائق</span>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="mt-1 p-1.5 bg-green-50 text-green-600 rounded-full h-fit">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-admin-primary">تم الموافقة على طلب <span class="font-bold">مدرسة النور</span>.</p>
+<span class="font-caption text-caption text-admin-secondary">منذ ساعتين</span>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="mt-1 p-1.5 bg-red-50 text-red-600 rounded-full h-fit">
+<span class="material-symbols-outlined text-[16px]">warning</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-admin-primary">إبلاغ عن محتوى غير لائق في <span class="font-bold">قسم الرياضيات</span>.</p>
+<span class="font-caption text-caption text-admin-secondary">منذ 3 ساعات</span>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="mt-1 p-1.5 bg-orange-50 text-orange-600 rounded-full h-fit">
+<span class="material-symbols-outlined text-[16px]">upload_file</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-admin-primary"><span class="font-bold">فاطمة علي</span> رفعت ملفات جديدة.</p>
+<span class="font-caption text-caption text-admin-secondary">أمس, 14:30</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Overlay for mobile sidebar -->
+<div class="fixed inset-0 bg-black/50 z-30 hidden md:hidden" id="sidebar-overlay"></div>
+<script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+
+        function toggleSidebar() {
+            const isClosed = sidebar.classList.contains('translate-x-full');
+            if (isClosed) {
+                sidebar.classList.remove('translate-x-full');
+                sidebar.classList.add('translate-x-0');
+                overlay.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            } else {
+                sidebar.classList.add('translate-x-full');
+                sidebar.classList.remove('translate-x-0');
+                overlay.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleSidebar);
+        overlay.addEventListener('click', toggleSidebar);
+    </script>
+</body></html>

@@ -1,15 +1,13 @@
+// src/components/layout/app-shell.tsx
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, type ReactNode } from "react";
+import { usePathname } from "next/navigation";
+import { type ReactNode } from "react";
 import { subjects } from "@/lib/subjects";
 import { BottomNav } from "@/components/layout/bottom-nav";
-import { MobileSubjectBar } from "@/components/layout/mobile-subject-bar";
-import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { UserMenu } from "@/components/auth/user-menu";
 import { AuthModal } from "@/components/auth/auth-modal";
-import { Sparkles } from "lucide-react";
-import { FloatingAssistant } from "@/components/assistant/floating-assistant";
 import { SurveyModal } from "@/components/survey/survey-modal";
 
 type AppShellProps = {
@@ -17,108 +15,119 @@ type AppShellProps = {
   activeSubject?: string;
 };
 
+/* Map subject slugs to Material Symbols icon names */
+const subjectIcons: Record<string, string> = {
+  math: "functions",
+  science: "biotech",
+  physics: "maps",
+  arabic: "menu_book",
+  philosophy: "psychology",
+  "history-geography": "public",
+  "islamic-studies": "mosque",
+  english: "language",
+  french: "translate",
+};
+
 export function AppShell({ children, activeSubject }: AppShellProps) {
-  const headerRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
-  useEffect(() => {
-    const el = headerRef.current;
-    if (!el) return;
-
-    const observer = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        const height = entry.borderBoxSize?.[0]?.blockSize ?? entry.contentRect.height;
-        document.documentElement.style.setProperty("--header-height", `${height}px`);
-      }
-    });
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+  const navLinks = [
+    { href: "/", label: "الرئيسية", active: pathname === "/" },
+    { href: "/subject", label: "المواد", active: pathname.startsWith("/subject") },
+    { href: "/tools", label: "الأدوات", active: pathname.startsWith("/tools") },
+    { href: "/progress", label: "تقدمي", active: pathname.startsWith("/progress") },
+  ];
 
   return (
-    <div className="app-shell">
-      <a className="skip-link" href="#main-content">تخطي إلى المحتوى</a>
+    <div className="flex flex-col min-h-screen">
+      <a className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:bg-primary focus:text-on-primary focus:p-3" href="#main-content">
+        تخطي إلى المحتوى
+      </a>
 
       {/* Auth Modal overlay */}
       <AuthModal />
 
-      {/* Desktop transparent header */}
-      <header className="navbar">
-        <Link className="brand" href="/" aria-label="باك الجزائر - الصفحة الرئيسية">
-          <span className="brand-mark">ب</span>
-          <span>
-            <strong>باك الجزائر</strong>
-            <small>رفيقك في التحضير</small>
-          </span>
+      {/* ── Top Navbar ── */}
+      <header className="fixed top-0 w-full border-b border-primary/10 bg-surface-bright flex flex-row-reverse justify-between items-center px-gutter h-16 z-50">
+        {/* Brand (right side in RTL) */}
+        <Link href="/" className="flex items-center gap-md font-headline text-headline-lg font-bold text-primary" aria-label="منصة البكالوريا - الصفحة الرئيسية">
+          <span>منصة البكالوريا</span>
         </Link>
 
-        <nav className="top-nav" aria-label="التنقل الرئيسي">
-          <Link href="/progress">تقدمي في الدروس</Link>
-          <Link href="/tools">أدوات المراجعة</Link>
-          <Link href="/calculator">حاسبة المعدل</Link>
+        {/* Center Nav Links — desktop only */}
+        <nav className="hidden md:flex gap-lg" aria-label="التنقل الرئيسي">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={
+                link.active
+                  ? "text-primary font-bold border-b-2 border-primary pb-1 font-body text-label-md"
+                  : "text-on-surface-variant hover:text-primary transition-colors font-body text-label-md"
+              }
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
 
-        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-          <UserMenu />
-          <ThemeToggle />
+        {/* Left actions */}
+        <div className="flex items-center gap-md">
+          {/* Desktop login button area */}
+          <div className="hidden md:block">
+            <UserMenu />
+          </div>
+          {/* Mobile profile icon */}
+          <div className="md:hidden">
+            <UserMenu />
+          </div>
         </div>
       </header>
 
-      {/* Mobile-only smart header with horizontal subjects navigation bar */}
-      <div className="mobile-header-wrapper" ref={headerRef}>
-        <div className="mobile-brand-bar">
-          <Link className="brand" href="/">
-            <span className="brand-mark">ب</span>
-            <strong>باك الجزائر</strong>
-          </Link>
-          <div className="mobile-brand-actions" style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-            <UserMenu />
-            <ThemeToggle />
+      {/* ── Layout: Main + Sidebar ── */}
+      <div className="flex w-full pt-16">
+        {/* Main content */}
+        <main className="flex-1 pb-20 md:pb-0 md:pl-0 md:pr-sidebar-width w-full" id="main-content">
+          {children}
+        </main>
+
+        {/* ── Desktop Sidebar ── */}
+        <aside className="hidden md:flex flex-col fixed right-0 top-0 h-full w-[280px] pt-16 z-40 border-l border-primary/10 bg-surface-container overflow-y-auto">
+          {/* Sidebar header */}
+          <div className="p-6 pb-2 border-b border-primary/5">
+            <h2 className="font-headline text-headline-md font-semibold text-primary">المواد الدراسية</h2>
+            <p className="text-caption text-on-surface-variant mt-1">تحضير البكالوريا 2027</p>
           </div>
-        </div>
-        <MobileSubjectBar activeSubject={activeSubject} />
+
+          {/* Subject nav links */}
+          <nav className="flex-1 py-4 flex flex-col gap-1">
+            {subjects.map((subject) => {
+              const isActive = subject.slug === activeSubject;
+              const iconName = subjectIcons[subject.slug] || "school";
+              return (
+                <Link
+                  key={subject.slug}
+                  href={`/subject/${subject.slug}`}
+                  className={`flex flex-row-reverse items-center gap-md px-4 py-3 transition-all font-body text-label-md ${
+                    isActive
+                      ? "bg-primary/10 text-primary font-bold border-r-2 border-primary"
+                      : "text-on-surface-variant hover:bg-primary/5"
+                  }`}
+                  aria-current={isActive ? "page" : undefined}
+                >
+                  <span className="material-symbols-outlined text-[20px]">{iconName}</span>
+                  <span className="flex-1 text-right">{subject.name}</span>
+                </Link>
+              );
+            })}
+          </nav>
+        </aside>
       </div>
 
-      {/* Desktop sidebar */}
-      <aside className="sidebar" aria-label="المواد الدراسية">
-        <div className="sidebar-heading">
-          <span>المواد الدراسية</span>
-          <span className="badge">BAC</span>
-        </div>
-        <nav className="subject-list">
-          {subjects.map((subject) => {
-            const isActive = subject.slug === activeSubject;
-            return (
-              <Link
-                className={`subject-link ${isActive ? "is-active" : ""}`}
-                href={`/subject/${subject.slug}`}
-                key={subject.slug}
-                aria-current={isActive ? "page" : undefined}
-              >
-                <span className={`subject-icon subject-icon-${subject.color}`} aria-hidden="true">
-                  {subject.icon}
-                </span>
-                <span>{subject.name}</span>
-              </Link>
-            );
-          })}
-        </nav>
-        <div className="sidebar-card">
-          <span aria-hidden="true" style={{ display: 'grid', placeItems: 'center' }}><Sparkles size={24} /></span>
-          <p>ابدأ بمراجعة قصيرة اليوم.</p>
-          <Link href="/tools">ابدأ المراجعة</Link>
-        </div>
-      </aside>
-
-      <main className="main-content" id="main-content">{children}</main>
-
-      {/* Enhanced mobile bottom nav */}
+      {/* ── Mobile Bottom Nav ── */}
       <BottomNav />
 
-      {/* 🤖 Floating AI Assistant (Disabled temporarily until further notice) */}
-      {/* <FloatingAssistant /> */}
-
-      {/* 🚀 Survey Modal for first-time visitors */}
+      {/* Survey Modal */}
       <SurveyModal />
     </div>
   );

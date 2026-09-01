@@ -1,155 +1,23 @@
 // src/app/page.tsx
 import Link from "next/link";
 import { AppShell } from "@/components/layout/app-shell";
-import { 
-  GraduationCap, 
-  Calculator, 
-  Target, 
-  Layers, 
-  Sparkles, 
-  Tv, 
-  BookOpen, 
-  Smartphone,
-  ArrowLeft,
-  BookMarked,
-  CheckCircle2
-} from "lucide-react";
-import { FadeInSection } from "@/components/effects/fade-in-section";
 import { CountdownCard } from "@/components/news/countdown-card";
 import { subjects } from "@/lib/subjects";
 import bacContent from "@/data/bac-content";
+import { DeveloperMessage } from "@/components/auth/developer-message";
 
-const subjectMeta: Record<string, { desc: string; accent: string; bg: string; color: string }> = {
-  math: { 
-    desc: "ملخصات، احتمالات، أعداد مركبة، وتكاملات", 
-    accent: "#3b82f6", 
-    bg: "rgba(59, 130, 246, 0.12)", 
-    color: "#60a5fa" 
-  },
-  science: { 
-    desc: "الوحدات الـ 8 كاملة مع تجميعة الاختبارات", 
-    accent: "#10b981", 
-    bg: "rgba(16, 185, 129, 0.12)", 
-    color: "#34d399" 
-  },
-  physics: { 
-    desc: "ملخصات الوحدات والأسئلة النظرية الشاملة", 
-    accent: "#06b6d4", 
-    bg: "rgba(6, 182, 212, 0.12)", 
-    color: "#22d3ee" 
-  },
-  "history-geography": { 
-    desc: "دروس، مصطلحات، تواريخ، وخرائط تفاعلية", 
-    accent: "#f59e0b", 
-    bg: "rgba(245, 158, 11, 0.12)", 
-    color: "#fbbf24" 
-  },
-  philosophy: { 
-    desc: "مقالات نموذجية مفصلة، ملخصات، وتسجيلات صوتية", 
-    accent: "#8b5cf6", 
-    bg: "rgba(139, 92, 246, 0.12)", 
-    color: "#a78bfa" 
-  },
-  arabic: { 
-    desc: "ملخصات البناء اللغوي ومؤشرات الأنماط ومخططات", 
-    accent: "#22c55e", 
-    bg: "rgba(34, 197, 94, 0.12)", 
-    color: "#4ade80" 
-  },
-  "islamic-studies": { 
-    desc: "ملخصات الشريعة، الفروقات، والأسئلة غير المباشرة", 
-    accent: "#10b981", 
-    bg: "rgba(16, 185, 129, 0.12)", 
-    color: "#34d399" 
-  },
-  french: { 
-    desc: "مواقع تفاعلية، مرشد التعبير الكتابي والمواضيع", 
-    accent: "#3b82f6", 
-    bg: "rgba(59, 130, 246, 0.12)", 
-    color: "#60a5fa" 
-  },
-  english: { 
-    desc: "ملخصات القواعد، مقالات جاهزة، ومراجعة نهائية", 
-    accent: "#6366f1", 
-    bg: "rgba(99, 102, 241, 0.12)", 
-    color: "#818cf8" 
-  },
+/* Map subject slugs to Material Symbols icon names */
+const subjectIcons: Record<string, string> = {
+  math: "functions",
+  science: "biotech",
+  physics: "maps",
+  arabic: "menu_book",
+  philosophy: "psychology",
+  "history-geography": "public",
+  "islamic-studies": "mosque",
+  english: "language",
+  french: "translate",
 };
-
-const smartTools = [
-  {
-    href: "/tools/orientation",
-    icon: <GraduationCap size={24} color="#38bdf8" />,
-    badge: "معدلات 2024-2026",
-    badgeBg: "rgba(56, 189, 248, 0.15)",
-    badgeColor: "#38bdf8",
-    title: "مستشار التوجيه الجامعي 🎓",
-    desc: "احسب معدلك الموزون وتعرف على تخصصات الطب، الهندسة، والمدارس العليا المتاحة لك بدقة."
-  },
-  {
-    href: "/calculator",
-    icon: <Calculator size={24} color="#34d399" />,
-    badge: "تعديل المعاملات 2026",
-    badgeBg: "rgba(52, 211, 153, 0.15)",
-    badgeColor: "#34d399",
-    title: "حاسبة معدل البكالوريا ⚖️",
-    desc: "محاكاة رسمية وسريعة لحساب معدل البكالوريا لجميع الشعب العلمية والأدبية مع حفظ النقاط."
-  },
-  {
-    href: "/tools/prerequisites/quiz",
-    icon: <Target size={24} color="#a78bfa" />,
-    badge: "تشخيص وتمرين شامل",
-    badgeBg: "rgba(167, 139, 250, 0.15)",
-    badgeColor: "#a78bfa",
-    title: "بنك المكتسبات القبلية 🎯",
-    desc: "اختبر أساسياتك في الرياضيات، الفيزياء، والعلوم مع تصحيح فوري وحلول نموذجية دقيقة بـ KaTeX."
-  },
-  {
-    href: "/progress",
-    icon: <Layers size={24} color="#fbbf24" />,
-    badge: "تتبع الإنجاز",
-    badgeBg: "rgba(251, 191, 36, 0.15)",
-    badgeColor: "#fbbf24",
-    title: "متابع التقدم والمراجعة 📊",
-    desc: "سجل الدروس المنجزة في كل مادة وتابع نسبة جاهزيتك لامتحان شهادة البكالوريا خطوة بخطوة."
-  },
-  {
-    href: "/tools/notebooks",
-    icon: <Sparkles size={24} color="#818cf8" />,
-    badge: "ذكاء اصطناعي",
-    badgeBg: "rgba(129, 140, 248, 0.15)",
-    badgeColor: "#818cf8",
-    title: "مذكرات NotebookLM 🧠",
-    desc: "مذكرات دراسية تفاعلية مجهزة بالذكاء الاصطناعي للمراجعة السريعة وتلخيص الأفكار."
-  },
-  {
-    href: "/tools/teachers",
-    icon: <Tv size={24} color="#f87171" />,
-    badge: "قنوات موثوقة",
-    badgeBg: "rgba(248, 113, 113, 0.15)",
-    badgeColor: "#f87171",
-    title: "دليل أفضل الأساتذة 👨‍🏫",
-    desc: "قائمة منتقاة لأفضل قنوات اليوتيوب التعليمية الجزائرية المصنفة حسب المواد والشعب."
-  },
-  {
-    href: "/tools/books",
-    icon: <BookOpen size={24} color="#fb923c" />,
-    badge: "مراجع خارجية",
-    badgeBg: "rgba(251, 146, 60, 0.15)",
-    badgeColor: "#fb923c",
-    title: "دليل الكتب والمراجع 📚",
-    desc: "استعرض أفضل سلاسل وكتب المراجعة الخارجية المعتمدة للتحضير المكثف للبكالوريا."
-  },
-  {
-    href: "/tools/apps",
-    icon: <Smartphone size={24} color="#2dd4bf" />,
-    badge: "تطبيقات مساعدة",
-    badgeBg: "rgba(45, 212, 191, 0.15)",
-    badgeColor: "#2dd4bf",
-    title: "تطبيقات ومواقع للدراسة 📱",
-    desc: "أفضل التطبيقات الهادفة لتنظيم الوقت، حل المسائل، والتدريب على الامتحانات."
-  }
-];
 
 export default function HomePage() {
   // Compute total file count across all subjects
@@ -167,196 +35,201 @@ export default function HomePage() {
 
   return (
     <AppShell>
-      {/* Hero Header */}
-      <section className="home-intro" style={{ marginBottom: "1.25rem" }}>
-        <div className="home-hero-badge">
-          <span>✨ المنصة الأكاديمية الأولى</span>
-          <span style={{ opacity: 0.6 }}>|</span>
-          <span>كل ما يحتاجه طالب البكالوريا 2026/2027 🇩🇿</span>
-        </div>
-        <h1>The Ultimate BAC Help</h1>
-        <p style={{ color: "var(--text-secondary)", fontSize: "1.05rem", marginTop: "0.5rem", maxWidth: "720px" }}>
-          بوابتك المرجعية الشاملة للتحضير للبكالوريا: ملفات منتقاة، حلول نموذجية، حاسبة رسمية، ومستشار التوجيه الجامعي في مكان واحد.
-        </p>
-      </section>
+      {/* ── Hero Section ── */}
+      <section className="relative bg-surface-container-low px-gutter py-12 md:py-xl border-b border-primary/5 overflow-hidden">
+        {/* Decorative background blur blobs */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl translate-y-1/4 -translate-x-1/4 pointer-events-none" />
 
-      {/* Live Metrics Grid */}
-      <div className="home-stats-grid">
-        <div className="home-stat-card">
-          <div className="home-stat-number">+{totalFiles}</div>
-          <div className="home-stat-label">ملف دراسي وملخص</div>
-        </div>
-        <div className="home-stat-card">
-          <div className="home-stat-number">{subjects.length}</div>
-          <div className="home-stat-label">مواد علمية وأدبية</div>
-        </div>
-        <div className="home-stat-card">
-          <div className="home-stat-number">{smartTools.length}</div>
-          <div className="home-stat-label">أدوات ذكية تفاعلية</div>
-        </div>
-        <div className="home-stat-card">
-          <div className="home-stat-number">100%</div>
-          <div className="home-stat-label">مجاني وبدون إعلانات</div>
-        </div>
-      </div>
-
-      {/* Countdown Card */}
-      <CountdownCard />
-
-      {/* Subjects Fast Access Section */}
-      <section style={{ marginTop: "2.5rem" }}>
-        <div className="home-section-header">
-          <div>
-            <h2>
-              <BookMarked size={24} color="var(--blue-400)" />
-              <span>المواد الدراسية والمكتبة الرقمية</span>
-            </h2>
-            <p>اختر المادة لتصفح الملخصات، التمارين الشاملة، والدروس المرقمة</p>
-          </div>
-          <span style={{ fontSize: "0.82rem", color: "var(--text-muted)", fontWeight: 700 }}>
-            {subjects.length} مواد متاحة
-          </span>
-        </div>
-
-        <div className="home-subjects-grid">
-          {subjects.map((subj, idx) => {
-            const meta = subjectMeta[subj.slug] || {
-              desc: "ملفات ودروس المادة",
-              accent: "#3b82f6",
-              bg: "rgba(59, 130, 246, 0.12)",
-              color: "#60a5fa"
-            };
-            const fileCount = subjectFileCounts[subj.slug] || 0;
-
-            return (
-              <FadeInSection key={subj.slug} delay={idx * 40}>
-                <Link
-                  href={`/subject/${subj.slug}`}
-                  className="home-subject-card"
-                  style={{ "--card-accent": meta.accent } as React.CSSProperties}
-                >
-                  <div
-                    className="home-subject-icon"
-                    style={{
-                      "--icon-bg": meta.bg,
-                      "--icon-color": meta.color
-                    } as React.CSSProperties}
-                  >
-                    {subj.icon}
-                  </div>
-                  <div className="home-subject-info">
-                    <h3 className="home-subject-title">{subj.name}</h3>
-                    <div className="home-subject-meta">
-                      <span>{fileCount} ملفات دراسية</span>
-                      <span style={{ margin: "0 0.35rem", opacity: 0.5 }}>•</span>
-                      <span style={{ opacity: 0.85 }}>{meta.desc.split("،")[0]}</span>
-                    </div>
-                  </div>
-                  <div className="home-subject-arrow" aria-hidden="true">
-                    <ArrowLeft size={18} />
-                  </div>
-                </Link>
-              </FadeInSection>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Smart Tools Hub Section */}
-      <section style={{ marginTop: "3rem" }}>
-        <div className="home-section-header">
-          <div>
-            <h2>
-              <Sparkles size={24} color="var(--accent-cyan)" />
-              <span>الأدوات الذكية وخدمات المترشح</span>
-            </h2>
-            <p>أدوات تقنية متقدمة لمساعدتك في التوجيه، حساب المعدل، وتقييم مستواك</p>
-          </div>
-          <Link href="/tools" style={{ fontSize: "0.86rem", fontWeight: 800, color: "var(--blue-400)", textDecoration: "none" }}>
-            عرض جميع الأدوات ←
-          </Link>
-        </div>
-
-        <div className="home-tools-grid">
-          {smartTools.map((tool, idx) => (
-            <FadeInSection key={tool.href} delay={idx * 50}>
-              <Link href={tool.href} className="home-tool-card">
-                <div>
-                  <div className="home-tool-top">
-                    <div className="home-tool-icon-wrapper">
-                      {tool.icon}
-                    </div>
-                    <div className="home-tool-info">
-                      <span
-                        className="home-tool-badge"
-                        style={{ backgroundColor: tool.badgeBg, color: tool.badgeColor }}
-                      >
-                        {tool.badge}
-                      </span>
-                      <h3 className="home-tool-title">{tool.title}</h3>
-                    </div>
-                  </div>
-                  <p className="home-tool-desc">{tool.desc}</p>
-                </div>
-
-                <div className="home-tool-action">
-                  <span>فتح الأداة</span>
-                  <ArrowLeft size={16} />
-                </div>
-              </Link>
-            </FadeInSection>
-          ))}
-        </div>
-      </section>
-
-      {/* Academic Success Roadmap Banner */}
-      <FadeInSection delay={100}>
-        <div className="home-roadmap-card">
-          <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
-            <CheckCircle2 size={24} color="#60a5fa" />
-            <h3 style={{ fontSize: "1.2rem", fontWeight: 900, color: "var(--text-primary)", margin: 0 }}>
-              خارطة طريق التفوق في شهادة البكالوريا 🚀
-            </h3>
-          </div>
-          <p style={{ color: "var(--text-secondary)", fontSize: "0.9rem", marginTop: "0.4rem", marginInlineStart: "2rem" }}>
-            اتبع هذه المحطات الأربع المنظمة لضمان أعلى جاهزية معرفية ومنهجية يوم الامتحان:
+        <div className="max-w-4xl mx-auto text-center relative z-10 flex flex-col items-center">
+          <h1 className="font-headline text-display-lg text-primary mb-4 md:mb-6">
+            استعد للبكالوريا بثقة
+          </h1>
+          <p className="font-body text-body-lg text-on-surface-variant mb-8 max-w-2xl mx-auto">
+            منصتك الشاملة للمراجعة، امتحانات سابقة، وأدوات تنظيم الوقت لضمان نجاحك.
           </p>
 
-          <div className="home-roadmap-grid">
-            <div className="home-roadmap-step">
-              <div className="home-roadmap-step-num">1</div>
-              <div>
-                <div className="home-roadmap-step-title">تشخيص المكتسبات</div>
-                <p className="home-roadmap-step-text">اختبر أساسياتك في الرياضيات والفيزياء وسد الثغرات مبكراً.</p>
-              </div>
-            </div>
+          {/* Countdown Timer */}
+          <CountdownCard />
+        </div>
+      </section>
 
-            <div className="home-roadmap-step">
-              <div className="home-roadmap-step-num">2</div>
-              <div>
-                <div className="home-roadmap-step-title">استيعاب الدروس</div>
-                <p className="home-roadmap-step-text">راجع ملخصات المواد وحل تمارين الوحدات أولاً بأول.</p>
-              </div>
-            </div>
+      <DeveloperMessage />
 
-            <div className="home-roadmap-step">
-              <div className="home-roadmap-step-num">3</div>
-              <div>
-                <div className="home-roadmap-step-title">حل البكالوريات</div>
-                <p className="home-roadmap-step-text">تدرّب على مواضيع السنوات السابقة والاختبارات التجريبية.</p>
-              </div>
+      {/* ── Content Sections Wrapper ── */}
+      <div className="max-w-7xl mx-auto px-gutter py-xl flex flex-col gap-xl">
+        {/* ── 1. Stats Row ── */}
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-md">
+          <div className="bg-surface-bright border border-primary/10 rounded-xl p-6 flex items-center gap-4">
+            <div className="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
+              <span className="material-symbols-outlined text-[28px]">group</span>
             </div>
-
-            <div className="home-roadmap-step">
-              <div className="home-roadmap-step-num">4</div>
-              <div>
-                <div className="home-roadmap-step-title">تحديد الهدف</div>
-                <p className="home-roadmap-step-text">احسب معدلك الموزون واستكشف متطلبات التخصص الذي تطمح إليه.</p>
-              </div>
+            <div>
+              <p className="font-headline text-headline-md text-primary font-bold">120,000+</p>
+              <p className="font-body text-label-md text-on-surface-variant">طالب ومترشح مستفيد</p>
             </div>
           </div>
+
+          <div className="bg-surface-bright border border-primary/10 rounded-xl p-6 flex items-center gap-4">
+            <div className="w-12 h-12 rounded-full bg-secondary/10 text-secondary flex items-center justify-center shrink-0">
+              <span className="material-symbols-outlined text-[28px]">library_books</span>
+            </div>
+            <div>
+              <p className="font-headline text-headline-md text-secondary font-bold">+{totalFiles}</p>
+              <p className="font-body text-label-md text-on-surface-variant">ملف دراسي وملخص منتقى</p>
+            </div>
+          </div>
+
+          <div className="bg-surface-bright border border-primary/10 rounded-xl p-6 flex items-center gap-4">
+            <div className="w-12 h-12 rounded-full bg-tertiary/10 text-tertiary flex items-center justify-center shrink-0">
+              <span className="material-symbols-outlined text-[28px]">history_edu</span>
+            </div>
+            <div>
+              <p className="font-headline text-headline-md text-tertiary font-bold">200+</p>
+              <p className="font-body text-label-md text-on-surface-variant">موضوع بكالوريا وحل نموذجي</p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── 2. Subjects Grid ── */}
+        <section>
+          <div className="flex justify-between items-end mb-6">
+            <div>
+              <h2 className="font-headline text-headline-md text-primary mb-1">المواد الدراسية</h2>
+              <p className="font-body text-body-md text-on-surface-variant">اختر المادة للبدء في المراجعة</p>
+            </div>
+            <Link
+              href="/subject"
+              className="hidden md:flex items-center gap-1 font-body text-label-md text-primary hover:underline"
+            >
+              <span>عرض الكل</span>
+              <span className="material-symbols-outlined text-sm">arrow_back</span>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            {subjects.map((subj) => {
+              const iconName = subjectIcons[subj.slug] || "school";
+              const fileCount = subjectFileCounts[subj.slug] || 0;
+
+              return (
+                <Link
+                  key={subj.slug}
+                  href={`/subject/${subj.slug}`}
+                  className="group bg-surface-bright border border-primary/10 rounded-xl p-4 flex flex-col items-center text-center hover:border-primary focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-sm hover:shadow-md"
+                >
+                  <div className="w-14 h-14 rounded-full bg-primary/5 text-primary flex items-center justify-center mb-3 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+                    <span className="material-symbols-outlined text-[28px]">{iconName}</span>
+                  </div>
+                  <span className="font-body text-label-md font-medium text-on-surface group-hover:text-primary transition-colors">
+                    {subj.name}
+                  </span>
+                  <span className="font-body text-caption text-on-surface-variant mt-1">
+                    {fileCount} ملف
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* ── 3. Tools & Roadmap Grid ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Preparation Roadmap */}
+          <section className="lg:col-span-2 bg-surface-container-low border border-primary/10 rounded-xl p-6 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full pointer-events-none" />
+            <h2 className="font-headline text-headline-md text-primary mb-6 relative z-10">
+              خريطة طريق التحضير
+            </h2>
+            <div className="relative z-10 pr-6 border-r-2 border-primary/20 space-y-8">
+              <div className="relative">
+                <div className="absolute w-4 h-4 rounded-full bg-primary border-4 border-surface-container-low -right-[31px] top-1" />
+                <h3 className="font-body text-label-md font-bold text-on-surface mb-1">
+                  الفصل الأول: بناء الأساسيات
+                </h3>
+                <p className="font-body text-body-md text-on-surface-variant">
+                  فهم الدروس الأساسية وحل التمارين البسيطة لترسيخ المفاهيم وسد الثغرات.
+                </p>
+              </div>
+
+              <div className="relative">
+                <div className="absolute w-4 h-4 rounded-full bg-secondary border-4 border-surface-container-low -right-[31px] top-1" />
+                <h3 className="font-body text-label-md font-bold text-on-surface mb-1">
+                  الفصل الثاني: التمرس والتعمق
+                </h3>
+                <p className="font-body text-body-md text-on-surface-variant">
+                  حل مواضيع مركبة والتدرب على منهجية الإجابة النموذجية في المواد الأساسية.
+                </p>
+              </div>
+
+              <div className="relative">
+                <div className="absolute w-4 h-4 rounded-full bg-surface-variant border-2 border-primary/20 -right-[31px] top-1" />
+                <h3 className="font-body text-label-md font-bold text-on-surface-variant mb-1">
+                  الفصل الثالث: المراجعة النهائية
+                </h3>
+                <p className="font-body text-body-md text-on-surface-variant/70">
+                  حل حوليات البكالوريا السابقة والتدرب على إدارة الوقت وإستراتيجية الامتحان.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* Tools Assistant Card */}
+          <section className="bg-surface-bright border border-primary/10 rounded-xl p-6 flex flex-col justify-between">
+            <div>
+              <h2 className="font-headline text-headline-md text-primary mb-4">أدوات مساعدة</h2>
+              <div className="flex flex-col gap-3">
+                <Link
+                  href="/calculator"
+                  className="flex items-center gap-4 p-3 rounded-lg hover:bg-surface-container-low border border-transparent hover:border-primary/10 transition-colors"
+                >
+                  <div className="w-10 h-10 rounded-md bg-secondary/10 text-secondary flex items-center justify-center shrink-0">
+                    <span className="material-symbols-outlined">calculate</span>
+                  </div>
+                  <div>
+                    <h3 className="font-body text-label-md font-bold text-on-surface">حساب المعدل</h3>
+                    <p className="font-body text-caption text-on-surface-variant">احسب معدلك المتوقع بسهولة</p>
+                  </div>
+                </Link>
+
+                <Link
+                  href="/progress"
+                  className="flex items-center gap-4 p-3 rounded-lg hover:bg-surface-container-low border border-transparent hover:border-primary/10 transition-colors"
+                >
+                  <div className="w-10 h-10 rounded-md bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                    <span className="material-symbols-outlined">trending_up</span>
+                  </div>
+                  <div>
+                    <h3 className="font-body text-label-md font-bold text-on-surface">متابع التقدم</h3>
+                    <p className="font-body text-caption text-on-surface-variant">سجل إنجازك في كل مادة</p>
+                  </div>
+                </Link>
+
+                <Link
+                  href="/tools/prerequisites/quiz"
+                  className="flex items-center gap-4 p-3 rounded-lg hover:bg-surface-container-low border border-transparent hover:border-primary/10 transition-colors"
+                >
+                  <div className="w-10 h-10 rounded-md bg-tertiary/10 text-tertiary flex items-center justify-center shrink-0">
+                    <span className="material-symbols-outlined">quiz</span>
+                  </div>
+                  <div>
+                    <h3 className="font-body text-label-md font-bold text-on-surface">اختبر نفسك</h3>
+                    <p className="font-body text-caption text-on-surface-variant">اختبارات قصيرة لتقييم مستواك</p>
+                  </div>
+                </Link>
+              </div>
+            </div>
+
+            <Link
+              href="/tools"
+              className="mt-6 w-full py-2.5 bg-surface-container border border-primary/20 rounded-lg text-primary font-body text-label-md font-semibold text-center hover:bg-primary/5 transition-colors block"
+            >
+              تصفح كل الأدوات
+            </Link>
+          </section>
         </div>
-      </FadeInSection>
+      </div>
     </AppShell>
   );
 }
+

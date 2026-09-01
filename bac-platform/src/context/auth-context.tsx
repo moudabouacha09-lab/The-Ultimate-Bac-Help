@@ -201,7 +201,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           signUpData.user.created_at
         );
         setUser(profile);
-        setIsModalOpen(false);
       }
 
       return { success: true, needsEmailConfirmation };
@@ -290,4 +289,3 @@ export function useAuth() {
   }
   return context;
 }
-
