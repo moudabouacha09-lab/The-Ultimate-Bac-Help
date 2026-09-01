@@ -1,3 +1,4 @@
+// src/app/subject/[id]/subject-view.tsx
 "use client";
 
 import { useState } from "react";
@@ -24,7 +25,7 @@ function FileCard({ file }: { file: FileItem }) {
 
   const getFileUrl = (filePath: string, isDownload: boolean = false) => {
     if (!filePath) return "#";
-    if (filePath.startsWith('http://') || filePath.startsWith('https://')) return filePath;
+    if (filePath.startsWith("http://") || filePath.startsWith("https://")) return filePath;
 
     const cleanPath = filePath.startsWith("/") ? filePath : `/${filePath}`;
     const segments = cleanPath.split("/").map((seg) => encodeURIComponent(seg));
@@ -34,26 +35,41 @@ function FileCard({ file }: { file: FileItem }) {
   };
 
   return (
-    <article className="file-card">
-      {/* Right Side: Content Block */}
-      <div className="card-content">
-        <div className="title-row">
-          <span className="file-badge-icon" aria-hidden="true">{info.icon}</span>
-          <h3 className="file-title" title={file.title}>{file.title}</h3>
+    <article className="group bg-surface-bright border border-primary/10 rounded-xl p-4 md:p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col md:flex-row justify-between md:items-center gap-4">
+      {/* Content Block */}
+      <div className="flex items-center gap-4">
+        <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0 font-bold text-caption">
+          {info.icon}
         </div>
-        <p className="file-type">{info.label}</p>
+        <div>
+          <h3 className="font-body text-label-md font-bold text-on-surface group-hover:text-primary transition-colors">
+            {file.title}
+          </h3>
+          <span className="font-body text-caption text-on-surface-variant">
+            {info.label}
+          </span>
+        </div>
       </div>
 
-      {/* Left Side: Actions Block (Always stays locked on the left) */}
-      <div className="card-actions-wrapper">
+      {/* Actions Block */}
+      <div className="flex items-center gap-2 self-end md:self-center">
         {!isPreview && (
-          <a className="btn btn-download" href={getFileUrl(file.path, true)} download>
-            <Download size={20} className="btn-icon" />
+          <a
+            className="bg-primary text-on-primary font-body text-caption font-semibold px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center gap-1.5 cursor-pointer"
+            href={getFileUrl(file.path, true)}
+            download
+          >
+            <Download size={16} />
             <span>تحميل</span>
           </a>
         )}
-        <a className="btn btn-preview" href={getFileUrl(file.path, false)} target="_blank" rel="noopener noreferrer">
-          <Eye size={20} className="btn-icon" />
+        <a
+          className="bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-body text-caption font-semibold px-4 py-2 rounded-lg transition-colors flex items-center gap-1.5 cursor-pointer"
+          href={getFileUrl(file.path, false)}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Eye size={16} />
           <span>معاينة</span>
         </a>
       </div>
@@ -61,8 +77,7 @@ function FileCard({ file }: { file: FileItem }) {
   );
 }
 
-export default function SubjectView({ subject, content }: { subject: Subject, content: SubjectContent }) {
-  /* Extract unique groups. If no groups, treat as flat. */
+export default function SubjectView({ subject, content }: { subject: Subject; content: SubjectContent }) {
   const groups = [...new Set(content.sections.map((s) => s.group).filter(Boolean))] as string[];
   const hasGroups = groups.length > 0;
 
@@ -73,50 +88,71 @@ export default function SubjectView({ subject, content }: { subject: Subject, co
     : content.sections;
 
   return (
-    <div className="main-content-grid">
-      {/* 1. Target the component wrapper housing your page header text elements */}
-      <div className="subject-page-header-container">
-        <span className="subject-global-tag">مادة دراسية</span>
-        
-        <div className="subject-global-identity-row">
-          <h1 className="subject-global-main-title">{subject.name}</h1>
-          <span className="subject-global-badge">{subject.icon}</span>
-        </div>
-        
-        <p className="subject-global-description">
-          حمّل الملفات، شاهد المواقع التفاعلية، واستعد للبكالوريا.
-        </p>
-      </div>
+    <div className="max-w-7xl mx-auto px-gutter py-xl flex flex-col gap-xl">
+      {/* ── Page Header ── */}
+      <header className="relative overflow-hidden bg-surface-bright border border-primary/10 rounded-xl p-6 md:p-8 shadow-sm">
+        <span className="font-body text-label-md text-secondary bg-secondary/10 px-3 py-1 rounded-full inline-block font-semibold mb-3">
+          ملفات {subject.name} 📚
+        </span>
 
-      {/* 2. Target the filter pill element wrapper row directly underneath */}
+        <div className="flex items-center gap-4 mb-3 relative z-10">
+          <div className="w-12 h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
+            <span className="material-symbols-outlined text-2xl">{subject.icon}</span>
+          </div>
+          <h1 className="font-headline text-display-lg text-primary font-bold">
+            {subject.name}
+          </h1>
+        </div>
+
+        <p className="font-body text-body-lg text-on-surface-variant max-w-2xl relative z-10">
+          حمّل الملخصات، المواضيع التجريبية، والتمارين الشاملة المحلولة لاستباق برنامج البكالوريا.
+        </p>
+
+        {/* Decorative background icon */}
+        <span className="material-symbols-outlined text-primary/5 text-[140px] absolute left-6 top-1/2 -translate-y-1/2 pointer-events-none select-none">
+          {subject.icon}
+        </span>
+      </header>
+
+      {/* ── Filter Segmented Tabs ── */}
       {hasGroups && (
-        <div className="subject-filters-row" aria-label={`أقسام مادة ${subject.name}`}>
-          <div className="segmented-control-track">
-            {groups.map((group) => (
+        <nav className="flex flex-wrap gap-2" aria-label={`أقسام مادة ${subject.name}`}>
+          {groups.map((group) => {
+            const isActive = activeGroup === group;
+            return (
               <button
-                className={`segmented-tab-btn ${activeGroup === group ? "is-active" : ""}`}
                 key={group}
-                onClick={() => setActiveGroup(group)}
                 type="button"
+                onClick={() => setActiveGroup(group)}
+                className={`font-body text-label-md px-4 py-2 rounded-full font-medium cursor-pointer transition-all ${
+                  isActive
+                    ? "bg-primary text-on-primary font-bold shadow-sm"
+                    : "bg-surface-container text-on-surface-variant hover:bg-surface-container-high"
+                }`}
               >
                 {group}
               </button>
-            ))}
-          </div>
-        </div>
+            );
+          })}
+        </nav>
       )}
 
-      {/* Content sections */}
-      <section className="subject-content-container" aria-live="polite">
+      {/* ── Content Sections ── */}
+      <section className="space-y-8" aria-live="polite">
         {visibleSections.map((section) => (
-          <div className="section-block" key={section.title}>
-            <div className="section-grid-header">
-              <span className="file-count">{section.files.length} ملفات</span>
-              <h2 className="unit-title">{section.title}</h2>
+          <div key={section.title} className="space-y-4">
+            <div className="flex items-center justify-between border-b border-primary/10 pb-3">
+              <h2 className="font-headline text-headline-md text-primary font-bold">
+                {section.title}
+              </h2>
+              <span className="font-body text-caption font-semibold text-secondary bg-secondary/10 px-3 py-1 rounded-full">
+                {section.files.length} ملفات
+              </span>
             </div>
-            <div className="file-grid">
+
+            <div className="grid grid-cols-1 gap-3">
               {section.files.map((file, index) => (
-                <FadeInSection key={file.path} delay={index * 80}>
+                <FadeInSection key={file.path} delay={index * 60}>
                   <FileCard file={file} />
                 </FadeInSection>
               ))}
@@ -126,47 +162,45 @@ export default function SubjectView({ subject, content }: { subject: Subject, co
 
         {/* Exam collection (science only) */}
         {content.examCollection && (!hasGroups || activeGroup === groups[groups.length - 1]) && (
-          <div className="section-block">
-            <div className="section-grid-header">
-              <span className="file-count">أرشيف</span>
-              <h2 className="unit-title">{content.examCollection.title}</h2>
+          <div className="space-y-4">
+            <div className="flex items-center justify-between border-b border-primary/10 pb-3">
+              <h2 className="font-headline text-headline-md text-primary font-bold">
+                {content.examCollection.title}
+              </h2>
+              <span className="font-body text-caption font-semibold text-secondary bg-secondary/10 px-3 py-1 rounded-full">
+                أرشيف شامل
+              </span>
             </div>
 
             <FadeInSection delay={0}>
-              <div className="file-card compilation-card">
-                {/* Left Actions Block */}
-                <div className="card-actions-wrapper compilation-actions">
-                  <a 
-                    className="btn btn-download" 
-                    href={content.examCollection.downloadPath.startsWith('http') ? content.examCollection.downloadPath : `https://moudabouacha09-lab.github.io/The-Ultimate-Bac-Help/${content.examCollection.downloadPath.replace('/materials/', '')}`} 
+              <div className="bg-surface-bright border border-primary/10 rounded-xl p-6 shadow-sm flex flex-col md:flex-row justify-between md:items-center gap-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                    <Package size={24} />
+                  </div>
+                  <div>
+                    <h3 className="font-headline text-headline-md text-primary font-bold mb-1">
+                      تحميل جميع الاختبارات التجريبية
+                    </h3>
+                    <p className="font-body text-body-md text-on-surface-variant">
+                      ملف أرشيف واحد يحتوي على اختبارات {content.examCollection.schools.length} ثانوية نموذجية عبر الوطن.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                  <a
+                    className="bg-primary text-on-primary font-body text-label-md font-semibold px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 shadow-sm cursor-pointer"
+                    href={
+                      content.examCollection.downloadPath.startsWith("http")
+                        ? content.examCollection.downloadPath
+                        : `https://moudabouacha09-lab.github.io/The-Ultimate-Bac-Help/${content.examCollection.downloadPath.replace("/materials/", "")}`
+                    }
                     download
                   >
-                    <svg className="btn-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                    </svg>
+                    <Download size={18} />
                     <span>تحميل الأرشيف</span>
                   </a>
-  
-                  <details className="school-list-details">
-                    <summary className="secondary-action-link">
-                      <span>عرض قائمة الثانويات ({content.examCollection.schools.length})</span>
-                      <span className="arrow-indicator">←</span>
-                    </summary>
-                    <ul className="school-list">
-                      {content.examCollection.schools.map((school) => (
-                        <li key={school}>{school}</li>
-                      ))}
-                    </ul>
-                  </details>
-                </div>
-  
-                {/* Right Content Block */}
-                <div className="card-content">
-                  <div className="title-row">
-                    <span className="file-badge-icon" aria-hidden="true">📦</span>
-                    <h3 className="file-title">تحميل كل الاختبارات التجريبية</h3>
-                  </div>
-                  <p className="file-type">ملف أرشيف واحد يحتوي على اختبارات {content.examCollection.schools.length} ثانوية</p>
                 </div>
               </div>
             </FadeInSection>
@@ -176,3 +210,4 @@ export default function SubjectView({ subject, content }: { subject: Subject, co
     </div>
   );
 }
+
