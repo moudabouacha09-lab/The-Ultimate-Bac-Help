@@ -103,7 +103,6 @@ export function AppShell({ children, activeSubject }: AppShellProps) {
           <nav className="flex-1 py-4 flex flex-col gap-1">
             {subjects.map((subject) => {
               const isActive = subject.slug === activeSubject;
-              const iconName = subjectIcons[subject.slug] || "school";
               return (
                 <Link
                   key={subject.slug}
@@ -115,7 +114,7 @@ export function AppShell({ children, activeSubject }: AppShellProps) {
                   }`}
                   aria-current={isActive ? "page" : undefined}
                 >
-                  <span className="material-symbols-outlined text-[20px]">{iconName}</span>
+                  <span className="material-symbols-outlined text-[20px]">{subject.icon}</span>
                   <span className="flex-1 text-right">{subject.name}</span>
                 </Link>
               );

@@ -36,7 +36,7 @@ export function MobileSubjectBar({ activeSubject }: MobileSubjectBarProps) {
               className={`mobile-subject-pill ${isActive ? "is-active" : ""}`}
               aria-current={isActive ? "page" : undefined}
             >
-              <span className={`subject-icon subject-icon-${subject.color}`} aria-hidden="true">
+              <span className="material-symbols-outlined text-base" aria-hidden="true">
                 {subject.icon}
               </span>
               <span className="mobile-subject-label">{subject.name}</span>

@@ -590,7 +590,7 @@ $$x_0 = \\sqrt{-2+\\sqrt{5}} \\quad \\text{أو} \\quad x_0 = -\\sqrt{-2+\\sqrt{
   },
   physics: {
     subjectSlug: "physics",
-    subjectName: "العلوم الفيزيائية",
+    subjectName: "الفيزياء",
     icon: "⚛",
     color: "blue",
     questions: [

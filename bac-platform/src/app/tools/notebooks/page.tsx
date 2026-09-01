@@ -14,7 +14,7 @@ interface NotebookInfo {
 const notebooks: NotebookInfo[] = [
   { subject: "الرياضيات", icon: "∑", url: "https://notebooklm.google.com/notebook/3b69473d-e349-4858-aee5-ca7cc137251f", color: "blue" },
   { subject: "العلوم الطبيعية", icon: <Dna size={20} />, url: "https://notebooklm.google.com/notebook/008762bf-ccb0-48fe-b01b-ce7f5ffd0595", color: "green" },
-  { subject: "العلوم الفيزيائية", icon: <Zap size={20} />, url: "https://notebooklm.google.com/notebook/280ee977-083d-40b1-8453-e60e8ad6cf2a", color: "cyan" },
+  { subject: "الفيزياء", icon: <Zap size={20} />, url: "https://notebooklm.google.com/notebook/280ee977-083d-40b1-8453-e60e8ad6cf2a", color: "cyan" },
   { subject: "الفلسفة", icon: <Brain size={20} />, url: "https://notebooklm.google.com/notebook/091214d1-e9b6-4a28-8728-fc7c3d50894f", color: "purple" },
   { subject: "التاريخ", icon: <Scroll size={20} />, url: "https://notebooklm.google.com/notebook/b7585059-485e-4490-b19a-4942df3e4712", color: "yellow" },
   { subject: "الجغرافيا", icon: <Globe size={20} />, url: "https://notebooklm.google.com/notebook/6ddbb130-d46f-4ff2-a7a1-7063ab36a0c3", color: "orange" },

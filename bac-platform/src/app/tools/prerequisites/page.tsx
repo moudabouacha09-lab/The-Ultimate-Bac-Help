@@ -162,7 +162,7 @@ export default function PrerequisitesPage() {
           <section className="prerequisite-section">
             <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--cyan-600)' }}>
               <span className="subject-icon subject-icon-cyan" style={{ width: '2rem', height: '2rem', fontSize: '1rem', display: 'grid', placeItems: 'center' }}><Zap size={20} /></span>
-              العلوم الفيزيائية
+              الفيزياء
             </h2>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', marginBottom: '1rem' }}>
               <p style={{ color: 'var(--text-muted)', lineHeight: '1.6', flex: '1 1 300px' }}>

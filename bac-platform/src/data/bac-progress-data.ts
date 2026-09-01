@@ -1,3 +1,5 @@
+import { subjects, Subject } from "@/lib/subjects";
+
 export type LessonStatus = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 
 export type Lesson = {
@@ -15,13 +17,20 @@ export type ProgressSubject = {
   lessons: Lesson[];
 };
 
+function getSubjectMeta(slug: string, coefficient: number) {
+  const subj = subjects.find((s) => s.slug === slug);
+  return {
+    id: slug,
+    name: subj ? subj.name : slug,
+    icon: subj ? subj.iconName : "menu_book",
+    coefficient,
+    color: (subj ? subj.color : "blue") as "blue" | "green" | "violet" | "orange",
+  };
+}
+
 export const SCIENTIFIC_STREAM_PROGRESS_DATA: ProgressSubject[] = [
   {
-    id: "science",
-    name: "العلوم الطبيعية",
-    icon: "🧬",
-    coefficient: 6,
-    color: "green",
+    ...getSubjectMeta("science", 6),
     lessons: [
       // المجال الأول
       { id: "sci-1", title: "الوحدة 1: آليات تركيب البروتين", category: "المجال الأول: التخصص الوظيفي للبروتين" },
@@ -39,11 +48,7 @@ export const SCIENTIFIC_STREAM_PROGRESS_DATA: ProgressSubject[] = [
     ],
   },
   {
-    id: "physics",
-    name: "العلوم الفيزيائية",
-    icon: "⚛",
-    coefficient: 5,
-    color: "blue",
+    ...getSubjectMeta("physics", 5),
     lessons: [
       { id: "phy-1", title: "الوحدة 1: المتابعة الزمنية لتحول كيميائي في وسط مائي" },
       { id: "phy-2", title: "الوحدة 2: تطور جملة ميكانيكية" },
@@ -56,11 +61,7 @@ export const SCIENTIFIC_STREAM_PROGRESS_DATA: ProgressSubject[] = [
     ],
   },
   {
-    id: "math",
-    name: "الرياضيات",
-    icon: "∑",
-    coefficient: 5,
-    color: "blue",
+    ...getSubjectMeta("math", 5),
     lessons: [
       { id: "math-1", title: "الدوال العددية", category: "الدوال" },
       { id: "math-2", title: "الدالة الأسية", category: "الدوال" },
@@ -76,11 +77,7 @@ export const SCIENTIFIC_STREAM_PROGRESS_DATA: ProgressSubject[] = [
     ],
   },
   {
-    id: "arabic",
-    name: "اللغة العربية",
-    icon: "أ",
-    coefficient: 3,
-    color: "green",
+    ...getSubjectMeta("arabic", 3),
     lessons: [
       { id: "arb-1", title: "الشعر التعليمي", category: "البناء الفكري" },
       { id: "arb-2", title: "النثر العلمي المتأدب", category: "البناء الفكري" },
@@ -103,43 +100,28 @@ export const SCIENTIFIC_STREAM_PROGRESS_DATA: ProgressSubject[] = [
     ],
   },
   {
-    id: "history",
-    name: "التاريخ",
-    icon: "📜",
-    coefficient: 1, // فصل التاريخ عن الجغرافيا للمتابعة
-    color: "orange",
+    ...getSubjectMeta("history-geography", 2),
     lessons: [
-      { id: "his-1", title: "بروز الصراع وتشكل العالم", category: "الوحدة 1: الحرب الباردة" },
-      { id: "his-2", title: "مساعي الإنفرَاج الدولي", category: "الوحدة 1: الحرب الباردة" },
-      { id: "his-3", title: "من الثنائية إلى الأحادية القطبية", category: "الوحدة 1: الحرب الباردة" },
-      { id: "his-4", title: "العمل المسلح ورد فعل الاستعمار", category: "الوحدة 2: الثورة الجزائرية" },
-      { id: "his-5", title: "إستعادة السيادة وبناء الدولة الجزائرية", category: "الوحدة 2: الثورة الجزائرية" },
-      { id: "his-6", title: "العالم الثالث بين تراجع الاستعمار واستمرار التحرر", category: "الوحدة 3: العالم الثالث" },
-      { id: "his-7", title: "فلسطين من تصفية الاستعمار واستمرارية التحرر", category: "الوحدة 3: العالم الثالث" },
+      // قسم التاريخ
+      { id: "his-1", title: "بروز الصراع وتشكل العالم", category: "قسم التاريخ - الحرب الباردة" },
+      { id: "his-2", title: "مساعي الإنفرَاج الدولي", category: "قسم التاريخ - الحرب الباردة" },
+      { id: "his-3", title: "من الثنائية إلى الأحادية القطبية", category: "قسم التاريخ - الحرب الباردة" },
+      { id: "his-4", title: "العمل المسلح ورد فعل الاستعمار", category: "قسم التاريخ - الثورة الجزائرية" },
+      { id: "his-5", title: "إستعادة السيادة وبناء الدولة الجزائرية", category: "قسم التاريخ - الثورة الجزائرية" },
+      { id: "his-6", title: "العالم الثالث بين تراجع الاستعمار واستمرار التحرر", category: "قسم التاريخ - العالم الثالث" },
+      { id: "his-7", title: "فلسطين من تصفية الاستعمار واستمرارية التحرر", category: "قسم التاريخ - العالم الثالث" },
+      // قسم الجغرافيا
+      { id: "geo-1", title: "إشكالية التقدم والتخلف", category: "قسم الجغرافيا - الاقتصاد العالمي" },
+      { id: "geo-2", title: "المبادلات والتنقلات في العالم", category: "قسم الجغرافيا - الاقتصاد العالمي" },
+      { id: "geo-3", title: "مصادر القوة الأمريكية وتأثيرها العالمي", category: "قسم الجغرافيا - القوى الكبرى" },
+      { id: "geo-4", title: "ظاهرة التكتل وأثرها في قوة الاتحاد الأوروبي", category: "قسم الجغرافيا - القوى الكبرى" },
+      { id: "geo-5", title: "العلاقة بين السكان والتنمية في شرق وجنوب شرق آسيا", category: "قسم الجغرافيا - القوى الكبرى" },
+      { id: "geo-6", title: "الاقتصاد الجزائري في العالم", category: "قسم الجغرافيا - دول الجنوب" },
+      { id: "geo-7", title: "التنمية في البرازيل", category: "قسم الجغرافيا - دول الجنوب" },
     ],
   },
   {
-    id: "geography",
-    name: "الجغرافيا",
-    icon: "🌍",
-    coefficient: 1,
-    color: "orange",
-    lessons: [
-      { id: "geo-1", title: "إشكالية التقدم والتخلف", category: "الوحدة 1: الاقتصاد العالمي" },
-      { id: "geo-2", title: "المبادلات والتنقلات في العالم", category: "الوحدة 1: الاقتصاد العالمي" },
-      { id: "geo-3", title: "مصادر القوة الأمريكية وتأثيرها العالمي", category: "الوحدة 2: القوى الكبرى" },
-      { id: "geo-4", title: "ظاهرة التكتل وأثرها في قوة الاتحاد الأوروبي", category: "الوحدة 2: القوى الكبرى" },
-      { id: "geo-5", title: "العلاقة بين السكان والتنمية في شرق وجنوب شرق آسيا", category: "الوحدة 2: القوى الكبرى" },
-      { id: "geo-6", title: "الاقتصاد الجزائري في العالم", category: "الوحدة 3: دول الجنوب" },
-      { id: "geo-7", title: "التنمية في البرازيل", category: "الوحدة 3: دول الجنوب" },
-    ],
-  },
-  {
-    id: "islamic",
-    name: "العلوم الإسلامية",
-    icon: "🕌",
-    coefficient: 2,
-    color: "green",
+    ...getSubjectMeta("islamic-studies", 2),
     lessons: [
       { id: "isl-1", title: "1. العقيدة الإسلامية وأثرها في حياة الفرد والمجتمع" },
       { id: "isl-2", title: "2. وسائل القرآن الكريم في تثبيت العقيدة الإسلامية" },
@@ -162,11 +144,7 @@ export const SCIENTIFIC_STREAM_PROGRESS_DATA: ProgressSubject[] = [
     ],
   },
   {
-    id: "french",
-    name: "اللغة الفرنسية",
-    icon: "Fr",
-    coefficient: 2,
-    color: "blue",
+    ...getSubjectMeta("french", 2),
     lessons: [
       { id: "fr-1", title: "Séquence 01: Produire un texte pour informer d’un fait d’Histoire", category: "Projet 01: Texte d'Histoire" },
       { id: "fr-2", title: "Séquence 02: Produire un texte Historique avec témoignage / commentaire", category: "Projet 01: Texte d'Histoire" },
@@ -176,11 +154,7 @@ export const SCIENTIFIC_STREAM_PROGRESS_DATA: ProgressSubject[] = [
     ],
   },
   {
-    id: "english",
-    name: "اللغة الإنجليزية",
-    icon: "En",
-    coefficient: 2,
-    color: "blue",
+    ...getSubjectMeta("english", 2),
     lessons: [
       { id: "eng-1", title: "First Unit: Ethics in Business" },
       { id: "eng-2", title: "Second Unit: Safety First" },
@@ -189,11 +163,7 @@ export const SCIENTIFIC_STREAM_PROGRESS_DATA: ProgressSubject[] = [
     ],
   },
   {
-    id: "philosophy",
-    name: "الفلسفة",
-    icon: "🧠",
-    coefficient: 2,
-    color: "violet",
+    ...getSubjectMeta("philosophy", 2),
     lessons: [
       { id: "ph-1", title: "العلاقة بين العلم والفلسفة", category: "الإشكالية الأولى: السؤال بين المشكلة والإشكالية" },
       { id: "ph-2", title: "أهمية الفلسفة", category: "الإشكالية الأولى: السؤال بين المشكلة والإشكالية" },
@@ -217,3 +187,4 @@ export const SCIENTIFIC_STREAM_PROGRESS_DATA: ProgressSubject[] = [
     ],
   },
 ];
+

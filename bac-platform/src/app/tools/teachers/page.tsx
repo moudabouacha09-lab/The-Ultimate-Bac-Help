@@ -32,7 +32,7 @@ const categories: Category[] = [
     ]
   },
   {
-    title: "العلوم الفيزيائية",
+    title: "الفيزياء",
     icon: <Zap size={20} />,
     color: "cyan",
     teachers: [

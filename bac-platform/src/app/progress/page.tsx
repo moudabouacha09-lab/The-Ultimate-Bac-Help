@@ -97,7 +97,8 @@ export default function ProgressPage() {
                 }`}
                 onClick={() => setSelectedSubjectId(subj.id)}
               >
-                <span>{subj.icon} {subj.name}</span>
+                <span className="material-symbols-outlined text-lg">{subj.icon}</span>
+                <span>{subj.name}</span>
                 <span className={`text-caption px-2 py-0.5 rounded-full ${isActive ? "bg-primary-container text-on-primary-container" : "bg-surface-bright text-on-surface-variant"}`}>
                   {subj.percentage}%
                 </span>
@@ -112,9 +113,10 @@ export default function ProgressPage() {
             <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b border-primary/10 pb-4">
               <div>
                 <h2 className="font-headline text-headline-md text-primary font-bold flex items-center gap-2">
-                  <span>{activeSubject.icon}</span>
+                  <span className="material-symbols-outlined text-2xl text-primary">{activeSubject.icon}</span>
                   <span>{activeSubject.name}</span>
                 </h2>
+
                 <p className="font-body text-body-md text-on-surface-variant mt-1">
                   المعامل: <strong className="text-primary">{activeSubject.coefficient}</strong> • إجمالي الدروس: {activeSubject.totalCount}
                 </p>

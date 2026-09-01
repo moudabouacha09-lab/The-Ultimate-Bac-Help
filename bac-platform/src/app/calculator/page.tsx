@@ -28,7 +28,7 @@ const streamSubjects: Record<Stream, SubjectField[]> = {
   Scientific: [
     { id: "science", name: "علوم الطبيعة والحياة", coefficient: 6 },
     { id: "math", name: "الرياضيات", coefficient: 5 },
-    { id: "physics", name: "العلوم الفيزيائية", coefficient: 4 },
+    { id: "physics", name: "الفيزياء", coefficient: 4 },
     { id: "english", name: "اللغة الإنجليزية", coefficient: 3 },
     { id: "arabic", name: "اللغة العربية", coefficient: 2 },
     { id: "history", name: "تاريخ وجغرافيا (تاريخ)", coefficient: 2 },
@@ -37,7 +37,7 @@ const streamSubjects: Record<Stream, SubjectField[]> = {
   ],
   Mathematical: [
     { id: "math", name: "الرياضيات", coefficient: 8 },
-    { id: "physics", name: "العلوم الفيزيائية", coefficient: 6 },
+    { id: "physics", name: "الفيزياء", coefficient: 6 },
     { id: "computer_science", name: "إعلام آلي", coefficient: 3 },
     { id: "english", name: "اللغة الإنجليزية", coefficient: 3 },
     { id: "science", name: "علوم الطبيعة والحياة", coefficient: 2 },
@@ -48,7 +48,7 @@ const streamSubjects: Record<Stream, SubjectField[]> = {
   Engineering: [
     { id: "technology", name: "تكنولوجيا", coefficient: 7 },
     { id: "math", name: "الرياضيات", coefficient: 5 },
-    { id: "physics", name: "علوم فيزيائية", coefficient: 4 },
+    { id: "physics", name: "الفيزياء", coefficient: 4 },
     { id: "computer_science", name: "إعلام آلي", coefficient: 3 },
     { id: "english", name: "لغة إنجليزية", coefficient: 3 },
     { id: "history", name: "تاريخ وجغرافيا (تاريخ)", coefficient: 2 },
