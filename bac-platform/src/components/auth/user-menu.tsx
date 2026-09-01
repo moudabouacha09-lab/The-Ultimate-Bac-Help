@@ -4,7 +4,7 @@
 import React, { useState } from "react";
 import { useAuth } from "@/context/auth-context";
 import { branchLabels, levelLabels, AcademicLevel } from "@/lib/auth-types";
-import { User, LogOut, ChevronDown, Sparkles, LogIn, Check } from "lucide-react";
+import { LogOut, ChevronDown, LogIn, Check } from "lucide-react";
 
 export function UserMenu() {
   const { user, openAuthModal, logout, updateProfile } = useAuth();
@@ -14,23 +14,9 @@ export function UserMenu() {
     return (
       <button
         onClick={() => openAuthModal("register")}
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: "0.5rem",
-          padding: "0.45rem 0.9rem",
-          backgroundColor: "rgba(37, 99, 235, 0.15)",
-          border: "1px solid rgba(59, 130, 246, 0.35)",
-          borderRadius: "999px",
-          color: "var(--accent-cyan, #38bdf8)",
-          fontSize: "0.82rem",
-          fontWeight: "800",
-          cursor: "pointer",
-          backdropFilter: "blur(8px)",
-          transition: "all 0.2s ease"
-        }}
+        className="flex items-center gap-2 bg-primary text-on-primary font-body text-label-md px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors shadow-sm cursor-pointer font-medium"
       >
-        <LogIn size={15} />
+        <LogIn size={16} />
         <span>تسجيل الدخول</span>
       </button>
     );
@@ -45,81 +31,34 @@ export function UserMenu() {
   };
 
   return (
-    <div style={{ position: "relative", display: "inline-block" }}>
+    <div className="relative inline-block">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: "0.6rem",
-          padding: "0.4rem 0.85rem",
-          backgroundColor: "var(--surface-glass, rgba(20, 28, 38, 0.65))",
-          border: "1px solid var(--border-strong, rgba(255, 255, 255, 0.18))",
-          borderRadius: "999px",
-          color: "var(--text-primary)",
-          fontSize: "0.84rem",
-          fontWeight: "800",
-          cursor: "pointer",
-          backdropFilter: "blur(12px)"
-        }}
+        className="inline-flex items-center gap-2 px-3 py-1.5 bg-surface-container border border-primary/10 rounded-lg text-on-surface font-body text-label-md cursor-pointer hover:bg-surface-container-high transition-colors"
       >
-        <div
-          style={{
-            width: "26px",
-            height: "26px",
-            borderRadius: "50%",
-            backgroundColor: "var(--blue-600)",
-            color: "#ffffff",
-            display: "grid",
-            placeItems: "center",
-            fontSize: "0.75rem",
-            fontWeight: "900"
-          }}
-        >
+        <div className="w-6 h-6 rounded-full bg-primary text-on-primary grid place-items-center text-xs font-bold">
           {user.username.charAt(0).toUpperCase()}
         </div>
-        <span>{user.username}</span>
-        <span
-          style={{
-            fontSize: "0.72rem",
-            padding: "0.1rem 0.45rem",
-            borderRadius: "999px",
-            backgroundColor: "rgba(255, 255, 255, 0.08)",
-            color: levelInfo.color
-          }}
-        >
+        <span className="font-semibold">{user.username}</span>
+        <span className="text-caption text-secondary font-medium px-2 py-0.5 rounded-full bg-secondary/10">
           {levelInfo.badge}
         </span>
-        <ChevronDown size={14} style={{ opacity: 0.7 }} />
+        <ChevronDown size={14} className="opacity-70" />
       </button>
 
       {isOpen && (
-        <div
-          style={{
-            position: "absolute",
-            top: "calc(100% + 0.5rem)",
-            left: 0,
-            zIndex: 999,
-            width: "240px",
-            backgroundColor: "var(--ocean-900, #141c26)",
-            border: "1.5px solid var(--border-strong, rgba(255, 255, 255, 0.18))",
-            borderRadius: "var(--radius-lg, 1rem)",
-            boxShadow: "0 16px 36px rgba(0, 0, 0, 0.5)",
-            padding: "0.75rem",
-            backdropFilter: "blur(16px)"
-          }}
-        >
-          <div style={{ paddingBottom: "0.5rem", marginBottom: "0.5rem", borderBottom: "1px solid var(--border)" }}>
-            <div style={{ fontSize: "0.88rem", fontWeight: "900", color: "var(--text-primary)" }}>{user.username}</div>
-            <div style={{ fontSize: "0.78rem", color: "var(--text-secondary)", marginTop: "0.15rem" }}>{user.email}</div>
-            <div style={{ fontSize: "0.75rem", color: "var(--accent-cyan)", marginTop: "0.35rem", fontWeight: "700" }}>
+        <div className="absolute top-[calc(100%+0.5rem)] left-0 z-[999] w-60 bg-surface-bright border border-primary/10 rounded-xl shadow-lg p-3 text-on-surface">
+          <div className="pb-2 mb-2 border-b border-primary/10">
+            <div className="text-label-md font-bold text-on-surface">{user.username}</div>
+            <div className="text-caption text-on-surface-variant mt-0.5">{user.email}</div>
+            <div className="text-caption text-primary mt-1 font-semibold">
               {branchName}
             </div>
           </div>
 
           {/* Quick Level Switcher */}
-          <div style={{ marginBottom: "0.75rem" }}>
-            <div style={{ fontSize: "0.75rem", fontWeight: "800", color: "var(--text-muted)", marginBottom: "0.35rem" }}>
+          <div className="mb-3">
+            <div className="text-caption font-semibold text-on-surface-variant mb-1">
               تغيير المستوى الدراسي الحالي:
             </div>
             {(["intelligent", "mid", "poor"] as AcademicLevel[]).map((lvl) => {
@@ -129,24 +68,14 @@ export function UserMenu() {
                 <button
                   key={lvl}
                   onClick={() => handleLevelChange(lvl)}
-                  style={{
-                    width: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    padding: "0.4rem 0.6rem",
-                    borderRadius: "var(--radius-sm, 0.5rem)",
-                    border: "none",
-                    backgroundColor: active ? "rgba(37, 99, 235, 0.18)" : "transparent",
-                    color: active ? info.color : "var(--text-secondary)",
-                    fontSize: "0.78rem",
-                    fontWeight: "800",
-                    cursor: "pointer",
-                    marginBottom: "0.2rem"
-                  }}
+                  className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg border-none text-caption font-medium cursor-pointer mb-1 transition-colors ${
+                    active
+                      ? "bg-primary/10 text-primary font-bold"
+                      : "text-on-surface-variant hover:bg-surface-container-low"
+                  }`}
                 >
                   <span>{info.label}</span>
-                  {active && <Check size={14} color={info.color} />}
+                  {active && <Check size={14} className="text-primary" />}
                 </button>
               );
             })}
@@ -157,20 +86,7 @@ export function UserMenu() {
               logout();
               setIsOpen(false);
             }}
-            style={{
-              width: "100%",
-              display: "flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              padding: "0.5rem 0.6rem",
-              borderRadius: "var(--radius-sm, 0.5rem)",
-              border: "none",
-              backgroundColor: "rgba(248, 113, 113, 0.12)",
-              color: "#f87171",
-              fontSize: "0.82rem",
-              fontWeight: "800",
-              cursor: "pointer"
-            }}
+            className="w-full flex items-center gap-2 px-2.5 py-2 rounded-lg border-none bg-error/10 text-error text-caption font-bold cursor-pointer hover:bg-error/20 transition-colors"
           >
             <LogOut size={16} />
             <span>تسجيل الخروج</span>
@@ -180,3 +96,4 @@ export function UserMenu() {
     </div>
   );
 }
+

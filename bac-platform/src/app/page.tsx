@@ -41,11 +41,11 @@ export default function HomePage() {
         <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl translate-y-1/4 -translate-x-1/4 pointer-events-none" />
 
-        <div className="max-w-4xl mx-auto text-center relative z-10 flex flex-col items-center">
+        <div className="max-w-7xl mx-auto text-center relative z-10 flex flex-col items-center">
           <h1 className="font-headline text-display-lg text-primary mb-4 md:mb-6">
             استعد للبكالوريا بثقة
           </h1>
-          <p className="font-body text-body-lg text-on-surface-variant mb-8 max-w-2xl mx-auto">
+          <p className="font-body text-body-lg text-on-surface-variant mb-8 max-w-3xl mx-auto">
             منصتك الشاملة للمراجعة، امتحانات سابقة، وأدوات تنظيم الوقت لضمان نجاحك.
           </p>
 
