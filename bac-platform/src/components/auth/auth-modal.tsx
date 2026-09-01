@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "@/context/auth-context";
 import { AcademicBranch, AcademicLevel, branchLabels, levelLabels } from "@/lib/auth-types";
-import { X, Mail, Lock, User, LogIn, UserPlus, CheckCircle2, GraduationCap, ArrowRight, Eye, EyeOff } from "lucide-react";
+import { X, Mail, Lock, User, LogIn, UserPlus, CheckCircle2, GraduationCap, Eye, EyeOff } from "lucide-react";
 
 export function AuthModal() {
   const { isModalOpen, closeAuthModal, authMode, login, register } = useAuth();
@@ -66,50 +66,17 @@ export function AuthModal() {
 
   return (
     <div
-      style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 9999,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "1rem",
-        backgroundColor: "rgba(10, 16, 26, 0.8)",
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)"
-      }}
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-primary/40 backdrop-blur-sm"
       onClick={closeAuthModal}
     >
       <div
-        style={{
-          width: "100%",
-          maxWidth: "460px",
-          backgroundColor: "var(--ocean-900, #141c26)",
-          border: "1.5px solid var(--border-strong, rgba(255, 255, 255, 0.18))",
-          borderRadius: "var(--radius-xl, 1.25rem)",
-          boxShadow: "0 24px 48px -12px rgba(0, 0, 0, 0.6)",
-          padding: "1.75rem",
-          color: "var(--text-primary)",
-          maxHeight: "90vh",
-          overflowY: "auto",
-          position: "relative"
-        }}
+        className="w-full max-w-md bg-surface-bright border border-primary/10 rounded-xl shadow-xl p-6 md:p-8 text-on-surface maxHeight-[90vh] overflow-y-auto relative"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
         <button
           onClick={closeAuthModal}
-          style={{
-            position: "absolute",
-            top: "1.25rem",
-            left: "1.25rem",
-            background: "none",
-            border: "none",
-            color: "var(--text-muted)",
-            cursor: "pointer",
-            padding: "0.25rem",
-            borderRadius: "50%"
-          }}
+          className="absolute top-4 left-4 p-1.5 text-on-surface-variant hover:text-primary rounded-full transition-colors cursor-pointer"
           aria-label="إغلاق"
         >
           <X size={20} />
@@ -117,36 +84,21 @@ export function AuthModal() {
 
         {needsConfirmation ? (
           /* Step 8: Email Confirmation State */
-          <div style={{ textAlign: "center", padding: "1rem 0" }}>
-            <div
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: "60px",
-                height: "60px",
-                borderRadius: "50%",
-                backgroundColor: "rgba(52, 211, 153, 0.15)",
-                color: "#34d399",
-                marginBottom: "1rem"
-              }}
-            >
+          <div className="text-center py-4">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary mb-4">
               <Mail size={32} />
             </div>
-            <h2 style={{ fontSize: "1.35rem", fontWeight: "900", margin: "0 0 0.5rem 0" }}>
+            <h2 className="font-headline text-headline-md text-primary font-bold mb-2">
               تحقق من بريدك الإلكتروني! 📩
             </h2>
-            <p style={{ fontSize: "0.9rem", color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: "1.5rem" }}>
+            <p className="font-body text-body-md text-on-surface-variant leading-relaxed mb-6">
               تم إرسال رابط تأكيد الحساب إلى:
               <br />
-              <strong style={{ color: "var(--accent-cyan)", fontSize: "0.95rem" }}>{email}</strong>
+              <strong className="text-primary font-bold">{email}</strong>
               <br />
               يرجى فتح صندوق البريد والنقر على رابط التأكيد لتفعيل حسابك، ثم تسجيل الدخول.
             </p>
-            <div className="developer-message developer-message-modal">
-              <strong>رسالة من المطور</strong>
-              <span>شكراً لتسجيلكم، سنضيف قريباً ميزات فريدة تناسب مستواكم وتحسن تجربتكم. بالتوفيق!</span>
-            </div>
+
             <button
               type="button"
               onClick={() => {
@@ -155,81 +107,50 @@ export function AuthModal() {
                 setTab("login");
                 setError(null);
               }}
-              style={{
-                width: "100%",
-                padding: "0.85rem",
-                borderRadius: "var(--radius-md, 0.75rem)",
-                border: "none",
-                backgroundColor: "var(--blue-600)",
-                color: "#ffffff",
-                fontWeight: "900",
-                fontSize: "0.95rem",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "0.5rem"
-              }}
+              className="w-full bg-primary text-on-primary font-body text-label-md rounded-lg py-3 hover:bg-primary/90 transition-colors shadow-sm font-medium flex items-center justify-center gap-2 cursor-pointer"
             >
               <LogIn size={18} />
               <span>الانتقال لتسجيل الدخول</span>
             </button>
           </div>
         ) : registrationSuccess ? (
-          <div style={{ textAlign: "center", padding: "1rem 0" }}>
-            <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: "60px", height: "60px", borderRadius: "50%", backgroundColor: "rgba(52, 211, 153, 0.15)", color: "#34d399", marginBottom: "1rem" }}>
+          <div className="text-center py-4">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary mb-4">
               <CheckCircle2 size={32} />
             </div>
-            <h2 style={{ fontSize: "1.35rem", fontWeight: "900", margin: "0 0 0.5rem" }}>تم إنشاء حسابك بنجاح 🎉</h2>
-            <div className="developer-message developer-message-modal">
-              <strong>رسالة من المطور</strong>
-              <span>شكراً لتسجيلكم، سنضيف قريباً ميزات فريدة تناسب مستواكم وتحسن تجربتكم. بالتوفيق!</span>
-            </div>
-            <button type="button" onClick={closeAuthModal} style={{ width: "100%", padding: "0.85rem", marginTop: "1rem", borderRadius: "var(--radius-md, 0.75rem)", border: "none", backgroundColor: "var(--blue-600)", color: "#ffffff", fontWeight: "900", fontSize: "0.95rem", cursor: "pointer" }}>
+            <h2 className="font-headline text-headline-md text-primary font-bold mb-2">
+              تم إنشاء حسابك بنجاح 🎉
+            </h2>
+            <p className="font-body text-body-md text-on-surface-variant mb-6">
+              مرحباً بك في منصة البكالوريا! يمكنك الآن متابعة دروسك وحفظ نتائجك.
+            </p>
+            <button
+              type="button"
+              onClick={closeAuthModal}
+              className="w-full bg-primary text-on-primary font-body text-label-md rounded-lg py-3 hover:bg-primary/90 transition-colors shadow-sm font-medium cursor-pointer"
+            >
               متابعة المراجعة
             </button>
           </div>
         ) : (
           <>
             {/* Modal Header */}
-            <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
-              <div
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: "48px",
-                  height: "48px",
-                  borderRadius: "50%",
-                  backgroundColor: "rgba(37, 99, 235, 0.15)",
-                  color: "var(--blue-400)",
-                  marginBottom: "0.75rem"
-                }}
-              >
+            <div className="text-center mb-6">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary mb-3">
                 <GraduationCap size={26} />
               </div>
-              <h2 style={{ fontSize: "1.35rem", fontWeight: "900", margin: "0 0 0.35rem 0" }}>
-                {tab === "register" ? "إنشاء حساب طالب جديد 🎓" : "مرحباً بعودتك! 👋"}
+              <h2 className="font-headline text-headline-md text-primary font-bold mb-1">
+                {tab === "register" ? "إنشاء حساب جديد 🎓" : "مرحباً بعودتك 👋"}
               </h2>
-              <p style={{ fontSize: "0.86rem", color: "var(--text-secondary)", margin: 0 }}>
+              <p className="font-body text-body-md text-on-surface-variant">
                 {tab === "register"
-                  ? "سجل حسابك مجاناً لمتابعة تقدمك وتخصيص تجربة التعلم"
-                  : "سجل دخولك لمتابعة دروسك ومكتسباتك المنجزة"}
+                  ? "انضم إلينا وابدأ رحلة التفوق الأكاديمي"
+                  : "سجل دخولك لمتابعة دروسك ومكتسباتك"}
               </p>
             </div>
 
             {/* Tab Switcher */}
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: "0.4rem",
-                padding: "0.3rem",
-                backgroundColor: "rgba(0, 0, 0, 0.25)",
-                borderRadius: "var(--radius-md, 0.75rem)",
-                marginBottom: "1.25rem"
-              }}
-            >
+            <div className="grid grid-cols-2 gap-1 p-1 bg-surface-container rounded-lg mb-6">
               <button
                 type="button"
                 onClick={() => {
@@ -238,17 +159,11 @@ export function AuthModal() {
                   setRegistrationSuccess(false);
                   setNeedsConfirmation(false);
                 }}
-                style={{
-                  padding: "0.6rem",
-                  borderRadius: "var(--radius-sm, 0.5rem)",
-                  border: "none",
-                  backgroundColor: tab === "register" ? "var(--blue-600)" : "transparent",
-                  color: tab === "register" ? "#ffffff" : "var(--text-secondary)",
-                  fontWeight: "800",
-                  fontSize: "0.86rem",
-                  cursor: "pointer",
-                  transition: "all 0.2s"
-                }}
+                className={`py-2 rounded-md font-body text-label-md transition-all cursor-pointer ${
+                  tab === "register"
+                    ? "bg-surface-bright text-primary font-bold shadow-sm"
+                    : "text-on-surface-variant hover:text-primary font-medium"
+                }`}
               >
                 إنشاء حساب جديد
               </button>
@@ -260,153 +175,97 @@ export function AuthModal() {
                   setRegistrationSuccess(false);
                   setNeedsConfirmation(false);
                 }}
-                style={{
-                  padding: "0.6rem",
-                  borderRadius: "var(--radius-sm, 0.5rem)",
-                  border: "none",
-                  backgroundColor: tab === "login" ? "var(--blue-600)" : "transparent",
-                  color: tab === "login" ? "#ffffff" : "var(--text-secondary)",
-                  fontWeight: "800",
-                  fontSize: "0.86rem",
-                  cursor: "pointer",
-                  transition: "all 0.2s"
-                }}
+                className={`py-2 rounded-md font-body text-label-md transition-all cursor-pointer ${
+                  tab === "login"
+                    ? "bg-surface-bright text-primary font-bold shadow-sm"
+                    : "text-on-surface-variant hover:text-primary font-medium"
+                }`}
               >
                 تسجيل الدخول
               </button>
             </div>
 
             {error && (
-              <div
-                style={{
-                  padding: "0.75rem 1rem",
-                  backgroundColor: "rgba(248, 113, 113, 0.15)",
-                  border: "1px solid rgba(248, 113, 113, 0.3)",
-                  borderRadius: "var(--radius-md, 0.5rem)",
-                  color: "#f87171",
-                  fontSize: "0.85rem",
-                  marginBottom: "1rem",
-                  fontWeight: "700"
-                }}
-              >
+              <div className="p-3 bg-error/10 border border-error/20 rounded-lg text-error text-caption font-semibold mb-4 text-center">
                 ⚠️ {error}
               </div>
             )}
 
-            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               {tab === "register" && (
                 <div>
-                  <label style={{ display: "block", fontSize: "0.82rem", fontWeight: "800", marginBottom: "0.35rem" }}>
-                    اسم الطالب / اللقب
+                  <label className="block font-body text-label-md text-on-surface mb-1 text-right font-medium">
+                    الاسم الكامل
                   </label>
-                  <div style={{ position: "relative" }}>
+                  <div className="relative">
                     <input
                       type="text"
                       required
                       placeholder="مثال: أمين بن علي"
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
-                      style={{
-                        width: "100%",
-                        padding: "0.7rem 0.9rem 0.7rem 2.5rem",
-                        backgroundColor: "rgba(0, 0, 0, 0.2)",
-                        border: "1px solid var(--border)",
-                        borderRadius: "var(--radius-md, 0.5rem)",
-                        color: "var(--text-primary)",
-                        fontSize: "0.9rem",
-                        boxSizing: "border-box"
-                      }}
+                      className="w-full bg-surface-container-lowest border border-primary/20 rounded-lg px-3 py-2.5 pr-10 text-on-surface font-body text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
                     />
-                    <User size={18} style={{ position: "absolute", left: "0.75rem", top: "50%", transform: "translateY(-50%)", color: "var(--text-muted)" }} />
+                    <User size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant" />
                   </div>
                 </div>
               )}
 
               <div>
-                <label style={{ display: "block", fontSize: "0.82rem", fontWeight: "800", marginBottom: "0.35rem" }}>
+                <label className="block font-body text-label-md text-on-surface mb-1 text-right font-medium">
                   البريد الإلكتروني
                 </label>
-                <div style={{ position: "relative" }}>
+                <div className="relative">
                   <input
                     type="email"
                     required
-                    placeholder="name@example.com"
+                    placeholder="user@example.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    style={{
-                      width: "100%",
-                      padding: "0.7rem 0.9rem 0.7rem 2.5rem",
-                      backgroundColor: "rgba(0, 0, 0, 0.2)",
-                      border: "1px solid var(--border)",
-                      borderRadius: "var(--radius-md, 0.5rem)",
-                      color: "var(--text-primary)",
-                      fontSize: "0.9rem",
-                      boxSizing: "border-box"
-                    }}
+                    className="w-full bg-surface-container-lowest border border-primary/20 rounded-lg px-3 py-2.5 pr-10 text-on-surface font-body text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
                   />
-                  <Mail size={18} style={{ position: "absolute", left: "0.75rem", top: "50%", transform: "translateY(-50%)", color: "var(--text-muted)" }} />
+                  <Mail size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant" />
                 </div>
               </div>
 
               <div>
-                <label style={{ display: "block", fontSize: "0.82rem", fontWeight: "800", marginBottom: "0.35rem" }}>
+                <label className="block font-body text-label-md text-on-surface mb-1 text-right font-medium">
                   كلمة المرور
                 </label>
-                <div style={{ position: "relative" }}>
+                <div className="relative">
                   <input
                     type={showPassword ? "text" : "password"}
                     required
                     placeholder="••••••••"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    style={{
-                      width: "100%",
-                      padding: "0.7rem 0.9rem 0.7rem 2.5rem",
-                      backgroundColor: "rgba(0, 0, 0, 0.2)",
-                      border: "1px solid var(--border)",
-                      borderRadius: "var(--radius-md, 0.5rem)",
-                      color: "var(--text-primary)",
-                      fontSize: "0.9rem",
-                      boxSizing: "border-box"
-                    }}
+                    className="w-full bg-surface-container-lowest border border-primary/20 rounded-lg px-3 py-2.5 pr-10 pl-10 text-on-surface font-body text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
                   />
-                  <Lock size={18} style={{ position: "absolute", left: "0.75rem", top: "50%", transform: "translateY(-50%)", color: "var(--text-muted)" }} />
+                  <Lock size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant" />
                   <button
                     type="button"
                     onClick={() => setShowPassword((visible) => !visible)}
-                    aria-label={showPassword ? "إخفاء كلمة المرور" : "إظهار كلمة المرور"}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors cursor-pointer"
                     title={showPassword ? "إخفاء كلمة المرور" : "إظهار كلمة المرور"}
-                    style={{ position: "absolute", right: "0.65rem", top: "50%", transform: "translateY(-50%)", display: "grid", placeItems: "center", padding: "0.25rem", color: "var(--text-muted)", background: "transparent", border: "none", cursor: "pointer" }}
                   >
-                    {showPassword ? <EyeOff size={17} /> : <Eye size={17} />}
+                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
                 </div>
-                {tab === "register" && <p className="password-reminder">تذكّر جيداً كلمة المرور التي اخترتها.</p>}
               </div>
 
               {tab === "register" && (
                 <>
                   <div>
-                    <label style={{ display: "block", fontSize: "0.82rem", fontWeight: "800", marginBottom: "0.35rem" }}>
+                    <label className="block font-body text-label-md text-on-surface mb-1 text-right font-medium">
                       الشعبة الدراسية 📚
                     </label>
                     <select
                       value={branch}
                       onChange={(e) => setBranch(e.target.value as AcademicBranch)}
-                      style={{
-                        width: "100%",
-                        padding: "0.7rem 0.9rem",
-                        backgroundColor: "rgba(0, 0, 0, 0.3)",
-                        border: "1px solid var(--border)",
-                        borderRadius: "var(--radius-md, 0.5rem)",
-                        color: "var(--text-primary)",
-                        fontSize: "0.88rem",
-                        cursor: "pointer",
-                        boxSizing: "border-box"
-                      }}
+                      className="w-full bg-surface-container-lowest border border-primary/20 rounded-lg px-3 py-2.5 text-on-surface font-body text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors cursor-pointer"
                     >
                       {Object.entries(branchLabels).map(([key, label]) => (
-                        <option key={key} value={key} style={{ backgroundColor: "#1c2736", color: "#ffffff" }}>
+                        <option key={key} value={key}>
                           {label}
                         </option>
                       ))}
@@ -414,10 +273,10 @@ export function AuthModal() {
                   </div>
 
                   <div>
-                    <label style={{ display: "block", fontSize: "0.82rem", fontWeight: "800", marginBottom: "0.35rem" }}>
+                    <label className="block font-body text-label-md text-on-surface mb-1 text-right font-medium">
                       المستوى الحالي المعين ذاتياً 🎯
                     </label>
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "0.5rem" }}>
+                    <div className="grid grid-cols-3 gap-2">
                       {(["intelligent", "mid", "poor"] as AcademicLevel[]).map((lvl) => {
                         const info = levelLabels[lvl];
                         const isSelected = level === lvl;
@@ -426,17 +285,11 @@ export function AuthModal() {
                             key={lvl}
                             type="button"
                             onClick={() => setLevel(lvl)}
-                            style={{
-                              padding: "0.6rem 0.3rem",
-                              borderRadius: "var(--radius-sm, 0.5rem)",
-                              border: isSelected ? `1.5px solid ${info.color}` : "1px solid var(--border)",
-                              backgroundColor: isSelected ? "rgba(56, 189, 248, 0.12)" : "rgba(0, 0, 0, 0.2)",
-                              color: isSelected ? info.color : "var(--text-secondary)",
-                              fontSize: "0.78rem",
-                              fontWeight: "800",
-                              cursor: "pointer",
-                              textAlign: "center"
-                            }}
+                            className={`p-2 rounded-lg border text-caption font-semibold text-center cursor-pointer transition-colors ${
+                              isSelected
+                                ? "border-primary bg-primary/10 text-primary font-bold"
+                                : "border-primary/20 bg-surface-container-low text-on-surface-variant hover:bg-surface-container"
+                            }`}
                           >
                             {info.badge}
                           </button>
@@ -450,22 +303,7 @@ export function AuthModal() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                style={{
-                  marginTop: "0.5rem",
-                  padding: "0.85rem",
-                  borderRadius: "var(--radius-md, 0.75rem)",
-                  border: "none",
-                  backgroundColor: "var(--blue-600)",
-                  color: "#ffffff",
-                  fontWeight: "900",
-                  fontSize: "0.95rem",
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: "0.5rem",
-                  boxShadow: "0 4px 15px rgba(37, 99, 235, 0.3)"
-                }}
+                className="w-full bg-primary text-on-primary font-body text-label-md rounded-lg py-3 mt-2 hover:bg-primary/90 transition-colors shadow-sm font-medium flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
               >
                 {isSubmitting ? (
                   <span>جاري التحميل...</span>
@@ -488,3 +326,4 @@ export function AuthModal() {
     </div>
   );
 }
+
