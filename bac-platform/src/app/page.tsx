@@ -62,31 +62,31 @@ export default function HomePage() {
         <section className="grid grid-cols-1 md:grid-cols-3 gap-md">
           <div className="bg-surface-bright border border-primary/10 rounded-xl p-6 flex items-center gap-4">
             <div className="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
-              <span className="material-symbols-outlined text-[28px]">group</span>
-            </div>
-            <div>
-              <p className="font-headline text-headline-md text-primary font-bold">120,000+</p>
-              <p className="font-body text-label-md text-on-surface-variant">طالب ومترشح مستفيد</p>
-            </div>
-          </div>
-
-          <div className="bg-surface-bright border border-primary/10 rounded-xl p-6 flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-secondary/10 text-secondary flex items-center justify-center shrink-0">
               <span className="material-symbols-outlined text-[28px]">library_books</span>
             </div>
             <div>
-              <p className="font-headline text-headline-md text-secondary font-bold">+{totalFiles}</p>
+              <p className="font-headline text-headline-md text-primary font-bold">+{totalFiles}</p>
               <p className="font-body text-label-md text-on-surface-variant">ملف دراسي وملخص منتقى</p>
             </div>
           </div>
 
           <div className="bg-surface-bright border border-primary/10 rounded-xl p-6 flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-tertiary/10 text-tertiary flex items-center justify-center shrink-0">
-              <span className="material-symbols-outlined text-[28px]">history_edu</span>
+            <div className="w-12 h-12 rounded-full bg-secondary/10 text-secondary flex items-center justify-center shrink-0">
+              <span className="material-symbols-outlined text-[28px]">volunteer_activism</span>
             </div>
             <div>
-              <p className="font-headline text-headline-md text-tertiary font-bold">200+</p>
-              <p className="font-body text-label-md text-on-surface-variant">موضوع بكالوريا وحل نموذجي</p>
+              <p className="font-headline text-headline-md text-secondary font-bold">100%</p>
+              <p className="font-body text-label-md text-on-surface-variant">مجاني بالكامل لكل الطلاب</p>
+            </div>
+          </div>
+
+          <div className="bg-surface-bright border border-primary/10 rounded-xl p-6 flex items-center gap-4">
+            <div className="w-12 h-12 rounded-full bg-tertiary/10 text-tertiary flex items-center justify-center shrink-0">
+              <span className="material-symbols-outlined text-[28px]">shield</span>
+            </div>
+            <div>
+              <p className="font-headline text-headline-md text-tertiary font-bold">0</p>
+              <p className="font-body text-label-md text-on-surface-variant">إعلانات مزعجة أو اشتراكات</p>
             </div>
           </div>
         </section>
