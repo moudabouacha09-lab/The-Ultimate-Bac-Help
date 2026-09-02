@@ -15,12 +15,12 @@ const formatIcons: Record<string, { icon: ReactNode; label: string }> = {
   html: { icon: "🌐", label: "موقع تفاعلي" },
   m4a: { icon: "🎧", label: "صوتي" },
   docx: { icon: "W", label: "Word" },
-  rar: { icon: <Package size={20} />, label: "أرشيف" },
-  zip: { icon: <Package size={20} />, label: "أرشيف" },
+  rar: { icon: <Package size={18} />, label: "أرشيف" },
+  zip: { icon: <Package size={18} />, label: "أرشيف" },
 };
 
 function FileCard({ file }: { file: FileItem }) {
-  const info = formatIcons[file.format] ?? { icon: "PDF", label: file.format };
+  const info = formatIcons[file.format] ?? { icon: "PDF", label: file.format.toUpperCase() };
   const isPreview = file.type === "preview";
 
   const getFileUrl = (filePath: string, isDownload: boolean = false) => {
@@ -35,36 +35,29 @@ function FileCard({ file }: { file: FileItem }) {
   };
 
   return (
-    <article className="group bg-surface-bright border border-primary/10 rounded-xl p-4 md:p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col md:flex-row justify-between md:items-center gap-4">
-      {/* Content Block */}
-      <div className="flex items-center gap-4">
-        <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0 font-bold text-caption">
-          {info.icon}
-        </div>
-        <div>
-          <h3 className="font-body text-label-md font-bold text-on-surface group-hover:text-primary transition-colors">
-            {file.title}
-          </h3>
-          <span className="font-body text-caption text-on-surface-variant">
+    <article className="group bg-surface-bright border border-primary/10 rounded-xl p-6 flex flex-col justify-between hover:border-primary/30 hover:shadow-md transition-all duration-300 relative overflow-hidden min-h-[160px]">
+      <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-bl-full -z-10 group-hover:bg-primary/10 transition-colors" />
+
+      <div>
+        <div className="flex justify-between items-start mb-3">
+          <span className="bg-surface-container px-2.5 py-1 rounded text-primary font-body text-caption font-semibold">
             {info.label}
           </span>
+          <span className="material-symbols-outlined text-primary/40 text-xl" aria-hidden="true">
+            description
+          </span>
         </div>
+        <h3 className="font-headline text-headline-md text-primary mb-2 font-bold group-hover:text-primary transition-colors leading-snug">
+          {file.title}
+        </h3>
+        <p className="font-body text-body-md text-on-surface-variant mb-6 line-clamp-2">
+          ملف مخصص لتحضير شهادة البكالوريا - منهجية دقيقة وتمارين تطبيقية.
+        </p>
       </div>
 
-      {/* Actions Block */}
-      <div className="flex items-center gap-2 self-end md:self-center">
-        {!isPreview && (
-          <a
-            className="bg-primary text-on-primary font-body text-caption font-semibold px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center gap-1.5 cursor-pointer"
-            href={getFileUrl(file.path, true)}
-            download
-          >
-            <Download size={16} />
-            <span>تحميل</span>
-          </a>
-        )}
+      <div className="flex items-center gap-2 pt-2 border-t border-primary/10 mt-auto">
         <a
-          className="bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-body text-caption font-semibold px-4 py-2 rounded-lg transition-colors flex items-center gap-1.5 cursor-pointer"
+          className="flex-1 bg-primary text-on-primary font-body text-label-md font-semibold px-4 py-2.5 rounded-lg hover:bg-primary/90 transition-colors flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
           href={getFileUrl(file.path, false)}
           target="_blank"
           rel="noopener noreferrer"
@@ -72,6 +65,17 @@ function FileCard({ file }: { file: FileItem }) {
           <Eye size={16} />
           <span>معاينة</span>
         </a>
+        {!isPreview && (
+          <a
+            className="px-4 py-2.5 border border-primary text-primary font-body text-label-md font-semibold rounded-lg hover:bg-primary/5 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+            href={getFileUrl(file.path, true)}
+            download
+            title="تحميل الملف"
+          >
+            <Download size={16} />
+            <span className="hidden sm:inline">تحميل</span>
+          </a>
+        )}
       </div>
     </article>
   );
@@ -89,7 +93,7 @@ export default function SubjectView({ subject, content }: { subject: Subject; co
 
   return (
     <div className="max-w-7xl mx-auto px-gutter py-xl flex flex-col gap-xl">
-      {/* ── Page Header ── */}
+      {/* ── Header Section ── */}
       <header className="relative overflow-hidden bg-surface-bright border border-primary/10 rounded-xl p-6 md:p-8 shadow-sm">
         <span className="font-body text-label-md text-secondary bg-secondary/10 px-3 py-1 rounded-full inline-block font-semibold mb-3">
           ملفات {subject.name} 📚
@@ -104,8 +108,8 @@ export default function SubjectView({ subject, content }: { subject: Subject; co
           </h1>
         </div>
 
-        <p className="font-body text-body-lg text-on-surface-variant max-w-2xl relative z-10">
-          حمّل الملخصات، المواضيع التجريبية، والتمارين الشاملة المحلولة لاستباق برنامج البكالوريا.
+        <p className="font-body text-body-lg text-on-surface-variant max-w-2xl relative z-10 leading-relaxed">
+          موارد شاملة، ملخصات مركزة، وحوليات بكالوريا سابقة مرتبة حسب الوحدات لمساعدتك في التفوق في مادة {subject.name}.
         </p>
 
         {/* Decorative background icon */}
@@ -114,31 +118,34 @@ export default function SubjectView({ subject, content }: { subject: Subject; co
         </span>
       </header>
 
-      {/* ── Filter Segmented Tabs ── */}
+      {/* ── Unit Tabs ── */}
       {hasGroups && (
-        <nav className="flex flex-wrap gap-2" aria-label={`أقسام مادة ${subject.name}`}>
-          {groups.map((group) => {
-            const isActive = activeGroup === group;
-            return (
-              <button
-                key={group}
-                type="button"
-                onClick={() => setActiveGroup(group)}
-                className={`font-body text-label-md px-4 py-2 rounded-full font-medium cursor-pointer transition-all ${
-                  isActive
-                    ? "bg-primary text-on-primary font-bold shadow-sm"
-                    : "bg-surface-container text-on-surface-variant hover:bg-surface-container-high"
-                }`}
-              >
-                {group}
-              </button>
-            );
-          })}
-        </nav>
+        <section aria-label={`أقسام مادة ${subject.name}`}>
+          <h2 className="font-headline text-headline-md text-primary font-bold mb-4">الوحدات الدراسية</h2>
+          <div className="flex overflow-x-auto gap-2 pb-2 scrollbar-none">
+            {groups.map((group) => {
+              const isActive = activeGroup === group;
+              return (
+                <button
+                  key={group}
+                  type="button"
+                  onClick={() => setActiveGroup(group)}
+                  className={`whitespace-nowrap px-6 py-2 rounded-full font-body text-label-md cursor-pointer transition-all ${
+                    isActive
+                      ? "bg-primary text-on-primary font-bold shadow-sm"
+                      : "bg-primary/10 text-primary border border-primary/10 hover:bg-primary/20 font-medium"
+                  }`}
+                >
+                  {group}
+                </button>
+              );
+            })}
+          </div>
+        </section>
       )}
 
-      {/* ── Content Sections ── */}
-      <section className="space-y-8" aria-live="polite">
+      {/* ── Content Sections (Grid of Bento Resource Cards) ── */}
+      <section className="space-y-10" aria-live="polite">
         {visibleSections.map((section) => (
           <div key={section.title} className="space-y-4">
             <div className="flex items-center justify-between border-b border-primary/10 pb-3">
@@ -150,7 +157,7 @@ export default function SubjectView({ subject, content }: { subject: Subject; co
               </span>
             </div>
 
-            <div className="grid grid-cols-1 gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {section.files.map((file, index) => (
                 <FadeInSection key={file.path} delay={index * 60}>
                   <FileCard file={file} />
@@ -210,4 +217,5 @@ export default function SubjectView({ subject, content }: { subject: Subject; co
     </div>
   );
 }
+
 
