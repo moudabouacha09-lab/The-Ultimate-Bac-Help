@@ -153,11 +153,12 @@ export default function OrientationHubPage() {
 
   return (
     <AppShell>
+      <div className="orientation-page">
       <div className="back-link-wrapper">
         <Link className="back-link" href="/tools">← العودة للأدوات</Link>
       </div>
 
-      <section className="subject-page-heading" style={{ marginBottom: "1.5rem" }}>
+      <section className="subject-page-heading">
         <div>
           <p className="eyebrow">دليل التوجيه الجامعي الشامل 2026/2027</p>
           <h1>المستشار الذكي للتوجيه والجامعات</h1>
@@ -170,25 +171,15 @@ export default function OrientationHubPage() {
         </span>
       </section>
 
-      <div className="official-disclaimer-banner" style={{
-        background: "var(--card-bg)",
-        border: "1px solid var(--border-color)",
-        borderRight: "4px solid var(--accent-color, #2563eb)",
-        borderRadius: "0.75rem",
-        padding: "1rem 1.25rem",
-        marginBottom: "1.5rem",
-        fontSize: "0.875rem",
-        color: "var(--text-secondary)",
-        lineHeight: "1.6"
-      }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontWeight: "700", color: "var(--text-primary)", marginBottom: "0.25rem" }}>
+      <div className="official-disclaimer-banner">
+        <div className="official-disclaimer-title">
           <span>ℹ️ تنبيه استرشادي رسمي:</span>
         </div>
-        <p style={{ margin: 0 }}>
+        <p>
           البيانات والمعدلات المعروضة في هذا المحاكي هي <strong>نتائج مرجعية تاريخية استرشادية</strong> مستخرجة مباشرةً من المنشور الوزاري رقم 01 لوزارة التعليم العالي والبحث العلمي (MESRS) والملف الرسمي لمعدلات القبول الأدنى للمرحلة الأولى 2026. لا تُعد هذه النتائج ضماناً حتمياً للقبول في الدوات القادمة، وتعتمد معادلات الحساب الموزون (g) على الصيغ والقواعد الوزارية الرسمية.
         </p>
-        <div style={{ marginTop: "0.5rem" }}>
-          🔗 لتأكيد رغباتك الرسمية والتسجيل النهائي، يرجى دائماً زيارة <a href="https://orientation-esi.dz" target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent-color, #2563eb)", fontWeight: "700", textDecoration: "underline" }}>البوابة الرسمية للتوجيه الجامعي (orientation-esi.dz)</a>.
+        <div className="official-disclaimer-link">
+          🔗 لتأكيد رغباتك الرسمية والتسجيل النهائي، يرجى دائماً زيارة <a href="https://orientation-esi.dz" target="_blank" rel="noopener noreferrer">البوابة الرسمية للتوجيه الجامعي (orientation-esi.dz)</a>.
         </div>
       </div>
 
@@ -516,6 +507,7 @@ export default function OrientationHubPage() {
           </div>
         </section>
       )}
+      </div>
     </AppShell>
   );
 }
