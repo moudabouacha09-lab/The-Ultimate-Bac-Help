@@ -49,6 +49,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           email: profile.email || userEmail || "",
           branch: (profile.branch as AcademicBranch) || userMetadata?.branch || "experimental-science",
           level: (profile.level as AcademicLevel) || userMetadata?.level || "mid",
+          role: (profile.role as any) || userMetadata?.role || "student",
           targetGrade: profile.target_grade,
           createdAt: profile.created_at || createdAt || new Date().toISOString()
         };
@@ -60,6 +61,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         email: userEmail || "",
         branch: (userMetadata?.branch as AcademicBranch) || "experimental-science",
         level: (userMetadata?.level as AcademicLevel) || "mid",
+        role: userMetadata?.role || "student",
         targetGrade: userMetadata?.target_grade,
         createdAt: createdAt || new Date().toISOString()
       };
@@ -71,6 +73,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         email: userEmail || "",
         branch: (userMetadata?.branch as AcademicBranch) || "experimental-science",
         level: (userMetadata?.level as AcademicLevel) || "mid",
+        role: userMetadata?.role || "student",
         createdAt: createdAt || new Date().toISOString()
       };
     }

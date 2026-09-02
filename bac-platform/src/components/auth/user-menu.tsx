@@ -2,9 +2,10 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { useAuth } from "@/context/auth-context";
 import { branchLabels, levelLabels, AcademicLevel } from "@/lib/auth-types";
-import { LogOut, ChevronDown, LogIn, Check } from "lucide-react";
+import { LogOut, ChevronDown, LogIn, Check, GraduationCap } from "lucide-react";
 
 export function UserMenu() {
   const { user, openAuthModal, logout, updateProfile } = useAuth();
@@ -80,6 +81,20 @@ export function UserMenu() {
               );
             })}
           </div>
+
+          {/* Become Contributor Link for students */}
+          {(!user.role || user.role === "student") && (
+            <div className="mb-3 pt-2 border-t border-primary/10">
+              <Link
+                href="/contribute"
+                onClick={() => setIsOpen(false)}
+                className="w-full flex items-center gap-2 px-2.5 py-2 rounded-lg bg-primary/5 hover:bg-primary/10 text-primary text-caption font-semibold transition-colors"
+              >
+                <GraduationCap size={16} />
+                <span>انضم إلى فريق المساهمين</span>
+              </Link>
+            </div>
+          )}
 
           <button
             onClick={() => {
