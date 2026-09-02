@@ -384,4 +384,24 @@ const bacContent: Record<string, SubjectContent> = {
   },
 };
 
+export function getSubjectStats(slug: string) {
+  const content = bacContent[slug];
+  if (!content) return { fileCount: 0, sectionCount: 0, hasExams: false };
+
+  let fileCount = 0;
+  content.sections.forEach((sec) => {
+    fileCount += sec.files.length;
+  });
+
+  const sectionCount = content.sections.length;
+  const hasExams = !!content.examCollection;
+
+  return {
+    fileCount: fileCount + (hasExams ? content.examCollection!.schools.length : 0),
+    sectionCount,
+    hasExams,
+  };
+}
+
 export default bacContent;
+

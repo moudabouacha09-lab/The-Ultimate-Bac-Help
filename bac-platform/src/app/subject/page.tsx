@@ -1,5 +1,6 @@
 import { AppShell } from "@/components/layout/app-shell";
-import { subjects } from "@/lib/subjects";
+import { subjects, isEssentialSubject } from "@/lib/subjects";
+import { getSubjectStats } from "@/data/bac-content";
 import Link from "next/link";
 import { FadeInSection } from "@/components/effects/fade-in-section";
 
@@ -25,7 +26,9 @@ export default function SubjectsOverviewPage() {
         {/* ── Subjects Bento Grid Directory ── */}
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" aria-label="قائمة المواد الدراسية">
           {subjects.map((subject, index) => {
-            const isEssential = ["math", "science", "physics"].includes(subject.slug);
+            const isEssential = isEssentialSubject(subject.defaultCoefficient);
+            const stats = getSubjectStats(subject.slug);
+
             return (
               <FadeInSection key={subject.slug} delay={index * 60}>
                 <Link
@@ -53,19 +56,19 @@ export default function SubjectsOverviewPage() {
                     ملخصات شاملة، دروس محلولة، ومواضيع بكالوريا سابقة مرتبة حسب الوحدات.
                   </p>
 
-                  {/* Bottom Stats Footer */}
-                  <div className="mt-auto grid grid-cols-3 gap-2 border-t border-primary/10 pt-4 relative z-10 text-center">
+                  {/* Bottom Stats Footer (Real Dynamic Data) */}
+                  <div className="mt-auto grid grid-cols-2 gap-2 border-t border-primary/10 pt-4 relative z-10 text-center">
                     <div className="flex flex-col items-center">
-                      <span className="font-body text-label-md font-bold text-primary">دروس</span>
-                      <span className="font-body text-caption text-on-surface-variant">شاملة</span>
+                      <span className="font-body text-label-md font-bold text-primary" dir="ltr">
+                        {stats.fileCount}
+                      </span>
+                      <span className="font-body text-caption text-on-surface-variant">ملف متاح</span>
                     </div>
-                    <div className="flex flex-col items-center border-r border-l border-primary/10">
-                      <span className="font-body text-label-md font-bold text-primary">تمارين</span>
-                      <span className="font-body text-caption text-on-surface-variant">محلولة</span>
-                    </div>
-                    <div className="flex flex-col items-center">
-                      <span className="font-body text-label-md font-bold text-secondary">حوالات</span>
-                      <span className="font-body text-caption text-on-surface-variant font-medium">بكالوريا</span>
+                    <div className="flex flex-col items-center border-r border-primary/10">
+                      <span className="font-body text-label-md font-bold text-primary" dir="ltr">
+                        {stats.sectionCount}
+                      </span>
+                      <span className="font-body text-caption text-on-surface-variant">أقسام / وحدات</span>
                     </div>
                   </div>
                 </Link>
@@ -77,5 +80,6 @@ export default function SubjectsOverviewPage() {
     </AppShell>
   );
 }
+
 
 
