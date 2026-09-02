@@ -96,6 +96,21 @@ export function UserMenu() {
             </div>
           )}
 
+          {/* Upload content link for teachers/admins */}
+          {(user.role === "teacher" || user.role === "admin") && (
+            <div className="mb-3 pt-2 border-t border-primary/10">
+              <Link
+                href="/contribute/upload-exam"
+                onClick={() => setIsOpen(false)}
+                className="w-full flex items-center gap-2 px-2.5 py-2 rounded-lg bg-secondary/5 hover:bg-secondary/10 text-secondary text-caption font-semibold transition-colors"
+              >
+                <span className="material-symbols-outlined text-base">upload_file</span>
+                <span>رفع محتوى تعليمي</span>
+              </Link>
+            </div>
+          )}
+
+
           <button
             onClick={() => {
               logout();
