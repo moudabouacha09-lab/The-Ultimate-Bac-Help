@@ -19,7 +19,7 @@ export type UserProfile = {
   email: string;
   branch: AcademicBranch;
   level: AcademicLevel;
-  role?: "student" | "teacher" | "inspector" | "admin";
+  role?: "student" | "teacher" | "admin";
   targetGrade?: number;
   createdAt: string;
 };
