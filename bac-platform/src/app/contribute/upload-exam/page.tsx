@@ -7,6 +7,7 @@ import { AppShell } from "@/components/layout/app-shell";
 import { useAuth } from "@/context/auth-context";
 import { createClient } from "@/lib/supabase/client";
 import { subjects } from "@/lib/subjects";
+import { SCIENTIFIC_STREAM_PROGRESS_DATA } from "@/data/bac-progress-data";
 import {
   UploadCloud,
   FileText,
@@ -28,6 +29,26 @@ const EXAM_TYPE_LABELS: Record<ExamType, string> = {
   series: "سلسلة",
 };
 
+// Build unit suggestions from the same curriculum used by /progress. This
+// keeps teacher tags in sync with the platform curriculum for every subject.
+// Raw values are stored in Supabase while the UI presents hashtags such as
+// #الدوال_العددية.
+const SUBJECT_UNIT_OPTIONS: Record<string, string[]> = Object.fromEntries(
+  SCIENTIFIC_STREAM_PROGRESS_DATA.map((subject) => {
+    const units = subject.lessons.map((lesson) =>
+      lesson.title
+        .replace(/^الوحدة\s*\d+\s*:\s*/i, "")
+        .replace(/^(?:First|Second|Third|Fourth|Forth)\s+Unit\s*:\s*/i, "")
+        .replace(/^\d+\.\s*/, "")
+        .trim()
+    );
+
+    return [subject.id, [...new Set(units)]];
+  })
+);
+
+const formatUnitTag = (unit: string) => `#${unit.trim().replace(/\s+/g, "_")}`;
+
 type UploadState = "idle" | "submitting" | "success";
 
 export default function UploadExamPage() {
@@ -42,6 +63,7 @@ export default function UploadExamPage() {
   const [examType, setExamType] = useState<ExamType>("trimestre1");
   const [units, setUnits] = useState<string[]>([]);
   const [unitInput, setUnitInput] = useState("");
+  const [isUnitMenuOpen, setIsUnitMenuOpen] = useState(false);
   const [corrigeStatus, setCorrigeStatus] = useState<CorrigeStatus>("unavailable");
 
   const [examFile, setExamFile] = useState<File | null>(null);
@@ -72,6 +94,19 @@ export default function UploadExamPage() {
     setUnitInput("");
   };
 
+  const handleSubjectChange = (value: string) => {
+    setSubjectSlug(value);
+    // Units belong to the selected subject; never carry tags across subjects.
+    setUnits([]);
+    setUnitInput("");
+    setIsUnitMenuOpen(false);
+  };
+
+  const availableUnits = SUBJECT_UNIT_OPTIONS[subjectSlug] ?? [];
+  const filteredUnits = availableUnits.filter((unit) =>
+    !units.includes(unit) && unit.toLocaleLowerCase().includes(unitInput.trim().toLocaleLowerCase())
+  );
+
   const removeUnit = (unit: string) => {
     setUnits((prev) => prev.filter((u) => u !== unit));
   };
@@ -80,8 +115,11 @@ export default function UploadExamPage() {
     if (e.key === "Enter" || e.key === "،" || e.key === ",") {
       e.preventDefault();
       addUnit(unitInput);
+      setIsUnitMenuOpen(false);
     } else if (e.key === "Backspace" && unitInput === "" && units.length > 0) {
       setUnits((prev) => prev.slice(0, -1));
+    } else if (e.key === "Escape") {
+      setIsUnitMenuOpen(false);
     }
   };
 
@@ -341,7 +379,7 @@ export default function UploadExamPage() {
                     <select
                       required
                       value={subjectSlug}
-                      onChange={(e) => setSubjectSlug(e.target.value)}
+                      onChange={(e) => handleSubjectChange(e.target.value)}
                       className="w-full appearance-none bg-surface-bright border border-primary/20 rounded-lg px-4 py-3 text-on-surface font-body text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors cursor-pointer pr-10"
                     >
                       <option value="">اختر المادة...</option>
@@ -387,38 +425,80 @@ export default function UploadExamPage() {
                 <div className="md:col-span-2">
                   <label className="block font-body text-label-md font-bold text-on-surface mb-2 text-right">
                     الوحدات المغطاة{" "}
-                    <span className="text-on-surface-variant text-caption font-normal">(اختياري — اضغط Enter لإضافة وحدة)</span>
+                    <span className="text-on-surface-variant text-caption font-normal">(اختياري — اختر وحدة أو اكتب وحدة جديدة)</span>
                   </label>
-                  <div
-                    className="bg-surface-bright border border-primary/20 rounded-lg p-3 min-h-[52px] flex flex-wrap gap-2 items-center focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-colors cursor-text"
-                    onClick={() => document.getElementById("unit-input")?.focus()}
-                  >
-                    {units.map((unit) => (
-                      <span
-                        key={unit}
-                        className="bg-primary/10 text-primary font-body text-label-md px-3 py-1 rounded-full flex items-center gap-1.5"
-                      >
-                        {unit}
-                        <button
-                          type="button"
-                          onClick={() => removeUnit(unit)}
-                          className="hover:text-error transition-colors cursor-pointer"
-                          aria-label={`حذف ${unit}`}
+                  <div className="relative">
+                    <div
+                      className={`bg-surface-bright border border-primary/20 rounded-lg p-3 min-h-[52px] flex flex-wrap gap-2 items-center focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-colors ${subjectSlug ? "cursor-text" : "cursor-not-allowed opacity-70"}`}
+                      onClick={() => {
+                        if (!subjectSlug) return;
+                        document.getElementById("unit-input")?.focus();
+                        setIsUnitMenuOpen(true);
+                      }}
+                    >
+                      {units.map((unit) => (
+                        <span
+                          key={unit}
+                          className="bg-primary/10 text-primary font-body text-label-md px-3 py-1 rounded-full flex items-center gap-1.5"
                         >
-                          <X size={14} />
-                        </button>
-                      </span>
-                    ))}
-                    <input
-                      id="unit-input"
-                      type="text"
-                      value={unitInput}
-                      onChange={(e) => setUnitInput(e.target.value)}
-                      onKeyDown={handleUnitKeyDown}
-                      onBlur={() => { if (unitInput.trim()) addUnit(unitInput); }}
-                      placeholder={units.length === 0 ? "مثال: الدوال العددية، النهايات..." : "أضف وحدة..."}
-                      className="flex-1 bg-transparent border-none outline-none font-body text-body-md text-on-surface placeholder:text-on-surface-variant/50 min-w-[150px] py-0.5"
-                    />
+                          {formatUnitTag(unit)}
+                          <button
+                            type="button"
+                            onClick={() => removeUnit(unit)}
+                            className="hover:text-error transition-colors cursor-pointer"
+                            aria-label={`حذف ${formatUnitTag(unit)}`}
+                          >
+                            <X size={14} />
+                          </button>
+                        </span>
+                      ))}
+                      <input
+                        id="unit-input"
+                        type="text"
+                        value={unitInput}
+                        disabled={!subjectSlug}
+                        onChange={(e) => {
+                          setUnitInput(e.target.value);
+                          setIsUnitMenuOpen(true);
+                        }}
+                        onFocus={() => subjectSlug && setIsUnitMenuOpen(true)}
+                        onKeyDown={handleUnitKeyDown}
+                        onBlur={() => window.setTimeout(() => setIsUnitMenuOpen(false), 120)}
+                        placeholder={!subjectSlug ? "اختر المادة أولاً" : units.length === 0 ? "اضغط هنا لاختيار الوحدات..." : "أضف وحدة..."}
+                        className="flex-1 bg-transparent border-none outline-none font-body text-body-md text-on-surface placeholder:text-on-surface-variant/50 min-w-[180px] py-0.5 disabled:cursor-not-allowed"
+                      />
+                    </div>
+
+                    {subjectSlug && isUnitMenuOpen && (
+                      <div
+                        className="absolute inset-x-0 top-[calc(100%+0.5rem)] z-30 max-h-64 overflow-y-auto rounded-xl border border-primary/15 bg-surface-bright p-2 shadow-xl"
+                        role="listbox"
+                        aria-label="الوحدات المتاحة للمادة"
+                      >
+                        {filteredUnits.length > 0 ? (
+                          filteredUnits.map((unit) => (
+                            <button
+                              key={unit}
+                              type="button"
+                              role="option"
+                              onMouseDown={(e) => e.preventDefault()}
+                              onClick={() => {
+                                addUnit(unit);
+                                setIsUnitMenuOpen(false);
+                              }}
+                              className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-right font-body text-label-md text-on-surface transition-colors hover:bg-primary/10 hover:text-primary"
+                            >
+                              <span>{formatUnitTag(unit)}</span>
+                              <span className="text-caption text-on-surface-variant">إضافة</span>
+                            </button>
+                          ))
+                        ) : (
+                          <p className="px-3 py-2 text-right font-body text-caption text-on-surface-variant">
+                            لا توجد وحدة مطابقة. اضغط Enter لإضافة وسم مخصص.
+                          </p>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
