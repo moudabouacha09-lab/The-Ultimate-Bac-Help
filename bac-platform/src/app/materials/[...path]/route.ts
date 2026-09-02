@@ -4,6 +4,10 @@ import { Readable } from "node:stream";
 import path from "node:path";
 import { NextResponse } from "next/server";
 
+// This route uses Node's filesystem APIs for local/self-hosted development.
+// Keep it on the Node runtime; production deployments fall back to GitHub.
+export const runtime = "nodejs";
+
 const contentTypes: Record<string, string> = {
   ".pdf": "application/pdf",
   ".png": "image/png",
@@ -115,10 +119,12 @@ export async function GET(request: Request, { params }: MaterialsRouteProps) {
   }
 
   try {
-    const fileStats = await stat(resolvedFilePath);
+    // The path is validated and constrained to the configured material roots above.
+    // Turbopack should not trace the entire repository for this runtime-resolved path.
+    const fileStats = await stat(/*turbopackIgnore: true*/ resolvedFilePath);
     const isDownload = request.url.includes("download=1");
 
-    const nodeStream = createReadStream(resolvedFilePath);
+    const nodeStream = createReadStream(/*turbopackIgnore: true*/ resolvedFilePath);
     // Convert Node ReadStream to Web ReadableStream for 100% Next.js / Web Response standards
     const webStream = Readable.toWeb(nodeStream);
 
