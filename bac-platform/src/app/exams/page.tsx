@@ -7,7 +7,8 @@ import { AppShell } from "@/components/layout/app-shell";
 import { FadeInSection } from "@/components/effects/fade-in-section";
 import { createClient } from "@/lib/supabase/client";
 import { subjects } from "@/lib/subjects";
-import { Eye, FileText, CheckCircle2, AlertCircle } from "lucide-react";
+import { Eye, FileText, Download, CheckCircle2, AlertCircle } from "lucide-react";
+
 
 type ExamRow = {
   id: string;
@@ -493,29 +494,24 @@ export default function ExamsListPage() {
 
                     {/* Card Actions Footer */}
                     <div className="flex items-center gap-2 pt-3 border-t border-primary/10 mt-auto relative z-10">
-                      <a
-                        href={examUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <Link
+                        href={`/exams/${exam.id}`}
                         className="flex-1 bg-primary text-on-primary font-body text-label-md font-semibold px-4 py-2.5 rounded-lg hover:bg-primary/90 transition-colors flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
                       >
                         <Eye size={16} />
-                        <span>معاينة الامتحان</span>
-                      </a>
+                        <span>خوض الاختبار والحل</span>
+                      </Link>
 
-                      {corrigeUrl && (
-                        <a
-                          href={corrigeUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-4 py-2.5 border border-primary text-primary font-body text-label-md font-semibold rounded-lg hover:bg-primary/5 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
-                          title="معاينة الحل والتصحيح"
-                        >
-                          <FileText size={16} />
-                          <span className="hidden sm:inline">التصحيح</span>
-                        </a>
-                      )}
+                      <a
+                        href={examUrl}
+                        download
+                        className="px-3 py-2.5 border border-primary/20 text-primary font-body text-label-md font-semibold rounded-lg hover:bg-primary/5 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                        title="تحميل ملف الموضوع PDF"
+                      >
+                        <Download size={16} />
+                      </a>
                     </div>
+
                   </article>
                 </FadeInSection>
               );
