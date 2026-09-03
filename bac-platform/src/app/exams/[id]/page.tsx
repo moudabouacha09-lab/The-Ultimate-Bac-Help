@@ -20,6 +20,8 @@ import {
   BookOpen,
   Award,
 } from "lucide-react";
+import { ExamCard, type ExamCardData } from "@/components/exams/exam-card";
+
 
 type ExamData = {
   id: string;
@@ -67,6 +69,66 @@ export default function ExamTakingPage({ params }: PageProps) {
   const [attemptId, setAttemptId] = useState<string | null>(null);
   const [selectedWeakUnits, setSelectedWeakUnits] = useState<string[]>([]);
   const [savingHelp, setSavingHelp] = useState(false);
+
+  // Recommendations state
+  const [recommendations, setRecommendations] = useState<ExamCardData[]>([]);
+  const [loadingRecs, setLoadingRecs] = useState(false);
+
+  // Fetch recommendations based on weak units
+  const fetchRecommendations = async (weakUnits: string[]) => {
+    if (!exam || weakUnits.length === 0) return;
+    setLoadingRecs(true);
+    try {
+      const { data, error } = await supabase
+        .from("exams")
+        .select("*")
+        .eq("status", "approved")
+        .eq("subject_slug", exam.subject_slug)
+        .neq("id", exam.id)
+        .overlaps("units", weakUnits);
+
+      if (error || !data || data.length === 0) {
+        setRecommendations([]);
+        return;
+      }
+
+      // Sort: series first, then the rest. Keep the newest items stable within each type.
+      const sorted = [...data].sort((a, b) => {
+        if (a.type === "series" && b.type !== "series") return -1;
+        if (a.type !== "series" && b.type === "series") return 1;
+        return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+      });
+      const limited = sorted.slice(0, 6);
+
+      // Fetch author profiles
+      const userIds = [...new Set(limited.map((e) => e.created_by).filter(Boolean))];
+      let profilesMap: Record<string, string> = {};
+      if (userIds.length > 0) {
+        const { data: profiles } = await supabase
+          .from("profiles")
+          .select("id, title, full_name")
+          .in("id", userIds);
+        if (profiles) {
+          profiles.forEach((p) => {
+            profilesMap[p.id] = p.title || p.full_name || "";
+          });
+        }
+      }
+
+      const mapped: ExamCardData[] = limited.map((e) => ({
+        ...e,
+        teacherTitle: profilesMap[e.created_by] || null,
+      }));
+
+      setRecommendations(mapped);
+    } catch (err) {
+      console.error("Error fetching recommendations:", err);
+      setRecommendations([]);
+    } finally {
+      setLoadingRecs(false);
+    }
+  };
+
 
   // Fetch Exam Data
   useEffect(() => {
@@ -193,13 +255,14 @@ export default function ExamTakingPage({ params }: PageProps) {
           })
           .eq("id", attemptId);
       }
-      setGradeState("help_saved");
     } catch (err) {
       console.error("Error updating weak units:", err);
-      setGradeState("help_saved");
     } finally {
       setSavingHelp(false);
     }
+
+    setGradeState("help_saved");
+    await fetchRecommendations(selectedWeakUnits);
   };
 
   if (loading) {
@@ -612,6 +675,40 @@ export default function ExamTakingPage({ params }: PageProps) {
             </div>
           </section>
         </div>
+
+        {gradeState === "help_saved" && selectedWeakUnits.length > 0 && (
+          <section
+            aria-labelledby="recommendations-heading"
+            className="bg-surface-bright border border-primary/10 rounded-xl p-5 md:p-6 shadow-sm space-y-5"
+          >
+            <div className="border-b border-primary/10 pb-3">
+              <h2
+                id="recommendations-heading"
+                className="font-headline text-headline-md text-primary font-bold flex items-center gap-2"
+              >
+                <Sparkles size={18} className="text-secondary" />
+                <span>تمارين وامتحانات موصى بها لهذه الوحدات</span>
+              </h2>
+            </div>
+
+            {loadingRecs ? (
+              <div className="py-6 text-center">
+                <div className="inline-block w-8 h-8 border-3 border-primary/30 border-t-primary rounded-full animate-spin mb-3" />
+                <p className="font-body text-body-md text-on-surface-variant">جاري البحث عن تمارين مناسبة...</p>
+              </div>
+            ) : recommendations.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {recommendations.map((recommendedExam) => (
+                  <ExamCard key={recommendedExam.id} exam={recommendedExam} />
+                ))}
+              </div>
+            ) : (
+              <p className="py-4 text-center font-body text-body-md text-on-surface-variant">
+                لا توجد تمارين إضافية على هذه الوحدات حالياً، تحقق لاحقاً
+              </p>
+            )}
+          </section>
+        )}
       </div>
     </AppShell>
   );

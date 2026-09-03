@@ -37,6 +37,12 @@ export function BottomNav() {
       href: "/progress",
       isActive: pathname.startsWith("/progress"),
       icon: "trending_up"
+    },
+    {
+      label: "التحليلات",
+      href: "/analytics",
+      isActive: pathname.startsWith("/analytics"),
+      icon: "analytics"
     }
   ];
 

@@ -1,0 +1,517 @@
+<!-- لوحة التحليلات الأكاديمية - المساعد النهائي للبكالوريا -->
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;1,8..60,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-secondary-container": "#785a1a",
+                "surface-container-highest": "#e4e2de",
+                "tertiary-fixed": "#acf4a4",
+                "background": "#fbf9f5",
+                "secondary-fixed-dim": "#e9c176",
+                "on-tertiary": "#ffffff",
+                "secondary-fixed": "#ffdea5",
+                "error-container": "#ffdad6",
+                "surface-container-high": "#eae8e4",
+                "on-surface": "#1b1c1a",
+                "primary-fixed-dim": "#94d3c1",
+                "surface-bright": "#fbf9f5",
+                "surface-container-low": "#f5f3ef",
+                "tertiary-container": "#064f13",
+                "secondary-container": "#fed488",
+                "on-primary-fixed": "#00201a",
+                "on-tertiary-fixed": "#002203",
+                "on-error-container": "#93000a",
+                "tertiary-fixed-dim": "#91d78a",
+                "on-primary": "#ffffff",
+                "outline-variant": "#bfc9c4",
+                "on-secondary-fixed-variant": "#5d4201",
+                "inverse-surface": "#30312e",
+                "surface-container": "#efeeea",
+                "on-secondary": "#ffffff",
+                "tertiary": "#003608",
+                "primary-container": "#004d40",
+                "surface-dim": "#dbdad6",
+                "surface-container-lowest": "#ffffff",
+                "primary-fixed": "#afefdd",
+                "on-error": "#ffffff",
+                "on-tertiary-container": "#7cc176",
+                "on-primary-fixed-variant": "#065043",
+                "surface-tint": "#29695b",
+                "outline": "#707975",
+                "surface-variant": "#e4e2de",
+                "surface": "#fbf9f5",
+                "on-primary-container": "#7ebdac",
+                "error": "#ba1a1a",
+                "on-tertiary-fixed-variant": "#0c5216",
+                "on-surface-variant": "#3f4945",
+                "primary": "#00342b",
+                "secondary": "#775a19",
+                "on-secondary-fixed": "#261900",
+                "on-background": "#1b1c1a",
+                "inverse-primary": "#94d3c1",
+                "inverse-on-surface": "#f2f0ed"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {
+                "sm": "12px",
+                "md": "24px",
+                "base": "8px",
+                "xs": "4px",
+                "gutter": "24px",
+                "margin-desktop": "64px",
+                "xl": "80px",
+                "margin-mobile": "16px",
+                "lg": "48px"
+        },
+        "fontFamily": {
+                "display-lg": [
+                        "\"Source Serif 4\""
+                ],
+                "headline-lg": [
+                        "\"Source Serif 4\""
+                ],
+                "body-lg": [
+                        "IBM Plex Sans"
+                ],
+                "label-md": [
+                        "IBM Plex Sans"
+                ],
+                "label-sm": [
+                        "IBM Plex Sans"
+                ],
+                "headline-lg-mobile": [
+                        "\"Source Serif 4\""
+                ],
+                "title-md": [
+                        "\"Source Serif 4\""
+                ],
+                "body-md": [
+                        "IBM Plex Sans"
+                ]
+        },
+        "fontSize": {
+                "display-lg": [
+                        "48px",
+                        {
+                                "lineHeight": "56px",
+                                "fontWeight": "700"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-md": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "letterSpacing": "0.02em",
+                                "fontWeight": "500"
+                        }
+                ],
+                "label-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "fontWeight": "500"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "title-md": [
+                        "20px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ]
+        }
+},
+    },
+  }</script></head><body class="bg-background font-body-md text-body-md text-on-surface min-h-screen selection:bg-secondary-fixed selection:text-on-secondary-fixed"><aside class="fixed right-0 top-0 h-full w-64 bg-surface-container-low z-50 flex flex-col justify-between pt-base pb-md"><div class="flex flex-col"><div class="h-16 px-md flex items-center justify-between"><div class="flex items-center gap-xs"><div class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[22px]">school</span></div><div class="flex flex-col mr-xs"><span class="font-title-md text-title-md text-primary font-bold tracking-tight leading-none">رفيق البكالوريا</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-tight">المساعد الأكاديمي</span></div></div></div><nav class="flex flex-col gap-xs px-sm mt-md" data-active-classes="bg-primary-container text-on-primary font-medium rounded-lg"><a class="flex items-center gap-sm px-sm py-base rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">home</span><span class="font-label-md text-label-md">الرئيسية</span></a><a class="flex items-center gap-sm px-sm py-base rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="subjects" href="#"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-label-md text-label-md">المواد</span></a><a class="flex items-center gap-sm px-sm py-base rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="progress" href="#"><span class="material-symbols-outlined text-[20px]">task_alt</span><span class="font-label-md text-label-md">تتبع التقدم</span></a><a aria-current="page" class="flex items-center gap-sm px-sm py-base transition-colors bg-primary-container text-on-primary font-medium rounded-lg" data-path="analytics" href="#"><span class="material-symbols-outlined text-[20px]">analytics</span><span class="font-label-md text-label-md">التحليلات</span></a><a class="flex items-center gap-sm px-sm py-base rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="tools" href="#"><span class="material-symbols-outlined text-[20px]">construction</span><span class="font-label-md text-label-md">الأدوات</span></a></nav></div><div class="px-sm flex flex-col gap-xs"><div class="p-sm rounded-lg bg-surface-container flex flex-col gap-xs"><div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm"><span>امتحان البكالوريا</span><span class="font-label-md text-label-md font-bold text-primary">98 يوم</span></div><div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden"><div class="h-full bg-primary rounded-full" style="width: 65%"></div></div></div><a class="flex items-center gap-sm px-sm py-base rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="settings" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span class="font-label-md text-label-md">الإعدادات</span></a></div></aside><div class="pr-64"><header class="fixed top-0 right-64 left-0 h-16 bg-surface/80 backdrop-blur-xl z-40 flex items-center justify-between px-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-base"><div class="flex items-center bg-surface-container-low px-sm py-xs rounded-lg text-on-surface-variant w-80"><span class="material-symbols-outlined text-outline text-[20px] ml-xs">search</span><span class="font-label-md text-label-md text-outline">ابحث عن درس، تمرين، أو ملخص...</span></div></div><div class="flex items-center gap-sm"><button aria-label="الإشعارات" class="w-9 h-9 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span></button><button aria-label="المساعدة" class="w-9 h-9 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">help_outline</span></button><div class="h-6 w-[1px] bg-outline-variant/30 mx-xs"></div><div class="flex items-center gap-xs"><div class="flex flex-col text-left"><span class="font-label-md text-label-md font-semibold text-on-surface">أحمد بلقاسم</span><span class="font-label-sm text-label-sm text-on-surface-variant">شعبة علوم تجريبية</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="relative pt-16 w-full px-md bg-background"><div class="flex flex-col w-full pb-xl">
+<!-- Top Banner & Context Header -->
+<div class="flex flex-col gap-base mt-base mb-md">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-base bg-surface-container-lowest p-md rounded-xl shadow-sm">
+<div class="flex flex-col gap-xs">
+<div class="flex items-center gap-xs">
+<span class="px-sm py-xs bg-primary-container text-on-primary font-label-sm text-label-sm rounded-lg font-medium">
+            أحمد بن سالم — شعبة علوم تجريبية
+          </span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">
+            الدورة الأكاديمية 2024/2025
+          </span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary font-bold tracking-tight">
+          تحليلات الأداء والامتحانات التجريبية
+        </h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+          لوحة موجهة لتقييم نتائج اختباراتك الذاتية ورصد الأولويات الدراسية بهدوء وفعالية
+        </p>
+</div>
+<div class="flex items-center gap-sm">
+<button class="inline-flex items-center gap-xs px-md py-sm bg-primary text-on-primary font-label-md text-label-md rounded-lg shadow-sm hover:bg-primary-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+<span>تسجيل نتيجة اختبار ذاتي</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Overall Score & Visual Diagnostic Hero Card -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter mb-lg">
+<!-- Main Average Highlight Card -->
+<div class="lg:col-span-8 flex flex-col justify-between p-md bg-surface-container-lowest rounded-xl shadow-sm">
+<div class="flex flex-col gap-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-secondary text-[22px]">analytics</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-medium">المعدل العام للاختبارات المقيمة ذاتياً</span>
+</div>
+<span class="px-sm py-xs bg-surface-container text-on-surface-variant rounded-lg font-label-sm text-label-sm">
+            محدث اليوم
+          </span>
+</div>
+<div class="flex items-baseline gap-xs mt-xs">
+<span class="font-display-lg text-display-lg text-primary font-bold">14.35</span>
+<span class="font-title-md text-title-md text-on-surface-variant font-medium">/ 20</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          محسوب بناءً على 8 اختبارات تم تصحيحها ذاتياً وفق سلم التنقيط الرسمي لوزارة التربية الوطنية.
+        </p>
+<!-- Evaluation Badge -->
+<div class="inline-flex items-center gap-xs px-sm py-xs bg-primary-container/10 text-primary rounded-lg font-label-md text-label-md font-semibold self-start mt-xs">
+<span class="material-symbols-outlined text-[18px]">trending_up</span>
+<span>أداء واعد ومستقر — تقدم ملحوظ بنسبة +0.8 هذا الشهر</span>
+</div>
+</div>
+<!-- Quick Metrics Strip -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-sm mt-md pt-sm bg-surface-container-low p-sm rounded-lg">
+<div class="flex items-center gap-xs">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">assignment_turned_in</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">الحصيلة المقيمة</span>
+<span class="font-label-md text-label-md font-bold text-on-surface">8 اختبارات منجزة</span>
+</div>
+</div>
+<div class="flex items-center gap-xs">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">أعلى نقطة مسجلة</span>
+<span class="font-label-md text-label-md font-bold text-on-surface">17.5 / 20 (علوم طبيعية)</span>
+</div>
+</div>
+<div class="flex items-center gap-xs">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-secondary-fixed-variant">
+<span class="material-symbols-outlined text-[18px]">rule</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">محاور الدعم</span>
+<span class="font-label-md text-label-md font-bold text-on-surface">5 وحدات موصى بمراجعتها</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Editorial Motivational Context & Quick Photo Insight -->
+<div class="lg:col-span-4 flex flex-col justify-between p-md bg-surface-container-lowest rounded-xl shadow-sm">
+<div class="flex flex-col gap-sm">
+<div class="flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-md text-label-md text-secondary font-semibold">منهجية المذاكرة المتوازنة</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface font-bold">
+          التركيز الذكي بدلاً من الجهد المشتت
+        </h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          الهدف ليس مراجعة كل شيء في آن واحد، بل استثمار الوقت في المواد ذات المعامل المرتفع التي تفصلك عن معدلك المنشود.
+        </p>
+</div>
+<div class="mt-sm overflow-hidden rounded-lg bg-surface-container-high relative">
+<img class="w-full h-32 object-cover" data-alt="A focused Algerian high school student working at a tidy wooden desk with textbooks and physical notebooks in a warm sunlit study corner, deep teal and cream palette, clean and authentic academic atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqOcOz94uJt0sz5uXQsGn4PHIQv37XzgFUtH17aVTuKXvCWX0KMoU5ntJz8CUrB8UzMX6b4i1nW8knD_hUuALBEI3AT5BSg4aKCw1wymWOo6AsnqmTAQEUBwYDMiN8iYgtHAL7X6mhr3wknY45-0kiAODJ0NmUo5sigJehxh1_vxZD_607rnb5f8VrhbSoGqVPy1sOd1pLTk8HI1JL214_uYndQbbFVn2H7s6ciC2EvHWrp6T4J04"/>
+<div class="p-xs bg-surface-container-lowest/90 backdrop-blur-sm text-center">
+<span class="font-label-sm text-label-sm text-on-surface font-medium">
+            استمرارية المجهود اليومي تصنع الامتياز
+          </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Section Header: Priority Subject Analytics -->
+<div class="flex flex-col gap-xs mb-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-[24px]">balance</span>
+<h2 class="font-title-md text-title-md text-primary font-bold">
+          المواد التي تحتاج اهتماماً أكبر
+        </h2>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">
+        مرتبة وفق الأثر التراكمي
+      </span>
+</div>
+<div class="p-sm bg-surface-container-low rounded-lg text-on-surface-variant font-body-md text-body-md">
+      تم ترتيب المواد حسب معاملها في شهادة البكالوريا والفارق عن معدلك المستهدف، لتحديد أولويات المراجعة الأكثر تأثيراً على معدلك النهائي دون قلق أو إرباك.
+    </div>
+</div>
+<!-- Priority Subjects Stack -->
+<div class="flex flex-col gap-sm mb-lg">
+<!-- Subject 1: High Priority (Mathematics) -->
+<div class="p-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col gap-sm">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-xs">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[24px]">functions</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-xs">
+<h3 class="font-title-md text-title-md text-on-surface font-bold">الرياضيات</h3>
+<span class="font-label-sm text-label-sm px-xs py-[2px] bg-surface-container text-on-surface-variant rounded">المعامل: 7</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">العلوم التجريبية</span>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<div class="flex flex-col items-end">
+<span class="font-label-sm text-label-sm text-on-surface-variant">المعدل الحالي</span>
+<span class="font-title-md text-title-md text-primary font-bold">11.50 <span class="text-label-sm text-on-surface-variant">/ 20</span></span>
+</div>
+<span class="px-sm py-xs bg-secondary-container text-on-secondary-container font-label-sm text-label-sm rounded-lg font-semibold flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+            أولوية مرتفعة للمراجعة
+          </span>
+</div>
+</div>
+<div class="p-sm bg-surface-container-low rounded-lg flex items-start gap-xs text-on-surface">
+<span class="material-symbols-outlined text-secondary text-[20px] shrink-0 mt-[2px]">lightbulb</span>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          المعامل المرتفع (7) يجعل تحسين نقطتين في هذه المادة يرفع معدلك العام بمقدار <strong class="text-on-surface">0.7 نقطة</strong> مباشرة في الحساب النهائي.
+        </p>
+</div>
+<div class="flex flex-col gap-xs pt-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">
+          الوحدات المرصودة للتقوية (أحتاج مساعدة):
+        </span>
+<div class="flex flex-wrap gap-xs">
+<span class="px-sm py-xs bg-surface-container-high text-on-surface font-label-md text-label-md rounded-lg flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-secondary">arrow_left</span>
+            الدوال الأسية واللوغاريتمية
+          </span>
+<span class="px-sm py-xs bg-surface-container-high text-on-surface font-label-md text-label-md rounded-lg flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-secondary">arrow_left</span>
+            المتتاليات العددية (التراجع)
+          </span>
+<span class="px-sm py-xs bg-surface-container-high text-on-surface font-label-md text-label-md rounded-lg flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-secondary">arrow_left</span>
+            الهندسة الفضائية
+          </span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant">
+          تم إجراء 3 اختبارات ذاتية
+        </span>
+<button class="inline-flex items-center gap-xs px-sm py-xs bg-primary text-on-primary rounded-lg font-label-md text-label-md font-medium hover:bg-primary-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">library_books</span>
+<span>استعراض ملخصات وتمارين هذه الوحدات</span>
+</button>
+</div>
+</div>
+<!-- Subject 2: Medium Priority (Physics & Chemistry) -->
+<div class="p-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col gap-sm">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-xs">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">science</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-xs">
+<h3 class="font-title-md text-title-md text-on-surface font-bold">العلوم الفيزيائية</h3>
+<span class="font-label-sm text-label-sm px-xs py-[2px] bg-surface-container text-on-surface-variant rounded">المعامل: 6</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">العلوم التجريبية</span>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<div class="flex flex-col items-end">
+<span class="font-label-sm text-label-sm text-on-surface-variant">المعدل الحالي</span>
+<span class="font-title-md text-title-md text-primary font-bold">13.25 <span class="text-label-sm text-on-surface-variant">/ 20</span></span>
+</div>
+<span class="px-sm py-xs bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm rounded-lg font-semibold flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+            أولوية متوسطة
+          </span>
+</div>
+</div>
+<div class="flex flex-col gap-xs pt-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">
+          الوحدات المرصودة للتقوية:
+        </span>
+<div class="flex flex-wrap gap-xs">
+<span class="px-sm py-xs bg-surface-container-high text-on-surface font-label-md text-label-md rounded-lg flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-secondary">bookmark_border</span>
+            الوحدة 4: تطور جملة كيميائية نحو التوازن (pH)
+          </span>
+<span class="px-sm py-xs bg-surface-container-high text-on-surface font-label-md text-label-md rounded-lg flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-secondary">bookmark_border</span>
+            الوحدة 5: حركة السقوط وحركة الأقمار
+          </span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant">
+          تم إجراء اختبارين ذاتيين
+        </span>
+<button class="inline-flex items-center gap-xs px-sm py-xs bg-surface-container text-on-surface font-label-md text-label-md font-medium rounded-lg hover:bg-surface-container-high transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">quiz</span>
+<span>تمارين نموذجية</span>
+</button>
+</div>
+</div>
+<!-- Subject 3: Moderate Priority (Philosophy) -->
+<div class="p-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col gap-sm">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-xs">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[24px]">psychology</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-xs">
+<h3 class="font-title-md text-title-md text-on-surface font-bold">الفلسفة</h3>
+<span class="font-label-sm text-label-sm px-xs py-[2px] bg-surface-container text-on-surface-variant rounded">المعامل: 2</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">العلوم التجريبية</span>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<div class="flex flex-col items-end">
+<span class="font-label-sm text-label-sm text-on-surface-variant">المعدل الحالي</span>
+<span class="font-title-md text-title-md text-primary font-bold">10.00 <span class="text-label-sm text-on-surface-variant">/ 20</span></span>
+</div>
+<span class="px-sm py-xs bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm rounded-lg font-semibold flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+            أولوية معتدلة
+          </span>
+</div>
+</div>
+<div class="flex flex-col gap-xs pt-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">
+          الوحدات المرصودة للتقوية:
+        </span>
+<div class="flex flex-wrap gap-xs">
+<span class="px-sm py-xs bg-surface-container-high text-on-surface font-label-md text-label-md rounded-lg flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">format_quote</span>
+            منهجية المقالة الفلسفية المقارنة
+          </span>
+<span class="px-sm py-xs bg-surface-container-high text-on-surface font-label-md text-label-md rounded-lg flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">format_quote</span>
+            الشعور بالذات والغير
+          </span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant">
+          تم إجراء اختبار ذاتي واحد مع تصحيح منهجي
+        </span>
+<button class="inline-flex items-center gap-xs px-sm py-xs bg-surface-container text-on-surface font-label-md text-label-md font-medium rounded-lg hover:bg-surface-container-high transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+<span>منهجيات كتابة المقال</span>
+</button>
+</div>
+</div>
+<!-- Subject 4: Excellent Level (Natural Sciences) -->
+<div class="p-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col gap-sm">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-xs">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined text-[24px]">biotech</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-xs">
+<h3 class="font-title-md text-title-md text-on-surface font-bold">علوم الطبيعة والحياة</h3>
+<span class="font-label-sm text-label-sm px-xs py-[2px] bg-surface-container text-on-surface-variant rounded">المعامل: 6</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">المادة الأساسية للشعبة</span>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<div class="flex flex-col items-end">
+<span class="font-label-sm text-label-sm text-on-surface-variant">المعدل الحالي</span>
+<span class="font-title-md text-title-md text-primary font-bold">16.50 <span class="text-label-sm text-on-surface-variant">/ 20</span></span>
+</div>
+<span class="px-sm py-xs bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm rounded-lg font-semibold flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+            مستوى ممتاز — واصل التثبيت
+          </span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-xs">
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-tertiary text-[18px]">done_all</span>
+<span class="font-label-md text-label-md">لا توجد وحدات متعثرة مرصودة حالياً. تمكن ممتاز من تركيب البروتين والمناعة.</span>
+</div>
+<button class="inline-flex items-center gap-xs px-sm py-xs bg-surface-container text-on-surface font-label-md text-label-md font-medium rounded-lg hover:bg-surface-container-high transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">history_edu</span>
+<span>مواضيع بكالوريات سابقة</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Low-Data / Empty-State Component: Supportive Academic Guidance -->
+<div class="p-md bg-surface-container-low rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-md">
+<div class="flex items-start gap-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[24px]">hourglass_empty</span>
+</div>
+<div class="flex flex-col gap-xs">
+<div class="flex items-center gap-xs">
+<span class="font-label-md text-label-md text-primary font-bold">
+            مواد قيد التقييم الأولي:
+          </span>
+<span class="font-label-md text-label-md text-on-surface">
+            التاريخ والجغرافيا (اختبار واحد) ، اللغة الإنجليزية (0 اختبارات)
+          </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">
+          أكمل المزيد من الاختبارات لنحصل على صورة أوضح عن مستواك — نفضل انتظار 3 اختبارات على الأقل قبل تقديم توصيات دقيقة لتجنب الأحكام المتسرعة.
+        </p>
+</div>
+</div>
+<button class="inline-flex items-center gap-xs px-md py-sm bg-primary text-on-primary font-label-md text-label-md font-medium rounded-lg hover:bg-primary-container transition-colors shrink-0" type="button">
+<span class="material-symbols-outlined text-[20px]">play_circle</span>
+<span>بدء اختبار في هذه المواد</span>
+</button>
+</div>
+</div></main></div></body></html>
