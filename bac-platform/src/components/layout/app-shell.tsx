@@ -38,6 +38,7 @@ export function AppShell({ children, activeSubject }: AppShellProps) {
     { href: "/tools", label: "الأدوات", active: pathname.startsWith("/tools") },
     { href: "/progress", label: "تقدمي", active: pathname.startsWith("/progress") },
     { href: "/analytics", label: "التحليلات", active: pathname.startsWith("/analytics") },
+    { href: "/team", label: "فريق العمل", active: pathname.startsWith("/team") },
   ];
 
 

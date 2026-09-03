@@ -1,7 +1,7 @@
 // src/app/contribute/page.tsx
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { AppShell } from "@/components/layout/app-shell";
 import { useAuth } from "@/context/auth-context";
@@ -11,12 +11,9 @@ import {
   GraduationCap,
   ShieldCheck,
   School,
-  UploadCloud,
   CheckCircle2,
   Clock,
   AlertCircle,
-  FileText,
-  X,
   Lock,
   Mail,
   Building2,
@@ -104,15 +101,10 @@ export default function ContributePage() {
   const [institution, setInstitution] = useState("");
   const [wilaya, setWilaya] = useState("");
   const [yearsExperience, setYearsExperience] = useState<string>("");
-  const [proofFile, setProofFile] = useState<File | null>(null);
   const [message, setMessage] = useState("");
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
-
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
   // Sync user name when user is loaded
   useEffect(() => {
     if (user?.username && !fullName) {
@@ -176,34 +168,6 @@ export default function ContributePage() {
     );
   };
 
-  // Handle file select
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      if (file.size > 10 * 1024 * 1024) {
-        setSubmitError("حجم الملف يجب ألا يتجاوز 10 ميغابايت");
-        return;
-      }
-      setProofFile(file);
-      setSubmitError(null);
-    }
-  };
-
-  // Handle drag and drop
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      const file = e.dataTransfer.files[0];
-      if (file.size > 10 * 1024 * 1024) {
-        setSubmitError("حجم الملف يجب ألا يتجاوز 10 ميغابايت");
-        return;
-      }
-      setProofFile(file);
-      setSubmitError(null);
-    }
-  };
-
   // Submit Handler
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -232,33 +196,7 @@ export default function ContributePage() {
     setIsSubmitting(true);
 
     try {
-      let proofFilePath: string | null = null;
-
-      // 1. Upload proof file if provided
-      if (proofFile) {
-        const fileExt = proofFile.name.split(".").pop() || "pdf";
-        const cleanBase = proofFile.name
-          .replace(/\.[^/.]+$/, "")
-          .replace(/[^a-zA-Z0-9_-]/g, "_");
-        const uniqueFileName = `${Date.now()}_${cleanBase}.${fileExt}`;
-        const path = `${user.id}/${uniqueFileName}`;
-
-        const { error: uploadError } = await supabase.storage
-          .from("contributor-proofs")
-          .upload(path, proofFile, {
-            cacheControl: "3600",
-            upsert: true
-          });
-
-        if (uploadError) {
-          console.error("Storage upload error:", uploadError);
-          throw new Error(`فشل رفع وثيقة الإثبات: ${uploadError.message}`);
-        }
-
-        proofFilePath = path;
-      }
-
-      // 2. Insert application row
+      // Insert application row
       const { error: insertError } = await supabase
         .from("contributor_applications")
         .insert({
@@ -269,7 +207,6 @@ export default function ContributePage() {
           institution: institution.trim(),
           wilaya: wilaya || null,
           years_experience: yearsExperience ? parseInt(yearsExperience.toString(), 10) : null,
-          proof_file_path: proofFilePath,
           message: message.trim() || null
         });
 
@@ -633,82 +570,7 @@ export default function ContributePage() {
                 />
               </div>
 
-              {/* 6. Proof of Status File Upload Dropzone */}
-              <div className="space-y-2">
-                <label className="block font-body text-label-md font-bold text-on-surface text-right">
-                  إثبات الصفة (شهادة عمل، بطاقة مهنية، أو قرار تعيين)
-                </label>
-                <div
-                  onDragOver={(e) => {
-                    e.preventDefault();
-                    setIsDragging(true);
-                  }}
-                  onDragLeave={() => setIsDragging(false)}
-                  onDrop={handleDrop}
-                  onClick={() => fileInputRef.current?.click()}
-                  className={`mt-1 flex flex-col items-center justify-center p-6 border-2 border-dashed rounded-xl cursor-pointer transition-all ${
-                    isDragging
-                      ? "border-primary bg-primary/10"
-                      : proofFile
-                      ? "border-primary/40 bg-primary/5"
-                      : "border-primary/20 bg-surface-container-lowest hover:bg-surface-container-low"
-                  }`}
-                >
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept=".pdf,.jpg,.jpeg,.png"
-                    onChange={handleFileChange}
-                    className="sr-only"
-                  />
-                  {proofFile ? (
-                    <div className="flex items-center gap-3 w-full justify-between p-2">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
-                          <FileText size={22} />
-                        </div>
-                        <div className="text-right">
-                          <p className="font-body text-label-md font-bold text-primary truncate max-w-xs md:max-w-md">
-                            {proofFile.name}
-                          </p>
-                          <p className="font-body text-caption text-on-surface-variant">
-                            {(proofFile.size / (1024 * 1024)).toFixed(2)} MB
-                          </p>
-                        </div>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setProofFile(null);
-                        }}
-                        className="p-1.5 rounded-full hover:bg-error/10 text-error transition-colors"
-                        title="إزالة الملف"
-                      >
-                        <X size={18} />
-                      </button>
-                    </div>
-                  ) : (
-                    <div className="space-y-2 text-center py-2">
-                      <div className="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center mx-auto">
-                        <UploadCloud size={26} />
-                      </div>
-                      <div className="text-body-md text-on-surface-variant">
-                        <span className="font-semibold text-primary underline">انقر لاختيار ملف</span> أو اسحب وأفلت هنا
-                      </div>
-                      <p className="font-body text-caption text-on-surface-variant/70">
-                        PDF, JPG, PNG حتى 10 ميغابايت
-                      </p>
-                    </div>
-                  )}
-                </div>
-                <p className="font-body text-caption text-on-surface-variant text-right flex items-center gap-1.5 pt-1">
-                  <Lock size={13} className="text-primary shrink-0" />
-                  <span>سيُستخدم فقط للتحقق ولن يُعرض علنياً</span>
-                </p>
-              </div>
-
-              {/* 7. Short Message (Optional) */}
+              {/* 6. Short Message (Optional) */}
               <div>
                 <label className="block font-body text-label-md font-bold text-on-surface mb-1.5 text-right">
                   رسالة قصيرة <span className="text-on-surface-variant text-caption font-normal">(اختياري)</span>
