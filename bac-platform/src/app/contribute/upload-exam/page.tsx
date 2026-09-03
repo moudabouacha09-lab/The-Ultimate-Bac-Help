@@ -198,12 +198,14 @@ export default function UploadExamPage() {
     }
 
     setUploadState("submitting");
+    let examPath: string | null = null;
+    let corrigePath: string | null = null;
+
     try {
       // 1. Upload exam file
-      const examPath = await uploadFile(examFile, "exam-files", user.id);
+      examPath = await uploadFile(examFile, "exam-files", user.id);
 
       // 2. Upload corrigé file if separate
-      let corrigePath: string | null = null;
       if (corrigeStatus === "upload" && corrigeFile) {
         corrigePath = await uploadFile(corrigeFile, "exam-files", `${user.id}/corrige`);
       }
@@ -228,6 +230,13 @@ export default function UploadExamPage() {
 
       setUploadState("success");
     } catch (err: any) {
+      const uploadedPaths = [examPath, corrigePath].filter((path): path is string => Boolean(path));
+      if (uploadedPaths.length > 0) {
+        const { error: cleanupError } = await supabase.storage.from("exam-files").remove(uploadedPaths);
+        if (cleanupError) {
+          console.warn("Could not clean up files after failed exam submission:", cleanupError.message);
+        }
+      }
       setSubmitError(err.message || "حدث خطأ أثناء الرفع. يرجى المحاولة مرة أخرى.");
       setUploadState("idle");
     }
