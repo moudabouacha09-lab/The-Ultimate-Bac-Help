@@ -118,6 +118,21 @@ export function UserMenu() {
             </div>
           )}
 
+          {/* Admin Dashboard link for admin */}
+          {user.role === "admin" && (
+            <div className="mb-3 pt-2 border-t border-primary/10">
+              <Link
+                href="/admin"
+                onClick={() => setIsOpen(false)}
+                className="w-full flex items-center gap-2 px-2.5 py-2 rounded-lg bg-slate-900 text-white text-caption font-bold hover:bg-slate-800 transition-colors"
+              >
+                <span className="material-symbols-outlined text-base">admin_panel_settings</span>
+                <span>لوحة تحكم الإدارة</span>
+              </Link>
+            </div>
+          )}
+
+
 
 
           <button
