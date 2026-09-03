@@ -34,9 +34,11 @@ export function AppShell({ children, activeSubject }: AppShellProps) {
   const navLinks = [
     { href: "/", label: "الرئيسية", active: pathname === "/" },
     { href: "/subject", label: "المواد", active: pathname.startsWith("/subject") },
+    { href: "/exams", label: "الاختبارات والسلاسل", active: pathname.startsWith("/exams") },
     { href: "/tools", label: "الأدوات", active: pathname.startsWith("/tools") },
     { href: "/progress", label: "تقدمي", active: pathname.startsWith("/progress") },
   ];
+
 
   return (
     <div className="flex flex-col min-h-screen">

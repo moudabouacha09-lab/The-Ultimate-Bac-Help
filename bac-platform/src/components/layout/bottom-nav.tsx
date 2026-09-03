@@ -20,11 +20,18 @@ export function BottomNav() {
       icon: "dashboard"
     },
     {
+      label: "الاختبارات",
+      href: "/exams",
+      isActive: pathname.startsWith("/exams"),
+      icon: "quiz"
+    },
+    {
       label: "الأدوات",
       href: "/tools",
       isActive: pathname.startsWith("/tools"),
       icon: "construction"
     },
+
     {
       label: "تقدمي",
       href: "/progress",
