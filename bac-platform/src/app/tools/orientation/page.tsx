@@ -1,10 +1,10 @@
+// src/app/tools/orientation/page.tsx
 "use client";
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import { AppShell } from "@/components/layout/app-shell";
 import { FadeInSection } from "@/components/effects/fade-in-section";
-import { GraduationCap, ArrowRight, Search } from "lucide-react";
 import {
   officialBranchesDatabase,
   streamLabels,
@@ -153,361 +153,620 @@ export default function OrientationHubPage() {
 
   return (
     <AppShell>
-      <div className="orientation-page">
-      <div className="back-link-wrapper">
-        <Link className="back-link" href="/tools">← العودة للأدوات</Link>
-      </div>
-
-      <section className="subject-page-heading">
+      <div className="max-w-7xl mx-auto px-gutter py-xl flex flex-col gap-xl">
+        {/* ── Breadcrumb / Back Link ── */}
         <div>
-          <p className="eyebrow">دليل التوجيه الجامعي الشامل 2026/2027</p>
-          <h1>المستشار الذكي للتوجيه والجامعات</h1>
-          <p style={{ marginTop: "0.5rem", color: "var(--text-secondary)" }}>
-            احسب معدلك الموزون، ابحث حسب هدفك المستقبلي بالعربية أو الفرنسية، وخطط لتخصص أحلامك.
-          </p>
-        </div>
-        <span className="subject-hero-icon subject-icon-blue" aria-hidden="true">
-          <GraduationCap size={32} />
-        </span>
-      </section>
-
-      <div className="official-disclaimer-banner">
-        <div className="official-disclaimer-title">
-          <span>ℹ️ تنبيه استرشادي رسمي:</span>
-        </div>
-        <p>
-          البيانات والمعدلات المعروضة في هذا المحاكي هي <strong>نتائج مرجعية تاريخية استرشادية</strong> مستخرجة مباشرةً من المنشور الوزاري رقم 01 لوزارة التعليم العالي والبحث العلمي (MESRS) والملف الرسمي لمعدلات القبول الأدنى للمرحلة الأولى 2026. لا تُعد هذه النتائج ضماناً حتمياً للقبول في الدوات القادمة، وتعتمد معادلات الحساب الموزون (g) على الصيغ والقواعد الوزارية الرسمية.
-        </p>
-        <div className="official-disclaimer-link">
-          🔗 لتأكيد رغباتك الرسمية والتسجيل النهائي، يرجى دائماً زيارة <a href="https://orientation-esi.dz" target="_blank" rel="noopener noreferrer">البوابة الرسمية للتوجيه الجامعي (orientation-esi.dz)</a>.
-        </div>
-      </div>
-
-      {/* Mode Toggles */}
-      <div className="orientation-tabs-wrapper">
-        <button
-          type="button"
-          className={`orientation-tab-btn ${activeMode === "predictor" ? "is-active" : ""}`}
-          onClick={() => setActiveTab("predictor")}
-        >
-          📊 مستكشف التوجيه بمعدلي
-        </button>
-        <button
-          type="button"
-          className={`orientation-tab-btn ${activeMode === "target" ? "is-active" : ""}`}
-          onClick={() => setActiveTab("target")}
-        >
-          🎯 حاسبة جامعة أحلامي
-        </button>
-      </div>
-
-      {/* Grade Input Controls */}
-      <section className="orientation-controls-card">
-        <div className="orientation-input-group">
-          <label htmlFor="stream-select">الشعبة الدراسية:</label>
-          <select 
-            id="stream-select"
-            value={selectedStream}
-            onChange={(e) => setSelectedStream(e.target.value as StreamKey)}
+          <Link
+            href="/tools"
+            className="inline-flex items-center gap-1.5 font-body text-label-md font-semibold text-primary hover:text-secondary transition-colors"
           >
-            {(Object.keys(streamLabels) as StreamKey[]).map((key) => (
-              <option key={key} value={key}>{streamLabels[key]}</option>
-            ))}
-          </select>
+            <span className="material-symbols-outlined text-lg">arrow_forward</span>
+            <span>العودة للأدوات المساعدة</span>
+          </Link>
         </div>
 
-        <div className="orientation-input-group">
-          <label htmlFor="gen-avg-input">المعدل العام التقديري:</label>
-          <input 
-            id="gen-avg-input"
-            type="text" 
-            inputMode="decimal"
-            placeholder="16.50"
-            value={gradeInputs.generalAverage ?? ""}
-            onChange={(e) => handleGradeChange("generalAverage", e.target.value)}
-          />
-        </div>
+        {/* ── Page Header ── */}
+        <header className="space-y-3 border-b border-primary/10 pb-6">
+          <span className="font-body text-label-md text-secondary bg-secondary/10 px-3.5 py-1 rounded-full inline-block font-semibold">
+            دليل التوجيه الجامعي الشامل 2026/2027 🎓
+          </span>
+          <h1 className="font-headline text-display-lg text-primary font-bold">
+            المستشار الذكي للتوجيه والجامعات
+          </h1>
+          <p className="font-body text-body-lg text-on-surface-variant max-w-3xl leading-relaxed">
+            احسب معدلك الموزون بدقة، ابحث حسب هدفك المستقبلي بالعربية أو الفرنسية، وتعرّف على التخصصات المتاحة لشعبتك وفق المنشور الوزاري الرسمي.
+          </p>
+        </header>
 
-        <div className="orientation-input-group">
-          <label htmlFor="math-input">الرياضيات:</label>
-          <input 
-            id="math-input"
-            type="text" 
-            inputMode="decimal"
-            placeholder="17.00"
-            value={gradeInputs.math ?? ""}
-            onChange={(e) => handleGradeChange("math", e.target.value)}
-          />
-        </div>
-
-        {(selectedStream === "Scientific" || selectedStream === "Mathematical") && (
-          <div className="orientation-input-group">
-            <label htmlFor="science-input">العلوم الطبيعية:</label>
-            <input 
-              id="science-input"
-              type="text" 
-              inputMode="decimal"
-              placeholder="16.50"
-              value={gradeInputs.science ?? ""}
-              onChange={(e) => handleGradeChange("science", e.target.value)}
-            />
+        {/* ── 1. Official Legal Disclaimer Banner ── */}
+        <section
+          aria-label="تنبيه استرشادي رسمي"
+          className="bg-surface-variant/40 border border-primary/15 rounded-xl p-5 md:p-6 shadow-sm flex flex-col sm:flex-row gap-4 items-start"
+        >
+          <div className="w-10 h-10 rounded-lg bg-secondary/10 text-secondary flex items-center justify-center shrink-0">
+            <span className="material-symbols-outlined text-2xl">info</span>
           </div>
-        )}
-
-        <div className="orientation-input-group">
-          <label htmlFor="physics-input">الفيزياء:</label>
-          <input 
-            id="physics-input"
-            type="text" 
-            inputMode="decimal"
-            placeholder="16.00"
-            value={gradeInputs.physics ?? ""}
-            onChange={(e) => handleGradeChange("physics", e.target.value)}
-          />
-        </div>
-      </section>
-
-      {/* MODE 1: Predictor List */}
-      {activeMode === "predictor" && (
-        <>
-          {/* Career Goal Filtering Pills */}
-          <div className="career-goals-scroll">
-            <button
-              type="button"
-              className={`career-pill ${selectedCareerGoal === "ALL" ? "is-active" : ""}`}
-              onClick={() => setSelectedCareerGoal("ALL")}
-            >
-              🌟 جميع الأهداف
-            </button>
-            {(Object.keys(careerGoalLabels) as CareerGoal[]).map((key) => (
-              <button
-                key={key}
-                type="button"
-                className={`career-pill ${selectedCareerGoal === key ? "is-active" : ""}`}
-                onClick={() => setSelectedCareerGoal(key)}
+          <div className="space-y-2 flex-1">
+            <h2 className="font-headline text-headline-md text-primary font-bold text-base md:text-lg">
+              تنبيه استرشادي رسمي:
+            </h2>
+            <p className="font-body text-body-md text-on-surface leading-relaxed">
+              البيانات والمعدلات المعروضة في هذا المحاكي هي <strong className="font-bold text-primary">نتائج مرجعية تاريخية استرشادية</strong> مستخرجة مباشرةً من المنشور الوزاري رقم 01 لوزارة التعليم العالي والبحث العلمي (MESRS) والملف الرسمي لمعدلات القبول الأدنى للمرحلة الأولى 2026. لا تُعد هذه النتائج ضماناً حتمياً للقبول في الدورات القادمة، وتعتمد معادلات الحساب الموزون (g) على الصيغ والقواعد الوزارية الرسمية.
+            </p>
+            <div className="font-body text-caption text-on-surface-variant flex items-center gap-1.5 pt-1">
+              <span className="material-symbols-outlined text-base text-secondary">link</span>
+              <span>لتأكيد رغباتك الرسمية والتسجيل النهائي، يرجى دائماً زيارة </span>
+              <a
+                href="https://orientation-esi.dz"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-secondary font-bold underline hover:text-secondary/80 transition-colors"
               >
-                {careerGoalLabels[key].icon} {careerGoalLabels[key].label}
-              </button>
-            ))}
-          </div>
-
-          <div className="orientation-filter-bar" style={{ flexWrap: "wrap", gap: "0.75rem" }}>
-            <div className="orientation-search-wrapper" style={{ flex: "1 1 280px" }}>
-              <Search size={16} className="orientation-search-icon" />
-              <input 
-                type="text" 
-                placeholder="ابحث بالعربية أو الفرنسية (مثل: ذكاء، esi، طبيب، informatique, epau)..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="orientation-search-input"
-              />
-            </div>
-
-            <select 
-              value={selectedCategory} 
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="orientation-category-select"
-              style={{ flex: "1 1 180px" }}
-            >
-              <option value="ALL">جميع القطاعات</option>
-              <option value="Medical">العلوم الطبية</option>
-              <option value="HigherSchool">المدارس العليا الوطنية</option>
-              <option value="Engineering">المدارس المتعددة التقنيات</option>
-              <option value="ENS">مدارس الأساتذة</option>
-              <option value="DoubleDegree">الشهادات المزدوجة</option>
-            </select>
-
-            <select 
-              value={selectedWilaya} 
-              onChange={(e) => setSelectedWilaya(e.target.value)}
-              className="orientation-wilaya-select"
-              style={{ flex: "1 1 150px" }}
-            >
-              <option value="">جميع الولايات (58)</option>
-              {wilayasList.map((w) => (
-                <option key={w.code} value={w.code}>{w.name}</option>
-              ))}
-            </select>
-
-            <label className="checkbox-filter-label" style={{ display: "flex", alignItems: "center", cursor: "pointer" }}>
-              <input 
-                type="checkbox" 
-                checked={onlyEligible} 
-                onChange={(e) => setOnlyEligible(e.target.checked)} 
-              />
-              <span>إظهار التخصصات المضمونة والمنافسة فقط</span>
-            </label>
-          </div>
-
-          <div className="search-results-counter">
-            عُثر على <strong>{evaluatedBranches.length}</strong> تخصص مطابق لشروط البحث.
-          </div>
-
-          <section className="orientation-grid" aria-live="polite">
-            {evaluatedBranches.slice(0, 100).map((item, i) => (
-              <FadeInSection key={`${item.code}-${item.universityCode}`} delay={Math.min(i * 30, 300)}>
-                <article 
-                  className={`orientation-card status-border-${item.status}`}
-                >
-                  <div className="orientation-card-header">
-                    <div className="orientation-badges-group">
-                      {(item.category === "HigherSchool" || item.category === "ENS" || item.category === "Engineering") && (
-                        <span className="school-type-badge">المدرسة الوطنية العليا</span>
-                      )}
-                      <span className="code-badge">{item.code} · {item.universityName}</span>
-                    </div>
-                    <span className={`status-pill status-${item.status}`}>
-                      {item.status === "safe" && "🟢 مضمونة بإذن الله"}
-                      {item.status === "competitive" && "🟡 منافسة قوية"}
-                      {item.status === "stretch" && "🔴 تتطلب رفع النقاط"}
-                      {item.status === "nc" && "⚪ خاضع للمرحلة الثانية (NC)"}
-                      {item.status === "unavailable" && "⛔ غير متاح لشعبتك"}
-                    </span>
-                  </div>
-
-                  <h3>{item.name}</h3>
-                  <p className="orientation-desc">{item.description}</p>
-
-                  <div className="stream-priority-info-bar">
-                    <span>
-                      <strong>أولوية شعبتك: </strong>
-                      <span className={`priority-tag priority-rank-${item.priorityRank}`}>
-                        {item.priorityRank === 1 && "🥇 أولوية الأولى"}
-                        {item.priorityRank === 2 && "🥈 أولوية ثانية"}
-                        {item.priorityRank === 3 && "🥉 أولوية ثالثة"}
-                        {item.priorityRank > 3 && `أولوية ${item.priorityRank}`}
-                      </span>
-                    </span>
-                    <span>
-                      معدل القبول لشعبتك: <strong>{typeof item.userCutoff === "number" ? item.userCutoff.toFixed(2) : item.userCutoff}</strong>
-                    </span>
-                  </div>
-
-                  <div className="orientation-card-formula">
-                    <small>الصيغة الرسمية للمعدل الموزون:</small>
-                    <code>{item.formulaText}</code>
-                  </div>
-
-                  <div className="orientation-card-footer">
-                    <div>
-                      <small>معدلك الموزون:</small>
-                      <strong className="weighted-score">{item.calculatedScore.toFixed(2)}</strong>
-                    </div>
-                    <div className="threshold-box">
-                      <small>الفارق عن القبول:</small>
-                      <strong className={item.scoreDifference >= 0 ? "text-success" : "text-danger"}>
-                        {item.scoreDifference >= 0 ? `+${item.scoreDifference.toFixed(2)}` : `${item.scoreDifference.toFixed(2)}`}
-                      </strong>
-                    </div>
-                  </div>
-                </article>
-              </FadeInSection>
-            ))}
-          </section>
-        </>
-      )}
-
-      {/* MODE 2: Target Selection with Flexible Search Autocomplete */}
-      {activeMode === "target" && (
-        <section className="target-mode-wrapper">
-          <div className="target-select-card">
-            <h2>🎯 ابحث عن جامعة أو تخصص أحلامك بسهولة:</h2>
-            <p className="target-subtext">اكتب ما تعرفه بالعربية أو الفرنسية (مثل: "esi", "اساتذة القبة", "طبيب", "معماري", "عنابة") وسيتم التعرف الفوري عليه:</p>
-
-            <input 
-              type="text" 
-              placeholder="اكتب اسم التخصص أو المدرسة بالفرنسية أو العربية..."
-              value={targetSearchQuery}
-              onChange={(e) => setTargetSearchQuery(e.target.value)}
-              className="target-search-combobox"
-            />
-
-            {/* Live Autocomplete Suggestion Cards */}
-            <div className="target-suggestions-list">
-              {targetSuggestions.slice(0, 6).map((b) => (
-                <button
-                  key={`${b.code}-${b.universityCode}`}
-                  type="button"
-                  className={`target-suggestion-item ${selectedTargetCode === b.code ? "is-selected" : ""}`}
-                  onClick={() => setSelectedTargetCode(b.code)}
-                >
-                  <div>
-                    <strong>{b.name}</strong>
-                    <small>📍 {b.universityName} ({b.location})</small>
-                  </div>
-                  <span className="suggestion-code">{b.code}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="target-analysis-card">
-            <div className="target-header">
-              <div className="target-header-content">
-                <div style={{ display: "flex", gap: "0.5rem", alignItems: "center", flexWrap: "wrap", marginBottom: "0.25rem" }}>
-                  <span className="eyebrow" style={{ margin: 0 }}>الهدف المختار حالياً</span>
-                  {(currentTarget.category === "HigherSchool" || currentTarget.category === "ENS" || currentTarget.category === "Engineering") && (
-                    <span className="school-type-badge">المدرسة الوطنية العليا</span>
-                  )}
-                </div>
-                <h2>{currentTarget.name}</h2>
-                <p style={{ color: "var(--text-secondary)", fontSize: "0.85rem" }}>
-                  📍 {currentTarget.universityName} ({currentTarget.location})
-                </p>
-              </div>
-
-              <div className="target-score-badge">
-                <small>الحد الأدنى الرسمي (2026)</small>
-                <strong>
-                  {typeof currentTargetRule.cutoff === "number"
-                    ? currentTargetRule.cutoff.toFixed(2)
-                    : currentTargetRule.cutoff}
-                </strong>
-              </div>
-            </div>
-
-            <div className="target-comparison-row">
-              <div className="score-stat-box">
-                <span>معدلك الموزون المحسوب حالياً:</span>
-                <strong className={
-                  typeof currentTargetRule.cutoff === "number" && currentTargetWeighted >= currentTargetRule.cutoff 
-                    ? "text-success" 
-                    : "text-danger"
-                }>
-                  {currentTargetWeighted.toFixed(2)} / 20
-                </strong>
-              </div>
-
-              <div className="score-stat-box">
-                <span>الفارق عن القبول:</span>
-                <strong>
-                  {typeof currentTargetRule.cutoff === "number"
-                    ? (currentTargetWeighted >= currentTargetRule.cutoff
-                        ? `+${(currentTargetWeighted - currentTargetRule.cutoff).toFixed(2)} (مؤهل للقبول!)`
-                        : `${(currentTargetWeighted - currentTargetRule.cutoff).toFixed(2)} نقطة للوصول`
-                      )
-                    : "غير محدد بالرقم (خاضع للمرحلة الثانية)"
-                  }
-                </strong>
-              </div>
-            </div>
-
-            <div className="roadmap-box">
-              <h3>🗺️ المواد المفتاحية المعنية في حساب المعدل الموزون:</h3>
-              <p>المعادلة الرسمية المعتمدة: <code>{currentTarget.formulaText}</code></p>
-              <ul className="key-subjects-list">
-                {currentTarget.keySubjects.map((sub) => (
-                  <li key={sub}>
-                    <span>✦ المادة المفتاحية: <strong>{sub}</strong></span>
-                    <small>التركيز المكثف على هذه المادة يضاعف حظوظك للوصول إلى معدل هذا التخصص.</small>
-                  </li>
-                ))}
-              </ul>
+                البوابة الرسمية للتوجيه الجامعي (orientation-esi.dz)
+              </a>.
             </div>
           </div>
         </section>
-      )}
+
+        {/* ── 2. Mode Toggle Buttons ── */}
+        <section aria-label="أوضاع المستشار" className="flex flex-col sm:flex-row gap-3 p-1.5 bg-surface-container rounded-xl border border-primary/10">
+          <button
+            type="button"
+            className={`flex-1 py-3 px-6 rounded-lg font-body text-label-md cursor-pointer transition-all flex items-center justify-center gap-2 ${
+              activeMode === "predictor"
+                ? "bg-primary text-on-primary font-bold shadow-sm"
+                : "text-on-surface-variant hover:text-primary hover:bg-surface-bright/70 font-medium"
+            }`}
+            onClick={() => setActiveTab("predictor")}
+          >
+            <span className="material-symbols-outlined text-lg">analytics</span>
+            <span>مستكشف التوجيه بمعدلي</span>
+          </button>
+          <button
+            type="button"
+            className={`flex-1 py-3 px-6 rounded-lg font-body text-label-md cursor-pointer transition-all flex items-center justify-center gap-2 ${
+              activeMode === "target"
+                ? "bg-primary text-on-primary font-bold shadow-sm"
+                : "text-on-surface-variant hover:text-primary hover:bg-surface-bright/70 font-medium"
+            }`}
+            onClick={() => setActiveTab("target")}
+          >
+            <span className="material-symbols-outlined text-lg">track_changes</span>
+            <span>حاسبة جامعة أحلامي</span>
+          </button>
+        </section>
+
+        {/* ── 3. Grade Input Controls ── */}
+        <section className="bg-surface-bright border border-primary/10 rounded-xl p-6 shadow-sm space-y-6">
+          <div className="flex items-center justify-between border-b border-primary/10 pb-4">
+            <h2 className="font-headline text-headline-md text-primary font-bold flex items-center gap-2">
+              <span className="material-symbols-outlined text-secondary">tune</span>
+              <span>بيانات الطالب والنقاط التقديرية</span>
+            </h2>
+            <span className="font-body text-caption font-semibold text-secondary bg-secondary/10 px-3 py-1 rounded-full">
+              حساب فوري للمعدل الموزون
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            {/* Stream Selector */}
+            <div className="space-y-1.5">
+              <label htmlFor="stream-select" className="block font-body text-label-md font-bold text-on-surface text-right">
+                الشعبة الدراسية:
+              </label>
+              <div className="relative">
+                <select
+                  id="stream-select"
+                  value={selectedStream}
+                  onChange={(e) => setSelectedStream(e.target.value as StreamKey)}
+                  className="w-full bg-surface-container-lowest border border-primary/20 rounded-lg px-4 py-3 text-on-surface font-body text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors cursor-pointer appearance-none pr-10"
+                >
+                  {(Object.keys(streamLabels) as StreamKey[]).map((key) => (
+                    <option key={key} value={key}>
+                      {streamLabels[key]}
+                    </option>
+                  ))}
+                </select>
+                <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-xl">
+                  expand_more
+                </span>
+              </div>
+            </div>
+
+            {/* General Average */}
+            <div className="space-y-1.5">
+              <label htmlFor="gen-avg-input" className="block font-body text-label-md font-bold text-on-surface text-right">
+                المعدل العام التقديري:
+              </label>
+              <div className="relative">
+                <input
+                  id="gen-avg-input"
+                  type="text"
+                  inputMode="decimal"
+                  placeholder="16.50"
+                  value={gradeInputs.generalAverage ?? ""}
+                  onChange={(e) => handleGradeChange("generalAverage", e.target.value)}
+                  className="w-full bg-surface-container-lowest border border-primary/20 rounded-lg px-4 py-3 text-on-surface font-body text-body-md font-bold text-left focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                  dir="ltr"
+                />
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant font-bold text-caption pointer-events-none">
+                  / 20
+                </span>
+              </div>
+            </div>
+
+            {/* Mathematics */}
+            <div className="space-y-1.5">
+              <label htmlFor="math-input" className="block font-body text-label-md font-bold text-on-surface text-right">
+                الرياضيات:
+              </label>
+              <div className="relative">
+                <input
+                  id="math-input"
+                  type="text"
+                  inputMode="decimal"
+                  placeholder="17.00"
+                  value={gradeInputs.math ?? ""}
+                  onChange={(e) => handleGradeChange("math", e.target.value)}
+                  className="w-full bg-surface-container-lowest border border-primary/20 rounded-lg px-4 py-3 text-on-surface font-body text-body-md font-bold text-left focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                  dir="ltr"
+                />
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant font-bold text-caption pointer-events-none">
+                  / 20
+                </span>
+              </div>
+            </div>
+
+            {/* Science (shown for Science & Math streams) */}
+            {(selectedStream === "Scientific" || selectedStream === "Mathematical") && (
+              <div className="space-y-1.5">
+                <label htmlFor="science-input" className="block font-body text-label-md font-bold text-on-surface text-right">
+                  العلوم الطبيعية:
+                </label>
+                <div className="relative">
+                  <input
+                    id="science-input"
+                    type="text"
+                    inputMode="decimal"
+                    placeholder="16.50"
+                    value={gradeInputs.science ?? ""}
+                    onChange={(e) => handleGradeChange("science", e.target.value)}
+                    className="w-full bg-surface-container-lowest border border-primary/20 rounded-lg px-4 py-3 text-on-surface font-body text-body-md font-bold text-left focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                    dir="ltr"
+                  />
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant font-bold text-caption pointer-events-none">
+                    / 20
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {/* Physics */}
+            <div className="space-y-1.5">
+              <label htmlFor="physics-input" className="block font-body text-label-md font-bold text-on-surface text-right">
+                الفيزياء:
+              </label>
+              <div className="relative">
+                <input
+                  id="physics-input"
+                  type="text"
+                  inputMode="decimal"
+                  placeholder="16.00"
+                  value={gradeInputs.physics ?? ""}
+                  onChange={(e) => handleGradeChange("physics", e.target.value)}
+                  className="w-full bg-surface-container-lowest border border-primary/20 rounded-lg px-4 py-3 text-on-surface font-body text-body-md font-bold text-left focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                  dir="ltr"
+                />
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant font-bold text-caption pointer-events-none">
+                  / 20
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── MODE 1: Predictor List ── */}
+        {activeMode === "predictor" && (
+          <div className="space-y-6">
+            {/* 4. Career Goal Filter Chips */}
+            <section aria-label="تصفية حسب الهدف المهني" className="space-y-2">
+              <label className="block font-body text-label-md font-bold text-on-surface text-right">
+                المجال أو الهدف المهني المفضل:
+              </label>
+              <div className="flex overflow-x-auto gap-2 pb-2 scrollbar-none">
+                <button
+                  type="button"
+                  className={`whitespace-nowrap px-4 py-2 rounded-full font-body text-label-md transition-all cursor-pointer flex items-center gap-1.5 ${
+                    selectedCareerGoal === "ALL"
+                      ? "bg-primary text-on-primary font-bold shadow-sm"
+                      : "bg-surface-container text-on-surface-variant hover:bg-surface-container-high border border-primary/10 font-medium"
+                  }`}
+                  onClick={() => setSelectedCareerGoal("ALL")}
+                >
+                  <span>🌟</span>
+                  <span>جميع الأهداف</span>
+                </button>
+                {(Object.keys(careerGoalLabels) as CareerGoal[]).map((key) => {
+                  const isSelected = selectedCareerGoal === key;
+                  return (
+                    <button
+                      key={key}
+                      type="button"
+                      className={`whitespace-nowrap px-4 py-2 rounded-full font-body text-label-md transition-all cursor-pointer flex items-center gap-1.5 ${
+                        isSelected
+                          ? "bg-primary text-on-primary font-bold shadow-sm"
+                          : "bg-surface-container text-on-surface-variant hover:bg-surface-container-high border border-primary/10 font-medium"
+                      }`}
+                      onClick={() => setSelectedCareerGoal(key)}
+                    >
+                      <span>{careerGoalLabels[key].icon}</span>
+                      <span>{careerGoalLabels[key].label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </section>
+
+            {/* 5. Filter Bar (Search, Sector, Wilaya, Checkbox) */}
+            <section aria-label="أدوات البحث والتصفية" className="bg-surface-bright border border-primary/10 rounded-xl p-4 md:p-6 shadow-sm space-y-4">
+              <div className="flex flex-col md:flex-row gap-3 flex-wrap items-stretch md:items-center">
+                {/* Search Input */}
+                <div className="relative flex-1 min-w-[260px]">
+                  <span className="material-symbols-outlined absolute right-3.5 top-1/2 -translate-y-1/2 text-primary/50 text-xl pointer-events-none">
+                    search
+                  </span>
+                  <input
+                    type="text"
+                    placeholder="ابحث بالعربية أو الفرنسية (مثل: ذكاء، esi، طبيب، informatique, epau)..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full bg-surface-container-lowest border border-primary/20 rounded-lg pr-11 pl-4 py-2.5 font-body text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                  />
+                </div>
+
+                {/* Sector Select */}
+                <div className="relative min-w-[180px]">
+                  <select
+                    value={selectedCategory}
+                    onChange={(e) => setSelectedCategory(e.target.value)}
+                    className="w-full bg-surface-container-lowest border border-primary/20 rounded-lg px-4 py-2.5 font-body text-label-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary cursor-pointer transition-colors appearance-none pr-10"
+                  >
+                    <option value="ALL">جميع القطاعات</option>
+                    <option value="Medical">العلوم الطبية</option>
+                    <option value="HigherSchool">المدارس العليا الوطنية</option>
+                    <option value="Engineering">المدارس المتعددة التقنيات</option>
+                    <option value="ENS">مدارس الأساتذة</option>
+                    <option value="DoubleDegree">الشهادات المزدوجة</option>
+                  </select>
+                  <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-xl">
+                    expand_more
+                  </span>
+                </div>
+
+                {/* Wilaya Select */}
+                <div className="relative min-w-[170px]">
+                  <select
+                    value={selectedWilaya}
+                    onChange={(e) => setSelectedWilaya(e.target.value)}
+                    className="w-full bg-surface-container-lowest border border-primary/20 rounded-lg px-4 py-2.5 font-body text-label-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary cursor-pointer transition-colors appearance-none pr-10"
+                  >
+                    <option value="">جميع الولايات (58)</option>
+                    {wilayasList.map((w) => (
+                      <option key={w.code} value={w.code}>
+                        {w.name}
+                      </option>
+                    ))}
+                  </select>
+                  <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-xl">
+                    expand_more
+                  </span>
+                </div>
+              </div>
+
+              {/* Bottom Row: Checkbox & Results Counter */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 border-t border-primary/10">
+                <label className="flex items-center gap-2.5 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={onlyEligible}
+                    onChange={(e) => setOnlyEligible(e.target.checked)}
+                    className="w-4 h-4 rounded text-primary focus:ring-primary cursor-pointer border-primary/30"
+                  />
+                  <span className="font-body text-label-md font-semibold text-on-surface">
+                    إظهار التخصصات المضمونة والمنافسة فقط
+                  </span>
+                </label>
+
+                <div className="font-body text-label-md text-on-surface-variant">
+                  عُثر على <strong className="text-primary font-bold text-body-md">{evaluatedBranches.length}</strong> تخصص مطابق لشروط البحث.
+                </div>
+              </div>
+            </section>
+
+            {/* 6. Result Cards Bento Grid */}
+            <section className="grid grid-cols-1 md:grid-cols-2 gap-6" aria-live="polite">
+              {evaluatedBranches.slice(0, 100).map((item, i) => {
+                return (
+                  <FadeInSection key={`${item.code}-${item.universityCode}`} delay={Math.min(i * 30, 300)}>
+                    <article className="bg-surface-bright border border-primary/10 rounded-xl p-6 shadow-sm hover:shadow-md hover:border-primary/30 transition-all flex flex-col justify-between gap-4 relative overflow-hidden group">
+                      <div className="space-y-3">
+                        {/* Header Badges & Status */}
+                        <div className="flex justify-between items-start gap-2 flex-wrap">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            {(item.category === "HigherSchool" || item.category === "ENS" || item.category === "Engineering") && (
+                              <span className="bg-primary/10 text-primary font-body text-caption font-bold px-2.5 py-0.5 rounded">
+                                المدرسة الوطنية العليا
+                              </span>
+                            )}
+                            <span className="font-body text-caption font-semibold text-on-surface-variant bg-surface-container px-2.5 py-0.5 rounded">
+                              {item.code} · {item.universityName}
+                            </span>
+                          </div>
+
+                          {/* Status Badge */}
+                          {item.status === "safe" && (
+                            <span className="bg-secondary/10 text-secondary border border-secondary/20 font-body text-caption font-bold px-3 py-1 rounded-full inline-flex items-center gap-1">
+                              <span>🟢</span>
+                              <span>مضمونة بإذن الله</span>
+                            </span>
+                          )}
+                          {item.status === "competitive" && (
+                            <span className="bg-primary/10 text-primary border border-primary/20 font-body text-caption font-bold px-3 py-1 rounded-full inline-flex items-center gap-1">
+                              <span>🟡</span>
+                              <span>منافسة قوية</span>
+                            </span>
+                          )}
+                          {item.status === "stretch" && (
+                            <span className="bg-error/10 text-error border border-error/20 font-body text-caption font-bold px-3 py-1 rounded-full inline-flex items-center gap-1">
+                              <span>🔴</span>
+                              <span>تتطلب رفع النقاط</span>
+                            </span>
+                          )}
+                          {item.status === "nc" && (
+                            <span className="bg-surface-container text-on-surface-variant border border-primary/10 font-body text-caption font-semibold px-3 py-1 rounded-full inline-flex items-center gap-1">
+                              <span>⚪</span>
+                              <span>خاضع للمرحلة الثانية (NC)</span>
+                            </span>
+                          )}
+                          {item.status === "unavailable" && (
+                            <span className="bg-surface-container text-on-surface-variant/60 font-body text-caption font-medium px-3 py-1 rounded-full inline-flex items-center gap-1">
+                              <span>⛔</span>
+                              <span>غير متاح لشعبتك</span>
+                            </span>
+                          )}
+                        </div>
+
+                        {/* Title & Description */}
+                        <div>
+                          <h3 className="font-headline text-headline-md text-primary font-bold leading-snug group-hover:text-primary transition-colors">
+                            {item.name}
+                          </h3>
+                          <p className="font-body text-body-md text-on-surface-variant line-clamp-2 mt-1 leading-relaxed">
+                            {item.description}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="space-y-3 pt-2">
+                        {/* Stream Priority & Cutoff Bar */}
+                        <div className="flex flex-wrap items-center justify-between gap-2 p-3 bg-surface-container-low rounded-lg border border-primary/5 text-caption font-body">
+                          <span className="flex items-center gap-1">
+                            <strong className="text-on-surface">أولوية شعبتك: </strong>
+                            <span className="font-semibold text-primary">
+                              {item.priorityRank === 1 && "🥇 أولوية أولى"}
+                              {item.priorityRank === 2 && "🥈 أولوية ثانية"}
+                              {item.priorityRank === 3 && "🥉 أولوية ثالثة"}
+                              {item.priorityRank > 3 && `أولوية ${item.priorityRank}`}
+                            </span>
+                          </span>
+                          <span>
+                            معدل القبول الأدنى: <strong className="text-primary font-bold text-body-md" dir="ltr">{typeof item.userCutoff === "number" ? item.userCutoff.toFixed(2) : item.userCutoff}</strong>
+                          </span>
+                        </div>
+
+                        {/* Formula text */}
+                        <div className="p-2.5 bg-surface-container-lowest rounded-lg border border-primary/10 font-body text-caption text-on-surface-variant flex items-center gap-2">
+                          <span className="font-semibold text-primary shrink-0">الصيغة الرسمية:</span>
+                          <code className="font-mono text-primary font-bold text-xs truncate" dir="ltr">{item.formulaText}</code>
+                        </div>
+
+                        {/* Footer: Score Comparison */}
+                        <div className="flex items-center justify-between border-t border-primary/10 pt-4 mt-1">
+                          <div>
+                            <span className="font-body text-caption text-on-surface-variant block">معدلك الموزون:</span>
+                            <strong className="font-headline text-headline-md text-primary font-bold" dir="ltr">
+                              {item.calculatedScore.toFixed(2)}
+                            </strong>
+                          </div>
+                          <div className="text-left">
+                            <span className="font-body text-caption text-on-surface-variant block">الفارق عن القبول:</span>
+                            <strong
+                              className={`font-body text-label-md font-bold px-3 py-1 rounded-full inline-block mt-0.5 ${
+                                item.scoreDifference >= 0
+                                  ? "bg-secondary/10 text-secondary"
+                                  : "bg-error/10 text-error"
+                              }`}
+                              dir="ltr"
+                            >
+                              {item.scoreDifference >= 0
+                                ? `+${item.scoreDifference.toFixed(2)}`
+                                : `${item.scoreDifference.toFixed(2)}`}
+                            </strong>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                  </FadeInSection>
+                );
+              })}
+            </section>
+          </div>
+        )}
+
+        {/* ── MODE 2: Target Selection with Search & Analysis ── */}
+        {activeMode === "target" && (
+          <section className="space-y-8" aria-label="حاسبة جامعة أحلامي">
+            {/* Target Search Card */}
+            <div className="bg-surface-bright border border-primary/10 rounded-xl p-6 shadow-sm space-y-4">
+              <div>
+                <h2 className="font-headline text-headline-md text-primary font-bold mb-1 flex items-center gap-2">
+                  <span className="material-symbols-outlined text-secondary">search</span>
+                  <span>ابحث عن جامعة أو تخصص أحلامك بسهولة:</span>
+                </h2>
+                <p className="font-body text-body-md text-on-surface-variant">
+                  اكتب ما تعرفه بالعربية أو الفرنسية (مثل: "esi", "اساتذة القبة", "طبيب", "معماري", "عنابة") وسيتم التعرف الفوري عليه:
+                </p>
+              </div>
+
+              <div className="relative">
+                <span className="material-symbols-outlined absolute right-3.5 top-1/2 -translate-y-1/2 text-primary/50 text-xl pointer-events-none">
+                  search
+                </span>
+                <input
+                  type="text"
+                  placeholder="اكتب اسم التخصص أو المدرسة بالفرنسية أو العربية..."
+                  value={targetSearchQuery}
+                  onChange={(e) => setTargetSearchQuery(e.target.value)}
+                  className="w-full bg-surface-container-lowest border border-primary/20 rounded-lg pr-11 pl-4 py-3 font-body text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                />
+              </div>
+
+              {/* Live Suggestions Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pt-2">
+                {targetSuggestions.slice(0, 6).map((b) => {
+                  const isSelected = selectedTargetCode === b.code;
+                  return (
+                    <button
+                      key={`${b.code}-${b.universityCode}`}
+                      type="button"
+                      className={`p-4 rounded-xl cursor-pointer transition-all text-right flex flex-col justify-between gap-2 border ${
+                        isSelected
+                          ? "bg-primary text-on-primary border-primary shadow-sm"
+                          : "bg-surface-container-lowest hover:bg-primary/5 text-on-surface border-primary/10 hover:border-primary/30"
+                      }`}
+                      onClick={() => setSelectedTargetCode(b.code)}
+                    >
+                      <div>
+                        <strong className={`font-body text-label-md font-bold block ${isSelected ? "text-on-primary" : "text-primary"}`}>
+                          {b.name}
+                        </strong>
+                        <span className={`font-body text-caption block mt-1 ${isSelected ? "text-on-primary/80" : "text-on-surface-variant"}`}>
+                          📍 {b.universityName} ({b.location})
+                        </span>
+                      </div>
+                      <span className={`font-body text-caption font-semibold self-start px-2 py-0.5 rounded ${isSelected ? "bg-white/20 text-white" : "bg-surface-container text-primary"}`}>
+                        {b.code}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Target Detailed Analysis Card */}
+            <div className="bg-surface-bright border border-primary/10 rounded-xl p-6 md:p-8 shadow-sm space-y-6">
+              {/* Header Info */}
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-primary/10 pb-6">
+                <div className="space-y-1.5">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="font-body text-label-md font-semibold text-secondary bg-secondary/10 px-3 py-0.5 rounded-full">
+                      الهدف المختار حالياً 🎯
+                    </span>
+                    {(currentTarget.category === "HigherSchool" || currentTarget.category === "ENS" || currentTarget.category === "Engineering") && (
+                      <span className="bg-primary/10 text-primary font-body text-caption font-bold px-2.5 py-0.5 rounded">
+                        المدرسة الوطنية العليا
+                      </span>
+                    )}
+                  </div>
+                  <h2 className="font-headline text-display-lg text-primary font-bold text-2xl md:text-3xl">
+                    {currentTarget.name}
+                  </h2>
+                  <p className="font-body text-body-md text-on-surface-variant flex items-center gap-1.5">
+                    <span className="material-symbols-outlined text-base text-secondary">location_on</span>
+                    <span>{currentTarget.universityName} ({currentTarget.location})</span>
+                  </p>
+                </div>
+
+                {/* Score Target Box */}
+                <div className="bg-primary text-on-primary p-4 rounded-xl text-center min-w-[160px] shadow-sm">
+                  <span className="font-body text-caption text-primary-fixed-dim block">
+                    الحد الأدنى الرسمي (2026)
+                  </span>
+                  <strong className="font-headline text-headline-lg font-bold block mt-1" dir="ltr">
+                    {typeof currentTargetRule.cutoff === "number"
+                      ? currentTargetRule.cutoff.toFixed(2)
+                      : currentTargetRule.cutoff}
+                  </strong>
+                </div>
+              </div>
+
+              {/* Comparison Stats Row */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="p-5 rounded-xl bg-surface-container-lowest border border-primary/10 space-y-1">
+                  <span className="font-body text-label-md text-on-surface-variant block font-medium">
+                    معدلك الموزون المحسوب حالياً:
+                  </span>
+                  <strong
+                    className={`font-headline text-headline-lg font-bold block ${
+                      typeof currentTargetRule.cutoff === "number" && currentTargetWeighted >= currentTargetRule.cutoff
+                        ? "text-primary"
+                        : "text-error"
+                    }`}
+                    dir="ltr"
+                  >
+                    {currentTargetWeighted.toFixed(2)} / 20
+                  </strong>
+                </div>
+
+                <div className="p-5 rounded-xl bg-surface-container-lowest border border-primary/10 space-y-1">
+                  <span className="font-body text-label-md text-on-surface-variant block font-medium">
+                    الفارق عن القبول:
+                  </span>
+                  <strong className="font-body text-label-md font-bold block text-primary mt-1">
+                    {typeof currentTargetRule.cutoff === "number"
+                      ? currentTargetWeighted >= currentTargetRule.cutoff
+                        ? `+${(currentTargetWeighted - currentTargetRule.cutoff).toFixed(2)} (مؤهل للقبول بإذن الله! 🎉)`
+                        : `${(currentTargetWeighted - currentTargetRule.cutoff).toFixed(2)} نقطة للوصول 🎯`
+                      : "غير محدد بالرقم (خاضع للمرحلة الثانية)"}
+                  </strong>
+                </div>
+              </div>
+
+              {/* Roadmap & Key Subjects Box */}
+              <div className="p-6 rounded-xl bg-surface-container-lowest border border-primary/10 space-y-4">
+                <h3 className="font-headline text-headline-md text-primary font-bold flex items-center gap-2">
+                  <span className="material-symbols-outlined text-secondary">explore</span>
+                  <span>المواد المفتاحية المعنية في حساب المعدل الموزون:</span>
+                </h3>
+
+                <div className="p-3 bg-surface-container rounded-lg font-body text-body-md text-on-surface">
+                  <span className="font-bold text-primary">المعادلة الرسمية المعتمدة: </span>
+                  <code className="font-mono text-primary font-bold mr-2" dir="ltr">{currentTarget.formulaText}</code>
+                </div>
+
+                <ul className="space-y-3 pt-2">
+                  {currentTarget.keySubjects.map((sub) => (
+                    <li key={sub} className="flex items-start gap-3 p-3 rounded-lg bg-surface-bright border border-primary/5">
+                      <span className="material-symbols-outlined text-secondary text-xl shrink-0 mt-0.5">
+                        stars
+                      </span>
+                      <div>
+                        <span className="font-body text-label-md font-bold text-primary block">
+                          المادة المفتاحية: {sub}
+                        </span>
+                        <p className="font-body text-caption text-on-surface-variant mt-0.5">
+                          التركيز المكثف على هذه المادة يضاعف حظوظك المباشرة للوصول إلى معدل هذا التخصص.
+                        </p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </section>
+        )}
       </div>
     </AppShell>
   );
 }
+
