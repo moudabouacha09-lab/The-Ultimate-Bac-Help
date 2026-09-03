@@ -96,19 +96,28 @@ export function UserMenu() {
             </div>
           )}
 
-          {/* Upload content link for teachers/admins */}
+          {/* Upload content links for teachers/admins */}
           {(user.role === "teacher" || user.role === "admin") && (
-            <div className="mb-3 pt-2 border-t border-primary/10">
+            <div className="mb-3 pt-2 border-t border-primary/10 space-y-1">
+              <Link
+                href="/contribute/upload-lesson"
+                onClick={() => setIsOpen(false)}
+                className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-primary/5 hover:bg-primary/10 text-primary text-caption font-semibold transition-colors"
+              >
+                <span className="material-symbols-outlined text-base">menu_book</span>
+                <span>رفع درس أو ملخص</span>
+              </Link>
               <Link
                 href="/contribute/upload-exam"
                 onClick={() => setIsOpen(false)}
-                className="w-full flex items-center gap-2 px-2.5 py-2 rounded-lg bg-secondary/5 hover:bg-secondary/10 text-secondary text-caption font-semibold transition-colors"
+                className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-secondary/5 hover:bg-secondary/10 text-secondary text-caption font-semibold transition-colors"
               >
                 <span className="material-symbols-outlined text-base">upload_file</span>
-                <span>رفع محتوى تعليمي</span>
+                <span>رفع اختبار أو سلسلة</span>
               </Link>
             </div>
           )}
+
 
 
           <button

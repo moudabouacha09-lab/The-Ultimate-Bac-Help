@@ -1,17 +1,28 @@
 // src/app/subject/[id]/subject-view.tsx
 "use client";
 
-import { useState } from "react";
-import type { FileItem, SubjectContent } from "@/data/bac-content";
+import { useState, useEffect } from "react";
+import type { SubjectContent } from "@/data/bac-content";
 import type { Subject } from "@/lib/subjects";
 import { Eye, Download, Package } from "lucide-react";
 import type { ReactNode } from "react";
 import { FadeInSection } from "@/components/effects/fade-in-section";
+import { createClient } from "@/lib/supabase/client";
+
+export type DisplayFileItem = {
+  title: string;
+  path: string;
+  type: "download" | "preview";
+  format: string;
+  author: string;
+  isTeacherContent?: boolean;
+};
 
 const formatIcons: Record<string, { icon: ReactNode; label: string }> = {
   pdf: { icon: "PDF", label: "PDF" },
   png: { icon: "🖼", label: "صورة" },
   jpg: { icon: "🖼", label: "صورة" },
+  jpeg: { icon: "🖼", label: "صورة" },
   html: { icon: "🌐", label: "موقع تفاعلي" },
   m4a: { icon: "🎧", label: "صوتي" },
   docx: { icon: "W", label: "Word" },
@@ -19,7 +30,7 @@ const formatIcons: Record<string, { icon: ReactNode; label: string }> = {
   zip: { icon: <Package size={18} />, label: "أرشيف" },
 };
 
-function FileCard({ file }: { file: FileItem }) {
+function FileCard({ file }: { file: DisplayFileItem }) {
   const info = formatIcons[file.format] ?? { icon: "PDF", label: file.format.toUpperCase() };
   const isPreview = file.type === "preview";
 
@@ -35,26 +46,40 @@ function FileCard({ file }: { file: FileItem }) {
   };
 
   return (
-    <article className="group bg-surface-bright border border-primary/10 rounded-xl p-6 flex flex-col justify-between hover:border-primary/30 hover:shadow-md transition-all duration-300 relative overflow-hidden min-h-[160px]">
+    <article className="group bg-surface-bright border border-primary/10 rounded-xl p-6 flex flex-col justify-between hover:border-primary/30 hover:shadow-md transition-all duration-300 relative overflow-hidden min-h-[190px]">
       <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-bl-full -z-10 group-hover:bg-primary/10 transition-colors" />
 
       <div>
+        {/* Top Badges */}
         <div className="flex justify-between items-start mb-3">
           <span className="bg-surface-container px-2.5 py-1 rounded text-primary font-body text-caption font-semibold">
             {info.label}
           </span>
           <span className="material-symbols-outlined text-primary/40 text-xl" aria-hidden="true">
-            description
+            {file.isTeacherContent ? "school" : "description"}
           </span>
         </div>
+
+        {/* Title */}
         <h3 className="font-headline text-headline-md text-primary mb-2 font-bold group-hover:text-primary transition-colors leading-snug">
           {file.title}
         </h3>
-        <p className="font-body text-body-md text-on-surface-variant mb-6 line-clamp-2">
+
+        {/* Description */}
+        <p className="font-body text-body-md text-on-surface-variant mb-3 line-clamp-2">
           ملف مخصص لتحضير شهادة البكالوريا - منهجية دقيقة وتمارين تطبيقية.
         </p>
+
+        {/* Author Attribution Line */}
+        <div className="flex items-center gap-1.5 font-body text-caption font-semibold text-on-surface-variant mb-5">
+          <span className="material-symbols-outlined text-[15px] text-primary/70">
+            {file.isTeacherContent ? "school" : "verified"}
+          </span>
+          <span>{file.author}</span>
+        </div>
       </div>
 
+      {/* Actions */}
       <div className="flex items-center gap-2 pt-2 border-t border-primary/10 mt-auto">
         <a
           className="flex-1 bg-primary text-on-primary font-body text-label-md font-semibold px-4 py-2.5 rounded-lg hover:bg-primary/90 transition-colors flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
@@ -82,6 +107,71 @@ function FileCard({ file }: { file: FileItem }) {
 }
 
 export default function SubjectView({ subject, content }: { subject: Subject; content: SubjectContent }) {
+  const supabase = createClient();
+  const [teacherFiles, setTeacherFiles] = useState<DisplayFileItem[]>([]);
+
+  useEffect(() => {
+    async function fetchTeacherLessons() {
+      try {
+        const { data: lessonsData, error: lessonsError } = await supabase
+          .from("lessons")
+          .select("id, title, subject_slug, units, file_path, created_at, created_by")
+          .eq("subject_slug", subject.slug)
+          .eq("status", "approved")
+          .order("created_at", { ascending: false });
+
+        if (lessonsError || !lessonsData || lessonsData.length === 0) {
+          setTeacherFiles([]);
+          return;
+        }
+
+        const userIds = [...new Set(lessonsData.map((l) => l.created_by).filter(Boolean))];
+        let profilesMap: Record<string, { title?: string; full_name?: string }> = {};
+
+        if (userIds.length > 0) {
+          const { data: profilesData } = await supabase
+            .from("profiles")
+            .select("id, full_name, title")
+            .in("id", userIds);
+
+          if (profilesData) {
+            profilesData.forEach((p) => {
+              profilesMap[p.id] = { full_name: p.full_name, title: p.title };
+            });
+          }
+        }
+
+        const mappedTeacherFiles: DisplayFileItem[] = lessonsData.map((lesson) => {
+          const prof = profilesMap[lesson.created_by];
+          const authorName = prof?.title || prof?.full_name || null;
+          const author = authorName ? `بواسطة: ${authorName}` : "بواسطة: أستاذ معتمد";
+
+          const ext = lesson.file_path.split(".").pop()?.toLowerCase() || "pdf";
+          let publicUrl = lesson.file_path;
+          if (!publicUrl.startsWith("http")) {
+            const { data } = supabase.storage.from("lesson-files").getPublicUrl(lesson.file_path);
+            publicUrl = data?.publicUrl || lesson.file_path;
+          }
+
+          return {
+            title: lesson.title,
+            path: publicUrl,
+            type: "download",
+            format: ext,
+            author,
+            isTeacherContent: true,
+          };
+        });
+
+        setTeacherFiles(mappedTeacherFiles);
+      } catch (err) {
+        console.error("Error fetching teacher lessons:", err);
+      }
+    }
+
+    fetchTeacherLessons();
+  }, [subject.slug]);
+
   const groups = [...new Set(content.sections.map((s) => s.group).filter(Boolean))] as string[];
   const hasGroups = groups.length > 0;
 
@@ -158,14 +248,44 @@ export default function SubjectView({ subject, content }: { subject: Subject; co
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {section.files.map((file, index) => (
+              {section.files.map((file, index) => {
+                const displayItem: DisplayFileItem = {
+                  ...file,
+                  author: "من إعداد: إدارة المنصة",
+                  isTeacherContent: false,
+                };
+                return (
+                  <FadeInSection key={file.path} delay={index * 60}>
+                    <FileCard file={displayItem} />
+                  </FadeInSection>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+
+        {/* Teacher Contributions Section */}
+        {teacherFiles.length > 0 && (
+          <div className="space-y-4 pt-4 border-t border-primary/10">
+            <div className="flex items-center justify-between border-b border-primary/10 pb-3">
+              <h2 className="font-headline text-headline-md text-primary font-bold flex items-center gap-2">
+                <span className="material-symbols-outlined text-secondary">school</span>
+                <span>مساهمات ودروس الأساتذة المعتمدين</span>
+              </h2>
+              <span className="font-body text-caption font-semibold text-secondary bg-secondary/10 px-3 py-1 rounded-full">
+                {teacherFiles.length} ملفات
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {teacherFiles.map((file, index) => (
                 <FadeInSection key={file.path} delay={index * 60}>
                   <FileCard file={file} />
                 </FadeInSection>
               ))}
             </div>
           </div>
-        ))}
+        )}
 
         {/* Exam collection (science only) */}
         {content.examCollection && (!hasGroups || activeGroup === groups[groups.length - 1]) && (
@@ -192,6 +312,10 @@ export default function SubjectView({ subject, content }: { subject: Subject; co
                     <p className="font-body text-body-md text-on-surface-variant">
                       ملف أرشيف واحد يحتوي على اختبارات {content.examCollection.schools.length} ثانوية نموذجية عبر الوطن.
                     </p>
+                    <p className="font-body text-caption font-semibold text-on-surface-variant mt-2 flex items-center gap-1">
+                      <span className="material-symbols-outlined text-[15px] text-primary/70">verified</span>
+                      <span>من إعداد: إدارة المنصة</span>
+                    </p>
                   </div>
                 </div>
 
@@ -217,5 +341,6 @@ export default function SubjectView({ subject, content }: { subject: Subject; co
     </div>
   );
 }
+
 
 
