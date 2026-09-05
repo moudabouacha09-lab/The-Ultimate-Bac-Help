@@ -3,12 +3,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { type ReactNode } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 import { subjects } from "@/lib/subjects";
 import { BottomNav } from "@/components/layout/bottom-nav";
 import { UserMenu } from "@/components/auth/user-menu";
 import { AuthModal } from "@/components/auth/auth-modal";
 import { SurveyModal } from "@/components/survey/survey-modal";
+import { Bell } from "lucide-react";
+import { useAuth } from "@/context/auth-context";
+import { createClient } from "@/lib/supabase/client";
 
 type AppShellProps = {
   children: ReactNode;
@@ -30,6 +33,20 @@ const subjectIcons: Record<string, string> = {
 
 export function AppShell({ children, activeSubject }: AppShellProps) {
   const pathname = usePathname();
+  const { user } = useAuth();
+  const [unreadNotifications, setUnreadNotifications] = useState(0);
+  const supabase = createClient();
+
+  useEffect(() => {
+    let active = true;
+    const loadUnread = async () => {
+      if (!user) { setUnreadNotifications(0); return; }
+      const { count } = await supabase.from("notifications").select("id", { count: "exact", head: true }).eq("user_id", user.id).eq("is_read", false);
+      if (active) setUnreadNotifications(count ?? 0);
+    };
+    loadUnread();
+    return () => { active = false; };
+  }, [user, pathname]);
 
   const navLinks = [
     { href: "/", label: "الرئيسية", active: pathname === "/" },
@@ -39,6 +56,9 @@ export function AppShell({ children, activeSubject }: AppShellProps) {
     { href: "/progress", label: "تقدمي", active: pathname.startsWith("/progress") },
     { href: "/analytics", label: "التحليلات", active: pathname.startsWith("/analytics") },
     { href: "/team", label: "فريق العمل", active: pathname.startsWith("/team") },
+    { href: "/questions", label: "الأسئلة", active: pathname.startsWith("/questions") },
+    { href: "/notifications", label: "الإشعارات", active: pathname.startsWith("/notifications"), icon: <Bell size={16} aria-hidden="true" /> },
+    ...(user && (user.role === "teacher" || user.role === "admin") ? [{ href: "/contribute/questions", label: "أسئلة المساهمين", active: pathname.startsWith("/contribute/questions") }] : []),
   ];
 
 
@@ -70,6 +90,7 @@ export function AppShell({ children, activeSubject }: AppShellProps) {
                   : "text-on-surface-variant hover:text-primary transition-colors font-body text-label-md"
               }
             >
+              {link.icon && <span className="relative inline-flex align-middle ml-1">{link.icon}{link.href === "/notifications" && unreadNotifications > 0 && <span className="absolute -right-1 -top-1 h-2 w-2 rounded-full bg-red-500 ring-2 ring-surface-bright" aria-label={`${unreadNotifications} إشعارات غير مقروءة`} />}</span>}
               {link.label}
             </Link>
           ))}

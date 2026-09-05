@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;1,8..60,600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "outline": "#707975",
+          "inverse-primary": "#94d3c1",
+          "surface-container-highest": "#e4e2de",
+          "on-secondary": "#ffffff",
+          "error-container": "#ffdad6",
+          "on-primary": "#ffffff",
+          "error": "#ba1a1a",
+          "on-surface": "#1b1c1a",
+          "secondary-container": "#fd844c",
+          "on-surface-variant": "#3f4945",
+          "surface": "#fbf9f5",
+          "on-primary-fixed": "#00201a",
+          "surface-bright": "#fbf9f5",
+          "background": "#fbf9f5",
+          "primary-fixed": "#afefdd",
+          "primary-container": "#004d40",
+          "tertiary-container": "#cca730",
+          "on-tertiary-container": "#4f3e00",
+          "on-tertiary-fixed": "#241a00",
+          "secondary-fixed-dim": "#ffb596",
+          "on-tertiary-fixed-variant": "#574500",
+          "surface-variant": "#e4e2de",
+          "on-primary-fixed-variant": "#065043",
+          "on-secondary-container": "#6a2500",
+          "surface-container-low": "#f5f3ef",
+          "on-error": "#ffffff",
+          "outline-variant": "#bfc9c4",
+          "inverse-surface": "#30312e",
+          "surface-dim": "#dbdad6",
+          "on-primary-container": "#7ebdac",
+          "surface-container-high": "#eae8e4",
+          "tertiary": "#735c00",
+          "tertiary-fixed": "#ffe088",
+          "surface-container": "#efeeea",
+          "on-tertiary": "#ffffff",
+          "surface-container-lowest": "#ffffff",
+          "on-secondary-fixed-variant": "#7d2d00",
+          "surface-tint": "#29695b",
+          "inverse-on-surface": "#f2f0ed",
+          "on-error-container": "#93000a",
+          "on-secondary-fixed": "#360f00",
+          "secondary": "#a14009",
+          "primary-fixed-dim": "#94d3c1",
+          "tertiary-fixed-dim": "#e9c349",
+          "on-background": "#1b1c1a",
+          "secondary-fixed": "#ffdbcd",
+          "primary": "#00342b"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "sidebar-width": "280px",
+          "base": "4px",
+          "xl": "48px",
+          "lg": "24px",
+          "md": "16px",
+          "gutter": "20px",
+          "xs": "4px",
+          "sm": "8px"
+        },
+        "fontFamily": {
+          "headline-md": [
+            "\"Source Serif 4\""
+          ],
+          "headline-lg-mobile": [
+            "\"Source Serif 4\""
+          ],
+          "body-lg": [
+            "IBM Plex Sans Arabic"
+          ],
+          "body-md": [
+            "IBM Plex Sans Arabic"
+          ],
+          "headline-lg": [
+            "\"Source Serif 4\""
+          ],
+          "display-lg": [
+            "\"Source Serif 4\""
+          ],
+          "caption": [
+            "IBM Plex Sans Arabic"
+          ],
+          "label-md": [
+            "IBM Plex Sans Arabic"
+          ]
+        },
+        "fontSize": {
+          "headline-md": [
+            "24px",
+            {
+              "lineHeight": "32px",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-lg-mobile": [
+            "24px",
+            {
+              "lineHeight": "32px",
+              "fontWeight": "600"
+            }
+          ],
+          "body-lg": [
+            "18px",
+            {
+              "lineHeight": "28px",
+              "fontWeight": "400"
+            }
+          ],
+          "body-md": [
+            "16px",
+            {
+              "lineHeight": "24px",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-lg": [
+            "32px",
+            {
+              "lineHeight": "40px",
+              "fontWeight": "600"
+            }
+          ],
+          "display-lg": [
+            "48px",
+            {
+              "lineHeight": "56px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "700"
+            }
+          ],
+          "caption": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "fontWeight": "400"
+            }
+          ],
+          "label-md": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "letterSpacing": "0.05em",
+              "fontWeight": "500"
+            }
+          ]
+        }
+      },
+    },
+  }</script></head><body class="bg-surface font-body-md text-on-surface"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 w-full px-lg flex items-center justify-between"><div class="flex items-center gap-md"><img alt="المساعد النهائي للبكالوريا, academic seal, book icon, forest teal and gold, elegant Arabic calligraphy." class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Whb6mDGED8uxZzdBjs5BxiENDu-tEYw1ffbhgU6ziROii9ShjKl8LkFviIIKYhRMwkZoowLqiN6E--BAQWViKkzS08LthkpTMLZhyG-VS1rpO_2rfhjU-sajM8ncpIdJQPxG3KuERFEBAFJY9aw7qLnGDlA-RoSCODxdTr4Wd6pjHPQCFi9VFiNmQ-onFQVTzaFwJnxY6sCOO44uf8fV3G1mhXKFErgI0o8wD6-d9sJrUDC_a0gSKx"/><span class="font-headline-md text-headline-md text-primary font-bold hidden sm:inline-block">المساعد النهائي للبكالوريا</span></div><nav class="hidden lg:flex items-center gap-lg" data-active-classes="text-primary font-bold"><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="home" href="#">الرئيسية</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="subjects-catalog" href="#">المواد</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="student-discussions" href="#">تساؤلات الطلاب</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="academic-tools" href="#">الأدوات</a><a aria-current="page" class="transition-colors text-primary font-bold" data-path="announcements" href="#">الإشعارات</a></nav><div class="flex items-center gap-md"><button aria-label="الإشعارات" class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div><div class="lg:hidden w-full overflow-x-auto bg-surface-container-low px-md py-sm flex items-center gap-sm no-scrollbar"><button class="filter-tab active-tab px-md py-xs rounded-full bg-primary text-on-primary font-label-md text-label-md transition-all whitespace-nowrap shadow-sm" onclick="filterNotifications('all', this)">الكل (3)</button><button class="filter-tab px-md py-xs rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-md text-label-md transition-all whitespace-nowrap flex items-center gap-xs" onclick="filterNotifications('unread', this)"><span class="material-symbols-outlined text-[16px]">mark_email_unread</span><span>غير مقروءة (2)</span><span class="w-2 h-2 rounded-full bg-secondary"></span></button><button class="filter-tab px-md py-xs rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-md text-label-md transition-all whitespace-nowrap flex items-center gap-xs" onclick="filterNotifications('read', this)"><span class="material-symbols-outlined text-[16px]">done_all</span><span>إجابات تمت مشاهدتها</span></button></div></header><aside class="hidden lg:flex fixed top-16 right-0 bottom-0 w-sidebar-width bg-surface-container-low flex-col justify-between py-lg px-md z-40 shadow-[0_1px_8px_rgba(0,0,0,0.02)]"><div class="flex flex-col gap-sm overflow-y-auto"><div class="px-sm pb-xs font-label-md text-label-md text-on-surface-variant font-semibold">مواد البكالوريا الرسمية</div><nav class="flex flex-col gap-xs" data-active-classes="bg-primary-container text-on-primary font-semibold"><a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="mathematics" href="#"><span class="material-symbols-outlined text-[20px]">calculate</span><span class="font-body-md text-body-md">الرياضيات</span></a><a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="physics-chemistry" href="#"><span class="material-symbols-outlined text-[20px]">science</span><span class="font-body-md text-body-md">العلوم الفيزيائية</span></a><a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="natural-sciences" href="#"><span class="material-symbols-outlined text-[20px]">biotech</span><span class="font-body-md text-body-md">علوم الطبيعة والحياة</span></a><a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="arabic-literature" href="#"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-body-md text-body-md">اللغة العربية وآدابها</span></a><a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="philosophy" href="#"><span class="material-symbols-outlined text-[20px]">psychology</span><span class="font-body-md text-body-md">الفلسفة</span></a><a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="history-geography" href="#"><span class="material-symbols-outlined text-[20px]">public</span><span class="font-body-md text-body-md">التاريخ والجغرافيا</span></a><a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="islamic-studies" href="#"><span class="material-symbols-outlined text-[20px]">mosque</span><span class="font-body-md text-body-md">العلوم الإسلامية</span></a><a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="french-language" href="#"><span class="material-symbols-outlined text-[20px]">translate</span><span class="font-body-md text-body-md">اللغة الفرنسية</span></a><a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="english-language" href="#"><span class="material-symbols-outlined text-[20px]">language</span><span class="font-body-md text-body-md">اللغة الإنجليزية</span></a></nav></div><div class="pt-md px-sm"><div class="p-md rounded-xl bg-surface-container border-0 flex flex-col gap-xs"><span class="font-label-md text-label-md text-secondary font-semibold">دورة بكالوريا 2025</span><p class="font-caption text-caption text-on-surface-variant">تحضير منهجي مستمر مع حلول البكالوريات السابقة.</p></div></div></aside><div class="lg:pr-sidebar-width"><main class="w-full pt-16 pb-24 lg:pb-lg bg-surface px-md lg:px-lg"><div class="flex flex-col w-full">
+<!-- Dynamic Notification Canvas -->
+<div class="w-full max-w-7xl mx-auto space-y-lg py-md">
+<!-- Top Header Bar with Academic Heritage Typography -->
+<header class="flex flex-col md:flex-row md:items-center justify-between gap-md pb-md">
+<div class="flex items-center gap-md">
+<div class="relative flex items-center justify-center w-12 h-12 rounded-xl bg-primary-container text-on-primary">
+<span class="material-symbols-outlined text-[26px]">notifications_active</span>
+<span class="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-secondary ring-2 ring-surface" id="header-badge-ping"></span>
+</div>
+<div>
+<div class="flex items-center gap-sm">
+<h1 class="font-headline-lg text-headline-lg text-primary">الإشعارات</h1>
+<span class="font-label-md text-label-md px-sm py-xs rounded-full bg-secondary/15 text-secondary font-semibold" id="unread-counter-badge">
+              2 غير مقروءة
+            </span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant mt-xs">
+            سجل المتابعة الأكاديمية اللحظي لمسار بكالوريا 2025 • شعبة علوم تجريبية ورياضيات
+          </p>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<button class="flex items-center gap-xs px-md py-sm rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-primary transition-all duration-200" id="mark-all-btn" onclick="markAllAsRead()">
+<span class="material-symbols-outlined text-[18px]">done_all</span>
+<span class="font-label-md text-label-md font-medium">تحديد الكل كمقروء</span>
+</button>
+<button class="flex items-center justify-center w-10 h-10 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface-variant transition-colors" title="إعدادات التنبيهات">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+</button>
+</div>
+</header>
+<!-- Filter Pills / Categories Tabs -->
+<div class="flex items-center gap-sm overflow-x-auto pb-xs no-scrollbar"><button class="filter-tab active-tab px-md py-xs rounded-full bg-primary text-on-primary font-label-md text-label-md transition-all whitespace-nowrap shadow-sm" onclick="filterNotifications('all', this)">الكل (3)</button><button class="filter-tab px-md py-xs rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-md text-label-md transition-all whitespace-nowrap flex items-center gap-xs" onclick="filterNotifications('unread', this)"><span class="material-symbols-outlined text-[16px]">mark_email_unread</span><span>غير مقروءة (2)</span><span class="w-2 h-2 rounded-full bg-secondary"></span></button><button class="filter-tab px-md py-xs rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-md text-label-md transition-all whitespace-nowrap flex items-center gap-xs" onclick="filterNotifications('read', this)"><span class="material-symbols-outlined text-[16px]">done_all</span><span>إجابات تمت مشاهدتها</span></button></div>
+<!-- Main Content Layout (List + Insight Sidebar) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg items-start">
+<!-- Notifications Feed Column -->
+<div class="lg:col-span-8 flex flex-col gap-md"><!-- Notification 1: Unread (Mathematics Question Answered) -->
+<article class="notification-item unread group relative overflow-hidden rounded-xl bg-surface-container-lowest p-md lg:p-lg transition-all duration-200 shadow-sm hover:shadow-md" data-status="unread">
+<div class="absolute right-0 top-0 bottom-0 w-1.5 bg-secondary"></div>
+<div class="flex items-start gap-md">
+<div class="relative shrink-0 flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-[24px]">forum</span>
+<span class="unread-dot absolute -top-1 -left-1 w-3 h-3 rounded-full bg-secondary ring-2 ring-surface-container-lowest"></span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-sm mb-xs">
+<div class="flex items-center gap-xs flex-wrap">
+<span class="font-caption text-caption font-semibold px-sm py-xs rounded bg-primary/10 text-primary">
+            الرياضيات • التكامل والدوال
+          </span>
+<span class="font-caption text-caption text-secondary font-medium flex items-center gap-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary inline-block"></span>
+            إجابة معتمدة
+          </span>
+</div>
+<time class="font-caption text-caption text-on-surface-variant shrink-0 flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+          منذ ساعتين
+        </time>
+</div>
+<h2 class="font-body-lg text-body-lg font-semibold text-on-surface group-hover:text-primary transition-colors leading-relaxed">
+        تمت الإجابة عن تساؤلك في مادة الرياضيات: «كيف نفرق بين حساب مساحة الحيز المحصور بين منحنيين والتكامل المعرّف؟»
+      </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs line-clamp-2">
+        أضاف <strong class="text-primary font-medium">أ.د. محمد بن علي</strong> شرحاً مفصلاً ومنهجياً ملحقاً برسم بياني وتطبيق عددي.
+      </p>
+<div class="flex items-center justify-between pt-md mt-sm">
+<a class="inline-flex items-center gap-xs px-md py-xs rounded-lg bg-primary text-on-primary hover:bg-primary-container transition-colors shadow-sm font-label-md text-label-md" href="#">
+<span>عرض الإجابة والحل</span>
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+</a>
+<button class="hover:text-primary p-xs rounded transition-colors text-caption font-caption text-on-surface-variant flex items-center gap-xs" onclick="toggleCardRead(this)">
+<span class="material-symbols-outlined text-[16px]">drafts</span>
+<span>تمييز كمقروء</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- Notification 2: Unread (Philosophy Question Answered) -->
+<article class="notification-item unread group relative overflow-hidden rounded-xl bg-surface-container-lowest p-md lg:p-lg transition-all duration-200 shadow-sm hover:shadow-md" data-status="unread">
+<div class="absolute right-0 top-0 bottom-0 w-1.5 bg-secondary"></div>
+<div class="flex items-start gap-md">
+<div class="relative shrink-0 flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-[24px]">forum</span>
+<span class="unread-dot absolute -top-1 -left-1 w-3 h-3 rounded-full bg-secondary ring-2 ring-surface-container-lowest"></span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-sm mb-xs">
+<div class="flex items-center gap-xs flex-wrap">
+<span class="font-caption text-caption font-semibold px-sm py-xs rounded bg-surface-container-high text-on-surface">
+            الفلسفة • فلسفة العلوم
+          </span>
+<span class="font-caption text-caption text-secondary font-medium flex items-center gap-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary inline-block"></span>
+            إجابة معتمدة
+          </span>
+</div>
+<time class="font-caption text-caption text-on-surface-variant shrink-0 flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+          منذ 5 ساعات
+        </time>
+</div>
+<h2 class="font-body-lg text-body-lg font-semibold text-on-surface group-hover:text-primary transition-colors leading-relaxed">
+        تمت الإجابة عن تساؤلك في مادة الفلسفة: «هل انطباق الفكر مع الواقع يضمن انطباقه مع نفسه؟»
+      </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs line-clamp-2">
+        أضاف <strong class="text-primary font-medium">الأستاذ عبد القادر درويش</strong> قراءة نقدية منهجية مع أمثلة وتطبيقات فكرية.
+      </p>
+<div class="flex items-center justify-between pt-md mt-sm">
+<a class="inline-flex items-center gap-xs px-md py-xs rounded-lg bg-primary text-on-primary hover:bg-primary-container transition-colors shadow-sm font-label-md text-label-md" href="#">
+<span>عرض الإجابة والحل</span>
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+</a>
+<button class="hover:text-primary p-xs rounded transition-colors text-caption font-caption text-on-surface-variant flex items-center gap-xs" onclick="toggleCardRead(this)">
+<span class="material-symbols-outlined text-[16px]">drafts</span>
+<span>تمييز كمقروء</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- Notification 3: Read (Physics Question Answered) -->
+<article class="notification-item read group relative overflow-hidden rounded-xl bg-surface-container-low p-md lg:p-lg transition-all duration-200" data-status="read">
+<div class="flex items-start gap-md">
+<div class="shrink-0 flex items-center justify-center w-12 h-12 rounded-xl bg-surface-container-high text-on-surface-variant">
+<span class="material-symbols-outlined text-[24px]">mark_chat_read</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-sm mb-xs">
+<span class="font-caption text-caption font-medium px-sm py-xs rounded bg-surface-container text-on-surface-variant">
+          العلوم الفيزيائية • الميكانيك وحركة الجمل
+        </span>
+<time class="font-caption text-caption text-on-surface-variant shrink-0">
+          أمس الساعة 16:20
+        </time>
+</div>
+<h2 class="font-body-md text-body-md font-normal text-on-surface leading-relaxed">
+        تمت الإجابة عن تساؤلك في مادة العلوم الفيزيائية: «تحديد السرعة الحدية في السقوط الحقيقي»
+      </h2>
+<div class="flex items-center justify-between pt-sm mt-xs">
+<a class="inline-flex items-center gap-xs text-primary hover:underline font-label-md text-label-md font-medium" href="#">
+<span>عرض الإجابة والحل</span>
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+</a>
+<span class="font-caption text-caption text-outline">تمت المشاهدة</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Empty State Container -->
+<div class="hidden flex-col items-center justify-center text-center p-xl rounded-xl bg-surface-container-lowest shadow-sm" id="empty-state-card">
+<div class="relative w-20 h-20 rounded-full bg-surface-container flex items-center justify-center text-primary mb-md">
+<span class="material-symbols-outlined text-[40px]">notifications_paused</span>
+<div class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-primary-container text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</div>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary font-bold mb-xs">
+    لا توجد إشعارات جديدة حالياً
+  </h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md mb-md leading-relaxed">
+    ستصلك إشعارات فور اعتماد الأساتذة لإجابات تساؤلاتك في كافة مواد البكالوريا.
+  </p>
+<a class="inline-flex items-center gap-xs px-md py-sm rounded-lg bg-primary text-on-primary font-label-md text-label-md shadow-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">forum</span>
+<span>استعراض تساؤلات الطلاب</span>
+</a>
+</div></div>
+<!-- Left / Side Auxiliary Column: Visual Academic Progress & Fast Actions -->
+<aside class="lg:col-span-4 flex flex-col gap-md"><!-- Focus & Prep Card -->
+<div class="p-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-md">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-semibold text-primary">متابعة إجابات التساؤلات</span>
+<span class="font-caption text-caption text-secondary font-medium">85% معتمدة</span>
+</div>
+<div class="space-y-xs">
+<div class="flex justify-between font-caption text-caption text-on-surface-variant">
+<span>تساؤلاتك التي تمت إجابتها</span>
+<span class="font-bold text-on-surface">17 / 20 سؤالاً</span>
+</div>
+<div class="w-full h-2 rounded-full bg-primary/10 overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 85%;"></div>
+</div>
+</div>
+<div class="p-md rounded-lg bg-surface-container-low flex flex-col gap-xs">
+<div class="flex items-center gap-xs text-primary font-medium font-caption text-caption">
+<span class="material-symbols-outlined text-[18px]">bolt</span>
+<span>متوسط سرعة رد الأساتذة المعتمدين</span>
+</div>
+<div class="flex items-baseline gap-xs">
+<span class="font-display-lg text-[32px] leading-tight font-bold text-primary">3.2</span>
+<span class="font-caption text-caption text-on-surface-variant">ساعات للإجابة المنهجية</span>
+</div>
+<svg class="w-full h-10 mt-xs text-secondary overflow-visible" fill="none" viewbox="0 0 100 25">
+<path d="M0,20 Q20,15 35,18 T70,8 T100,5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.5"></path>
+<circle class="fill-primary" cx="100" cy="5" r="3.5"></circle>
+</svg>
+</div>
+</div>
+<!-- Quick Ask Action Card -->
+<div class="p-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-sm">
+<div class="flex items-center gap-sm text-primary">
+<span class="material-symbols-outlined text-[24px]">help</span>
+<h3 class="font-label-md text-label-md font-bold text-on-surface">هل لديك تساؤل غير مفهوم؟</h3>
+</div>
+<p class="font-caption text-caption text-on-surface-variant leading-relaxed">
+    اطرح سؤالك في مساحة تساؤلات الطلاب لتتلقى إجابة منهجية مصادقاً عليها من الأساتذة المعتمدين والمفتشين.
+  </p>
+<a class="mt-xs inline-flex items-center justify-center gap-xs px-md py-sm rounded-lg bg-primary-container text-on-primary font-label-md text-label-md hover:bg-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>طرح تساؤل جديد</span>
+</a>
+</div>
+<!-- Teacher Community Tip -->
+<div class="p-md rounded-xl bg-primary-container text-on-primary shadow-sm flex items-start gap-md">
+<span class="material-symbols-outlined text-[24px] text-tertiary-fixed shrink-0">tips_and_updates</span>
+<div class="space-y-xs">
+<h3 class="font-label-md text-label-md font-bold text-tertiary-fixed">تنبيه متابعة الإجابات</h3>
+<p class="font-caption text-caption text-on-primary-container leading-relaxed">
+      عند اعتماد الأستاذ لإجابة جديدة، يمكنك كتابة تعقيب استفساري للتوضيح الإضافي لمدة 24 ساعة من تاريخ الرد.
+    </p>
+</div>
+</div></aside>
+</div>
+</div>
+<!-- Interactive JavaScript Behavior -->
+<script>
+    function markAllAsRead() {
+      const unreadItems = document.querySelectorAll('.notification-item.unread');
+      unreadItems.forEach(item => {
+        item.classList.remove('unread');
+        item.classList.add('read', 'bg-surface-container-low');
+        item.classList.remove('bg-surface-container-lowest');
+        
+        // Remove left accent strip if present
+        const strip = item.querySelector('.bg-secondary.w-1\\.5');
+        if (strip) strip.remove();
+
+        // Remove red/terracotta dot
+        const dot = item.querySelector('.unread-dot');
+        if (dot) dot.remove();
+
+        // Alter headline weight
+        const heading = item.querySelector('h2');
+        if (heading) {
+          heading.classList.remove('font-semibold');
+          heading.classList.add('font-normal');
+        }
+      });
+
+      // Update badge
+      const badge = document.getElementById('unread-counter-badge');
+      if (badge) {
+        badge.textContent = '0 غير مقروءة';
+        badge.className = 'font-caption text-caption px-sm py-xs rounded-full bg-surface-container-high text-on-surface-variant';
+      }
+      
+      const ping = document.getElementById('header-badge-ping');
+      if (ping) ping.remove();
+    }
+
+    function toggleCardRead(btn) {
+      const card = btn.closest('.notification-item');
+      if (!card) return;
+      if (card.classList.contains('unread')) {
+        card.classList.remove('unread');
+        card.classList.add('read', 'bg-surface-container-low');
+        card.classList.remove('bg-surface-container-lowest');
+        const strip = card.querySelector('.bg-secondary.w-1\\.5');
+        if (strip) strip.remove();
+        const dot = card.querySelector('.unread-dot');
+        if (dot) dot.remove();
+        const heading = card.querySelector('h2');
+        if (heading) {
+          heading.classList.remove('font-semibold');
+          heading.classList.add('font-normal');
+        }
+        btn.innerHTML = '<span class="material-symbols-outlined text-[16px]">mark_email_read</span><span>مقروء</span>';
+        
+        // Recalculate remaining unread
+        const remaining = document.querySelectorAll('.notification-item.unread').length;
+        const badge = document.getElementById('unread-counter-badge');
+        if (badge) {
+          badge.textContent = remaining > 0 ? remaining + ' غير مقروءة' : '0 غير مقروءة';
+          if (remaining === 0) {
+            badge.className = 'font-caption text-caption px-sm py-xs rounded-full bg-surface-container-high text-on-surface-variant';
+            const ping = document.getElementById('header-badge-ping');
+            if (ping) ping.remove();
+          }
+        }
+      }
+    }
+
+    function filterNotifications(category, tabBtn) {
+      // Toggle Tab Active Classes
+      document.querySelectorAll('.filter-tab').forEach(tab => {
+        tab.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm');
+        tab.classList.add('bg-surface-container', 'text-on-surface-variant');
+      });
+      tabBtn.classList.remove('bg-surface-container', 'text-on-surface-variant');
+      tabBtn.classList.add('bg-primary', 'text-on-primary', 'shadow-sm');
+
+      const items = document.querySelectorAll('.notification-item');
+      let visibleCount = 0;
+
+      items.forEach(item => {
+        if (category === 'all' || item.getAttribute('data-category') === category) {
+          item.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+
+      const emptyState = document.getElementById('empty-state-card');
+      if (visibleCount === 0) {
+        emptyState.classList.remove('hidden');
+        emptyState.classList.add('flex');
+      } else {
+        emptyState.classList.add('hidden');
+        emptyState.classList.remove('flex');
+      }
+    }
+  </script>
+</div></main></div><nav class="lg:hidden fixed bottom-0 left-0 right-0 h-16 bg-surface/95 backdrop-blur-xl shadow-[0_-1px_8px_rgba(0,0,0,0.05)] z-50 flex items-center justify-around px-md" data-active-classes="text-secondary font-bold"><a class="flex flex-col items-center gap-xs text-on-surface-variant hover:text-on-surface" data-path="home" href="#"><span class="material-symbols-outlined text-[22px]">home</span><span class="font-caption text-caption">الرئيسية</span></a><a class="flex flex-col items-center gap-xs text-on-surface-variant hover:text-on-surface" data-path="subjects-catalog" href="#"><span class="material-symbols-outlined text-[22px]">auto_stories</span><span class="font-caption text-caption">المواد</span></a><a class="flex flex-col items-center gap-xs text-on-surface-variant hover:text-on-surface" data-path="student-discussions" href="#"><span class="material-symbols-outlined text-[22px]">forum</span><span class="font-caption text-caption">التساؤلات</span></a><a class="flex flex-col items-center gap-xs text-on-surface-variant hover:text-on-surface" data-path="academic-tools" href="#"><span class="material-symbols-outlined text-[22px]">architecture</span><span class="font-caption text-caption">الأدوات</span></a><a aria-current="page" class="flex flex-col items-center gap-xs text-secondary font-bold" data-path="announcements" href="#"><span class="material-symbols-outlined text-[22px]">campaign</span><span class="font-caption text-caption">الإشعارات</span></a></nav></body></html>

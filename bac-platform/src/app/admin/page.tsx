@@ -22,6 +22,7 @@ import {
   BarChart2,
   Search,
   Filter,
+  Megaphone,
 } from "lucide-react";
 
 type ContributorApplication = {
@@ -74,7 +75,7 @@ export default function AdminDashboardPage() {
   const { user, loading: authLoading } = useAuth();
   const supabase = createClient();
 
-  const [activeTab, setActiveTab] = useState<"applications" | "exams" | "lessons">("applications");
+  const [activeTab, setActiveTab] = useState<"applications" | "exams" | "lessons" | "announcement">("applications");
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<{ type: "success" | "error"; message: string } | null>(null);
@@ -83,6 +84,9 @@ export default function AdminDashboardPage() {
   const [applications, setApplications] = useState<ContributorApplication[]>([]);
   const [exams, setExams] = useState<PendingExam[]>([]);
   const [lessons, setLessons] = useState<PendingLesson[]>([]);
+  const [announcementTitle, setAnnouncementTitle] = useState("");
+  const [announcementBody, setAnnouncementBody] = useState("");
+  const [announcementSending, setAnnouncementSending] = useState(false);
 
   // Approval Modal State for Applications
   const [selectedApp, setSelectedApp] = useState<ContributorApplication | null>(null);
@@ -375,6 +379,25 @@ export default function AdminDashboardPage() {
     }
   };
 
+  const handleSendAnnouncement = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (!announcementTitle.trim() || !announcementBody.trim()) return;
+    setAnnouncementSending(true);
+    setFeedback(null);
+    const { error } = await supabase.rpc("send_announcement", {
+      p_title: announcementTitle.trim(),
+      p_body: announcementBody.trim(),
+    });
+    if (error) {
+      setFeedback({ type: "error", message: error.message || "تعذر إرسال الإعلان" });
+    } else {
+      setFeedback({ type: "success", message: "تم إرسال الإعلان إلى جميع المستخدمين" });
+      setAnnouncementTitle("");
+      setAnnouncementBody("");
+    }
+    setAnnouncementSending(false);
+  };
+
   // Gate Check
   if (authLoading) {
     return (
@@ -525,6 +548,16 @@ export default function AdminDashboardPage() {
             >
               {lessons.length}
             </span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab("announcement")}
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-colors cursor-pointer ${
+              activeTab === "announcement" ? "bg-slate-800 text-white shadow-sm" : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+            }`}
+          >
+            <Megaphone size={16} />
+            <span>إرسال إعلان</span>
           </button>
         </div>
 
@@ -830,6 +863,18 @@ export default function AdminDashboardPage() {
               </div>
             )}
           </div>
+        )}
+
+        {activeTab === "announcement" && (
+          <form onSubmit={handleSendAnnouncement} className="max-w-2xl bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-5">
+            <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
+              <div className="w-10 h-10 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center"><Megaphone size={20} /></div>
+              <div><h2 className="text-lg font-bold text-slate-900">إرسال إعلان للمنصة</h2><p className="text-xs text-slate-500 mt-1">سيصل الإعلان إلى جميع المستخدمين المسجلين.</p></div>
+            </div>
+            <div><label htmlFor="announcement-title" className="block text-sm font-semibold text-slate-700 mb-2">عنوان الإعلان</label><input id="announcement-title" required value={announcementTitle} onChange={(e) => setAnnouncementTitle(e.target.value)} className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2.5 text-slate-900" placeholder="مثال: تحديث مهم للمنصة" /></div>
+            <div><label htmlFor="announcement-body" className="block text-sm font-semibold text-slate-700 mb-2">نص الإعلان</label><textarea id="announcement-body" required rows={6} value={announcementBody} onChange={(e) => setAnnouncementBody(e.target.value)} className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2.5 text-slate-900 resize-y" placeholder="اكتب تفاصيل الإعلان هنا..." /></div>
+            <button type="submit" disabled={announcementSending} className="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-5 py-2.5 rounded-lg font-semibold disabled:opacity-50"><Megaphone size={17} />{announcementSending ? "جاري الإرسال..." : "إرسال للجميع"}</button>
+          </form>
         )}
       </div>
 
