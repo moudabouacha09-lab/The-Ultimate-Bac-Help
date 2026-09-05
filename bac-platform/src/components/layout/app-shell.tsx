@@ -74,9 +74,15 @@ export function AppShell({ children, activeSubject }: AppShellProps) {
       {/* ── Top Navbar ── */}
       <header className="fixed top-0 w-full border-b border-primary/10 bg-surface-bright flex flex-row-reverse justify-between items-center px-gutter h-16 z-50">
         {/* Brand (right side in RTL) */}
-        <Link href="/" className="flex items-center gap-md font-headline text-headline-lg font-bold text-primary" aria-label="منصة البكالوريا - الصفحة الرئيسية">
-          <span>منصة البكالوريا</span>
-        </Link>
+        <div className="flex items-center">
+          <Link href="/" className="hidden md:flex items-center gap-md font-headline text-headline-lg font-bold text-primary" aria-label="منصة البكالوريا - الصفحة الرئيسية">
+            <span>منصة البكالوريا</span>
+          </Link>
+          <Link href="/notifications" className="relative inline-flex md:hidden text-primary" aria-label="الإشعارات">
+            <Bell size={25} />
+            {unreadNotifications > 0 && <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-red-500 ring-2 ring-surface-bright" aria-label="إشعارات غير مقروءة" />}
+          </Link>
+        </div>
 
         {/* Center Nav Links — desktop only */}
         <nav className="hidden md:flex gap-lg" aria-label="التنقل الرئيسي">
