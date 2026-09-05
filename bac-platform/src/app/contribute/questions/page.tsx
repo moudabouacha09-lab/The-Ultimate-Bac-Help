@@ -56,7 +56,11 @@ export default function TeacherQuestionsPage() {
     const text = drafts[questionId]?.trim();
     if (!user || !text) return;
     const { error } = await supabase.from("answers").insert({ question_id: questionId, answered_by: user.id, answer_text: text });
-    if (error) { setMessage("تعذر إرسال الإجابة حالياً."); return; }
+    if (error) {
+      console.error("Answer submission failed:", error);
+      setMessage(`تعذر إرسال الإجابة: ${error.message}`);
+      return;
+    }
     setDrafts((current) => ({ ...current, [questionId]: "" }));
     setMessage("تم إرسال إجابتك بنجاح.");
     await load();
