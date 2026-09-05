@@ -253,6 +253,9 @@ export default function AdminDashboardPage() {
         .update({
           role: "teacher",
           title: finalTitle,
+          // Keep the approved teaching subjects on the profile so the
+          // contributor question queue can scope questions correctly.
+          subjects: selectedApp.subjects ?? [],
         })
         .eq("id", selectedApp.user_id);
 
