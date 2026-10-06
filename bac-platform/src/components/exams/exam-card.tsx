@@ -48,7 +48,7 @@ export function ExamCard({ exam }: { exam: ExamCardData }) {
   const examUrl = getStorageUrl(exam.exam_file_path);
 
   return (
-    <article className="bg-surface-bright border border-primary/10 rounded-xl p-6 flex flex-col justify-between gap-4 hover:shadow-md hover:border-primary/30 transition-all duration-300 relative overflow-hidden group min-h-[240px]">
+    <article className="bg-surface-bright border border-primary/10 rounded-2xl p-6 flex flex-col justify-between gap-4 card-hover-lift shadow-xs relative overflow-hidden group min-h-[240px]">
       {/* Top Type / Subject Badges */}
       <div className="flex justify-between items-start gap-2 relative z-10">
         <div className="flex items-center gap-2 flex-wrap">
@@ -83,7 +83,7 @@ export function ExamCard({ exam }: { exam: ExamCardData }) {
       {/* Card Body: Icon + Title + Author Attribution */}
       <div className="space-y-3 relative z-10">
         <div className="flex items-start gap-3.5">
-          <div className="w-12 h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+          <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0 group-hover:scale-105 group-hover:bg-primary group-hover:text-on-primary transition-all duration-300 shadow-xs">
             <span className="material-symbols-outlined text-2xl">{subjectIcon}</span>
           </div>
           <div className="space-y-1">
@@ -102,7 +102,7 @@ export function ExamCard({ exam }: { exam: ExamCardData }) {
             {exam.units.map((unit) => (
               <span
                 key={unit}
-                className="bg-surface-container text-on-surface-variant font-body text-caption px-2 py-0.5 rounded"
+                className="bg-surface-container text-on-surface-variant font-body text-caption px-2.5 py-0.5 rounded-md"
               >
                 {unit}
               </span>
@@ -115,7 +115,7 @@ export function ExamCard({ exam }: { exam: ExamCardData }) {
       <div className="flex items-center gap-2 pt-3 border-t border-primary/10 mt-auto relative z-10">
         <Link
           href={`/exams/${exam.id}`}
-          className="flex-1 bg-primary text-on-primary font-body text-label-md font-semibold px-4 py-2.5 rounded-lg hover:bg-primary/90 transition-colors flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
+          className="flex-1 bg-primary text-on-primary font-body text-label-md font-semibold px-4 py-2.5 rounded-xl hover:bg-primary/90 btn-interactive flex items-center justify-center gap-1.5 shadow-xs cursor-pointer"
         >
           <Eye size={16} />
           <span>خوض الاختبار والحل</span>
@@ -124,7 +124,7 @@ export function ExamCard({ exam }: { exam: ExamCardData }) {
         <a
           href={examUrl}
           download
-          className="px-3 py-2.5 border border-primary/20 text-primary font-body text-label-md font-semibold rounded-lg hover:bg-primary/5 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+          className="px-3.5 py-2.5 border border-primary/20 text-primary font-body text-label-md font-semibold rounded-xl hover:bg-primary/5 btn-interactive flex items-center justify-center gap-1.5 cursor-pointer"
           title="تحميل ملف الموضوع PDF"
         >
           <Download size={16} />

@@ -30,20 +30,26 @@ export default function SubjectsOverviewPage() {
             const stats = getSubjectStats(subject.slug);
 
             return (
-              <FadeInSection key={subject.slug} delay={index * 60}>
+              <FadeInSection key={subject.slug} delay={index * 50}>
                 <Link
-                  className="group bg-surface-bright border border-primary/10 rounded-xl p-6 flex flex-col hover:shadow-md hover:border-primary/30 transition-all duration-300 relative overflow-hidden min-h-[220px]"
+                  className="group bg-surface-bright border border-primary/10 rounded-2xl p-6 flex flex-col card-hover-lift shadow-xs relative overflow-hidden min-h-[230px]"
                   href={`/subject/${subject.slug}`}
                 >
                   {/* Decorative Glow */}
-                  <div className="absolute -top-10 -left-10 w-32 h-32 bg-primary/5 rounded-full blur-xl group-hover:bg-primary/10 transition-colors" />
+                  <div className="absolute -top-10 -left-10 w-32 h-32 bg-primary/5 rounded-full blur-xl group-hover:bg-primary/10 transition-colors pointer-events-none" />
 
                   {/* Header Icon + Category Badge */}
                   <div className="flex justify-between items-start mb-4 relative z-10">
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary transition-colors">
-                      <span className="material-symbols-outlined text-2xl">{subject.icon}</span>
+                    <div className="w-13 h-13 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-105 group-hover:bg-primary group-hover:text-on-primary transition-all duration-300 shadow-xs">
+                      <span className="material-symbols-outlined text-[26px]">{subject.icon}</span>
                     </div>
-                    <span className="px-2.5 py-1 bg-surface-container rounded-md font-body text-caption font-semibold text-on-surface-variant">
+                    <span
+                      className={`px-3 py-1 rounded-full font-body text-caption font-semibold transition-colors ${
+                        isEssential
+                          ? "bg-secondary/10 text-secondary border border-secondary/20"
+                          : "bg-surface-container text-on-surface-variant border border-primary/5"
+                      }`}
+                    >
                       {isEssential ? "مادة أساسية" : "مادة مرافقة"}
                     </span>
                   </div>
@@ -55,6 +61,7 @@ export default function SubjectsOverviewPage() {
                   <p className="font-body text-body-md text-on-surface-variant mb-6 relative z-10 line-clamp-2 leading-relaxed">
                     ملخصات شاملة، دروس محلولة، ومواضيع بكالوريا سابقة مرتبة حسب الوحدات.
                   </p>
+
 
                   {/* Bottom Stats Footer (Real Dynamic Data) */}
                   <div className="mt-auto grid grid-cols-2 gap-2 border-t border-primary/10 pt-4 relative z-10 text-center">
