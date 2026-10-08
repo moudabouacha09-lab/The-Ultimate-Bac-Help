@@ -1,7 +1,7 @@
 // src/components/layout/brand-logo.tsx
 "use client";
 
-import React from "react";
+import React, { useId } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -18,6 +18,9 @@ export function BrandLogo({
   useImageCalligraphy = false,
   className = "",
 }: BrandLogoProps) {
+  const rawId = useId();
+  const gradId = `goldStarGrad_${rawId.replace(/:/g, "_")}`;
+
   const iconSizes = {
     sm: "w-8 h-8",
     md: "w-10 h-10",
@@ -29,6 +32,33 @@ export function BrandLogo({
     md: "text-xl",
     lg: "text-2xl md:text-3xl",
   };
+
+  if (useImageCalligraphy) {
+    const imgHeights = {
+      sm: "h-8 w-28",
+      md: "h-10 w-36",
+      lg: "h-14 w-48",
+    };
+
+    return (
+      <Link
+        href="/"
+        className={`group inline-flex items-center select-none transition-all duration-300 focus:outline-none rounded-xl p-1 -m-1 ${className}`}
+        aria-label="منصة البكالوريا - الصفحة الرئيسية"
+      >
+        <div className={`relative ${imgHeights[size]} overflow-hidden rounded-lg`}>
+          <Image
+            src="/images/logo.jpg"
+            alt="منصة البكالوريا"
+            fill
+            sizes="200px"
+            className="object-contain"
+            priority
+          />
+        </div>
+      </Link>
+    );
+  }
 
   return (
     <Link
@@ -53,7 +83,7 @@ export function BrandLogo({
           {/* Outer 8-Pointed Star (Rub el Hizb) */}
           <path
             d="M24 3L28.2 9.5L35.8 8.2L37.1 15.8L43.6 20L40 26.8L43.6 33.6L37.1 37.8L35.8 45.4L28.2 44.1L24 50.6L19.8 44.1L12.2 45.4L10.9 37.8L4.4 33.6L8 26.8L4.4 20L10.9 15.8L12.2 8.2L19.8 9.5L24 3Z"
-            fill="url(#goldStarGrad)"
+            fill={`url(#${gradId})`}
             opacity="0.9"
             transform="scale(0.85) translate(4, 4)"
           />
@@ -82,7 +112,7 @@ export function BrandLogo({
           </g>
 
           <defs>
-            <linearGradient id="goldStarGrad" x1="4" y1="3" x2="44" y2="48" gradientUnits="userSpaceOnUse">
+            <linearGradient id={gradId} x1="4" y1="3" x2="44" y2="48" gradientUnits="userSpaceOnUse">
               <stop stopColor="#FFE088" />
               <stop offset="0.5" stopColor="#CCA730" />
               <stop offset="1" stopColor="#8A6E10" />
@@ -117,3 +147,4 @@ export function BrandLogo({
     </Link>
   );
 }
+

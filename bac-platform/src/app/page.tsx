@@ -95,11 +95,11 @@ export default function HomePage() {
           <FadeInSection delay={160}>
             <div className="bg-surface-bright border border-primary/10 rounded-2xl p-6 flex items-center gap-4 card-hover-lift shadow-xs">
               <div className="w-14 h-14 rounded-2xl bg-tertiary-container/20 text-tertiary flex items-center justify-center shrink-0 shadow-xs">
-                <span className="material-symbols-outlined text-[30px]">verified</span>
+                <span className="material-symbols-outlined text-[30px]">shield</span>
               </div>
               <div>
-                <p className="font-headline text-headline-md text-tertiary font-bold">مواد معتمدة</p>
-                <p className="font-body text-label-md text-on-surface-variant">بإشراف أساتذة ومفتشين تربويين</p>
+                <p className="font-headline text-headline-md text-tertiary font-bold">0</p>
+                <p className="font-body text-label-md text-on-surface-variant">إعلانات مزعجة أو اشتراكات مدفوعة</p>
               </div>
             </div>
           </FadeInSection>

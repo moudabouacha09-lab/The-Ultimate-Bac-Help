@@ -89,6 +89,18 @@
   --violet-700: #6d28d9;
   --violet-800: #5b21b6;
   --orange-800: #9a3412;
+
+  /* Emerald accent ramp (compatibility with countdown & pulse components) */
+  --emerald-100: #d1fae5;
+  --emerald-500: #10b981;
+  --emerald-600: #059669;
+  --emerald-800: #065f46;
+  --emerald-900: #064e3b;
+
+  /* Pointer coordinates for reactive aurora */
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+
   --card-bg: var(--surface-1);
   --surface: var(--surface-1);
 }
@@ -139,6 +151,20 @@ body {
   user-select: none;
   flex-shrink: 0;
   transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1), color 200ms ease;
+}
+
+/* Scrollbar utilities */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Subtle Shadow Utility (matching design system tokens) */
+.shadow-xs {
+  box-shadow: 0 1px 2px 0 rgba(0, 52, 43, 0.05);
 }
 
 /* Custom Scrollbars */

@@ -56,6 +56,9 @@ const config: Config = {
         "surface-container-low": "#f5f3ef",
         "tertiary-fixed": "#ffe088",
       },
+      boxShadow: {
+        xs: "0 1px 2px 0 rgba(0, 52, 43, 0.05)",
+      },
       borderRadius: {
         DEFAULT: "0.25rem",
         lg: "0.5rem",

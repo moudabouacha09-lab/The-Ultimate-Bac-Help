@@ -40,7 +40,7 @@ export default function SubjectsOverviewPage() {
 
                   {/* Header Icon + Category Badge */}
                   <div className="flex justify-between items-start mb-4 relative z-10">
-                    <div className="w-13 h-13 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-105 group-hover:bg-primary group-hover:text-on-primary transition-all duration-300 shadow-xs">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-105 group-hover:bg-primary group-hover:text-on-primary transition-all duration-300 shadow-xs">
                       <span className="material-symbols-outlined text-[26px]">{subject.icon}</span>
                     </div>
                     <span
